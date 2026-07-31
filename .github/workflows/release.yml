@@ -72,21 +72,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Only persisted on a real release. A dry run keeps the bump in the
-      # working tree so the built jar is stamped correctly, but leaves main
-      # untouched.
-      - name: Commit version bump
-        if: ${{ steps.version.outputs.bumped == 'true' && !inputs.dry_run }}
-        run: |
-          set -euo pipefail
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add gradle.properties
-          git commit -m "Bump version to ${{ inputs.version }}"
-          git push origin HEAD:${{ github.ref_name }}
-          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-        id: bumpcommit
-
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -109,6 +94,20 @@ jobs:
             -exec cp {} dist/ \;
           ls -la dist
           test -n "$(ls -A dist)" || { echo "ERROR: no jars produced"; exit 1; }
+
+      # Deliberately after the build. Committing the bump up front means a
+      # failed build leaves main claiming a version that has no release.
+      - name: Commit version bump
+        if: ${{ steps.version.outputs.bumped == 'true' && !inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add gradle.properties
+          git commit -m "Bump version to ${{ inputs.version }}"
+          git push origin HEAD:${{ github.ref_name }}
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+        id: bumpcommit
 
       # A dry run still builds and still enforces the version check, so it can
       # be re-run against the current released version without burning a new
