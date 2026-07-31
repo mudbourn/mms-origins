@@ -1,0 +1,13 @@
+{
+  "powers": [
+    "mms_origins:nether_born",
+    "mms_origins:fire_resilience",
+    "mms_origins:sun_shy",
+    "mms_origins:gilded_bearing"
+  ],
+  "icon": {
+    "item": "minecraft:gold_ingot"
+  },
+  "order": 23,
+  "impact": 2
+}

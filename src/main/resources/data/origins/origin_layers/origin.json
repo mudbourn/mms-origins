@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "order": 0,
+  "enabled": true,
+  "origins": [
+    "mms_origins:floran",
+    "mms_origins:inchling",
+    "mms_origins:truffle",
+    "mms_origins:piglin"
+  ],
+  "allow_random": true,
+  "allow_random_unchoosable": false,
+  "hidden": false
+}

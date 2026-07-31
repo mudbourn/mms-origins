@@ -1,0 +1,13 @@
+{
+  "powers": [
+    "mms_origins:diminutive",
+    "mms_origins:light_step",
+    "mms_origins:fragile_frame",
+    "mms_origins:wall_scramble"
+  ],
+  "icon": {
+    "item": "minecraft:pink_petals"
+  },
+  "order": 21,
+  "impact": 2
+}

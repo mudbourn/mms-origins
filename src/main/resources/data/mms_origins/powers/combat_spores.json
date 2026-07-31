@@ -1,0 +1,12 @@
+{
+  "type": "origins:modify_damage_dealt",
+  "condition": {
+    "type": "origins:power_active",
+    "power": "mms_origins:spore_shift"
+  },
+  "modifier": {
+    "name": "Acrid spores",
+    "value": 2,
+    "operation": "addition"
+  }
+}

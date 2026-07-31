@@ -1,0 +1,14 @@
+{
+  "type": "origins:attribute",
+  "modifier": {
+    "name": "Drifting spores speed bonus",
+    "attribute": "minecraft:generic.movement_speed",
+    "value": 0.15,
+    "operation": "multiply_base"
+  },
+  "condition": {
+    "type": "origins:power_active",
+    "power": "mms_origins:spore_shift",
+    "inverted": true
+  }
+}

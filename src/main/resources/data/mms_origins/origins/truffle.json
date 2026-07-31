@@ -1,0 +1,13 @@
+{
+  "powers": [
+    "mms_origins:spore_shift",
+    "mms_origins:combat_spores",
+    "mms_origins:drift_spores",
+    "mms_origins:fungal_constitution"
+  ],
+  "icon": {
+    "item": "minecraft:red_mushroom"
+  },
+  "order": 22,
+  "impact": 1
+}

@@ -1,0 +1,9 @@
+{
+  "type": "origins:attribute",
+  "modifier": {
+    "name": "Bark skin armor bonus",
+    "attribute": "minecraft:generic.armor",
+    "value": 2.0,
+    "operation": "addition"
+  }
+}

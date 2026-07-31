@@ -1,0 +1,11 @@
+{
+  "type": "origins:modify_exhaustion",
+  "modifier": {
+    "name": "Sunlight discomfort",
+    "value": 0.5,
+    "operation": "multiply_base"
+  },
+  "condition": {
+    "type": "origins:exposed_to_sun"
+  }
+}

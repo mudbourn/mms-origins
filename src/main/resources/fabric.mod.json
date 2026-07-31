@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "mms_origins",
+  "version": "${version}",
+  "name": "MMS Origins",
+  "description": "MMS origin content for Origins: Legacy. Adds five original origins, ports Origin Furs' model layer, and carries the MMS tweaks to Origins Classes that previously shipped as a datapack.",
+  "authors": [
+    "Mudbourn"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "info.mudbourn.mmsorigins.MmsOrigins"
+    ]
+  },
+  "mixins": [
+    "mms_origins.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*",
+    "origins": ">=1.12.0",
+    "apoli": ">=2.12.0"
+  },
+  "recommends": {
+    "origins-classes": "*"
+  }
+}

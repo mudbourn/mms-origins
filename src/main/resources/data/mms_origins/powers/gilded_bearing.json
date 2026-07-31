@@ -1,0 +1,9 @@
+{
+  "type": "origins:attribute",
+  "modifier": {
+    "name": "Gilded bearing armor toughness",
+    "attribute": "minecraft:generic.armor_toughness",
+    "value": 2.0,
+    "operation": "addition"
+  }
+}

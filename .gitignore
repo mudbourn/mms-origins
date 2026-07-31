@@ -1,0 +1,11 @@
+# Third-party reference jars. Never committed: they are other projects'
+# redistributables under their own licenses, and committing them into an MIT
+# repo misrepresents those licenses. Populate locally -- see README.
+libs/
+
+.gradle/
+build/
+run/
+*.class
+.idea/
+*.iml

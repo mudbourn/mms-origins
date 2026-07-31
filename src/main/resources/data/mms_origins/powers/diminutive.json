@@ -1,0 +1,21 @@
+{
+  "type": "origins:multiple",
+  "scale": {
+    "type": "origins:attribute",
+    "modifier": {
+      "name": "Inchling scale",
+      "attribute": "minecraft:generic.scale",
+      "value": -0.6,
+      "operation": "multiply_base"
+    }
+  },
+  "reach": {
+    "type": "origins:attribute",
+    "modifier": {
+      "name": "Inchling block reach",
+      "attribute": "minecraft:player.block_interaction_range",
+      "value": -0.25,
+      "operation": "multiply_base"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "origins:modify_damage_taken",
+  "modifier": {
+    "name": "Fragile frame",
+    "value": 0.5,
+    "operation": "multiply_base"
+  }
+}

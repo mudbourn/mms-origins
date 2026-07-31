@@ -1,0 +1,53 @@
+plugins {
+    id 'net.fabricmc.fabric-loom-remap' version '1.17.14'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://api.modrinth.com/maven" }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.141.4+1.21.11"
+
+    modCompileOnly files("libs/Origins-Legacy-1.12.16+1.21.11.jar")
+    modCompileOnly files("libs/origins-legacy-classes-1.7.2+1.21.11.jar")
+    // Origins: Legacy ships Apoli and Calio as nested jars, and nested jars are
+    // not put on the compile classpath. Every power type we author is defined by
+    // Apoli, so both have to be extracted from the Origins jar and added by hand.
+    modCompileOnly files("libs/Apoli-Legacy-2.12.10+1.21.11.jar")
+    modCompileOnly files("libs/Calio-Legacy-1.11.2+1.21.11.jar")
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    withSourcesJar()
+}
+
+processResources {
+    inputs.property "mod_version", project.mod_version
+    filesMatching("fabric.mod.json") {
+        expand "version": project.mod_version
+    }
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.base.archivesName.get()}" }
+    }
+}
