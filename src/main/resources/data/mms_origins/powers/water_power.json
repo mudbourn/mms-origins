@@ -1,0 +1,73 @@
+{
+  "type": "origins:multiple",
+  "surge": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "name": "Water power surge",
+      "value": 2,
+      "operation": "addition"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:fluid_height",
+              "fluid": "minecraft:water",
+              "comparison": ">",
+              "compare_to": 0.0
+            },
+            {
+              "type": "origins:in_rain"
+            }
+          ]
+        },
+        {
+          "type": "origins:or",
+          "inverted": true,
+          "conditions": [
+            {
+              "type": "origins:dimension",
+              "dimension": "minecraft:the_nether"
+            },
+            {
+              "type": "origins:biome",
+              "condition": {
+                "type": "origins:temperature",
+                "comparison": ">=",
+                "compare_to": 1.0
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parch": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "name": "Water power parch",
+      "value": -2,
+      "operation": "addition"
+    },
+    "condition": {
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:dimension",
+          "dimension": "minecraft:the_nether"
+        },
+        {
+          "type": "origins:biome",
+          "condition": {
+            "type": "origins:temperature",
+            "comparison": ">=",
+            "compare_to": 1.0
+          }
+        }
+      ]
+    }
+  }
+}

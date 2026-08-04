@@ -1,0 +1,10 @@
+{
+  "required": false,
+  "package": "info.mudbourn.mmsorigins.mixin.originsclasses",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "info.mudbourn.mmsorigins.mixin.originsclasses.OriginsClassesMixinGate",
+  "client": ["ClassJobSynergyMixin"],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

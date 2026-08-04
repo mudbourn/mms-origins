@@ -38,5 +38,14 @@
   "power.mms_origins.sun_shy.name": "Sun Shy",
   "power.mms_origins.sun_shy.description": "Open daylight wears on you, and you tire faster under it.",
   "power.mms_origins.gilded_bearing.name": "Gilded Bearing",
-  "power.mms_origins.gilded_bearing.description": "Gold sits well on you, lending real toughness."
+  "power.mms_origins.gilded_bearing.description": "Gold sits well on you, lending real toughness.",
+  "power.mms_origins.language_barrier.name": "Language Barrier",
+  "power.mms_origins.language_barrier.description": "Villagers cannot make sense of you, and price their goods accordingly. Every trade costs you more.",
+  "power.mms_origins.cold_blooded.name": "Cold Blooded",
+  "power.mms_origins.cold_blooded.description": "Heat finds you badly, hurting half again as much. Cold cannot touch you at all.",
+  "power.mms_origins.seaborn.name": "Seaborn",
+  "power.mms_origins.seaborn.description": "You wake in open ocean. Out of the water you can neither rest nor claim a place to wake.",
+  "power.mms_origins.seaborn.cant_sleep": "You cannot rest out of the water.",
+  "power.mms_origins.water_power.name": "Water Power",
+  "power.mms_origins.water_power.description": "Wet — submerged or under rain — your blows land far harder. Somewhere hot, or in the Nether, the same tide runs against you."
 }

@@ -1,0 +1,22 @@
+{
+  "powers": [
+    "origins:water_breathing",
+    "origins:water_vision",
+    "origins:aqua_affinity",
+    "origins:swim_speed",
+    "origins:like_water",
+    "origins:aquatic",
+    "origins:conduit_power_on_land",
+    "origins:air_from_potions",
+    "mms_origins:language_barrier",
+    "mms_origins:cold_blooded",
+    "mms_origins:seaborn",
+    "mms_origins:water_power"
+  ],
+  "icon": {
+    "item": "minecraft:tropical_fish"
+  },
+  "order": 0,
+  "impact": 3,
+  "loading_priority": 100
+}

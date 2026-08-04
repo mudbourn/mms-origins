@@ -15,7 +15,8 @@
     ]
   },
   "mixins": [
-    "mms_origins.mixins.json"
+    "mms_origins.mixins.json",
+    "mms_origins.originsclasses.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.0",
@@ -26,6 +27,7 @@
     "apoli": ">=2.12.0"
   },
   "recommends": {
-    "origins-classes": "*"
+    "origins-classes": "*",
+    "jobsplus": "*"
   }
 }

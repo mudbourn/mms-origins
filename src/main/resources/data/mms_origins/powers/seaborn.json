@@ -1,0 +1,20 @@
+{
+  "type": "origins:multiple",
+  "ocean_spawn": {
+    "type": "origins:modify_player_spawn",
+    "dimension": "minecraft:overworld",
+    "biome": "minecraft:ocean",
+    "spawn_strategy": "center"
+  },
+  "no_dry_rest": {
+    "type": "origins:prevent_sleep",
+    "set_spawn_point": false,
+    "message": "power.mms_origins.seaborn.cant_sleep",
+    "condition": {
+      "type": "origins:fluid_height",
+      "fluid": "minecraft:water",
+      "comparison": "<=",
+      "compare_to": 0.0
+    }
+  }
+}
