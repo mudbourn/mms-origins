@@ -33,6 +33,9 @@ dependencies {
     // has to be on the compile classpath alongside it.
     modCompileOnly files("libs/jobsplus-19.1.0-fabric.jar")
     modCompileOnly files("libs/arc-19.1.1-fabric.jar")
+    // JobsPlusConfig exposes maxJobs/amountOfFreeJobs as yamlconfig entries, and
+    // the auto-join has to read both to honour the same limits the jobs menu does.
+    modCompileOnly files("libs/yamlconfig-19.1.2-fabric.jar")
 }
 
 tasks.withType(JavaCompile).configureEach {

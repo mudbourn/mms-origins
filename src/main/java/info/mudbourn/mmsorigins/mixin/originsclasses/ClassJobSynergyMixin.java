@@ -4,6 +4,7 @@ import com.daqem.jobsplus.integration.arc.holder.holders.job.JobInstance;
 import com.daqem.jobsplus.integration.arc.holder.holders.job.JobManager;
 import com.daqem.jobsplus.player.JobsPlayer;
 import com.daqem.jobsplus.player.job.Job;
+import info.mudbourn.mmsorigins.OriginsClasses;
 import io.github.apace100.origins.origin.Origin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -36,23 +37,12 @@ import java.util.Map;
 @Mixin(Origin.class)
 public class ClassJobSynergyMixin {
 
-    @Unique
-    private static final String CLASSES_NAMESPACE = "origins-classes";
-
-    /** Classes whose Jobs+ job id differs from the class id. */
-    @Unique
-    private static final Map<String, String> MMS_ORIGINS$JOB_ALIASES = Map.of(
-        "archer", "hunter",
-        "blacksmith", "smith",
-        "cleric", "alchemist"
-    );
-
     @Inject(method = "getDescription", at = @At("RETURN"), cancellable = true)
     private void mmsOrigins$appendJobSynergy(CallbackInfoReturnable<MutableComponent> cir) {
-        Identifier originId = ((Origin) (Object) this).getIdentifier();
-        if (originId == null || !CLASSES_NAMESPACE.equals(originId.getNamespace())) return;
+        Identifier jobId = OriginsClasses.jobIdFor(((Origin) (Object) this).getIdentifier());
+        if (jobId == null) return;
 
-        MutableComponent status = mmsOrigins$statusLine(originId.getPath());
+        MutableComponent status = mmsOrigins$statusLine(jobId);
         if (status == null) return;
 
         MutableComponent description = cir.getReturnValue();
@@ -66,11 +56,7 @@ public class ClassJobSynergyMixin {
      *         (unknown class, no local player, Jobs+ data not synced yet).
      */
     @Unique
-    private static MutableComponent mmsOrigins$statusLine(String classPath) {
-        String jobPath = MMS_ORIGINS$JOB_ALIASES.getOrDefault(classPath, classPath);
-        Identifier jobId = Identifier.tryBuild("jobsplus", jobPath);
-        if (jobId == null) return null;
-
+    private static MutableComponent mmsOrigins$statusLine(Identifier jobId) {
         // The client only knows about jobs the server has synced.  If the id is
         // not a real job (e.g. nitwit) there is no synergy to report.
         Map<Identifier, JobInstance> known = JobManager.getInstance().getJobs();
@@ -84,8 +70,8 @@ public class ClassJobSynergyMixin {
             return Component.literal("§a✔ You have this job at level " + held.getLevel() + ".");
         }
 
-        double price = instance.getPrice();
-        return Component.literal("§7✖ You have not joined this job §8("
-            + (price <= 0 ? "free" : String.format("%.0f coins", price)) + "§8).");
+        // Picking the class grants the job outright — never charged, whatever the
+        // job's listed price says. See ClassJobAutoJoinMixin.
+        return Component.literal("§7➜ Picking this class joins this job §8(free).");
     }
 }
