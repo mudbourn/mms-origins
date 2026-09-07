@@ -32,7 +32,9 @@ public abstract class PlayerRendererMixin {
                                         AvatarRenderState state,
                                         float partialTick,
                                         CallbackInfo ci) {
-        ((FurState) state).mmsOrigins$setFurOrigin(mmsOrigins$originOf(player));
+        FurState fur = (FurState) state;
+        fur.mmsOrigins$setFurOrigin(mmsOrigins$originOf(player));
+        fur.mmsOrigins$setFurVerticalSpeed((float) player.getDeltaMovement().y);
     }
 
     private static Identifier mmsOrigins$originOf(Avatar player) {

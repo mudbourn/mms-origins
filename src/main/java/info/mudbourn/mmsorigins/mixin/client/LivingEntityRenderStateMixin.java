@@ -18,6 +18,9 @@ public abstract class LivingEntityRenderStateMixin implements FurState {
     @Unique
     private Identifier mmsOrigins$furOrigin;
 
+    @Unique
+    private float mmsOrigins$furVerticalSpeed;
+
     @Override
     public Identifier mmsOrigins$furOrigin() {
         return this.mmsOrigins$furOrigin;
@@ -26,5 +29,15 @@ public abstract class LivingEntityRenderStateMixin implements FurState {
     @Override
     public void mmsOrigins$setFurOrigin(Identifier origin) {
         this.mmsOrigins$furOrigin = origin;
+    }
+
+    @Override
+    public float mmsOrigins$furVerticalSpeed() {
+        return this.mmsOrigins$furVerticalSpeed;
+    }
+
+    @Override
+    public void mmsOrigins$setFurVerticalSpeed(float verticalSpeed) {
+        this.mmsOrigins$furVerticalSpeed = verticalSpeed;
     }
 }
