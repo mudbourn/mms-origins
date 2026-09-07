@@ -2,76 +2,57 @@ package info.mudbourn.mmsorigins.mixin.client;
 
 import info.mudbourn.mmsorigins.client.fur.FurModels;
 import info.mudbourn.mmsorigins.client.fur.FurState;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.player.PlayerModel;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Hides the vanilla player parts a fur replaces while the base body is submitted.
+ * Hides the vanilla player parts a fur replaces.
  *
- * <p>A fur that stands in for the arms or torso lists those parts, and this suppresses
- * them for the duration of the body submit so the fur is not drawn over a visible
- * vanilla limb. Only parts that were visible are re-shown on return, so a part already
- * hidden for another reason stays hidden.
+ * <p>The hide rides {@code setupAnim}, which is where the player model re-establishes
+ * every part's visibility from the render state before both the body and its layers are
+ * drawn. Hiding here, after vanilla has had its say, keeps a replaced arm or torso from
+ * showing through or fighting the fur that stands in for it. No restore is needed: the
+ * next entity's {@code setupAnim} sets visibility afresh, so the shared model never
+ * carries a hidden part over to a player that did not ask for it.
  */
-@Mixin(LivingEntityRenderer.class)
+@Mixin(PlayerModel.class)
 public abstract class AvatarBodyHideMixin {
 
-    @Unique
-    private final List<ModelPart> mmsOrigins$suppressed = new ArrayList<>();
-
-    @Inject(method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V",
-            at = @At("HEAD"))
-    private void mmsOrigins$hideReplacedParts(LivingEntityRenderState state, CallbackInfo ci) {
-        this.mmsOrigins$suppressed.clear();
-        if (!(state instanceof AvatarRenderState avatar)
-                || !(((LivingEntityRenderer<?, ?, ?>) (Object) this).getModel() instanceof PlayerModel model)) {
+    @Inject(method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;)V",
+            at = @At("RETURN"))
+    private void mmsOrigins$hideReplacedParts(AvatarRenderState state, CallbackInfo ci) {
+        if (!(state instanceof FurState furState)) {
             return;
         }
-        FurModels.Fur fur = FurModels.resolve(((FurState) state).mmsOrigins$furOrigin());
+        FurModels.Fur fur = FurModels.resolve(furState.mmsOrigins$furOrigin());
         if (fur == null || fur.hidden().isEmpty()) {
             return;
         }
+        PlayerModel model = (PlayerModel) (Object) this;
         for (String name : fur.hidden()) {
             ModelPart part = mmsOrigins$partFor(model, name);
-            if (part != null && part.visible) {
+            if (part != null) {
                 part.visible = false;
-                this.mmsOrigins$suppressed.add(part);
             }
         }
     }
 
-    @Inject(method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V",
-            at = @At("RETURN"))
-    private void mmsOrigins$restoreReplacedParts(LivingEntityRenderState state, CallbackInfo ci) {
-        for (ModelPart part : this.mmsOrigins$suppressed) {
-            part.visible = true;
-        }
-        this.mmsOrigins$suppressed.clear();
-    }
-
     @Unique
     private static ModelPart mmsOrigins$partFor(PlayerModel model, String name) {
-        HumanoidModel<?> biped = model;
         return switch (name) {
-            case "head" -> biped.head;
-            case "hat" -> biped.hat;
-            case "body" -> biped.body;
-            case "leftArm" -> biped.leftArm;
-            case "rightArm" -> biped.rightArm;
-            case "leftLeg" -> biped.leftLeg;
-            case "rightLeg" -> biped.rightLeg;
+            case "head" -> model.head;
+            case "hat" -> model.hat;
+            case "body" -> model.body;
+            case "leftArm" -> model.leftArm;
+            case "rightArm" -> model.rightArm;
+            case "leftLeg" -> model.leftLeg;
+            case "rightLeg" -> model.rightLeg;
             case "leftSleeve" -> model.leftSleeve;
             case "rightSleeve" -> model.rightSleeve;
             case "leftPants" -> model.leftPants;

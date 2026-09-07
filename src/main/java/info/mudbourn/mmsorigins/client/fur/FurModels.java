@@ -146,7 +146,6 @@ public final class FurModels {
         registerEmissive("origins", "arachnid",
                 "mms_origins:textures/fur/arachnid.png",
                 "mms_origins:textures/fur/arachnid_eyes.png");
-        offset("origins", "enderian", 0.0F, 0.0F, -0.3F);
         offset("origins", "blazeborn", 0.0F, 0.1F, 0.0F);
         hide("origins", "blazeborn", "leftArm", "rightArm", "leftSleeve", "rightSleeve");
         hide("origins", "shulk", "leftArm", "rightArm", "body");
