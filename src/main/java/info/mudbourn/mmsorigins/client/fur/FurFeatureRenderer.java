@@ -72,17 +72,22 @@ public class FurFeatureRenderer extends RenderLayer<AvatarRenderState, PlayerMod
                     0xFFFFFFFF,
                     state.ageInTicks,
                     state.walkAnimationPos,
-                    state.walkAnimationSpeed);
+                    state.walkAnimationSpeed,
+                    isSlim(state));
             poseStack.popPose();
         }
     }
 
     /** The overlay for this model, the slim variant when the skin is slim and one exists. */
     private static Identifier overlayFor(FurModels.Fur fur, AvatarRenderState state) {
-        if (fur.overlaySlim() != null && state.skin != null
-                && state.skin.model() == PlayerModelType.SLIM) {
+        if (fur.overlaySlim() != null && isSlim(state)) {
             return fur.overlaySlim();
         }
         return fur.overlay();
+    }
+
+    /** Whether the player is wearing a three-pixel-arm (slim) skin. */
+    private static boolean isSlim(AvatarRenderState state) {
+        return state.skin != null && state.skin.model() == PlayerModelType.SLIM;
     }
 }
