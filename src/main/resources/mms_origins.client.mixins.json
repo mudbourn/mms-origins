@@ -3,8 +3,10 @@
   "package": "info.mudbourn.mmsorigins.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "AvatarBodyHideMixin",
     "LivingEntityRenderStateMixin",
-    "PlayerRendererMixin"
+    "PlayerRendererMixin",
+    "WingsElytraTextureMixin"
   ],
   "injectors": {
     "defaultRequire": 1
