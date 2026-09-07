@@ -14,8 +14,4 @@ public interface FurState {
     Identifier mmsOrigins$furOrigin();
 
     void mmsOrigins$setFurOrigin(Identifier origin);
-
-    float mmsOrigins$furVerticalSpeed();
-
-    void mmsOrigins$setFurVerticalSpeed(float verticalSpeed);
 }

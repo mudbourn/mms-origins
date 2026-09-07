@@ -3,7 +3,7 @@ package info.mudbourn.mmsorigins.client.fur;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import info.mudbourn.mmsorigins.MmsOrigins;
-import info.mudbourn.mmsrendercommon.client.geo.GeoAnimation;
+import info.mudbourn.mmsrendercommon.client.geo.BoneAnimator;
 import info.mudbourn.mmsrendercommon.client.geo.GeoModelData;
 import info.mudbourn.mmsrendercommon.client.geo.HumanoidGeoModel;
 import net.minecraft.client.Minecraft;
@@ -41,9 +41,9 @@ public final class FurModels {
                       Identifier overlay,
                       Identifier overlaySlim) {}
 
-    /** Where a fur's geo, animation and textures live, before baking. Any field may be null. */
+    /** Where a fur's geo and textures live, plus its bone animator, before baking. Any field may be null. */
     private record Source(Identifier geo,
-                          Identifier animation,
+                          BoneAnimator animator,
                           Identifier texture,
                           Identifier overlay,
                           Identifier overlaySlim) {}
@@ -72,7 +72,7 @@ public final class FurModels {
                 null);
         register("mms_origins", "piglin",
                 "mms_origins:fur/geo/piglin.geo.json",
-                "mms_origins:fur/animations/piglin.animation.json",
+                new PiglinEarAnimator(),
                 "mms_origins:textures/fur/piglin.png",
                 null,
                 null);
@@ -103,7 +103,7 @@ public final class FurModels {
         Source source = SOURCES.get(origin);
         HumanoidGeoModel model = null;
         if (source.geo() != null) {
-            model = load(source.geo(), source.animation());
+            model = load(source.geo(), source.animator());
             if (model == null) {
                 return null;
             }
@@ -113,23 +113,14 @@ public final class FurModels {
         return fur;
     }
 
-    private static HumanoidGeoModel load(Identifier geo, Identifier animationId) {
+    private static HumanoidGeoModel load(Identifier geo, BoneAnimator animator) {
         JsonObject geoJson = readJson(geo);
         if (geoJson == null) {
             MmsOrigins.LOGGER.warn("Missing fur geometry {}", geo);
             return null;
         }
         try {
-            GeoAnimation animation = null;
-            if (animationId != null) {
-                JsonObject animationJson = readJson(animationId);
-                if (animationJson == null) {
-                    MmsOrigins.LOGGER.warn("Missing fur animation {}", animationId);
-                } else {
-                    animation = GeoAnimation.parse(animationJson);
-                }
-            }
-            return HumanoidGeoModel.bake(GeoModelData.parse(geoJson), animation);
+            return HumanoidGeoModel.bake(GeoModelData.parse(geoJson), animator);
         } catch (Exception exception) {
             MmsOrigins.LOGGER.warn("Could not bake fur geometry {}", geo, exception);
             return null;
@@ -149,10 +140,10 @@ public final class FurModels {
         }
     }
 
-    private static void register(String namespace, String path, String geo, String animation,
+    private static void register(String namespace, String path, String geo, BoneAnimator animator,
                                  String texture, String overlay, String overlaySlim) {
         SOURCES.put(Identifier.fromNamespaceAndPath(namespace, path),
-                new Source(id(geo), id(animation), id(texture), id(overlay), id(overlaySlim)));
+                new Source(id(geo), animator, id(texture), id(overlay), id(overlaySlim)));
     }
 
     private static Identifier id(String value) {

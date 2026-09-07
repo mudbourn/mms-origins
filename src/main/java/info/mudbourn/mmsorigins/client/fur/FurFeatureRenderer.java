@@ -54,7 +54,9 @@ public class FurFeatureRenderer extends RenderLayer<AvatarRenderState, PlayerMod
                     light,
                     OverlayTexture.NO_OVERLAY,
                     0xFFFFFFFF,
-                    state.ageInTicks / 20.0F);
+                    state.ageInTicks,
+                    state.walkAnimationPos,
+                    state.walkAnimationSpeed);
         }
     }
 
