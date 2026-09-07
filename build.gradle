@@ -20,6 +20,10 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.141.4+1.21.11"
 
+    // Shared render infra, wired as a composite build (see settings.gradle). The
+    // fur models are posed through its CEM/EMF pose relay.
+    modImplementation "info.mudbourn:mms-render-common:${project.render_common_version}"
+
     modCompileOnly files("libs/Origins-Legacy-1.12.16+1.21.11.jar")
     modCompileOnly files("libs/origins-legacy-classes-1.7.2+1.21.11.jar")
     // Origins: Legacy ships Apoli and Calio as nested jars, and nested jars are
@@ -27,6 +31,13 @@ dependencies {
     // Apoli, so both have to be extracted from the Origins jar and added by hand.
     modCompileOnly files("libs/Apoli-Legacy-2.12.10+1.21.11.jar")
     modCompileOnly files("libs/Calio-Legacy-1.11.2+1.21.11.jar")
+    // The Origins origin lives on a Cardinal Components component, whose key and
+    // component types leak into the getter the fur mixin calls, so CCA has to be on
+    // the compile classpath. The modrinth artifact ships the modules as nested jars,
+    // and nested jars are not on the compile classpath, so the two the getter needs
+    // are extracted by hand. Supplied at runtime as a dependency of Origins.
+    modCompileOnly files("libs/cardinal-components-base-7.3.1.jar")
+    modCompileOnly files("libs/cardinal-components-entity-7.3.1.jar")
 
     // Only for the Origins Classes / Jobs+ synergy line. Arc is Jobs+' own
     // holder framework and its types leak into the Jobs+ API we call, so it

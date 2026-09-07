@@ -5,3 +5,8 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+// The fur model layer is drawn through mms-render-common's CEM pose relay; a
+// composite build wires the sibling source tree in directly, so an edit upstream
+// rebuilds here without a jar copy.
+includeBuild '../mms-render-common'
