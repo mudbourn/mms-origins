@@ -10,12 +10,12 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 
 /**
- * Draws a player's fur over the vanilla model.
+ * Draws a player's fur geometry over the vanilla model.
  *
- * <p>A feature layer rather than a model replacement because the ported furs are
- * additive: merling is a set of fins and a face card meant to sit on top of the
- * player's own skin, which is exactly what a feature layer over the base model is.
- * Full-body furs that need the vanilla model hidden are a later, per-fur concern.
+ * <p>A feature layer rather than a model replacement because the ported furs' geo is
+ * additive: a set of fins and a face card meant to sit on top of the player's body.
+ * The body overlay is not drawn here; it replaces the player's skin texture on the
+ * render state during extraction, so a fur with no geo (truffle) draws nothing here.
  */
 public class FurFeatureRenderer extends RenderLayer<AvatarRenderState, PlayerModel> {
 
@@ -27,13 +27,9 @@ public class FurFeatureRenderer extends RenderLayer<AvatarRenderState, PlayerMod
     public void submit(PoseStack poseStack, SubmitNodeCollector collector, int light,
                        AvatarRenderState state, float yRot, float xRot) {
         FurModels.Fur fur = FurModels.resolve(((FurState) state).mmsOrigins$furOrigin());
-        if (fur == null) {
+        if (fur == null || fur.model() == null) {
             return;
         }
-        // The scaled torso and tail are a vanilla-skin-layout texture drawn onto the
-        // player model itself, under the geo fins.
-        renderColoredCutoutModel(this.getParentModel(), fur.overlay(), poseStack, collector,
-                light, state, 0xFFFFFFFF, state.outlineColor);
         fur.model().submit(poseStack, collector,
                 RenderTypes.entityCutoutNoCull(fur.texture()),
                 this.getParentModel().root(),

@@ -27,13 +27,24 @@ public final class FurModels {
     /**
      * A resolved fur: its baked geometry, the geo texture, and the body overlay.
      *
-     * <p>The overlay is a vanilla-skin-layout texture drawn onto the player model
-     * itself (the merling's scaled torso and tail), separate from the geo fins.
+     * <p>The overlay is a vanilla-skin-layout texture that replaces the player's body
+     * skin on the render state, turning the vanilla model into the fur body; it is
+     * separate from the geo fins, with {@code overlaySlim} its three-pixel-arm variant.
+     * Any of {@code model},
+     * {@code texture}, {@code overlay} and {@code overlaySlim} may be null: an
+     * overlay-only fur (truffle) has no geo, a geo-only fur (inchling) has no overlay,
+     * and a fur with no slim variant (floran) reuses its wide overlay on slim models.
      */
-    public record Fur(HumanoidGeoModel model, Identifier texture, Identifier overlay) {}
+    public record Fur(HumanoidGeoModel model,
+                      Identifier texture,
+                      Identifier overlay,
+                      Identifier overlaySlim) {}
 
-    /** Where a fur's geo and textures live, before baking. */
-    private record Source(Identifier geo, Identifier texture, Identifier overlay) {}
+    /** Where a fur's geo and textures live, before baking. Any field may be null. */
+    private record Source(Identifier geo,
+                          Identifier texture,
+                          Identifier overlay,
+                          Identifier overlaySlim) {}
 
     private static final Map<Identifier, Source> SOURCES = new HashMap<>();
     private static final Map<Identifier, Fur> BAKED = new HashMap<>();
@@ -42,7 +53,29 @@ public final class FurModels {
         register("origins", "merling",
                 "mms_origins:fur/geo/merling.geo.json",
                 "mms_origins:textures/fur/merling.png",
-                "mms_origins:textures/fur/merling_skin.png");
+                "mms_origins:textures/fur/merling_skin.png",
+                "mms_origins:textures/fur/merling_skin_thin.png");
+        register("mms_origins", "floran",
+                "mms_origins:fur/geo/floran.geo.json",
+                "mms_origins:textures/fur/floran.png",
+                "mms_origins:textures/fur/floran_skin.png",
+                null);
+        register("mms_origins", "inchling",
+                "mms_origins:fur/geo/inchling.geo.json",
+                "mms_origins:textures/fur/inchling.png",
+                null,
+                null);
+        // Baked static; the source animation file is not applied.
+        register("mms_origins", "piglin",
+                "mms_origins:fur/geo/piglin.geo.json",
+                "mms_origins:textures/fur/piglin.png",
+                null,
+                null);
+        register("mms_origins", "truffle",
+                null,
+                null,
+                "mms_origins:textures/fur/truffle_skin.png",
+                "mms_origins:textures/fur/truffle_skin_slim.png");
     }
 
     private FurModels() {
@@ -62,11 +95,14 @@ public final class FurModels {
             return baked;
         }
         Source source = SOURCES.get(origin);
-        HumanoidGeoModel model = load(source.geo());
-        if (model == null) {
-            return null;
+        HumanoidGeoModel model = null;
+        if (source.geo() != null) {
+            model = load(source.geo());
+            if (model == null) {
+                return null;
+            }
         }
-        Fur fur = new Fur(model, source.texture(), source.overlay());
+        Fur fur = new Fur(model, source.texture(), source.overlay(), source.overlaySlim());
         BAKED.put(origin, fur);
         return fur;
     }
@@ -87,8 +123,12 @@ public final class FurModels {
     }
 
     private static void register(String namespace, String path,
-                                 String geo, String texture, String overlay) {
+                                 String geo, String texture, String overlay, String overlaySlim) {
         SOURCES.put(Identifier.fromNamespaceAndPath(namespace, path),
-                new Source(Identifier.parse(geo), Identifier.parse(texture), Identifier.parse(overlay)));
+                new Source(id(geo), id(texture), id(overlay), id(overlaySlim)));
+    }
+
+    private static Identifier id(String value) {
+        return value == null ? null : Identifier.parse(value);
     }
 }
