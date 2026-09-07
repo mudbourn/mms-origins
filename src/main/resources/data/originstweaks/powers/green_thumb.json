@@ -41,6 +41,31 @@
 			}
 		}
 	},
+	"fortune": {
+		"type": "mms_origins:modify_enchantment_level",
+		"enchantment": "minecraft:fortune",
+		"modifier": {
+			"operation": "add_base_late",
+			"value": 2
+		},
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "minecraft:hoes"
+			}
+		},
+		"condition": {
+			"type": "origins:raycast",
+			"block": true,
+			"entity": false,
+			"distance": 20,
+			"fluid_handling": "none",
+			"block_condition": {
+				"type": "origins:in_tag",
+				"tag": "originstweaks:green_thumb_crops"
+			}
+		}
+	},
 	"golden_apple_oak": {
 		"type": "origins:replace_loot_table",
 		"replace": {

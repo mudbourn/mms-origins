@@ -479,5 +479,15 @@
 			"comparison": "!=",
 			"compare_to": 0
 		}
+	},
+	"charge_pose": {
+		"type": "mms_origins:pose",
+		"entity_pose": "crouching",
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_hold_timer",
+			"comparison": "!=",
+			"compare_to": 0
+		}
 	}
 }

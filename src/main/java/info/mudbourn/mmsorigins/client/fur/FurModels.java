@@ -154,9 +154,26 @@ public final class FurModels {
         elytra("origins", "avian", "mms_origins:textures/fur/avian_elytra.png");
         elytra("origins", "phantom", "mms_origins:textures/fur/phantom_elytra.png");
         elytra("origins", "shulk", "mms_origins:textures/fur/shulk_elytra.png");
+        aliasToOriginsTweaks("arachnid", "avian", "blazeborn", "elytrian",
+                "enderian", "feline", "phantom", "shulk");
     }
 
     private FurModels() {
+    }
+
+    /**
+     * Points the OriginsTweaks copies of the default origins at the same furs.
+     * OriginsTweaks replaces the vanilla origins with {@code originstweaks:}
+     * versions, so a player's origin id is now that namespace, not
+     * {@code origins:}. Aliasing keeps the ported furs applying to both.
+     */
+    private static void aliasToOriginsTweaks(String... names) {
+        for (String name : names) {
+            Source source = SOURCES.get(Identifier.fromNamespaceAndPath("origins", name));
+            if (source != null) {
+                SOURCES.put(Identifier.fromNamespaceAndPath("originstweaks", name), source);
+            }
+        }
     }
 
     /** Touches the class so its table is populated; the models bake on first draw. */

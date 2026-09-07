@@ -1,8 +1,6 @@
 {
 	"gui_title": {
-		"choose_origin": {
-			"translate": "originstweaks.gui.choose_wings.title"
-		},
+		"choose_origin": "originstweaks.gui.choose_wings.title",
 		"view_origin": "originstweaks.gui.view_wings.title"
 	},
 	"order": 2,

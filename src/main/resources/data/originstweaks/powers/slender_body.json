@@ -83,6 +83,25 @@
 			}
 		}
 	},
+	"silk_touch": {
+		"type": "mms_origins:modify_enchantment_level",
+		"enchantment": "minecraft:silk_touch",
+		"modifier": {
+			"operation": "set_total",
+			"value": 1
+		},
+		"condition": {
+			"type": "origins:equipped_item",
+			"equipment_slot": "mainhand",
+			"item_condition": {
+				"type": "origins:ingredient",
+				"ingredient": {
+					"tag": "c:tools"
+				},
+				"inverted": true
+			}
+		}
+	},
 	"dodge_cooldown": {
 		"type": "origins:cooldown",
 		"cooldown": 100,
@@ -90,6 +109,92 @@
 			"should_render": true,
 			"sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
 			"bar_index": 2
+		}
+	},
+	"projectile_dodge": {
+		"type": "origins:modify_damage_taken",
+		"self_action": {
+			"type": "mms_origins:random_teleport",
+			"area_width": 8,
+			"area_height": 8,
+			"landing_offset": {
+				"y": 0.1
+			},
+			"landing_block_condition": {
+				"type": "origins:and",
+				"conditions": [
+					{
+						"type": "origins:movement_blocking"
+					},
+					{
+						"type": "apoli:offset",
+						"y": 1,
+						"condition": {
+							"type": "origins:movement_blocking",
+							"inverted": true
+						}
+					},
+					{
+						"type": "apoli:offset",
+						"y": 2,
+						"condition": {
+							"type": "origins:movement_blocking",
+							"inverted": true
+						}
+					},
+					{
+						"type": "apoli:offset",
+						"y": 3,
+						"condition": {
+							"type": "origins:movement_blocking",
+							"inverted": true
+						}
+					},
+					{
+						"type": "origins:block",
+						"block": "minecraft:bedrock",
+						"inverted": true
+					}
+				]
+			},
+			"success_action": {
+				"type": "origins:and",
+				"actions": [
+					{
+						"type": "origins:spawn_particles",
+						"particle": "minecraft:portal",
+						"count": 50,
+						"speed": 0.5,
+						"offset_y": 1
+					},
+					{
+						"type": "origins:grant_advancement",
+						"advancement": "originstweaks:enderian/dodge_projectile"
+					},
+					{
+						"type": "origins:play_sound",
+						"sound": "minecraft:item.chorus_fruit.teleport",
+						"category": "players"
+					},
+					{
+						"type": "origins:trigger_cooldown",
+						"power": "*:*_dodge_cooldown"
+					}
+				]
+			}
+		},
+		"damage_condition": {
+			"type": "origins:projectile"
+		},
+		"modifier": {
+			"operation": "set_total",
+			"value": 0
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_dodge_cooldown",
+			"comparison": "==",
+			"compare_to": 0
 		}
 	}
 }

@@ -177,5 +177,23 @@
 				}
 			]
 		}
+	},
+	"armor_modifier": {
+		"type": "mms_origins:resource_attribute",
+		"attribute": "minecraft:armor",
+		"resource": "*:*_shell_shield",
+		"value": 1.0
+	},
+	"death": {
+		"type": "mms_origins:action_on_death",
+		"bientity_action": {
+			"type": "origins:target_action",
+			"action": {
+				"type": "origins:change_resource",
+				"resource": "*:*_shell_shield",
+				"change": 0,
+				"operation": "set"
+			}
+		}
 	}
 }
