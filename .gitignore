@@ -1,11 +1,13 @@
-# Third-party reference jars. Never committed: they are other projects'
-# redistributables under their own licenses, and committing them into an MIT
-# repo misrepresents those licenses. Populate locally -- see README.
-libs/
-
 .gradle/
 build/
 run/
-*.class
-.idea/
-*.iml
+
+.DS_Store
+*.pem
+*.log
+*.txt
+*.md
+!README.md
+!docs/*.md
+
+.claude/settings.local.json
