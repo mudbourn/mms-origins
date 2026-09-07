@@ -1,14 +1,27 @@
 {
-  "replace": false,
+  "replace": true,
   "order": 0,
   "enabled": true,
   "origins": [
+    "origins:human",
+    "origins:merling",
     "mms_origins:floran",
     "mms_origins:inchling",
     "mms_origins:truffle",
-    "mms_origins:piglin"
+    "mms_origins:piglin",
+    "originstweaks:arachnid",
+    "originstweaks:avian",
+    "originstweaks:blazeborn",
+    "originstweaks:elytrian",
+    "originstweaks:enderian",
+    "originstweaks:feline",
+    "originstweaks:phantom",
+    "originstweaks:shulk"
   ],
   "allow_random": true,
+  "exclude_random": [
+    "origins:human"
+  ],
   "allow_random_unchoosable": false,
   "hidden": false
 }

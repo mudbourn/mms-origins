@@ -1,0 +1,11 @@
+{
+	"values": [
+		{
+			"id": "#c:tools/melee_weapon",
+			"required": false
+		},
+		"#minecraft:swords",
+		"#minecraft:axes",
+		"minecraft:trident"
+	  ]
+}

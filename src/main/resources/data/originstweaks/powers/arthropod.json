@@ -1,0 +1,52 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.arthropod.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.arthropod.1"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/star.png",
+			"text": {
+				"translate": "badge.originstweaks.arthropod.2"
+			}
+		}
+	],
+	"scale": {
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:execute_command",
+			"command": "attribute @s minecraft:generic.scale base set 0.6"
+		},
+		"entity_action_lost": {
+			"type": "origins:execute_command",
+			"command": "attribute @s minecraft:generic.scale base set 1"
+		}
+	},
+	"entity_group": {
+		"type": "origins:entity_group",
+		"group": "arthropod"
+	},
+	"fall_damage_reduction": {
+		"type": "origins:modify_damage_taken",
+		"damage_condition": {
+			"type": "origins:name",
+			"name": "fall"
+		},
+		"modifier": {
+			"operation": "addition",
+			"value": -13
+		}
+	}
+}

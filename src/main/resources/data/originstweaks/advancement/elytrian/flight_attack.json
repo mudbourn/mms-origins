@@ -1,0 +1,23 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.originstweaks.elytrian.flight_attack.title"
+		},
+		"description": {
+			"translate": "advancement.originstweaks.elytrian.flight_attack.description"
+		},
+		"icon": {
+			"id": "minecraft:firework_rocket"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"ranged_hit": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"parent": "originstweaks:elytrian/root"
+}

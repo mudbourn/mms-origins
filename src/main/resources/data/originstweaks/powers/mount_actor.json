@@ -1,0 +1,80 @@
+{
+	"type": "origins:multiple",
+	"hidden": true,
+	"mounted": {
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:execute_command",
+			"command": "attribute @s additionalentityattributes:generic.hitbox_scale base set 0"
+		},
+		"condition": {
+			"type": "origins:riding",
+			"bientity_condition": {
+				"type": "origins:target_condition",
+				"condition": {
+					"type": "origins:origin",
+					"origin": "originstweaks:elytrian",
+					"layer": "originstweaks:origin"
+				}
+			}
+		},
+		"interval": 5
+	},
+	"not_mounted": {
+		"type": "origins:action_over_time",
+		"rising_action": {
+			"type": "origins:execute_command",
+			"command": "attribute @s additionalentityattributes:generic.hitbox_scale base set 1"
+		},
+		"condition": {
+			"type": "origins:riding",
+			"bientity_condition": {
+				"type": "origins:target_condition",
+				"condition": {
+					"type": "origins:origin",
+					"origin": "originstweaks:elytrian",
+					"layer": "originstweaks:origin"
+				}
+			},
+			"inverted": true
+		},
+		"interval": 1
+	},
+	"sneak_dismount": {
+		"type": "origins:active_self",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:delay",
+					"action": {
+						"type": "origins:dismount"
+					},
+					"ticks": 3
+				},
+				{
+					"type": "origins:riding_action",
+					"action": {
+						"type": "origins:trigger_cooldown",
+						"power": "*:companion_mounting_mount_cooldown"
+					},
+					"bientity_condition": {
+						"type": "origins:target_condition",
+						"condition": {
+							"type": "origins:origin",
+							"origin": "originstweaks:elytrian",
+							"layer": "originstweaks:origin"
+						}
+					}
+				}
+			]
+		}
+	},
+	"dismount_on_leave": {
+		"type": "origins:action_on_callback",
+		"execute_chosen_when_orb": false,
+		"entity_action_removed": {
+			"type": "origins:dismount"
+		}
+	}
+}

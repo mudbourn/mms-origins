@@ -1,0 +1,19 @@
+{
+	"icon": {
+		"id": "minecraft:cobweb"
+	},
+	"order": 1,
+	"impact": 1,
+	"loading_priority": 1,
+	"powers": [
+		"originstweaks:master_of_webs",
+		"origins:master_of_webs_no_slowdown",
+		"originstweaks:venom",
+		"originstweaks:climbing",
+		"originstweaks:arthropod",
+		"origins:fragile",
+		"origins:carnivore",
+		"originstweaks:arachnid_sounds",
+		"originstweaks:arachnid_advancements"
+	]
+}

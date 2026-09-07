@@ -1,0 +1,33 @@
+{
+	"type": "origins:multiple",
+	"fire_immune": {
+		"type": "origins:invulnerability",
+		"damage_condition": {
+			"type": "origins:fire"
+		}
+	},
+	"lava_swim": {
+		"type": "origins:swimming",
+		"condition": {
+			"type": "origins:submerged_in",
+			"fluid": "minecraft:lava"
+		}
+	},
+	"lava_movement_speed": {
+		"type": "origins:modify_lava_speed",
+		"modifier": {
+			"id": "originstweaks:lava_move_speed",
+			"operation": "addition",
+			"value": 0.2
+		},
+		"condition": {
+			"type": "origins:swimming",
+			"inverted": true
+		}
+	},
+	"lava_vision": {
+		"type": "origins:lava_vision",
+		"s": 0.0,
+		"v": 6.0
+	}
+}

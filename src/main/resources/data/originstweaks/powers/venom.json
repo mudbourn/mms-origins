@@ -1,0 +1,367 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/toggle.png",
+			"text": {
+				"translate": "badge.originstweaks.venom.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/star.png",
+			"text": {
+				"translate": "badge.originstweaks.venom.1"
+			}
+		}
+	],
+	"poison": {
+		"type": "origins:action_on_hit",
+		"bientity_action": {
+			"type": "origins:chance",
+			"chance": 0.25,
+			"action": {
+				"type": "origins:if_else_list",
+				"actions": [
+					{
+						"condition": {
+							"type": "origins:target_condition",
+							"condition": {
+								"type": "origins:in_tag",
+								"tag": "originstweaks:illager_and_allies",
+								"inverted": true
+							}
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:actor_action",
+									"action": {
+										"type": "origins:change_resource",
+										"resource": "*:*_cooldown",
+										"change": 0,
+										"operation": "set"
+									}
+								},
+								{
+									"type": "origins:target_action",
+									"action": {
+										"type": "origins:execute_command",
+										"command": "effect give @s minecraft:poison 5 1"
+									}
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:target_condition",
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:pillager"
+							}
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:actor_action",
+									"action": {
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:grant_advancement",
+												"selection": "only",
+												"advancement": "originstweaks:arachnid/poison_illager",
+												"criterion": "pillager"
+											},
+											{
+												"type": "origins:change_resource",
+												"resource": "*:*_cooldown",
+												"change": 0,
+												"operation": "set"
+											}
+										]
+									}
+								},
+								{
+									"type": "origins:target_action",
+									"action": {
+										"type": "origins:execute_command",
+										"command": "effect give @s minecraft:poison 5 1"
+									}
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:target_condition",
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:vindicator"
+							}
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:actor_action",
+									"action": {
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:grant_advancement",
+												"selection": "only",
+												"advancement": "originstweaks:arachnid/poison_illager",
+												"criterion": "vindicator"
+											},
+											{
+												"type": "origins:change_resource",
+												"resource": "*:*_cooldown",
+												"change": 0,
+												"operation": "set"
+											}
+										]
+									}
+								},
+								{
+									"type": "origins:target_action",
+									"action": {
+										"type": "origins:execute_command",
+										"command": "effect give @s minecraft:poison 5 1"
+									}
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:target_condition",
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:evoker"
+							}
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:actor_action",
+									"action": {
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:grant_advancement",
+												"selection": "only",
+												"advancement": "originstweaks:arachnid/poison_illager",
+												"criterion": "evoker"
+											},
+											{
+												"type": "origins:change_resource",
+												"resource": "*:*_cooldown",
+												"change": 0,
+												"operation": "set"
+											}
+										]
+									}
+								},
+								{
+									"type": "origins:target_action",
+									"action": {
+										"type": "origins:execute_command",
+										"command": "effect give @s minecraft:poison 5 1"
+									}
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:target_condition",
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:vex"
+							}
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:actor_action",
+									"action": {
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:grant_advancement",
+												"selection": "only",
+												"advancement": "originstweaks:arachnid/poison_illager",
+												"criterion": "vex"
+											},
+											{
+												"type": "origins:change_resource",
+												"resource": "*:*_cooldown",
+												"change": 0,
+												"operation": "set"
+											}
+										]
+									}
+								},
+								{
+									"type": "origins:target_action",
+									"action": {
+										"type": "origins:execute_command",
+										"command": "effect give @s minecraft:poison 5 1"
+									}
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:target_condition",
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:ravager"
+							}
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:actor_action",
+									"action": {
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:grant_advancement",
+												"selection": "only",
+												"advancement": "originstweaks:arachnid/poison_illager",
+												"criterion": "ravager"
+											},
+											{
+												"type": "origins:change_resource",
+												"resource": "*:*_cooldown",
+												"change": 0,
+												"operation": "set"
+											}
+										]
+									}
+								},
+								{
+									"type": "origins:target_action",
+									"action": {
+										"type": "origins:execute_command",
+										"command": "effect give @s minecraft:poison 5 1"
+									}
+								}
+							]
+						}
+					},
+					{
+						"condition": {
+							"type": "origins:target_condition",
+							"condition": {
+								"type": "origins:entity_type",
+								"entity_type": "minecraft:witch"
+							}
+						},
+						"action": {
+							"type": "origins:and",
+							"actions": [
+								{
+									"type": "origins:actor_action",
+									"action": {
+										"type": "origins:and",
+										"actions": [
+											{
+												"type": "origins:grant_advancement",
+												"selection": "only",
+												"advancement": "originstweaks:arachnid/poison_illager",
+												"criterion": "witch"
+											},
+											{
+												"type": "origins:change_resource",
+												"resource": "*:*_cooldown",
+												"change": 0,
+												"operation": "set"
+											}
+										]
+									}
+								},
+								{
+									"type": "origins:target_action",
+									"action": {
+										"type": "origins:execute_command",
+										"command": "effect give @s minecraft:poison 5 1"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		"damage_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:name",
+					"name": "player"
+				},
+				{
+					"type": "origins:name",
+					"name": "player.item"
+				}
+			]
+		},
+		"cooldown": 0,
+		"hud_render": {
+			"should_render": false
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:climbing_toggle",
+					"inverted": true
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:*_cooldown",
+					"comparison": "==",
+					"compare_to": 100
+				}
+			]
+		}
+	},
+	"cooldown": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 100,
+		"start_value": 100,
+		"hud_render": {
+			"bar_index": 18,
+			"sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+			"order": 0,
+			"condition": {
+				"type": "origins:power_active",
+				"power": "*:climbing_toggle",
+				"inverted": true
+			}
+		}
+	},
+	"cooldown_tick": {
+		"type": "origins:action_over_time",
+		"interval": 3,
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:*_cooldown",
+			"operation": "add",
+			"change": 3
+		}
+	}
+}

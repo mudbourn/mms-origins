@@ -1,0 +1,19 @@
+{
+	"icon": {
+		"id": "minecraft:orange_wool"
+	},
+	"order": 0,
+	"impact": 2,
+	"loading_priority": 1,
+	"powers": [
+		"originstweaks:natural_hunter",
+		"originstweaks:dexterity",
+		"originstweaks:weak_arms",
+		"origins:velvet_paws",
+		"origins:nine_lives",
+		"origins:scare_creepers",
+		"originstweaks:cat_vision",
+		"originstweaks:feline_sounds",
+		"originstweaks:feline_advancements"
+	]
+}

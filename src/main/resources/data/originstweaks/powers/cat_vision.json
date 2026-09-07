@@ -1,0 +1,18 @@
+{
+	"type": "origins:toggle_night_vision",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/toggle.png",
+			"text": {
+				"translate": "badge.originstweaks.cat_vision.0"
+			}
+		}
+	],
+	"strength": 0.4,
+	"active_by_default": true,
+	"key": {
+		"key": "key.origins.secondary_active",
+		"continuous": false
+	}
+}

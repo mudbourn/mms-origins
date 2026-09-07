@@ -1,0 +1,39 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/toggle.png",
+			"text": {
+				"translate": "badge.originstweaks.phantomize.0"
+			}
+		}
+	],
+	"toggle": {
+		"type": "origins:toggle",
+		"key": {
+			"key": "key.origins.primary_active"
+		},
+		"retain_state": false,
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:soulbound_energy",
+			"comparison": "!=",
+			"compare_to": 0
+		}
+	},
+	"drain_soul_power": {
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:soulbound_energy",
+			"change": -1,
+			"operation": "add"
+		},
+		"interval": 40,
+		"condition": {
+			"type": "origins:power_active",
+			"power": "*:*_toggle"
+		}
+	}
+}

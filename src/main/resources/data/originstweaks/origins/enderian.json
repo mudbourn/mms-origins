@@ -1,0 +1,18 @@
+{
+	"icon": {
+		"id": "minecraft:ender_pearl"
+	},
+	"order": 1,
+	"impact": 2,
+	"loading_priority": 1,
+	"powers": [
+		"originstweaks:throw_ender_pearl",
+		"originstweaks:slender_body",
+		"originstweaks:water_vulnerability",
+		"origins:pumpkin_hate",
+		"origins:ender_particles",
+		"origins:damage_from_potions",
+		"originstweaks:enderian_sounds",
+		"originstweaks:enderian_advancements"
+	]
+}

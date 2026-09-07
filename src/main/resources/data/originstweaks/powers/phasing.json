@@ -1,0 +1,247 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.phasing.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.phasing.1"
+			}
+		}
+	],
+	"phase": {
+		"type": "origins:phasing",
+		"blacklist": true,
+		"render_type": "blindness",
+		"view_distance": 10,
+		"phase_down_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:on_block"
+				},
+				{
+					"type": "origins:sneaking"
+				}
+			]
+		},
+		"block_condition": {
+			"type": "origins:in_tag",
+			"tag": "originstweaks:unphasable"
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:swimming",
+					"inverted": true
+				},
+				{
+					"type": "origins:fall_flying",
+					"inverted": true
+				}
+			]
+		}
+	},
+	"drain_soul_power": {
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:soulbound_energy",
+			"change": -1,
+			"operation": "add"
+		},
+		"interval": 20,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:movement_blocking"
+							},
+							{
+								"type": "origins:offset",
+								"condition": {
+									"type": "origins:movement_blocking"
+								},
+								"y": 1
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"no_sprinting": {
+		"type": "origins:prevent_sprinting",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	},
+	"no_melee": {
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "set_total",
+			"value": 0
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	},
+	"no_projectile": {
+		"type": "origins:modify_projectile_damage",
+		"modifier": {
+			"operation": "set_total",
+			"value": 0
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	},
+	"no_item_use": {
+		"type": "origins:prevent_item_use",
+		"name": "Phasing",
+		"item_condition": {
+			"type": "origins:constant",
+			"value": true
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	},
+	"no_blocks": {
+		"type": "origins:prevent_block_selection",
+		"block_condition": {
+			"type": "origins:constant",
+			"value": true
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	},
+	"prevent_elytra": {
+		"type": "origins:prevent_elytra_flight",
+		"entity_action": {
+			"type": "origins:execute_command",
+			"command": "title @s actionbar \"You cant use your elytra while phasing.\""
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	}
+}

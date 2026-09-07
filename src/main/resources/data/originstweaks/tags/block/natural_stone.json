@@ -1,0 +1,9 @@
+{
+	"values":[
+		"#minecraft:base_stone_overworld",
+		"#minecraft:base_stone_nether",
+		"end_stone",
+		"#c:ores",
+		"#c:sandstone/blocks"
+	]
+}

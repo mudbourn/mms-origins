@@ -1,0 +1,23 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.originstweaks.avian.speed.title"
+		},
+		"description": {
+			"translate": "advancement.originstweaks.avian.speed.description"
+		},
+		"icon": {
+			"id": "minecraft:sugar"
+		},
+		"frame": "goal",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"high_speed": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"parent": "originstweaks:avian/root"
+}

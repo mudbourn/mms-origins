@@ -1,0 +1,29 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.originstweaks.merling.loyalty_channeling.title"
+		},
+		"description": {
+			"translate": "advancement.originstweaks.merling.loyalty_channeling.description"
+		},
+		"icon": {
+			"id": "minecraft:trident",
+			"components": {
+				"minecraft:enchantment_glint_override": true
+			}
+		},
+		"frame": "challenge",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"loyalty_channeling": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"rewards": {
+		"experience": 100
+	},
+	"parent": "originstweaks:merling/clear_monument"
+}

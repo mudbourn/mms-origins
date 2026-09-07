@@ -1,0 +1,68 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.green_thumb.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.green_thumb.1"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.green_thumb.2"
+			}
+		}
+	],
+	"melon_harvest": {
+		"type": "origins:modify_harvest",
+		"allow": true,
+		"block_condition": {
+			"type": "origins:block",
+			"block": "minecraft:melon"
+		},
+		"condition": {
+			"type": "origins:equipped_item",
+			"equipment_slot": "mainhand",
+			"item_condition": {
+				"type": "origins:ingredient",
+				"ingredient": {
+					"tag": "minecraft:hoes"
+				}
+			}
+		}
+	},
+	"golden_apple_oak": {
+		"type": "origins:replace_loot_table",
+		"replace": {
+			"minecraft:blocks/oak_leaves": "originstweaks:blocks/avian_oak_leaves"
+		}
+	},
+	"golden_apple_dark_oak": {
+		"type": "origins:replace_loot_table",
+		"replace": {
+			"minecraft:blocks/dark_oak_leaves": "originstweaks:blocks/avian_dark_oak_leaves"
+		}
+	},
+	"golden_apple_carrots": {
+		"type": "origins:replace_loot_table",
+		"replace": {
+			"minecraft:blocks/carrots": "originstweaks:blocks/avian_carrots"
+		}
+	},
+	"glistering_melon": {
+		"type": "origins:replace_loot_table",
+		"replace": {
+			"minecraft:blocks/melon": "originstweaks:blocks/avian_melon"
+		}
+	}
+}

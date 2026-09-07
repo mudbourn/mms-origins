@@ -1,0 +1,95 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.slender_body.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.slender_body.1"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.slender_body.2"
+			}
+		}
+	],
+	"scale": {
+		"type": "origins:action_on_callback",
+		"entity_action_added": {
+			"type": "origins:delay",
+			"ticks": 3,
+			"action": {
+				"type": "origins:and",
+				"actions": [
+					{
+						"type": "origins:execute_command",
+						"command": "attribute @s minecraft:generic.scale base set 1.33"
+					},
+					{
+						"type": "origins:execute_command",
+						"command": "attribute @s additionalentityattributes:generic.hitbox_width base set 0.75"
+					},
+					{
+						"type": "origins:execute_command",
+						"command": "attribute @s minecraft:player.block_interaction_range base set 6.75"
+					}
+				]
+			}
+		},
+		"entity_action_lost": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:execute_command",
+					"command": "attribute @s minecraft:generic.scale base set 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "attribute @s additionalentityattributes:generic.hitbox_width base set 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "attribute @s minecraft:player.block_interaction_range base set 4.5"
+				}
+			]
+		}
+	},
+	"harvest": {
+		"type": "origins:modify_harvest",
+		"allow": true,
+		"block_condition": {
+			"type": "origins:constant",
+			"value": true
+		},
+		"condition": {
+			"type": "origins:equipped_item",
+			"equipment_slot": "mainhand",
+			"item_condition": {
+				"type": "origins:ingredient",
+				"ingredient": {
+					"tag": "c:tools"
+				},
+				"inverted": true
+			}
+		}
+	},
+	"dodge_cooldown": {
+		"type": "origins:cooldown",
+		"cooldown": 100,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+			"bar_index": 2
+		}
+	}
+}
