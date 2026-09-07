@@ -3,19 +3,24 @@ package info.mudbourn.mmsorigins.client.fur;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.PlayerModelType;
 
 /**
- * Draws a player's fur geometry over the vanilla model.
+ * Draws a player's fur over the vanilla model.
  *
- * <p>A feature layer rather than a model replacement because the ported furs' geo is
- * additive: a set of fins and a face card meant to sit on top of the player's body.
- * The body overlay is not drawn here; it replaces the player's skin texture on the
- * render state during extraction, so a fur with no geo (truffle) draws nothing here.
+ * <p>Two additive passes, both over the player's own skin. The body overlay is the
+ * vanilla player model redrawn with the fur's skin-layout texture on a translucent
+ * render type, so its painted pixels composite over the opaque base skin while its
+ * transparent pixels leave the skin showing. The geo fins are extra bedrock geometry
+ * submitted on top. A fur may have either pass, both, or (for an overlay-only fur)
+ * just the overlay.
  */
 public class FurFeatureRenderer extends RenderLayer<AvatarRenderState, PlayerModel> {
 
@@ -27,14 +32,38 @@ public class FurFeatureRenderer extends RenderLayer<AvatarRenderState, PlayerMod
     public void submit(PoseStack poseStack, SubmitNodeCollector collector, int light,
                        AvatarRenderState state, float yRot, float xRot) {
         FurModels.Fur fur = FurModels.resolve(((FurState) state).mmsOrigins$furOrigin());
-        if (fur == null || fur.model() == null) {
+        if (fur == null) {
             return;
         }
-        fur.model().submit(poseStack, collector,
-                RenderTypes.entityCutoutNoCull(fur.texture()),
-                this.getParentModel().root(),
-                light,
-                OverlayTexture.NO_OVERLAY,
-                0xFFFFFFFF);
+        Identifier overlay = overlayFor(fur, state);
+        if (overlay != null) {
+            // Third int is the outline color, not the tint; this overload tints white.
+            collector.submitModel(this.getParentModel(),
+                    state,
+                    poseStack,
+                    RenderTypes.entityTranslucent(overlay),
+                    light,
+                    LivingEntityRenderer.getOverlayCoords(state, 0.0F),
+                    state.outlineColor,
+                    null);
+        }
+        if (fur.model() != null) {
+            fur.model().submit(poseStack, collector,
+                    RenderTypes.entityCutoutNoCull(fur.texture()),
+                    this.getParentModel().root(),
+                    light,
+                    OverlayTexture.NO_OVERLAY,
+                    0xFFFFFFFF,
+                    state.ageInTicks / 20.0F);
+        }
+    }
+
+    /** The overlay for this model, the slim variant when the skin is slim and one exists. */
+    private static Identifier overlayFor(FurModels.Fur fur, AvatarRenderState state) {
+        if (fur.overlaySlim() != null && state.skin != null
+                && state.skin.model() == PlayerModelType.SLIM) {
+            return fur.overlaySlim();
+        }
+        return fur.overlay();
     }
 }

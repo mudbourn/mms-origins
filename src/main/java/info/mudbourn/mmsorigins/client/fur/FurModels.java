@@ -3,6 +3,7 @@ package info.mudbourn.mmsorigins.client.fur;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import info.mudbourn.mmsorigins.MmsOrigins;
+import info.mudbourn.mmsrendercommon.client.geo.GeoAnimation;
 import info.mudbourn.mmsrendercommon.client.geo.GeoModelData;
 import info.mudbourn.mmsrendercommon.client.geo.HumanoidGeoModel;
 import net.minecraft.client.Minecraft;
@@ -27,10 +28,10 @@ public final class FurModels {
     /**
      * A resolved fur: its baked geometry, the geo texture, and the body overlay.
      *
-     * <p>The overlay is a vanilla-skin-layout texture that replaces the player's body
-     * skin on the render state, turning the vanilla model into the fur body; it is
-     * separate from the geo fins, with {@code overlaySlim} its three-pixel-arm variant.
-     * Any of {@code model},
+     * <p>The overlay is a vanilla-skin-layout texture drawn translucently over the
+     * player's own skin, adding the fur's body markings where it is painted and leaving
+     * the skin showing where it is transparent; it is separate from the geo fins, with
+     * {@code overlaySlim} its three-pixel-arm variant. Any of {@code model},
      * {@code texture}, {@code overlay} and {@code overlaySlim} may be null: an
      * overlay-only fur (truffle) has no geo, a geo-only fur (inchling) has no overlay,
      * and a fur with no slim variant (floran) reuses its wide overlay on slim models.
@@ -40,8 +41,9 @@ public final class FurModels {
                       Identifier overlay,
                       Identifier overlaySlim) {}
 
-    /** Where a fur's geo and textures live, before baking. Any field may be null. */
+    /** Where a fur's geo, animation and textures live, before baking. Any field may be null. */
     private record Source(Identifier geo,
+                          Identifier animation,
                           Identifier texture,
                           Identifier overlay,
                           Identifier overlaySlim) {}
@@ -52,26 +54,30 @@ public final class FurModels {
     static {
         register("origins", "merling",
                 "mms_origins:fur/geo/merling.geo.json",
+                null,
                 "mms_origins:textures/fur/merling.png",
                 "mms_origins:textures/fur/merling_skin.png",
                 "mms_origins:textures/fur/merling_skin_thin.png");
         register("mms_origins", "floran",
                 "mms_origins:fur/geo/floran.geo.json",
+                null,
                 "mms_origins:textures/fur/floran.png",
                 "mms_origins:textures/fur/floran_skin.png",
                 null);
         register("mms_origins", "inchling",
                 "mms_origins:fur/geo/inchling.geo.json",
+                null,
                 "mms_origins:textures/fur/inchling.png",
                 null,
                 null);
-        // Baked static; the source animation file is not applied.
         register("mms_origins", "piglin",
                 "mms_origins:fur/geo/piglin.geo.json",
+                "mms_origins:fur/animations/piglin.animation.json",
                 "mms_origins:textures/fur/piglin.png",
                 null,
                 null);
         register("mms_origins", "truffle",
+                null,
                 null,
                 null,
                 "mms_origins:textures/fur/truffle_skin.png",
@@ -97,7 +103,7 @@ public final class FurModels {
         Source source = SOURCES.get(origin);
         HumanoidGeoModel model = null;
         if (source.geo() != null) {
-            model = load(source.geo());
+            model = load(source.geo(), source.animation());
             if (model == null) {
                 return null;
             }
@@ -107,25 +113,46 @@ public final class FurModels {
         return fur;
     }
 
-    private static HumanoidGeoModel load(Identifier geo) {
-        Optional<Resource> resource = Minecraft.getInstance().getResourceManager().getResource(geo);
-        if (resource.isEmpty()) {
+    private static HumanoidGeoModel load(Identifier geo, Identifier animationId) {
+        JsonObject geoJson = readJson(geo);
+        if (geoJson == null) {
             MmsOrigins.LOGGER.warn("Missing fur geometry {}", geo);
             return null;
         }
-        try (BufferedReader reader = resource.get().openAsReader()) {
-            JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
-            return HumanoidGeoModel.bake(GeoModelData.parse(json));
+        try {
+            GeoAnimation animation = null;
+            if (animationId != null) {
+                JsonObject animationJson = readJson(animationId);
+                if (animationJson == null) {
+                    MmsOrigins.LOGGER.warn("Missing fur animation {}", animationId);
+                } else {
+                    animation = GeoAnimation.parse(animationJson);
+                }
+            }
+            return HumanoidGeoModel.bake(GeoModelData.parse(geoJson), animation);
         } catch (Exception exception) {
-            MmsOrigins.LOGGER.warn("Could not read fur geometry {}", geo, exception);
+            MmsOrigins.LOGGER.warn("Could not bake fur geometry {}", geo, exception);
             return null;
         }
     }
 
-    private static void register(String namespace, String path,
-                                 String geo, String texture, String overlay, String overlaySlim) {
+    private static JsonObject readJson(Identifier id) {
+        Optional<Resource> resource = Minecraft.getInstance().getResourceManager().getResource(id);
+        if (resource.isEmpty()) {
+            return null;
+        }
+        try (BufferedReader reader = resource.get().openAsReader()) {
+            return JsonParser.parseReader(reader).getAsJsonObject();
+        } catch (Exception exception) {
+            MmsOrigins.LOGGER.warn("Could not read {}", id, exception);
+            return null;
+        }
+    }
+
+    private static void register(String namespace, String path, String geo, String animation,
+                                 String texture, String overlay, String overlaySlim) {
         SOURCES.put(Identifier.fromNamespaceAndPath(namespace, path),
-                new Source(id(geo), id(texture), id(overlay), id(overlaySlim)));
+                new Source(id(geo), id(animation), id(texture), id(overlay), id(overlaySlim)));
     }
 
     private static Identifier id(String value) {
