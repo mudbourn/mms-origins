@@ -239,7 +239,7 @@
 		},
 		"damage_condition": {
 			"type": "origins:name",
-			"name": "player_attack"
+			"name": "player"
 		},
 		"bientity_condition": {
 			"type": "origins:and",

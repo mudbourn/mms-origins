@@ -250,13 +250,23 @@
 								"type": "origins:delay",
 								"ticks": 1,
 								"action": {
-									"type": "origins:add_velocity",
-									"x": 0,
-									"y": 0.4,
-									"z": 0.75,
-									"set": true,
-									"space": "velocity_horizontal_normalized",
-									"client": false
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:add_velocity",
+											"z": 0.75,
+											"space": "velocity_horizontal_normalized",
+											"set": false,
+											"client": false
+										},
+										{
+											"type": "origins:add_velocity",
+											"y": 0.4,
+											"space": "world",
+											"set": false,
+											"client": false
+										}
+									]
 								}
 							}
 						},
@@ -271,13 +281,23 @@
 								"type": "origins:delay",
 								"ticks": 1,
 								"action": {
-									"type": "origins:add_velocity",
-									"x": 0,
-									"y": 0.5,
-									"z": 0.75,
-									"set": true,
-									"space": "velocity_horizontal_normalized",
-									"client": false
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:add_velocity",
+											"z": 0.75,
+											"space": "velocity_horizontal_normalized",
+											"set": false,
+											"client": false
+										},
+										{
+											"type": "origins:add_velocity",
+											"y": 0.5,
+											"space": "world",
+											"set": false,
+											"client": false
+										}
+									]
 								}
 							}
 						},
@@ -292,13 +312,23 @@
 								"type": "origins:delay",
 								"ticks": 1,
 								"action": {
-									"type": "origins:add_velocity",
-									"x": 0,
-									"y": 0.6,
-									"z": 0.75,
-									"set": true,
-									"space": "velocity_horizontal_normalized",
-									"client": false
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:add_velocity",
+											"z": 0.75,
+											"space": "velocity_horizontal_normalized",
+											"set": false,
+											"client": false
+										},
+										{
+											"type": "origins:add_velocity",
+											"y": 0.6,
+											"space": "world",
+											"set": false,
+											"client": false
+										}
+									]
 								}
 							}
 						},
@@ -313,13 +343,23 @@
 								"type": "origins:delay",
 								"ticks": 1,
 								"action": {
-									"type": "origins:add_velocity",
-									"x": 0,
-									"y": 0.7,
-									"z": 0.75,
-									"set": true,
-									"space": "velocity_horizontal_normalized",
-									"client": false
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:add_velocity",
+											"z": 0.75,
+											"space": "velocity_horizontal_normalized",
+											"set": false,
+											"client": false
+										},
+										{
+											"type": "origins:add_velocity",
+											"y": 0.7,
+											"space": "world",
+											"set": false,
+											"client": false
+										}
+									]
 								}
 							}
 						},
@@ -334,13 +374,23 @@
 								"type": "origins:delay",
 								"ticks": 1,
 								"action": {
-									"type": "origins:add_velocity",
-									"x": 0,
-									"y": 0.8,
-									"z": 0.75,
-									"set": true,
-									"space": "velocity_horizontal_normalized",
-									"client": false
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:add_velocity",
+											"z": 0.75,
+											"space": "velocity_horizontal_normalized",
+											"set": false,
+											"client": false
+										},
+										{
+											"type": "origins:add_velocity",
+											"y": 0.8,
+											"space": "world",
+											"set": false,
+											"client": false
+										}
+									]
 								}
 							}
 						},
@@ -355,13 +405,23 @@
 								"type": "origins:delay",
 								"ticks": 1,
 								"action": {
-									"type": "origins:add_velocity",
-									"x": 0,
-									"y": 0.9,
-									"z": 0.75,
-									"set": true,
-									"space": "velocity_horizontal_normalized",
-									"client": false
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:add_velocity",
+											"z": 0.75,
+											"space": "velocity_horizontal_normalized",
+											"set": false,
+											"client": false
+										},
+										{
+											"type": "origins:add_velocity",
+											"y": 0.9,
+											"space": "world",
+											"set": false,
+											"client": false
+										}
+									]
 								}
 							}
 						},
@@ -376,13 +436,23 @@
 								"type": "origins:delay",
 								"ticks": 1,
 								"action": {
-									"type": "origins:add_velocity",
-									"x": 0,
-									"y": 1.0,
-									"z": 0.75,
-									"set": true,
-									"space": "velocity_horizontal_normalized",
-									"client": false
+									"type": "origins:and",
+									"actions": [
+										{
+											"type": "origins:add_velocity",
+											"z": 0.75,
+											"space": "velocity_horizontal_normalized",
+											"set": false,
+											"client": false
+										},
+										{
+											"type": "origins:add_velocity",
+											"y": 1.0,
+											"space": "world",
+											"set": false,
+											"client": false
+										}
+									]
 								}
 							}
 						}

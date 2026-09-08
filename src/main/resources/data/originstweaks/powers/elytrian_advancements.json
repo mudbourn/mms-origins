@@ -65,7 +65,7 @@
 		},
 		"damage_condition": {
 			"type": "origins:name",
-			"name": "player_attack"
+			"name": "player"
 		},
 		"condition": {
 			"type": "origins:resource",
