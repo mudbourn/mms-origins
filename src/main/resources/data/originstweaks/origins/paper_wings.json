@@ -1,0 +1,11 @@
+{
+	"icon": {
+		"id": "minecraft:paper",
+		"components": {
+			"minecraft:item_model": "originstweaks:paper_wings"
+		}
+	},
+	"impact": 0,
+	"order": 4,
+	"powers": []
+}

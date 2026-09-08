@@ -2,10 +2,10 @@
 	"icon": {
 		"id": "minecraft:phantom_membrane",
 		"components": {
-			"minecraft:item_model": "originstweaks:magic_wings"
+			"minecraft:item_model": "originstweaks:melan_wings"
 		}
 	},
 	"impact": 0,
-	"order": 5,
+	"order": 12,
 	"powers": []
 }

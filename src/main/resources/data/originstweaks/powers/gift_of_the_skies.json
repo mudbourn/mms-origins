@@ -28,6 +28,13 @@
 			"text": {
 				"translate": "badge.originstweaks.gift_of_the_skies.3"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.gift_of_the_skies.4"
+			}
 		}
 	],
 	"vanilla_wings": {
@@ -44,9 +51,25 @@
 		"render_elytra": true,
 		"texture_location": "originstweaks:textures/entity/icaruswings/feathered.png",
 		"condition": {
-			"type": "origins:origin",
-			"layer": "originstweaks:elytrian_options",
-			"origin": "originstweaks:feathered_wings"
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:feathered_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
 		}
 	},
 	"golden_wings": {
@@ -54,9 +77,77 @@
 		"render_elytra": true,
 		"texture_location": "originstweaks:textures/entity/icaruswings/golden.png",
 		"condition": {
-			"type": "origins:origin",
-			"layer": "originstweaks:elytrian_options",
-			"origin": "originstweaks:golden_wings"
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:golden_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
+		}
+	},
+	"colored_wings": {
+		"type": "origins:elytra_flight",
+		"render_elytra": true,
+		"texture_location": "originstweaks:textures/entity/icaruswings/colored.png",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:colored_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
+		}
+	},
+	"paper_wings": {
+		"type": "origins:elytra_flight",
+		"render_elytra": true,
+		"texture_location": "originstweaks:textures/entity/icaruswings/paper.png",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:paper_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
 		}
 	},
 	"magic_wings": {
@@ -64,19 +155,207 @@
 		"render_elytra": true,
 		"texture_location": "originstweaks:textures/entity/icaruswings/magic.png",
 		"condition": {
-			"type": "origins:origin",
-			"layer": "originstweaks:elytrian_options",
-			"origin": "originstweaks:magic_wings"
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:magic_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
 		}
 	},
 	"flandre_wings": {
 		"type": "origins:elytra_flight",
 		"render_elytra": true,
-		"texture_location": "originstweaks:textures/entity/icaruswings/magic.png",
+		"texture_location": "originstweaks:textures/entity/icaruswings/flandre.png",
 		"condition": {
-			"type": "origins:origin",
-			"layer": "originstweaks:elytrian_options",
-			"origin": "originstweaks:flandre_wings"
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:flandre_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
+		}
+	},
+	"ikaros_wings": {
+		"type": "origins:elytra_flight",
+		"render_elytra": true,
+		"texture_location": "originstweaks:textures/entity/icaruswings/ikaros.png",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:ikaros_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
+		}
+	},
+	"nymph_wings": {
+		"type": "origins:elytra_flight",
+		"render_elytra": true,
+		"texture_location": "originstweaks:textures/entity/icaruswings/nymph.png",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:nymph_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
+		}
+	},
+	"astraea_wings": {
+		"type": "origins:elytra_flight",
+		"render_elytra": true,
+		"texture_location": "originstweaks:textures/entity/icaruswings/astraea.png",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:astraea_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
+		}
+	},
+	"chaos_wings": {
+		"type": "origins:elytra_flight",
+		"render_elytra": true,
+		"texture_location": "originstweaks:textures/entity/icaruswings/chaos.png",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:chaos_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
+		}
+	},
+	"hiyori_wings": {
+		"type": "origins:elytra_flight",
+		"render_elytra": true,
+		"texture_location": "originstweaks:textures/entity/icaruswings/hiyori.png",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:hiyori_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
+		}
+	},
+	"melan_wings": {
+		"type": "origins:elytra_flight",
+		"render_elytra": true,
+		"texture_location": "originstweaks:textures/entity/icaruswings/melan.png",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:origin",
+					"layer": "originstweaks:elytrian_options",
+					"origin": "originstweaks:melan_wings"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "chest",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"item": "minecraft:elytra"
+						}
+					},
+					"inverted": true
+				}
+			]
 		}
 	},
 	"no_render": {

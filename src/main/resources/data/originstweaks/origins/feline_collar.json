@@ -1,8 +1,8 @@
 {
 	"icon": {
-		"id": "minecraft:barrier"
+		"id": "minecraft:lead"
 	},
 	"impact": 0,
-	"order": 13,
+	"order": 0,
 	"powers": []
 }

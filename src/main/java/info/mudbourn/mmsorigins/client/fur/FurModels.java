@@ -113,6 +113,12 @@ public final class FurModels {
                 "mms_origins:textures/fur/feline.png",
                 null,
                 null);
+        register("origins", "feline_nocollar",
+                "mms_origins:fur/geo/feline_nocollar.geo.json",
+                null,
+                "mms_origins:textures/fur/feline.png",
+                null,
+                null);
         register("origins", "enderian",
                 "mms_origins:fur/geo/enderian.geo.json",
                 null,
@@ -155,7 +161,7 @@ public final class FurModels {
         elytra("origins", "phantom", "mms_origins:textures/fur/phantom_elytra.png");
         elytra("origins", "shulk", "mms_origins:textures/fur/shulk_elytra.png");
         aliasToOriginsTweaks("arachnid", "avian", "blazeborn", "elytrian",
-                "enderian", "feline", "phantom", "shulk");
+                "enderian", "feline", "feline_nocollar", "phantom", "shulk");
     }
 
     private FurModels() {

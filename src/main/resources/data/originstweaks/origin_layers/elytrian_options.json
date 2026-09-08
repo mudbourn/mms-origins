@@ -11,8 +11,16 @@
 				"originstweaks:vanilla_elytra",
 				"originstweaks:feathered_wings",
 				"originstweaks:golden_wings",
+				"originstweaks:colored_wings",
+				"originstweaks:paper_wings",
 				"originstweaks:magic_wings",
 				"originstweaks:flandre_wings",
+				"originstweaks:ikaros_wings",
+				"originstweaks:nymph_wings",
+				"originstweaks:astraea_wings",
+				"originstweaks:chaos_wings",
+				"originstweaks:hiyori_wings",
+				"originstweaks:melan_wings",
 				"originstweaks:no_render"
 			],
 			"condition": {

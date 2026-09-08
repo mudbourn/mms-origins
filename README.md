@@ -12,8 +12,9 @@ behaviours no Apoli power factory can express.
 
 ## Credits
 
-The Elytrian custom wing textures (Feathered, Golden, Magic, and
-Flandre's wings and their menu icons) are from LocusAzzurro's Icarus Wings
+The Elytrian custom wing textures and menu icons (Feathered, Golden, Rainbow,
+Paper, Magic, Flandre, Ikaros, Nymph, Astraea, Chaos, Hiyori, and Melan wings)
+are from LocusAzzurro's Icarus Wings
 (https://github.com/LocusAzzurro/IcarusWings) by LocusAzzurro, used under the
 GNU General Public License v3.0. Those files remain under the GPL-3.0; the full
 license and a list of the exact files and changes are in `licenses/`. The rest

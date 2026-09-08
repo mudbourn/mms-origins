@@ -35,6 +35,13 @@ public abstract class PlayerRendererMixin {
         ((FurState) state).mmsOrigins$setFurOrigin(mmsOrigins$originOf(player));
     }
 
+    private static final Identifier FELINE_OPTIONS =
+            Identifier.fromNamespaceAndPath("originstweaks", "feline_options");
+    private static final Identifier FELINE_NO_COLLAR =
+            Identifier.fromNamespaceAndPath("originstweaks", "feline_no_collar");
+    private static final Identifier FELINE_NOCOLLAR_FUR =
+            Identifier.fromNamespaceAndPath("originstweaks", "feline_nocollar");
+
     private static Identifier mmsOrigins$originOf(Avatar player) {
         OriginComponent component = ModComponents.ORIGIN.maybeGet(player).orElse(null);
         if (component == null) {
@@ -45,6 +52,23 @@ public abstract class PlayerRendererMixin {
             return null;
         }
         Origin origin = component.getOrigin(layer);
-        return origin == null ? null : origin.getIdentifier();
+        if (origin == null) {
+            return null;
+        }
+        Identifier id = origin.getIdentifier();
+        if ("feline".equals(id.getPath()) && mmsOrigins$hasNoCollar(component)) {
+            return FELINE_NOCOLLAR_FUR;
+        }
+        return id;
+    }
+
+    /** Whether the player picked the collarless option in the feline options layer. */
+    private static boolean mmsOrigins$hasNoCollar(OriginComponent component) {
+        OriginLayer layer = OriginLayers.getLayer(FELINE_OPTIONS);
+        if (layer == null || !component.hasOrigin(layer)) {
+            return false;
+        }
+        Origin option = component.getOrigin(layer);
+        return option != null && FELINE_NO_COLLAR.equals(option.getIdentifier());
     }
 }

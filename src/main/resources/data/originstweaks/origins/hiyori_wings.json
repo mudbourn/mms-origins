@@ -2,10 +2,10 @@
 	"icon": {
 		"id": "minecraft:phantom_membrane",
 		"components": {
-			"minecraft:item_model": "originstweaks:magic_wings"
+			"minecraft:item_model": "originstweaks:hiyori_wings"
 		}
 	},
 	"impact": 0,
-	"order": 5,
+	"order": 11,
 	"powers": []
 }

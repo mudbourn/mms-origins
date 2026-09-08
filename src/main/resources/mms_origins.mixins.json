@@ -10,6 +10,7 @@
     "LivingEntityPoseMixin",
     "PhantomForgetTargetMixin",
     "PhantomUnseenMixin",
+    "PlayerHurtSoundMixin",
     "ReplaceLootTablePowerGuardMixin",
     "ServerPlayerGameModeMixin",
     "VillagerSwindleMixin"
