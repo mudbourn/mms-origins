@@ -43,10 +43,8 @@
 			"bar_index": 12,
 			"order": 0,
 			"condition": {
-				"type": "origins:resource",
-				"resource": "*:*_claws_combo",
-				"comparison": "==",
-				"compare_to": 0
+				"type": "origins:power_active",
+				"power": "originstweaks:claw_mode"
 			}
 		}
 	},
@@ -267,22 +265,8 @@
 			]
 		},
 		"condition": {
-			"type": "origins:and",
-			"conditions": [
-				{
-					"type": "origins:equipped_item",
-					"equipment_slot": "offhand",
-					"item_condition": {
-						"type": "origins:empty"
-					}
-				},
-				{
-					"type": "origins:resource",
-					"resource": "*:*_claws_sharpness",
-					"comparison": "!=",
-					"compare_to": 0
-				}
-			]
+			"type": "origins:power_active",
+			"power": "originstweaks:claw_mode"
 		}
 	},
 	"sharpen_cooldown": {

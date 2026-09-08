@@ -254,7 +254,7 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 0.75,
+											"z": 0.7,
 											"space": "velocity_horizontal_normalized",
 											"set": false,
 											"client": false
@@ -285,7 +285,7 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 0.75,
+											"z": 0.8,
 											"space": "velocity_horizontal_normalized",
 											"set": false,
 											"client": false
@@ -316,7 +316,7 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 0.75,
+											"z": 0.9,
 											"space": "velocity_horizontal_normalized",
 											"set": false,
 											"client": false
@@ -347,7 +347,7 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 0.75,
+											"z": 1.0,
 											"space": "velocity_horizontal_normalized",
 											"set": false,
 											"client": false
@@ -378,7 +378,7 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 0.75,
+											"z": 1.1,
 											"space": "velocity_horizontal_normalized",
 											"set": false,
 											"client": false
@@ -409,7 +409,7 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 0.75,
+											"z": 1.2,
 											"space": "velocity_horizontal_normalized",
 											"set": false,
 											"client": false
@@ -440,7 +440,7 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 0.75,
+											"z": 1.3,
 											"space": "velocity_horizontal_normalized",
 											"set": false,
 											"client": false

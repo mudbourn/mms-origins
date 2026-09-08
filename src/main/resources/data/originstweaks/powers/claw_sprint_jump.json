@@ -1,0 +1,21 @@
+{
+	"type": "origins:modify_jump",
+	"hidden": true,
+	"modifier": {
+		"name": "Bonus jump force while sprinting",
+		"value": 0.5,
+		"operation": "multiply_base"
+	},
+	"condition": {
+		"type": "origins:and",
+		"conditions": [
+			{
+				"type": "origins:sprinting"
+			},
+			{
+				"type": "origins:power_active",
+				"power": "originstweaks:claw_mode"
+			}
+		]
+	}
+}

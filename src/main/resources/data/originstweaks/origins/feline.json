@@ -6,10 +6,11 @@
 	"impact": 2,
 	"loading_priority": 1,
 	"powers": [
+		"originstweaks:claw_mode",
 		"originstweaks:natural_hunter",
 		"originstweaks:dexterity",
 		"originstweaks:weak_arms",
-		"origins:sprint_jump",
+		"originstweaks:claw_sprint_jump",
 		"origins:velvet_paws",
 		"origins:nine_lives",
 		"origins:scare_creepers",

@@ -1,0 +1,17 @@
+{
+	"type": "origins:toggle",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/toggle.png",
+			"text": {
+				"translate": "badge.originstweaks.claw_mode.0"
+			}
+		}
+	],
+	"active_by_default": true,
+	"key": {
+		"key": "key.origins.secondary_active",
+		"continuous": false
+	}
+}

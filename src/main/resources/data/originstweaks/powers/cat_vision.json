@@ -1,5 +1,5 @@
 {
-	"type": "origins:toggle_night_vision",
+	"type": "origins:night_vision",
 	"badges": [
 		{
 			"type": "origins:tooltip",
@@ -10,9 +10,8 @@
 		}
 	],
 	"strength": 0.4,
-	"active_by_default": true,
-	"key": {
-		"key": "key.origins.secondary_active",
-		"continuous": false
+	"condition": {
+		"type": "origins:power_active",
+		"power": "originstweaks:claw_mode"
 	}
 }
