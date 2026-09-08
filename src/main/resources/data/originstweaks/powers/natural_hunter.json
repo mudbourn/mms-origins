@@ -60,7 +60,7 @@
 		"type": "origins:action_on_hit",
 		"bientity_action": {
 			"type": "origins:delay",
-			"ticks": 10,
+			"ticks": 1,
 			"action": {
 				"type": "origins:if_else",
 				"condition": {
@@ -223,18 +223,6 @@
 				}
 			}
 		},
-		"cooldown": 20,
-		"hud_render": {
-			"sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
-			"bar_index": 12,
-			"order": 0,
-			"condition": {
-				"type": "origins:resource",
-				"resource": "*:*_claws_combo",
-				"comparison": "!=",
-				"compare_to": 0
-			}
-		},
 		"damage_condition": {
 			"type": "origins:name",
 			"name": "player"
@@ -246,6 +234,16 @@
 					"type": "origins:distance",
 					"compare_to": 5,
 					"comparison": "<="
+				},
+				{
+					"type": "origins:actor_condition",
+					"condition": {
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition": {
+							"type": "origins:empty"
+						}
+					}
 				},
 				{
 					"type": "origins:target_condition",
@@ -267,6 +265,31 @@
 		"condition": {
 			"type": "origins:power_active",
 			"power": "originstweaks:claw_mode"
+		}
+	},
+	"claws_replace_fist": {
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Bare fists replaced by claw strikes",
+			"attribute": "minecraft:generic.attack_damage",
+			"value": -0.99,
+			"operation": "multiply_base"
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "originstweaks:claw_mode"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition": {
+						"type": "origins:empty"
+					}
+				}
+			]
 		}
 	},
 	"sharpen_cooldown": {

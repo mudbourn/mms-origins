@@ -230,6 +230,10 @@
 					"power": "*:*_leap_cooldown"
 				},
 				{
+					"type": "origins:add_exhaustion",
+					"amount": 12.0
+				},
+				{
 					"type": "origins:play_sound",
 					"sound": "minecraft:entity.goat.long_jump",
 					"category": "players",
@@ -254,8 +258,8 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 0.7,
-											"space": "velocity_horizontal_normalized",
+											"z": 1.1,
+											"space": "local",
 											"set": false,
 											"client": false
 										},
@@ -285,8 +289,8 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 0.8,
-											"space": "velocity_horizontal_normalized",
+											"z": 1.2,
+											"space": "local",
 											"set": false,
 											"client": false
 										},
@@ -316,8 +320,8 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 0.9,
-											"space": "velocity_horizontal_normalized",
+											"z": 1.3,
+											"space": "local",
 											"set": false,
 											"client": false
 										},
@@ -347,8 +351,8 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 1.0,
-											"space": "velocity_horizontal_normalized",
+											"z": 1.4,
+											"space": "local",
 											"set": false,
 											"client": false
 										},
@@ -378,8 +382,8 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 1.1,
-											"space": "velocity_horizontal_normalized",
+											"z": 1.5,
+											"space": "local",
 											"set": false,
 											"client": false
 										},
@@ -409,8 +413,8 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 1.2,
-											"space": "velocity_horizontal_normalized",
+											"z": 1.6,
+											"space": "local",
 											"set": false,
 											"client": false
 										},
@@ -440,8 +444,8 @@
 									"actions": [
 										{
 											"type": "origins:add_velocity",
-											"z": 1.3,
-											"space": "velocity_horizontal_normalized",
+											"z": 1.7,
+											"space": "local",
 											"set": false,
 											"client": false
 										},
