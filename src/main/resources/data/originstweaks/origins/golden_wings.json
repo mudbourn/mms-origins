@@ -1,0 +1,11 @@
+{
+	"icon": {
+		"id": "minecraft:gold_ingot",
+		"components": {
+			"minecraft:item_model": "originstweaks:golden_wings"
+		}
+	},
+	"impact": 0,
+	"order": 2,
+	"powers": []
+}

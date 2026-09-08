@@ -1,0 +1,11 @@
+{
+	"icon": {
+		"id": "minecraft:feather",
+		"components": {
+			"minecraft:item_model": "originstweaks:feathered_wings"
+		}
+	},
+	"impact": 0,
+	"order": 1,
+	"powers": []
+}

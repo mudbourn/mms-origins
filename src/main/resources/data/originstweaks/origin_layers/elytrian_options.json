@@ -9,7 +9,10 @@
 		{
 			"origins": [
 				"originstweaks:vanilla_elytra",
-				"originstweaks:custom_wings",
+				"originstweaks:feathered_wings",
+				"originstweaks:golden_wings",
+				"originstweaks:magic_wings",
+				"originstweaks:flandre_wings",
 				"originstweaks:no_render"
 			],
 			"condition": {

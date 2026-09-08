@@ -39,14 +39,44 @@
 			"origin": "originstweaks:vanilla_elytra"
 		}
 	},
-	"custom_wings": {
+	"feathered_wings": {
 		"type": "origins:elytra_flight",
 		"render_elytra": true,
-		"texture_location": "originstweaks:textures/entity/wings.png",
+		"texture_location": "originstweaks:textures/entity/icaruswings/feathered.png",
 		"condition": {
 			"type": "origins:origin",
 			"layer": "originstweaks:elytrian_options",
-			"origin": "originstweaks:custom_wings"
+			"origin": "originstweaks:feathered_wings"
+		}
+	},
+	"golden_wings": {
+		"type": "origins:elytra_flight",
+		"render_elytra": true,
+		"texture_location": "originstweaks:textures/entity/icaruswings/golden.png",
+		"condition": {
+			"type": "origins:origin",
+			"layer": "originstweaks:elytrian_options",
+			"origin": "originstweaks:golden_wings"
+		}
+	},
+	"magic_wings": {
+		"type": "origins:elytra_flight",
+		"render_elytra": true,
+		"texture_location": "originstweaks:textures/entity/icaruswings/magic.png",
+		"condition": {
+			"type": "origins:origin",
+			"layer": "originstweaks:elytrian_options",
+			"origin": "originstweaks:magic_wings"
+		}
+	},
+	"flandre_wings": {
+		"type": "origins:elytra_flight",
+		"render_elytra": true,
+		"texture_location": "originstweaks:textures/entity/icaruswings/magic.png",
+		"condition": {
+			"type": "origins:origin",
+			"layer": "originstweaks:elytrian_options",
+			"origin": "originstweaks:flandre_wings"
 		}
 	},
 	"no_render": {
