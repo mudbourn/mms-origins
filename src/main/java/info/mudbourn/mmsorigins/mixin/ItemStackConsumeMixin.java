@@ -6,6 +6,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,8 +29,18 @@ public class ItemStackConsumeMixin {
             CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack self = (ItemStack) (Object) this;
         EdibleItemPower power = EdibleItemPower.find(player, self);
-        if (power != null) {
+        // The stack has no food component of its own, so vanilla's hunger gate cannot
+        // see it; refuse to start eating on a full belly rather than waste the item.
+        if (power != null && player.canEat(false)) {
             cir.setReturnValue(power.getConsumable().startConsuming(player, self, hand));
+        }
+    }
+
+    @Inject(method = "getUseAnimation", at = @At("HEAD"), cancellable = true)
+    private void mmsOrigins$eatAnimation(CallbackInfoReturnable<ItemUseAnimation> cir) {
+        ItemUseAnimation animation = EdibleItemPower.animationFor((ItemStack) (Object) this);
+        if (animation != null) {
+            cir.setReturnValue(animation);
         }
     }
 

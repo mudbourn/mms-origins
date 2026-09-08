@@ -5,10 +5,15 @@ import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.component.Consumable;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Makes an otherwise inedible item eatable while the power is active,
@@ -17,6 +22,11 @@ import net.minecraft.world.item.component.Consumable;
  * item use, duration and completion through the {@link Consumable} built here.
  */
 public final class EdibleItemPower extends Power {
+
+    // One entry per edible power type; used to pick the eating animation, which is
+    // queried without an entity in scope. Only power holders ever enter the using
+    // state for the item, so matching on the item condition alone is safe.
+    private static final Map<Identifier, EdibleItemPower> BY_TYPE = new ConcurrentHashMap<>();
 
     private final ConditionFactory<ItemStack>.Instance itemCondition;
     private final Consumable consumable;
@@ -32,6 +42,7 @@ public final class EdibleItemPower extends Power {
         this.itemCondition = itemCondition;
         this.consumable = consumable;
         this.food = food;
+        BY_TYPE.put(type.getIdentifier(), this);
     }
 
     public static EdibleItemPower find(LivingEntity entity, ItemStack stack) {
@@ -48,6 +59,22 @@ public final class EdibleItemPower extends Power {
             return false;
         }
         return itemCondition == null || itemCondition.test(stack);
+    }
+
+    /**
+     * @return the eating animation for a stack any edible power targets, or {@code null}
+     *         when no power turns this stack into food.
+     */
+    public static ItemUseAnimation animationFor(ItemStack stack) {
+        if (stack.has(DataComponents.CONSUMABLE)) {
+            return null;
+        }
+        for (EdibleItemPower power : BY_TYPE.values()) {
+            if (power.itemCondition != null && power.itemCondition.test(stack)) {
+                return power.consumable.animation();
+            }
+        }
+        return null;
     }
 
     public Consumable getConsumable() {
