@@ -8,6 +8,7 @@
     "ItemStackConsumeMixin",
     "LivingEntityDeathMixin",
     "LivingEntityPoseMixin",
+    "PhantomForgetTargetMixin",
     "PhantomUnseenMixin",
     "ReplaceLootTablePowerGuardMixin",
     "ServerPlayerGameModeMixin",

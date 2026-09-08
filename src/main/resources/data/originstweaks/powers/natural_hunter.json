@@ -240,7 +240,7 @@
 												},
 												{
 													"type": "origins:chance",
-													"chance": 0.4,
+													"chance": 0.6,
 													"action": {
 														"type": "origins:change_resource",
 														"resource": "*:*_claws_sharpness",

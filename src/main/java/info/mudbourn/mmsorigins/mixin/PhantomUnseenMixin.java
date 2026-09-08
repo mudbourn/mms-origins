@@ -15,12 +15,13 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 /**
  * Phantomize: hostile mobs cannot pick out an invisible phantom on their own.
  *
- * <p>Every attack-targeting goal funnels its candidate through
+ * <p>Attack-targeting goals funnel their candidate through
  * {@code TargetingConditions.test}, so failing the test here denies fresh
- * acquisition without touching revenge: a mob already fixed on the phantom, or
- * one the phantom has struck, keeps its quarry because those paths set the target
- * directly rather than asking to acquire one. The mob stays blind until the
- * phantom gives itself away by attacking.
+ * acquisition. Dropping a lock a goal-driven mob already holds is left to
+ * {@link PhantomForgetTargetMixin}, since those goals keep an existing target
+ * without re-running this test. The one exception is a mob the phantom has
+ * struck, recognised by its revenge memory, which keeps fighting regardless.
+ * The phantom is unseen until it gives itself away by attacking.
  */
 @Mixin(TargetingConditions.class)
 public class PhantomUnseenMixin {
@@ -31,7 +32,7 @@ public class PhantomUnseenMixin {
         if (!(attacker instanceof Mob mob) || !(target instanceof Player)) {
             return;
         }
-        if (mob.getTarget() == target || mob.getLastHurtByMob() == target) {
+        if (mob.getLastHurtByMob() == target) {
             return;
         }
         if (PowerHolderComponent.hasPower(target, InvisibilityPower.class, InvisibilityPower::isActive)) {
