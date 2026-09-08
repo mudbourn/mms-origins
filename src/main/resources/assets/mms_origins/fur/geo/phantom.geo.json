@@ -76,12 +76,12 @@
 				{
 					"name": "back_feather_0_elytra_hides_chestplate_hides",
 					"parent": "bipedBody",
-					"pivot": [0, 24, -2],
+					"pivot": [0, 24, -2.5],
 					"cubes": [
 						{
-							"origin": [-10, 24, -14],
+							"origin": [-10, 24, -14.5],
 							"size": [20, 0, 12],
-							"pivot": [0, 24, -2],
+							"pivot": [0, 24, -2.5],
 							"rotation": [55, 0, 0],
 							"uv": {
 								"up": {"uv": [41, 37], "uv_size": [-20, -12]}
@@ -92,12 +92,12 @@
 				{
 					"name": "back_feather_1_elytra_hides_chestplate_hides",
 					"parent": "bipedBody",
-					"pivot": [0, 24, -2],
+					"pivot": [0, 24, -2.5],
 					"cubes": [
 						{
-							"origin": [-10, 24, -10],
+							"origin": [-10, 24, -10.5],
 							"size": [20, 0, 8],
-							"pivot": [0, 24, -2],
+							"pivot": [0, 24, -2.5],
 							"rotation": [35, 0, 0],
 							"uv": {
 								"up": {"uv": [41, 45], "uv_size": [-20, -8]}

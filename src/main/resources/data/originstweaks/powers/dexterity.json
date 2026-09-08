@@ -519,14 +519,14 @@
 	"hold_timer": {
 		"type": "origins:resource",
 		"min": 0,
-		"max": 2
+		"max": 4
 	},
 	"hold_check": {
 		"type": "origins:active_self",
 		"entity_action": {
 			"type": "origins:change_resource",
 			"resource": "*:*_hold_timer",
-			"change": 2,
+			"change": 4,
 			"operation": "set"
 		},
 		"key": {

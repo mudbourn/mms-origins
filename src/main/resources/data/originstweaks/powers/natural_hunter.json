@@ -214,9 +214,43 @@
 						{
 							"type": "origins:actor_action",
 							"action": {
-								"type": "origins:change_resource",
-								"resource": "*:*_claws_sharpness",
-								"change": -1
+								"type": "origins:and",
+								"actions": [
+									{
+										"type": "origins:change_resource",
+										"resource": "*:*_claws_swings",
+										"change": 1
+									},
+									{
+										"type": "origins:if_else",
+										"condition": {
+											"type": "origins:resource",
+											"resource": "*:*_claws_swings",
+											"comparison": ">=",
+											"compare_to": 1
+										},
+										"if_action": {
+											"type": "origins:and",
+											"actions": [
+												{
+													"type": "origins:change_resource",
+													"resource": "*:*_claws_swings",
+													"change": 0,
+													"operation": "set"
+												},
+												{
+													"type": "origins:chance",
+													"chance": 0.4,
+													"action": {
+														"type": "origins:change_resource",
+														"resource": "*:*_claws_sharpness",
+														"change": -1
+													}
+												}
+											]
+										}
+									}
+								]
 							}
 						}
 					]
@@ -267,6 +301,14 @@
 			"power": "originstweaks:claw_mode"
 		}
 	},
+	"claws_swings": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 3,
+		"hud_render": {
+			"should_render": false
+		}
+	},
 	"claws_replace_fist": {
 		"type": "origins:attribute",
 		"modifier": {
@@ -287,6 +329,105 @@
 					"equipment_slot": "mainhand",
 					"item_condition": {
 						"type": "origins:empty"
+					}
+				}
+			]
+		}
+	},
+	"claws_death_penalty": {
+		"type": "origins:action_on_callback",
+		"entity_action_removed": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_claws_sharpness",
+						"comparison": ">",
+						"compare_to": 300
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_claws_sharpness",
+						"change": -65
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_claws_sharpness",
+						"comparison": ">",
+						"compare_to": 250
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_claws_sharpness",
+						"change": -55
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_claws_sharpness",
+						"comparison": ">",
+						"compare_to": 200
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_claws_sharpness",
+						"change": -45
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_claws_sharpness",
+						"comparison": ">",
+						"compare_to": 150
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_claws_sharpness",
+						"change": -35
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_claws_sharpness",
+						"comparison": ">",
+						"compare_to": 100
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_claws_sharpness",
+						"change": -25
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_claws_sharpness",
+						"comparison": ">",
+						"compare_to": 50
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_claws_sharpness",
+						"change": -15
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_claws_sharpness",
+						"comparison": ">",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_claws_sharpness",
+						"change": -5
 					}
 				}
 			]

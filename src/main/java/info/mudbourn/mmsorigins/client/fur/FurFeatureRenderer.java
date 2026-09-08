@@ -32,6 +32,9 @@ public class FurFeatureRenderer extends RenderLayer<AvatarRenderState, PlayerMod
     @Override
     public void submit(PoseStack poseStack, SubmitNodeCollector collector, int light,
                        AvatarRenderState state, float yRot, float xRot) {
+        if (state.isInvisible) {
+            return;
+        }
         FurModels.Fur fur = FurModels.resolve(((FurState) state).mmsOrigins$furOrigin());
         if (fur == null) {
             return;
