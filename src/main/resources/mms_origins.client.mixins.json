@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "AvatarBodyHideMixin",
+    "ChooseOriginGridMixin",
     "LivingEntityRenderStateMixin",
     "PlayerRendererMixin",
     "WingsElytraTextureMixin"
