@@ -89,5 +89,19 @@
 		"replace": {
 			"minecraft:blocks/melon": "originstweaks:blocks/avian_melon"
 		}
+	},
+	"glistering_melon_food": {
+		"type": "mms_origins:edible_item",
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"item": "minecraft:glistering_melon_slice"
+			}
+		},
+		"consume_sound": "minecraft:entity.generic.eat",
+		"nutrition": 6,
+		"saturation": 0.8,
+		"eat_seconds": 1.6,
+		"use_action": "eat"
 	}
 }

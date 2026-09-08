@@ -10,11 +10,15 @@ import io.github.apace100.apoli.util.modifier.Modifier;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataType;
 import io.github.apace100.calio.data.SerializableDataTypes;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.component.Consumable;
 import java.util.List;
 
 /**
@@ -29,6 +33,39 @@ public final class MmsPowerFactories {
         registerActionOnDeath();
         registerPose();
         registerModifyEnchantmentLevel();
+        registerEdibleItem();
+    }
+
+    private static void registerEdibleItem() {
+        Identifier id = id("edible_item");
+        Registry.register(
+            ApoliRegistries.POWER_FACTORY,
+            id,
+            new PowerFactory<>(
+                id,
+                new SerializableData()
+                    .add("item_condition", ApoliDataTypes.ITEM_CONDITION, null)
+                    .add("nutrition", SerializableDataTypes.INT)
+                    .add("saturation", SerializableDataTypes.FLOAT, 0.0f)
+                    .add("consume_sound", SerializableDataTypes.SOUND_EVENT)
+                    .add("eat_seconds", SerializableDataTypes.FLOAT, 1.6f)
+                    .add("use_action",
+                        SerializableDataType.enumValue(ItemUseAnimation.class),
+                        ItemUseAnimation.EAT),
+                data -> (type, entity) -> {
+                    FoodProperties food = new FoodProperties(
+                        data.getInt("nutrition"),
+                        data.getFloat("saturation"),
+                        false);
+                    Consumable consumable = new Consumable(
+                        data.getFloat("eat_seconds"),
+                        data.get("use_action"),
+                        Holder.direct(data.get("consume_sound")),
+                        true,
+                        List.of());
+                    return new EdibleItemPower(type, entity, data.get("item_condition"), consumable, food);
+                })
+                .allowCondition());
     }
 
     private static void registerModifyEnchantmentLevel() {
