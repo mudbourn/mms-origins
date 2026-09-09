@@ -1,5 +1,5 @@
 {
-  "type": "origins:multiple",
+  "type": "origins:simple",
   "badges": [
     {
       "type": "origins:tooltip",
@@ -15,11 +15,5 @@
         "translate": "badge.mms_origins.kinsmen.1"
       }
     }
-  ],
-  "richer_barter": {
-    "type": "origins:replace_loot_table",
-    "replace": {
-      "minecraft:gameplay/piglin_bartering": "mms_origins:gameplay/piglin_bartering"
-    }
-  }
+  ]
 }

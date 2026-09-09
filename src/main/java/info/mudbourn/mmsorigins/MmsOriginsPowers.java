@@ -30,6 +30,14 @@ public final class MmsOriginsPowers {
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "kinsmen"));
 
     /**
+     * Brute arms dealing. Piglin brutes carry no bartering behaviour at all, so
+     * {@code PiglinBruteBarterMixin} adds one and gates it on the gold's thrower
+     * holding this power.
+     */
+    public static final PowerType<?> ARMS_DEALING =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "arms_dealing"));
+
+    /**
      * The zombified state, gated on the overworld meter reaching its cap. Read
      * Java-side by {@code PiglinKinshipMixin} to drop kinship while it holds.
      */

@@ -1,5 +1,5 @@
 {
-  "type": "origins:active_self",
+  "type": "origins:simple",
   "badges": [
     {
       "type": "origins:tooltip",
@@ -7,65 +7,13 @@
       "text": {
         "translate": "badge.mms_origins.arms_dealing.0"
       }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.arms_dealing.1"
+      }
     }
-  ],
-  "key": {
-    "key": "key.origins.primary_active",
-    "continuous": false
-  },
-  "cooldown": 100,
-  "hud_render": {
-    "bar_index": 5,
-    "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png"
-  },
-  "entity_action": {
-    "type": "origins:and",
-    "actions": [
-      {
-        "type": "origins:swing_hand",
-        "hand": "MAIN_HAND"
-      },
-      {
-        "type": "origins:execute_command",
-        "command": "clear @s minecraft:gold_ingot 1"
-      },
-      {
-        "type": "origins:execute_command",
-        "command": "loot spawn ~ ~1 ~ loot mms_origins:gameplay/brute_bartering"
-      }
-    ]
-  },
-  "condition": {
-    "type": "origins:and",
-    "conditions": [
-      {
-        "type": "origins:resource",
-        "resource": "mms_origins:zombie_meter",
-        "comparison": "<",
-        "compare_to": 600
-      },
-      {
-        "type": "origins:equipped_item",
-        "equipment_slot": "mainhand",
-        "item_condition": {
-          "type": "origins:ingredient",
-          "ingredient": {
-            "item": "minecraft:gold_ingot"
-          }
-        }
-      },
-      {
-        "type": "origins:raycast",
-        "block": false,
-        "distance": 4,
-        "match_bientity_condition": {
-          "type": "origins:target_condition",
-          "condition": {
-            "type": "origins:entity_type",
-            "entity_type": "minecraft:piglin_brute"
-          }
-        }
-      }
-    ]
-  }
+  ]
 }
