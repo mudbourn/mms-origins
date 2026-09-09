@@ -21,6 +21,30 @@ public final class MmsOriginsPowers {
     public static final PowerType<?> LANGUAGE_BARRIER =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "language_barrier"));
 
+    /**
+     * Piglin kinship. Piglins and brutes leave the bearer alone; Apoli has no
+     * factory to pacify a brain-driven mob, so {@code PiglinKinshipMixin} clears
+     * their target while this is active and the bearer is not zombified.
+     */
+    public static final PowerType<?> KINSMEN =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "kinsmen"));
+
+    /**
+     * The zombified state, gated on the overworld meter reaching its cap. Read
+     * Java-side by {@code PiglinKinshipMixin} to drop kinship while it holds.
+     */
+    public static final PowerType<?> ZOMBIFIED =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "zombified"));
+
+    /**
+     * Piglin trade shunning. Villagers refuse to open trade with the bearer, a
+     * merchant-interaction call no Apoli factory reaches, so
+     * {@code VillagerBeastlyRefusalMixin} cancels the interaction unless a carved
+     * pumpkin hides the face.
+     */
+    public static final PowerType<?> BEASTLY =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "beastly"));
+
     private MmsOriginsPowers() {
     }
 }

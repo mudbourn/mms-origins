@@ -1,0 +1,10 @@
+{
+  "type": "origins:simple",
+  "hidden": true,
+  "condition": {
+    "type": "origins:resource",
+    "resource": "mms_origins:zombie_meter",
+    "comparison": ">=",
+    "compare_to": 600
+  }
+}

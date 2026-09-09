@@ -1,0 +1,7 @@
+{
+  "type": "origins:resource",
+  "hidden": true,
+  "min": 0,
+  "max": 600,
+  "start_value": 0
+}

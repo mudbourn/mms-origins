@@ -1,0 +1,25 @@
+{
+  "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.kinsmen.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.kinsmen.1"
+      }
+    }
+  ],
+  "richer_barter": {
+    "type": "origins:replace_loot_table",
+    "replace": {
+      "minecraft:gameplay/piglin_bartering": "mms_origins:gameplay/piglin_bartering"
+    }
+  }
+}

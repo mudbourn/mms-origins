@@ -4,7 +4,7 @@
 		"view_origin": "originstweaks.gui.view_collar.title"
 	},
 	"order": 3,
-	"auto_choose": true,
+	"auto_choose": false,
 	"origins": [
 		{
 			"origins": [
