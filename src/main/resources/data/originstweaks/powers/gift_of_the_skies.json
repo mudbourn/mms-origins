@@ -48,7 +48,7 @@
 	},
 	"feathered_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/feathered.png",
 		"condition": {
 			"type": "origins:and",
@@ -74,7 +74,7 @@
 	},
 	"golden_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/golden.png",
 		"condition": {
 			"type": "origins:and",
@@ -100,7 +100,7 @@
 	},
 	"colored_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/colored.png",
 		"condition": {
 			"type": "origins:and",
@@ -126,7 +126,7 @@
 	},
 	"paper_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/paper.png",
 		"condition": {
 			"type": "origins:and",
@@ -152,7 +152,7 @@
 	},
 	"magic_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/magic.png",
 		"condition": {
 			"type": "origins:and",
@@ -178,7 +178,7 @@
 	},
 	"flandre_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/flandre.png",
 		"condition": {
 			"type": "origins:and",
@@ -204,7 +204,7 @@
 	},
 	"ikaros_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/ikaros.png",
 		"condition": {
 			"type": "origins:and",
@@ -230,7 +230,7 @@
 	},
 	"nymph_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/nymph.png",
 		"condition": {
 			"type": "origins:and",
@@ -256,7 +256,7 @@
 	},
 	"astraea_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/astraea.png",
 		"condition": {
 			"type": "origins:and",
@@ -282,7 +282,7 @@
 	},
 	"chaos_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/chaos.png",
 		"condition": {
 			"type": "origins:and",
@@ -308,7 +308,7 @@
 	},
 	"hiyori_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/hiyori.png",
 		"condition": {
 			"type": "origins:and",
@@ -334,7 +334,7 @@
 	},
 	"melan_wings": {
 		"type": "origins:elytra_flight",
-		"render_elytra": true,
+		"render_elytra": false,
 		"texture_location": "originstweaks:textures/entity/icaruswings/melan.png",
 		"condition": {
 			"type": "origins:and",

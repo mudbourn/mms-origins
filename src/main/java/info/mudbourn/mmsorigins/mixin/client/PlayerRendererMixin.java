@@ -1,6 +1,7 @@
 package info.mudbourn.mmsorigins.mixin.client;
 
 import info.mudbourn.mmsorigins.client.fur.FurState;
+import info.mudbourn.mmsorigins.client.wings.WingState;
 import io.github.apace100.origins.component.OriginComponent;
 import io.github.apace100.origins.origin.Origin;
 import io.github.apace100.origins.origin.OriginLayer;
@@ -33,8 +34,11 @@ public abstract class PlayerRendererMixin {
                                         float partialTick,
                                         CallbackInfo ci) {
         ((FurState) state).mmsOrigins$setFurOrigin(mmsOrigins$originOf(player));
+        ((WingState) state).mmsOrigins$setWingOption(mmsOrigins$wingOf(player));
     }
 
+    private static final Identifier ELYTRIAN_OPTIONS =
+            Identifier.fromNamespaceAndPath("originstweaks", "elytrian_options");
     private static final Identifier FELINE_OPTIONS =
             Identifier.fromNamespaceAndPath("originstweaks", "feline_options");
     private static final Identifier FELINE_NO_COLLAR =
@@ -70,5 +74,27 @@ public abstract class PlayerRendererMixin {
         }
         Origin option = component.getOrigin(layer);
         return option != null && FELINE_NO_COLLAR.equals(option.getIdentifier());
+    }
+
+    /** The elytrian's chosen wing option, or null if the player is not an elytrian. */
+    private static Identifier mmsOrigins$wingOf(Avatar player) {
+        OriginComponent component = ModComponents.ORIGIN.maybeGet(player).orElse(null);
+        if (component == null) {
+            return null;
+        }
+        OriginLayer base = OriginLayers.getLayer(Identifier.fromNamespaceAndPath("origins", "origin"));
+        if (base == null || !component.hasOrigin(base)) {
+            return null;
+        }
+        Origin origin = component.getOrigin(base);
+        if (origin == null || !"elytrian".equals(origin.getIdentifier().getPath())) {
+            return null;
+        }
+        OriginLayer options = OriginLayers.getLayer(ELYTRIAN_OPTIONS);
+        if (options == null || !component.hasOrigin(options)) {
+            return null;
+        }
+        Origin option = component.getOrigin(options);
+        return option == null ? null : option.getIdentifier();
     }
 }
