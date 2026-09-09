@@ -5,6 +5,7 @@
   "mixins": [
     "AbstractPiglinGrudgeMixin",
     "CreativeTabDuplicateGuardMixin",
+    "CropYieldMixin",
     "EnchantmentHelperMixin",
     "ItemStackConsumeMixin",
     "LivingEntityDeathMixin",
