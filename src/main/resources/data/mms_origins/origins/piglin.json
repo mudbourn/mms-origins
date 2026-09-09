@@ -10,7 +10,8 @@
     "mms_origins:zombification",
     "mms_origins:zombified",
     "mms_origins:quarantine_exile",
-    "mms_origins:beastly"
+    "mms_origins:beastly",
+    "mms_origins:piglin_sounds"
   ],
   "icon": {
     "item": "minecraft:gold_ingot"

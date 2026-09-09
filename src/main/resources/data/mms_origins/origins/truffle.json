@@ -3,7 +3,8 @@
     "mms_origins:spore_shift",
     "mms_origins:combat_spores",
     "mms_origins:drift_spores",
-    "mms_origins:fungal_constitution"
+    "mms_origins:fungal_constitution",
+    "mms_origins:truffle_sounds"
   ],
   "icon": {
     "item": "minecraft:red_mushroom"

@@ -23,17 +23,20 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
-
 /**
  * Arms Dealing: piglin brutes learn to barter, which vanilla never lets them do.
  *
  * <p>A brute normally ignores gold entirely. When an arms-dealing piglin drops a
  * gold ingot or block within reach, the brute takes one into its off hand and
  * admires it for a spell, the way a common piglin would, before paying out from
- * its bastion-gear table. A block always pays; an ingot is stiffed three times in
- * ten, the brute pocketing the gold. Anything that is not a gold ingot or block
- * is ignored.
+ * its bastion-gear table. An ingot is stiffed six times in ten and a block three
+ * times in ten, the brute pocketing the gold. Anything that is not a gold ingot or
+ * block is ignored.
+ *
+ * <p>The admire timer does not survive a save, but the held gold does, so a brute
+ * reloaded mid-admire would hold its gold forever with no timer left to finish it.
+ * A brute found holding gold with no timer resumes the admire, which lets the
+ * barter finish instead of leaving it staring at the piece.
  */
 @Mixin(PiglinBrute.class)
 public class PiglinBruteBarterMixin {
@@ -44,7 +47,10 @@ public class PiglinBruteBarterMixin {
             Identifier.fromNamespaceAndPath("mms_origins", "gameplay/brute_bartering"));
 
     @Unique
-    private static final float MMS_STIFF_CHANCE = 0.30F;
+    private static final float MMS_INGOT_STIFF_CHANCE = 0.60F;
+
+    @Unique
+    private static final float MMS_BLOCK_STIFF_CHANCE = 0.30F;
 
     @Unique
     private static final int MMS_ADMIRE_TICKS = 120;
@@ -63,6 +69,13 @@ public class PiglinBruteBarterMixin {
             if (this.mmsOrigins$admireTicks == 0) {
                 mmsOrigins$finishBarter(level, brute);
             }
+            return;
+        }
+        ItemStack held = brute.getItemInHand(InteractionHand.OFF_HAND);
+        boolean heldBlock = held.is(Items.GOLD_BLOCK);
+        if (heldBlock || held.is(Items.GOLD_INGOT)) {
+            this.mmsOrigins$admirePays = mmsOrigins$rollPays(brute, heldBlock);
+            this.mmsOrigins$admireTicks = MMS_ADMIRE_TICKS;
             return;
         }
         AABB reach = brute.getBoundingBox().inflate(4.0);
@@ -84,10 +97,16 @@ public class PiglinBruteBarterMixin {
             }
             brute.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(block ? Items.GOLD_BLOCK : Items.GOLD_INGOT));
             brute.playSound(SoundEvents.PIGLIN_ADMIRING_ITEM, 1.0F, 1.0F);
-            this.mmsOrigins$admirePays = block || brute.getRandom().nextFloat() >= MMS_STIFF_CHANCE;
+            this.mmsOrigins$admirePays = mmsOrigins$rollPays(brute, block);
             this.mmsOrigins$admireTicks = MMS_ADMIRE_TICKS;
             return;
         }
+    }
+
+    @Unique
+    private boolean mmsOrigins$rollPays(PiglinBrute brute, boolean block) {
+        float stiff = block ? MMS_BLOCK_STIFF_CHANCE : MMS_INGOT_STIFF_CHANCE;
+        return brute.getRandom().nextFloat() >= stiff;
     }
 
     @Unique

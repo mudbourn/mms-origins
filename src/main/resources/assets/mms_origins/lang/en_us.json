@@ -50,7 +50,7 @@
   "power.mms_origins.arms_dealing.name": "Arms Dealing",
   "power.mms_origins.arms_dealing.description": "The brutes hoard the bastions and their armories, but for you they will open the vaults and trade their war gear for gold.",
   "badge.mms_origins.arms_dealing.0": "Drop a gold ingot or block by a piglin brute to barter for bastion gear.",
-  "badge.mms_origins.arms_dealing.1": "A brute keeps an ingot 30% of the time; a gold block never fails.",
+  "badge.mms_origins.arms_dealing.1": "A brute keeps an ingot 60% of the time; a gold block 30% of the time.",
   "power.mms_origins.zombification.name": "Zombification",
   "power.mms_origins.zombification.description": "The overworld sky is poison to your kind; linger beneath it too long and you begin to turn, mind and body slipping away.",
   "badge.mms_origins.zombification.0": "Ten minutes in the overworld turns you, in the Nether or out.",
@@ -70,5 +70,6 @@
   "power.mms_origins.seaborn.description": "You wake in open ocean. Out of the water you can neither rest nor claim a place to wake.",
   "power.mms_origins.seaborn.cant_sleep": "You cannot rest out of the water.",
   "power.mms_origins.water_power.name": "Water Power",
-  "power.mms_origins.water_power.description": "Wet, whether submerged or under rain, your blows land far harder. Somewhere hot, or in the Nether, the same tide runs against you."
+  "power.mms_origins.water_power.description": "Wet, whether submerged or under rain, your blows land far harder. Somewhere hot, or in the Nether, the same tide runs against you.",
+  "item.mms_origins.umbrella": "Umbrella"
 }

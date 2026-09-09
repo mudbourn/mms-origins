@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins;
 
+import info.mudbourn.mmsorigins.item.MmsItems;
 import info.mudbourn.mmsorigins.power.MmsPowerFactories;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ public class MmsOrigins implements ModInitializer {
     @Override
     public void onInitialize() {
         MmsPowerFactories.register();
+        MmsItems.register();
         LOGGER.info("MMS Origins loaded.");
     }
 }

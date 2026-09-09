@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"pattern": [
+		" # ",
+		"#/#",
+		" / "
+	],
+	"key": {
+		"#": "minecraft:leather",
+		"/": "minecraft:stick"
+	},
+	"result": {
+		"id": "mms_origins:umbrella",
+		"count": 1
+	}
+}

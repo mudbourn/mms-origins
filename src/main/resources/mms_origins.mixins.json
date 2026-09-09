@@ -12,6 +12,7 @@
     "PhantomForgetTargetMixin",
     "PhantomUnseenMixin",
     "PiglinAttackTargetMixin",
+    "PiglinBarterMixin",
     "PiglinBruteAttackTargetMixin",
     "PiglinBruteBarterMixin",
     "PiglinDefendMixin",

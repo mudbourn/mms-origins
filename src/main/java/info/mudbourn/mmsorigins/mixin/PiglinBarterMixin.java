@@ -1,0 +1,91 @@
+package info.mudbourn.mmsorigins.mixin;
+
+import info.mudbourn.mmsorigins.MmsOriginsPowers;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.monster.piglin.Piglin;
+import net.minecraft.world.entity.monster.piglin.PiglinAi;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.List;
+
+/**
+ * Kinsmen: a piglin pays out its finer stock to one of its own, and takes gold
+ * blocks as readily as ingots.
+ *
+ * <p>Vanilla rolls {@code minecraft:gameplay/piglin_bartering} for every ingot
+ * barter and never trades for a gold block at all. When a bartering piglin has a
+ * Kinsmen player within reach, its ingot response is rolled from the mod's own
+ * barter table, and a gold block it finishes admiring pays out from that same
+ * table instead of being kept. The vanilla table and the piglin's dealings with
+ * everyone else are left untouched.
+ */
+@Mixin(PiglinAi.class)
+public class PiglinBarterMixin {
+
+    @Unique
+    private static final double MMS_KIN_RANGE = 16.0;
+
+    @Unique
+    private static final ResourceKey<LootTable> MMS_KIN_BARTER =
+        ResourceKey.create(Registries.LOOT_TABLE,
+            Identifier.fromNamespaceAndPath("mms_origins", "gameplay/piglin_bartering"));
+
+    @Inject(method = "getBarterResponseItems", at = @At("HEAD"), cancellable = true)
+    private static void mmsOrigins$kinsmenLoot(Piglin piglin, CallbackInfoReturnable<List<ItemStack>> cir) {
+        Level level = piglin.level();
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return;
+        }
+        Player player = level.getNearestPlayer(piglin, MMS_KIN_RANGE);
+        if (player == null || !MmsOriginsPowers.KINSMEN.isActive(player)) {
+            return;
+        }
+        cir.setReturnValue(mmsOrigins$rollKinBarter(serverLevel, piglin));
+    }
+
+    @Inject(method = "stopHoldingOffHandItem", at = @At("HEAD"), cancellable = true)
+    private static void mmsOrigins$blockBarter(ServerLevel level, Piglin piglin, boolean bartering, CallbackInfo ci) {
+        if (!piglin.isAdult()) {
+            return;
+        }
+        ItemStack offhand = piglin.getItemInHand(InteractionHand.OFF_HAND);
+        if (!offhand.is(Items.GOLD_BLOCK)) {
+            return;
+        }
+        Player player = level.getNearestPlayer(piglin, MMS_KIN_RANGE);
+        if (player == null || !MmsOriginsPowers.KINSMEN.isActive(player)) {
+            return;
+        }
+        piglin.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
+        for (ItemStack loot : mmsOrigins$rollKinBarter(level, piglin)) {
+            piglin.spawnAtLocation(level, loot);
+        }
+        ci.cancel();
+    }
+
+    @Unique
+    private static List<ItemStack> mmsOrigins$rollKinBarter(ServerLevel level, Piglin piglin) {
+        LootTable table = level.getServer().reloadableRegistries().getLootTable(MMS_KIN_BARTER);
+        LootParams params = new LootParams.Builder(level)
+            .withParameter(LootContextParams.THIS_ENTITY, piglin)
+            .create(LootContextParamSets.PIGLIN_BARTER);
+        return table.getRandomItems(params);
+    }
+}

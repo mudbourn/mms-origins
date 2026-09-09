@@ -33,8 +33,18 @@
 			]
 		},
 		"block_condition": {
-			"type": "origins:in_tag",
-			"tag": "originstweaks:unphasable"
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:in_tag",
+					"tag": "originstweaks:unphasable"
+				},
+				{
+					"type": "origins:blast_resistance",
+					"comparison": ">=",
+					"compare_to": 1200
+				}
+			]
 		},
 		"condition": {
 			"type": "origins:and",

@@ -1,0 +1,43 @@
+{
+	"type": "origins:burn",
+	"interval": 20,
+	"burn_duration": 6,
+	"condition": {
+		"type": "origins:and",
+		"conditions": [
+			{
+				"type": "origins:exposed_to_sun"
+			},
+			{
+				"type": "origins:invisible",
+				"inverted": true
+			},
+			{
+				"type": "origins:or",
+				"inverted": true,
+				"conditions": [
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "mainhand",
+						"item_condition": {
+							"type": "origins:ingredient",
+							"ingredient": {
+								"item": "mms_origins:umbrella"
+							}
+						}
+					},
+					{
+						"type": "origins:equipped_item",
+						"equipment_slot": "offhand",
+						"item_condition": {
+							"type": "origins:ingredient",
+							"ingredient": {
+								"item": "mms_origins:umbrella"
+							}
+						}
+					}
+				]
+			}
+		]
+	}
+}

@@ -3,7 +3,8 @@
     "mms_origins:diminutive",
     "mms_origins:light_step",
     "mms_origins:fragile_frame",
-    "mms_origins:wall_scramble"
+    "mms_origins:wall_scramble",
+    "mms_origins:inchling_sounds"
   ],
   "icon": {
     "item": "minecraft:pink_petals"

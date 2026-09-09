@@ -3,7 +3,8 @@
     "mms_origins:bark_skin",
     "mms_origins:photosynthesis",
     "mms_origins:kindling",
-    "mms_origins:verdant_diet"
+    "mms_origins:verdant_diet",
+    "mms_origins:floran_sounds"
   ],
   "icon": {
     "item": "minecraft:oak_sapling"
