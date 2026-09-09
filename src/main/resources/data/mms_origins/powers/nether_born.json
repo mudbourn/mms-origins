@@ -2,5 +2,14 @@
   "type": "origins:modify_player_spawn",
   "dimension": "the_nether",
   "dimension_distance_multiplier": 0.125,
-  "spawn_strategy": "center"
+  "spawn_strategy": "center",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.nether_born.0"
+      }
+    }
+  ]
 }

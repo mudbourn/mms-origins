@@ -3,5 +3,15 @@
   "hidden": true,
   "min": 0,
   "max": 600,
-  "start_value": 0
+  "start_value": 0,
+  "hud_render": {
+    "sprite_location": "mms_origins:textures/gui/zombie_bar.png",
+    "bar_index": 0,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "mms_origins:zombie_meter",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  }
 }

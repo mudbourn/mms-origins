@@ -7,5 +7,14 @@
   },
   "condition": {
     "type": "origins:exposed_to_sun"
-  }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.sun_shy.0"
+      }
+    }
+  ]
 }

@@ -7,5 +7,14 @@
   },
   "damage_condition": {
     "type": "origins:fire"
-  }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.fire_resilience.0"
+      }
+    }
+  ]
 }

@@ -14,6 +14,13 @@
       "text": {
         "translate": "badge.mms_origins.zombification.1"
       }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/star.png",
+      "text": {
+        "translate": "badge.mms_origins.zombification.2"
+      }
     }
   ],
   "creep": {
@@ -37,6 +44,31 @@
           "resource": "mms_origins:zombie_meter",
           "comparison": "<",
           "compare_to": 600
+        }
+      ]
+    }
+  },
+  "recover": {
+    "type": "origins:action_over_time",
+    "interval": 40,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:zombie_meter",
+      "change": -1,
+      "operation": "add"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:dimension",
+          "dimension": "minecraft:the_nether"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:zombie_meter",
+          "comparison": ">",
+          "compare_to": 0
         }
       ]
     }
@@ -80,6 +112,18 @@
       "resource": "mms_origins:zombie_meter",
       "change": 0,
       "operation": "set"
+    }
+  },
+  "cure_on_death": {
+    "type": "mms_origins:action_on_death",
+    "bientity_action": {
+      "type": "origins:target_action",
+      "action": {
+        "type": "origins:change_resource",
+        "resource": "mms_origins:zombie_meter",
+        "change": 0,
+        "operation": "set"
+      }
     }
   }
 }
