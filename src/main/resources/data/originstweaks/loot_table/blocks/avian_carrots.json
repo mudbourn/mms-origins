@@ -7,17 +7,17 @@
 	],
 	"pools": [
 		{
-			"bonus_rolls": 0,
+			"bonus_rolls": 0.0,
 			"entries": [
 				{
 					"type": "minecraft:item",
 					"name": "minecraft:carrot"
 				}
 			],
-			"rolls": 1
+			"rolls": 1.0
 		},
 		{
-			"bonus_rolls": 0,
+			"bonus_rolls": 0.0,
 			"conditions": [
 				{
 					"block": "minecraft:carrots",
@@ -44,7 +44,7 @@
 					"name": "minecraft:carrot"
 				}
 			],
-			"rolls": 1
+			"rolls": 1.0
 		},
 		{
 			"rolls": {

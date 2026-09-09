@@ -11,12 +11,59 @@
         "compare_to": 0
       },
       "if_action": {
-        "type": "origins:play_sound",
-        "sound": "minecraft:block.grass.hit"
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:block.grass.hit",
+            "volume": 1.0
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:block.grass.hit",
+            "volume": 1.0
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:block.grass.hit",
+            "volume": 1.0
+          }
+        ]
       },
       "else_action": {
-        "type": "origins:play_sound",
-        "sound": "minecraft:block.grass.break"
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:block.grass.break",
+            "volume": 1.0
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:block.grass.break",
+            "volume": 1.0
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:block.grass.break",
+            "volume": 1.0
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:block.grass.break",
+            "volume": 1.0
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:block.grass.break",
+            "volume": 1.0
+          },
+          {
+            "type": "origins:play_sound",
+            "sound": "minecraft:block.grass.break",
+            "volume": 1.0
+          }
+        ]
       }
     },
     "cooldown": 1

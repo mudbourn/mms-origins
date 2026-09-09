@@ -3,6 +3,7 @@ package info.mudbourn.mmsorigins.power;
 import info.mudbourn.mmsorigins.MmsOrigins;
 import info.mudbourn.mmsorigins.power.action.RandomTeleportAction;
 import io.github.apace100.apoli.data.ApoliDataTypes;
+import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.apoli.registry.ApoliRegistries;
@@ -34,6 +35,40 @@ public final class MmsPowerFactories {
         registerPose();
         registerModifyEnchantmentLevel();
         registerEdibleItem();
+        registerGrapple();
+    }
+
+    private static void registerGrapple() {
+        Identifier id = id("grapple");
+        Registry.register(
+            ApoliRegistries.POWER_FACTORY,
+            id,
+            new PowerFactory<>(
+                id,
+                new SerializableData()
+                    .add("max_length", SerializableDataTypes.DOUBLE, 24.0)
+                    .add("reel_speed", SerializableDataTypes.DOUBLE, 1.0)
+                    .add("entity_reel_speed", SerializableDataTypes.DOUBLE, 0.9)
+                    .add("arrive_distance", SerializableDataTypes.DOUBLE, 1.5)
+                    .add("silk_resource", ApoliDataTypes.POWER_TYPE, null)
+                    .add("silk_cost_interval", SerializableDataTypes.INT, 15)
+                    .add("sound", SerializableDataTypes.SOUND_EVENT, null)
+                    .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key()),
+                data -> (type, entity) -> {
+                    GrappleHookPower power = new GrappleHookPower(
+                        type,
+                        entity,
+                        data.getDouble("max_length"),
+                        data.getDouble("reel_speed"),
+                        data.getDouble("entity_reel_speed"),
+                        data.getDouble("arrive_distance"),
+                        data.get("silk_resource"),
+                        data.getInt("silk_cost_interval"),
+                        data.get("sound"));
+                    power.setKey(data.get("key"));
+                    return power;
+                })
+                .allowCondition());
     }
 
     private static void registerEdibleItem() {
