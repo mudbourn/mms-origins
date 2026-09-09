@@ -90,6 +90,12 @@
 			"minecraft:blocks/melon": "originstweaks:blocks/avian_melon"
 		}
 	},
+	"bountiful_wheat": {
+		"type": "origins:replace_loot_table",
+		"replace": {
+			"minecraft:blocks/wheat": "originstweaks:blocks/avian_wheat"
+		}
+	},
 	"glistering_melon_food": {
 		"type": "mms_origins:edible_item",
 		"item_condition": {
