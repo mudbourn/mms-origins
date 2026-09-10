@@ -35,7 +35,7 @@ public final class FurModels {
      * the skin showing where it is transparent; it is separate from the geo fins, with
      * {@code overlaySlim} its three-pixel-arm variant. Any of {@code model},
      * {@code texture}, {@code overlay} and {@code overlaySlim} may be null: an
-     * overlay-only fur (truffle) has no geo, a geo-only fur (inchling) has no overlay,
+     * overlay-only fur (truffle) has no geo, a geo-only fur (fairy) has no overlay,
      * and a fur with no slim variant (floran) reuses its wide overlay on slim models.
      *
      * <p>{@code offset} is a small translation in block units applied to the geo fins
@@ -89,10 +89,10 @@ public final class FurModels {
                 "mms_origins:textures/fur/floran.png",
                 "mms_origins:textures/fur/floran_skin.png",
                 null);
-        register("mms_origins", "inchling",
-                "mms_origins:fur/geo/inchling.geo.json",
+        register("mms_origins", "fairy",
+                "mms_origins:fur/geo/fairy.geo.json",
                 null,
-                "mms_origins:textures/fur/inchling.png",
+                "mms_origins:textures/fur/fairy.png",
                 null,
                 null);
         register("mms_origins", "piglin",

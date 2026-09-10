@@ -1,6 +1,19 @@
 {
-  "type": "origins:effect_immunity",
-  "effects": [
-    "minecraft:poison"
-  ]
+  "type": "origins:multiple",
+  "immunity": {
+    "type": "origins:effect_immunity",
+    "effects": [
+      "minecraft:poison",
+      "minecraft:hunger"
+    ]
+  },
+  "frail": {
+    "type": "origins:attribute",
+    "modifier": {
+      "name": "Fungal frailty",
+      "attribute": "minecraft:generic.max_health",
+      "value": -4,
+      "operation": "addition"
+    }
+  }
 }

@@ -19,8 +19,8 @@
 				"type": "minecraft:crafting_shaped",
 				"pattern": [
 					"SSS",
-					" H ",
-					" C "
+					" C ",
+					" H "
 				],
 				"key": {
 					"S": "minecraft:prismarine_shard",
@@ -94,8 +94,8 @@
 			"type": "minecraft:crafting_shaped",
 			"pattern": [
 				"SSS",
-				" H ",
-				" C "
+				" C ",
+				" H "
 			],
 			"key": {
 				"S": "minecraft:prismarine_shard",

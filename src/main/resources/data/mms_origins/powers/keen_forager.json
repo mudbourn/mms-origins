@@ -1,0 +1,28 @@
+{
+  "type": "origins:multiple",
+  "fortune": {
+    "type": "mms_origins:modify_enchantment_level",
+    "enchantment": "minecraft:fortune",
+    "modifier": {
+      "operation": "add_base_early",
+      "value": 2
+    }
+  },
+  "looting": {
+    "type": "mms_origins:modify_enchantment_level",
+    "enchantment": "minecraft:looting",
+    "modifier": {
+      "operation": "add_base_early",
+      "value": 2
+    }
+  },
+  "luck": {
+    "type": "origins:attribute",
+    "modifier": {
+      "name": "Fairy luck",
+      "attribute": "minecraft:generic.luck",
+      "value": 2,
+      "operation": "addition"
+    }
+  }
+}

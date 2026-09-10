@@ -7,14 +7,30 @@
       "text": {
         "translate": "badge.mms_origins.spore_shift.0"
       }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": {
+        "translate": "badge.mms_origins.spore_shift.1"
+      }
     }
   ],
-  "toggle": {
+  "mode": {
     "type": "origins:toggle",
     "key": {
       "key": "key.origins.primary_active",
       "continuous": false
     },
     "retain_state": true
+  },
+  "enable": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    },
+    "retain_state": true,
+    "active_by_default": true
   }
 }

@@ -41,6 +41,19 @@ public final class MmsPowerFactories {
         registerGrapple();
         registerActiveSelfHud();
         registerHeightAboveGround();
+        registerFairyFlight();
+    }
+
+    private static void registerFairyFlight() {
+        Identifier id = id("fairy_flight");
+        Registry.register(
+            ApoliRegistries.POWER_FACTORY,
+            id,
+            new PowerFactory<>(
+                id,
+                new SerializableData(),
+                data -> (type, entity) -> new FairyFlightPower(type, entity))
+                .allowCondition());
     }
 
     private static void registerHeightAboveGround() {

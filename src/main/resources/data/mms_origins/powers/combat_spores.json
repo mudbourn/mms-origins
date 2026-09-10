@@ -10,8 +10,17 @@
       "bar_index": 18,
       "order": 0,
       "condition": {
-        "type": "origins:power_active",
-        "power": "mms_origins:spore_shift_toggle"
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:power_active",
+            "power": "mms_origins:spore_shift_enable"
+          },
+          {
+            "type": "origins:power_active",
+            "power": "mms_origins:spore_shift_mode"
+          }
+        ]
       }
     }
   },
@@ -25,8 +34,17 @@
   "bite": {
     "type": "origins:modify_damage_dealt",
     "condition": {
-      "type": "origins:power_active",
-      "power": "mms_origins:spore_shift_toggle"
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "mms_origins:spore_shift_enable"
+        },
+        {
+          "type": "origins:power_active",
+          "power": "mms_origins:spore_shift_mode"
+        }
+      ]
     },
     "modifier": {
       "name": "Acrid spores",
@@ -54,7 +72,11 @@
       "conditions": [
         {
           "type": "origins:power_active",
-          "power": "mms_origins:spore_shift_toggle"
+          "power": "mms_origins:spore_shift_enable"
+        },
+        {
+          "type": "origins:power_active",
+          "power": "mms_origins:spore_shift_mode"
         },
         {
           "type": "origins:resource",
@@ -83,6 +105,10 @@
                 "resource": "mms_origins:combat_spores_cooldown",
                 "change": 60,
                 "operation": "set"
+              },
+              {
+                "type": "origins:exhaust",
+                "amount": 4.0
               }
             ]
           }
@@ -90,8 +116,18 @@
         {
           "type": "origins:target_action",
           "action": {
-            "type": "origins:execute_command",
-            "command": "effect give @s minecraft:poison 2 1"
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:execute_command",
+                "command": "effect give @s minecraft:poison 2 1"
+              },
+              {
+                "type": "origins:damage",
+                "damage_type": "minecraft:magic",
+                "amount": 2
+              }
+            ]
           }
         }
       ]

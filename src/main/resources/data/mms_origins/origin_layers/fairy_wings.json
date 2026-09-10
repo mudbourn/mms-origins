@@ -1,0 +1,21 @@
+{
+  "gui_title": {
+    "choose_origin": "mms_origins.gui.choose_wings.title",
+    "view_origin": "mms_origins.gui.view_wings.title"
+  },
+  "order": 3,
+  "auto_choose": true,
+  "origins": [
+    {
+      "origins": [
+        "mms_origins:monarch_butterfly",
+        "mms_origins:blue_butterfly"
+      ],
+      "condition": {
+        "type": "origins:origin",
+        "layer": "origins:origin",
+        "origin": "mms_origins:fairy"
+      }
+    }
+  ]
+}

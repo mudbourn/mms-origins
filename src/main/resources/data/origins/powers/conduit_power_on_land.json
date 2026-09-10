@@ -1,5 +1,5 @@
 {
-  "type": "origins:conduit_power_on_land",
+  "type": "origins:simple",
   "loading_priority": 100,
   "hidden": true,
   "condition": {
