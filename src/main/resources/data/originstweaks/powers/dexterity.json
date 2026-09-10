@@ -659,14 +659,14 @@
 	"hold_timer": {
 		"type": "origins:resource",
 		"min": 0,
-		"max": 2
+		"max": 3
 	},
 	"hold_check": {
 		"type": "origins:active_self",
 		"entity_action": {
 			"type": "origins:change_resource",
 			"resource": "*:*_hold_timer",
-			"change": 2,
+			"change": 3,
 			"operation": "set"
 		},
 		"key": {
@@ -698,10 +698,24 @@
 		"type": "mms_origins:pose",
 		"entity_pose": "crouching",
 		"condition": {
-			"type": "origins:resource",
-			"resource": "*:*_hold_timer",
-			"comparison": "!=",
-			"compare_to": 0
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"resource": "*:*_hold_timer",
+					"comparison": "!=",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:*_leap_cooldown",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:on_block"
+				}
+			]
 		}
 	}
 }
