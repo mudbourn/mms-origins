@@ -155,12 +155,10 @@ public final class FurModels {
         offset("origins", "blazeborn", 0.0F, 0.1F, 0.0F);
         hide("origins", "blazeborn", "leftArm", "rightArm", "leftSleeve", "rightSleeve");
         hide("origins", "shulk", "leftArm", "rightArm", "body");
-        registerElytraOnly("origins", "elytrian",
-                "mms_origins:textures/fur/elytrian_elytra.png");
         elytra("origins", "avian", "mms_origins:textures/fur/avian_elytra.png");
         elytra("origins", "phantom", "mms_origins:textures/fur/phantom_elytra.png");
         elytra("origins", "shulk", "mms_origins:textures/fur/shulk_elytra.png");
-        aliasToOriginsTweaks("arachnid", "avian", "blazeborn", "elytrian",
+        aliasToOriginsTweaks("arachnid", "avian", "blazeborn",
                 "enderian", "feline", "feline_nocollar", "phantom", "shulk");
     }
 

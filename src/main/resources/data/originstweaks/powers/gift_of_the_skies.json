@@ -40,6 +40,7 @@
 	"vanilla_wings": {
 		"type": "origins:elytra_flight",
 		"render_elytra": true,
+		"texture_location": "mms_origins:textures/fur/elytrian_elytra.png",
 		"condition": {
 			"type": "origins:origin",
 			"layer": "originstweaks:elytrian_options",
@@ -573,11 +574,24 @@
 			"sprite_location": "origins:textures/gui/resource_bar.png",
 			"bar_index": 2,
 			"condition": {
-				"type": "origins:resource",
-				"resource": "*:*_stamina",
-				"compare_to": 600,
-				"comparison": "!="
+				"type": "origins:power_active",
+				"power": "originstweaks:gift_of_the_skies_flight_toggle"
 			}
+		}
+	},
+	"flight_toggle": {
+		"type": "origins:toggle",
+		"active_by_default": true,
+		"key": {
+			"key": "key.origins.secondary_active"
+		}
+	},
+	"disable_gliding": {
+		"type": "origins:prevent_elytra_flight",
+		"condition": {
+			"type": "origins:power_active",
+			"power": "originstweaks:gift_of_the_skies_flight_toggle",
+			"inverted": true
 		}
 	},
 	"stamina_regenerate": {

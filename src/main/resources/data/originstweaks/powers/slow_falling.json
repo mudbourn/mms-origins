@@ -87,14 +87,14 @@
 	},
 	"feather_drain": {
 		"type": "origins:action_over_time",
-		"interval": 1,
+		"interval": 3,
 		"entity_action": {
 			"type": "origins:and",
 			"actions": [
 				{
 					"type": "origins:change_resource",
 					"resource": "*:*_feathers",
-					"change": -1
+					"change": -2
 				},
 				{
 					"type": "origins:trigger_cooldown",
@@ -110,8 +110,8 @@
 					"power": "originstweaks:slow_falling_toggle"
 				},
 				{
-					"type": "origins:on_block",
-					"inverted": true
+					"type": "mms_origins:height_above_ground",
+					"min": 0.5
 				},
 				{
 					"type": "origins:resource",

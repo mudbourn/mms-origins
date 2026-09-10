@@ -2,10 +2,12 @@ package info.mudbourn.mmsorigins.power;
 
 import info.mudbourn.mmsorigins.MmsOrigins;
 import info.mudbourn.mmsorigins.power.action.RandomTeleportAction;
+import info.mudbourn.mmsorigins.power.condition.HeightAboveGroundCondition;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.apoli.power.factory.action.ActionFactory;
+import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import io.github.apace100.apoli.registry.ApoliRegistries;
 import io.github.apace100.apoli.util.HudRender;
 import io.github.apace100.apoli.util.modifier.Modifier;
@@ -38,6 +40,18 @@ public final class MmsPowerFactories {
         registerEdibleItem();
         registerGrapple();
         registerActiveSelfHud();
+        registerHeightAboveGround();
+    }
+
+    private static void registerHeightAboveGround() {
+        Identifier id = id("height_above_ground");
+        Registry.register(
+            ApoliRegistries.ENTITY_CONDITION,
+            id,
+            new ConditionFactory<Entity>(
+                id,
+                HeightAboveGroundCondition.data(),
+                HeightAboveGroundCondition::condition));
     }
 
     private static void registerActiveSelfHud() {

@@ -6,17 +6,41 @@
 		"entity_action": {
 			"type": "origins:if_else",
 			"condition": {
-				"type": "origins:health",
-				"comparison": ">",
-				"compare_to": 0
+				"type": "origins:origin",
+				"layer": "originstweaks:elytrian_options",
+				"origin": "originstweaks:flandre_wings"
 			},
 			"if_action": {
-				"type": "origins:play_sound",
-				"sound": "minecraft:entity.parrot.hurt"
+				"type": "origins:if_else",
+				"condition": {
+					"type": "origins:health",
+					"comparison": ">",
+					"compare_to": 0
+				},
+				"if_action": {
+					"type": "origins:play_sound",
+					"sound": "mms_origins:flandre.hurt"
+				},
+				"else_action": {
+					"type": "origins:play_sound",
+					"sound": "mms_origins:flandre.death"
+				}
 			},
 			"else_action": {
-				"type": "origins:play_sound",
-				"sound": "minecraft:entity.parrot.death"
+				"type": "origins:if_else",
+				"condition": {
+					"type": "origins:health",
+					"comparison": ">",
+					"compare_to": 0
+				},
+				"if_action": {
+					"type": "origins:play_sound",
+					"sound": "minecraft:entity.allay.hurt"
+				},
+				"else_action": {
+					"type": "origins:play_sound",
+					"sound": "minecraft:entity.allay.death"
+				}
 			}
 		},
 		"cooldown": 1

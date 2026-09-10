@@ -1,0 +1,12 @@
+{
+  "flandre.hurt": {
+    "sounds": [
+      "mms_origins:flandre/damage00"
+    ]
+  },
+  "flandre.death": {
+    "sounds": [
+      "mms_origins:flandre/pldead00"
+    ]
+  }
+}
