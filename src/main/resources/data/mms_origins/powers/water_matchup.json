@@ -1,0 +1,72 @@
+{
+  "type": "origins:multiple",
+  "effective": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "name": "Riptide super effective",
+      "value": 0.5,
+      "operation": "multiply_base"
+    },
+    "bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:or",
+        "conditions": [
+          {
+            "type": "origins:origin",
+            "origin": "originstweaks:blazeborn"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:blaze"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:magma_cube"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:ghast"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:strider"
+          }
+        ]
+      }
+    },
+    "badges": [
+      {
+        "type": "origins:tooltip",
+        "sprite": "origins:textures/gui/badge/arrow_up.png",
+        "text": {
+          "translate": "badge.mms_origins.water_matchup.0"
+        }
+      }
+    ]
+  },
+  "resisted": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "name": "Riptide not very effective",
+      "value": -0.5,
+      "operation": "multiply_base"
+    },
+    "bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:origin",
+        "origin": "mms_origins:floran"
+      }
+    },
+    "badges": [
+      {
+        "type": "origins:tooltip",
+        "sprite": "origins:textures/gui/badge/info.png",
+        "text": {
+          "translate": "badge.mms_origins.water_matchup.1"
+        }
+      }
+    ]
+  }
+}

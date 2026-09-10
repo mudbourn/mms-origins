@@ -2,6 +2,7 @@ package info.mudbourn.mmsorigins.power;
 
 import info.mudbourn.mmsorigins.MmsOrigins;
 import info.mudbourn.mmsorigins.power.action.RandomTeleportAction;
+import info.mudbourn.mmsorigins.power.action.SummonHenchmenAction;
 import info.mudbourn.mmsorigins.power.condition.HeightAboveGroundCondition;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
@@ -42,6 +43,18 @@ public final class MmsPowerFactories {
         registerActiveSelfHud();
         registerHeightAboveGround();
         registerFairyFlight();
+        registerSummonHenchmen();
+    }
+
+    private static void registerSummonHenchmen() {
+        Identifier id = id("summon_henchmen");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            id,
+            new ActionFactory<Entity>(
+                id,
+                SummonHenchmenAction.data(),
+                SummonHenchmenAction::action));
     }
 
     private static void registerFairyFlight() {

@@ -16,7 +16,9 @@
     "mms_origins:cold_blooded",
     "mms_origins:wetness",
     "mms_origins:seaborn",
-    "mms_origins:water_power"
+    "mms_origins:water_power",
+    "mms_origins:water_matchup",
+    "mms_origins:poor_farmer"
   ],
   "icon": {
     "item": "minecraft:tropical_fish"

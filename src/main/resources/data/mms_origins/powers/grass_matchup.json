@@ -1,0 +1,170 @@
+{
+  "type": "origins:multiple",
+  "effective": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "name": "Overgrowth super effective",
+      "value": 0.5,
+      "operation": "multiply_base"
+    },
+    "bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:or",
+        "conditions": [
+          {
+            "type": "origins:origin",
+            "origin": "origins:fishman"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:cod"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:salmon"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:tropical_fish"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:pufferfish"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:squid"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:glow_squid"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:dolphin"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:axolotl"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:tadpole"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:guardian"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:elder_guardian"
+          }
+        ]
+      }
+    },
+    "badges": [
+      {
+        "type": "origins:tooltip",
+        "sprite": "origins:textures/gui/badge/arrow_up.png",
+        "text": {
+          "translate": "badge.mms_origins.grass_matchup.0"
+        }
+      }
+    ]
+  },
+  "resisted": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "name": "Overgrowth not very effective",
+      "value": -0.5,
+      "operation": "multiply_base"
+    },
+    "bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:or",
+        "conditions": [
+          {
+            "type": "origins:origin",
+            "origin": "originstweaks:blazeborn"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:blaze"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:magma_cube"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:ghast"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:strider"
+          }
+        ]
+      }
+    },
+    "badges": [
+      {
+        "type": "origins:tooltip",
+        "sprite": "origins:textures/gui/badge/info.png",
+        "text": {
+          "translate": "badge.mms_origins.grass_matchup.2"
+        }
+      }
+    ]
+  },
+  "drenched": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "name": "Overgrowth drinks the wet",
+      "value": 0.5,
+      "operation": "multiply_base"
+    },
+    "bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:and",
+        "conditions": [
+          {
+            "type": "origins:origin",
+            "origin": "origins:fishman"
+          },
+          {
+            "type": "origins:or",
+            "conditions": [
+              {
+                "type": "origins:fluid_height",
+                "fluid": "minecraft:water",
+                "comparison": ">",
+                "compare_to": 0.0
+              },
+              {
+                "type": "origins:in_rain"
+              },
+              {
+                "type": "origins:resource",
+                "resource": "mms_origins:wetness_resource",
+                "comparison": ">",
+                "compare_to": 0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "badges": [
+      {
+        "type": "origins:tooltip",
+        "sprite": "origins:textures/gui/badge/arrow_up.png",
+        "text": {
+          "translate": "badge.mms_origins.grass_matchup.1"
+        }
+      }
+    ]
+  }
+}

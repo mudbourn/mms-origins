@@ -62,6 +62,14 @@ public final class MmsOriginsPowers {
     public static final PowerType<?> FAIRY_CHARM =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "fairy_charm"));
 
+    /**
+     * Floran growth aura. Apoli has no factory that quickens block growth, so
+     * the power is a marker and {@code VerdantGrowth} hastens plants around the
+     * bearer each world tick.
+     */
+    public static final PowerType<?> VERDANT_GROWTH =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "verdant_growth"));
+
     private MmsOriginsPowers() {
     }
 }

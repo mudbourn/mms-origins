@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins;
 
+import info.mudbourn.mmsorigins.entity.MmsEntities;
 import info.mudbourn.mmsorigins.item.MmsItems;
 import info.mudbourn.mmsorigins.power.MmsPowerFactories;
 import info.mudbourn.mmsorigins.sound.MmsSounds;
@@ -14,8 +15,10 @@ public class MmsOrigins implements ModInitializer {
     @Override
     public void onInitialize() {
         MmsPowerFactories.register();
+        MmsEntities.register();
         MmsItems.register();
         MmsSounds.register();
+        VerdantGrowth.register();
         LOGGER.info("MMS Origins loaded.");
     }
 }

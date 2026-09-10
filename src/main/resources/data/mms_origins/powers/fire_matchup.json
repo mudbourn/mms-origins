@@ -1,0 +1,168 @@
+{
+  "type": "origins:multiple",
+  "scorch": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "name": "Scorch super effective",
+      "value": 0.5,
+      "operation": "multiply_base"
+    },
+    "bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:origin",
+        "origin": "mms_origins:floran"
+      }
+    },
+    "badges": [
+      {
+        "type": "origins:tooltip",
+        "sprite": "origins:textures/gui/badge/arrow_up.png",
+        "text": {
+          "translate": "badge.mms_origins.fire_matchup.0"
+        }
+      }
+    ]
+  },
+  "immolate": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "name": "Scorch stokes the flame",
+      "value": 0.5,
+      "operation": "multiply_base"
+    },
+    "condition": {
+      "type": "origins:on_fire"
+    },
+    "bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:origin",
+        "origin": "mms_origins:floran"
+      }
+    },
+    "badges": [
+      {
+        "type": "origins:tooltip",
+        "sprite": "origins:textures/gui/badge/arrow_up.png",
+        "text": {
+          "translate": "badge.mms_origins.fire_matchup.2"
+        }
+      }
+    ]
+  },
+  "resisted": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "name": "Scorch not very effective",
+      "value": -0.5,
+      "operation": "multiply_base"
+    },
+    "bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:or",
+        "conditions": [
+          {
+            "type": "origins:origin",
+            "origin": "origins:fishman"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:cod"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:salmon"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:tropical_fish"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:pufferfish"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:squid"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:glow_squid"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:dolphin"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:axolotl"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:tadpole"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:guardian"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:elder_guardian"
+          }
+        ]
+      }
+    },
+    "badges": [
+      {
+        "type": "origins:tooltip",
+        "sprite": "origins:textures/gui/badge/info.png",
+        "text": {
+          "translate": "badge.mms_origins.fire_matchup.3"
+        }
+      }
+    ]
+  },
+  "doused": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "name": "Doused by aquatic attackers",
+      "value": 0.5,
+      "operation": "multiply_base"
+    },
+    "bientity_condition": {
+      "type": "origins:actor_condition",
+      "condition": {
+        "type": "origins:or",
+        "conditions": [
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:guardian"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:elder_guardian"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:pufferfish"
+          },
+          {
+            "type": "origins:entity_type",
+            "entity_type": "minecraft:dolphin"
+          }
+        ]
+      }
+    },
+    "badges": [
+      {
+        "type": "origins:tooltip",
+        "sprite": "origins:textures/gui/badge/info.png",
+        "text": {
+          "translate": "badge.mms_origins.fire_matchup.1"
+        }
+      }
+    ]
+  }
+}

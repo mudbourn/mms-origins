@@ -1,12 +1,15 @@
 package info.mudbourn.mmsorigins.client;
 
+import info.mudbourn.mmsorigins.client.entity.FloranHenchmanRenderer;
 import info.mudbourn.mmsorigins.client.fur.FurFeatureRenderer;
 import info.mudbourn.mmsorigins.client.fur.FurModels;
 import info.mudbourn.mmsorigins.client.wings.ButterflyFlap;
 import info.mudbourn.mmsorigins.client.wings.ButterflyWingsFeatureRenderer;
 import info.mudbourn.mmsorigins.client.wings.ButterflyWingsModel;
 import info.mudbourn.mmsorigins.client.wings.WingsFeatureRenderer;
+import info.mudbourn.mmsorigins.entity.MmsEntities;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
@@ -26,6 +29,7 @@ public class MmsOriginsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         FurModels.init();
+        EntityRendererRegistry.register(MmsEntities.FLORAN_HENCHMAN, FloranHenchmanRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ButterflyWingsModel.LAYER, ButterflyWingsModel::createLayer);
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register(
                 (entityType, renderer, helper, context) -> {
