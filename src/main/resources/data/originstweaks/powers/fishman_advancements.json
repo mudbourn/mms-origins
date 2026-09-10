@@ -5,14 +5,14 @@
 		"type": "origins:action_on_callback",
 		"entity_action_added": {
 			"type": "origins:grant_advancement",
-			"advancement": "originstweaks:merling/root"
+			"advancement": "originstweaks:fishman/root"
 		}
 	},
 	"clear_monument": {
 		"type": "origins:self_action_on_kill",
 		"entity_action": {
 			"type": "origins:execute_command",
-			"command": "execute unless entity @e[type=minecraft:elder_guardian,distance=0..256] run advancement grant @s only originstweaks:merling/clear_monument"
+			"command": "execute unless entity @e[type=minecraft:elder_guardian,distance=0..256] run advancement grant @s only originstweaks:fishman/clear_monument"
 		},
 		"cooldown": 0,
 		"hud_render": {
@@ -40,7 +40,7 @@
 		"type": "origins:action_over_time",
 		"rising_action": {
 			"type": "origins:grant_advancement",
-			"advancement": "originstweaks:merling/loyalty_channeling"
+			"advancement": "originstweaks:fishman/loyalty_channeling"
 		},
 		"condition": {
 			"type": "origins:inventory",
@@ -74,7 +74,7 @@
 		"type": "origins:action_over_time",
 		"rising_action": {
 			"type": "origins:grant_advancement",
-			"advancement": "originstweaks:merling/conduit_power"
+			"advancement": "originstweaks:fishman/conduit_power"
 		},
 		"condition": {
 			"type": "origins:status_effect",
@@ -85,7 +85,7 @@
 		"type": "origins:action_over_time",
 		"rising_action": {
 			"type": "origins:grant_advancement",
-			"advancement": "originstweaks:merling/nether"
+			"advancement": "originstweaks:fishman/nether"
 		},
 		"condition": {
 			"type": "origins:dimension",

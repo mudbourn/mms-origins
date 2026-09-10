@@ -15,7 +15,7 @@
 				"translate": "badge.originstweaks.aquadynamic.1.prefix"
 			},
 			"recipe": {
-				"id": "originstweaks:merling_trident_badge",
+				"id": "originstweaks:fishman_trident_badge",
 				"type": "minecraft:crafting_shaped",
 				"pattern": [
 					"SSS",
@@ -90,7 +90,7 @@
 	"crafting": {
 		"type": "origins:recipe",
 		"recipe": {
-			"id": "originstweaks:merling_trident",
+			"id": "originstweaks:fishman_trident",
 			"type": "minecraft:crafting_shaped",
 			"pattern": [
 				"SSS",

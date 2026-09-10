@@ -1,10 +1,10 @@
 {
 	"display": {
 		"title": {
-			"translate": "advancement.originstweaks.merling.root.title"
+			"translate": "advancement.originstweaks.fishman.root.title"
 		},
 		"description": {
-			"translate": "advancement.originstweaks.merling.root.description"
+			"translate": "advancement.originstweaks.fishman.root.description"
 		},
 		"icon": {
 			"id": "minecraft:trident"
@@ -16,7 +16,7 @@
 		"background": "minecraft:textures/block/prismarine_bricks.png"
 	},
 	"criteria": {
-		"chose_merling": {
+		"chose_fishman": {
 			"trigger": "minecraft:impossible"
 		}
 	}

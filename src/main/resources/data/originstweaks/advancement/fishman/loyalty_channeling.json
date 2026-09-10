@@ -1,10 +1,10 @@
 {
 	"display": {
 		"title": {
-			"translate": "advancement.originstweaks.merling.loyalty_channeling.title"
+			"translate": "advancement.originstweaks.fishman.loyalty_channeling.title"
 		},
 		"description": {
-			"translate": "advancement.originstweaks.merling.loyalty_channeling.description"
+			"translate": "advancement.originstweaks.fishman.loyalty_channeling.description"
 		},
 		"icon": {
 			"id": "minecraft:trident",
@@ -25,5 +25,5 @@
 	"rewards": {
 		"experience": 100
 	},
-	"parent": "originstweaks:merling/clear_monument"
+	"parent": "originstweaks:fishman/clear_monument"
 }

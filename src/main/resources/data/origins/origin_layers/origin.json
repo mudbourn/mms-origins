@@ -4,7 +4,7 @@
   "enabled": true,
   "origins": [
     "origins:human",
-    "origins:merling",
+    "origins:fishman",
     "mms_origins:floran",
     "mms_origins:inchling",
     "mms_origins:truffle",

@@ -77,12 +77,12 @@ public final class FurModels {
     private static final Map<Identifier, Fur> BAKED = new HashMap<>();
 
     static {
-        register("origins", "merling",
-                "mms_origins:fur/geo/merling.geo.json",
+        register("origins", "fishman",
+                "mms_origins:fur/geo/fishman.geo.json",
                 null,
-                "mms_origins:textures/fur/merling.png",
-                "mms_origins:textures/fur/merling_skin.png",
-                "mms_origins:textures/fur/merling_skin_thin.png");
+                "mms_origins:textures/fur/fishman.png",
+                "mms_origins:textures/fur/fishman_skin.png",
+                "mms_origins:textures/fur/fishman_skin_thin.png");
         register("mms_origins", "floran",
                 "mms_origins:fur/geo/floran.geo.json",
                 null,

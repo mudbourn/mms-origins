@@ -1,5 +1,5 @@
 {
-    "name": "originstweaks:merling_spawn",
+    "name": "originstweaks:fishman_spawn",
     "fallback": "minecraft:empty",
     "elements": [
         {
@@ -7,7 +7,7 @@
             "element": {
                 "element_type": "minecraft:single_pool_element",
                 "projection": "terrain_matching",
-                "location": "originstweaks:merling_spawn",
+                "location": "originstweaks:fishman_spawn",
                 "processors": "minecraft:empty",
                 "override_liquid_settings": "apply_waterlogging"
             }

@@ -1,10 +1,10 @@
 {
 	"display": {
 		"title": {
-			"translate": "advancement.originstweaks.merling.conduit_power.title"
+			"translate": "advancement.originstweaks.fishman.conduit_power.title"
 		},
 		"description": {
-			"translate": "advancement.originstweaks.merling.conduit_power.description"
+			"translate": "advancement.originstweaks.fishman.conduit_power.description"
 		},
 		"icon": {
 			"id": "minecraft:conduit"
@@ -19,5 +19,5 @@
 			"trigger": "minecraft:impossible"
 		}
 	},
-	"parent": "originstweaks:merling/root"
+	"parent": "originstweaks:fishman/root"
 }

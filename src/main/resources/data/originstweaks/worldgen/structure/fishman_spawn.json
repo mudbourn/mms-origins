@@ -3,7 +3,7 @@
 	"biomes": "#c:is_ocean",
 	"step": "top_layer_modification",
 	"spawn_overrides": {},
-	"start_pool": "originstweaks:merling_spawn",
+	"start_pool": "originstweaks:fishman_spawn",
 	"size": 1,
 	"start_height": {
 		"absolute": 0

@@ -1,10 +1,10 @@
 {
 	"display": {
 		"title": {
-			"translate": "advancement.originstweaks.merling.nether.title"
+			"translate": "advancement.originstweaks.fishman.nether.title"
 		},
 		"description": {
-			"translate": "advancement.originstweaks.merling.nether.description"
+			"translate": "advancement.originstweaks.fishman.nether.description"
 		},
 		"icon": {
 			"id": "minecraft:netherrack"
@@ -19,5 +19,5 @@
 			"trigger": "minecraft:impossible"
 		}
 	},
-	"parent": "originstweaks:merling/root"
+	"parent": "originstweaks:fishman/root"
 }

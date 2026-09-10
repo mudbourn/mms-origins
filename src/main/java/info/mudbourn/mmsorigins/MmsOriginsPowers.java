@@ -14,7 +14,7 @@ import net.minecraft.resources.Identifier;
 public final class MmsOriginsPowers {
 
     /**
-     * Merling/fishman trade penalty. Apoli has no merchant-offer power type, so
+     * Fishman trade penalty. Apoli has no merchant-offer power type, so
      * the power itself is a marker and the pricing happens in
      * {@code VillagerSwindleMixin}.
      */

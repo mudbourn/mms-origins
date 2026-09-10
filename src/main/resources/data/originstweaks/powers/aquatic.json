@@ -8,6 +8,6 @@
 	"spawn": {
 		"type": "origins:modify_player_spawn",
 		"dimension": "minecraft:overworld",
-		"structure": "originstweaks:merling_spawn"
+		"structure": "originstweaks:fishman_spawn"
 	}
 }
