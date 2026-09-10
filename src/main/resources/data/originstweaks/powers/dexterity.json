@@ -659,14 +659,14 @@
 	"hold_timer": {
 		"type": "origins:resource",
 		"min": 0,
-		"max": 4
+		"max": 2
 	},
 	"hold_check": {
 		"type": "origins:active_self",
 		"entity_action": {
 			"type": "origins:change_resource",
 			"resource": "*:*_hold_timer",
-			"change": 4,
+			"change": 2,
 			"operation": "set"
 		},
 		"key": {
@@ -709,7 +709,7 @@
 		"modifier": {
 			"name": "Rooted while charging a leap",
 			"attribute": "minecraft:generic.movement_speed",
-			"value": -0.6,
+			"value": -0.3,
 			"operation": "multiply_total"
 		},
 		"condition": {
