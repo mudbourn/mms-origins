@@ -21,6 +21,12 @@ import java.util.Optional;
  * refused here. That keeps kinship from breaking bartering the way emptying the
  * shared memory did, and it never sets an attack target, so there is no flicker.
  * A provoked kinsman is not spared, so retaliation still lands.
+ *
+ * <p>A zombified player is refused as a target too, while they hold no weapon
+ * against the piglin: a piglin flees the zombified rather than fighting them, and
+ * the fight activity outranks the avoid one, so leaving the target unset lets the
+ * flee take hold. A zombified player who strikes the pack is no longer spared and
+ * is hunted. Brutes share the truce through their own mixin, but never flee.
  */
 @Mixin(PiglinAi.class)
 public class PiglinAttackTargetMixin {
@@ -29,7 +35,8 @@ public class PiglinAttackTargetMixin {
     private static void mmsOrigins$spareKin(ServerLevel level, Piglin piglin,
                                             CallbackInfoReturnable<Optional<? extends LivingEntity>> cir) {
         Optional<? extends LivingEntity> found = cir.getReturnValue();
-        if (found.isPresent() && found.get() instanceof Player player && PiglinKinship.isSpared(piglin, player)) {
+        if (found.isPresent() && found.get() instanceof Player player
+                && (PiglinKinship.isSpared(piglin, player) || PiglinKinship.sparesZombified(piglin, player))) {
             cir.setReturnValue(Optional.empty());
         }
     }

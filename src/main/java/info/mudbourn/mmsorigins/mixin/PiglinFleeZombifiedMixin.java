@@ -1,6 +1,7 @@
 package info.mudbourn.mmsorigins.mixin;
 
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
+import info.mudbourn.mmsorigins.PiglinKinship;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.piglin.Piglin;
@@ -38,7 +39,7 @@ public class PiglinFleeZombifiedMixin {
     @Inject(method = "updateActivity", at = @At("HEAD"))
     private static void mmsOrigins$fleeZombified(Piglin piglin, CallbackInfo ci) {
         Player bearer = mmsOrigins$nearbyZombified(piglin);
-        if (bearer != null) {
+        if (bearer != null && PiglinKinship.sparesZombified(piglin, bearer)) {
             Brain<Piglin> brain = piglin.getBrain();
             brain.setMemoryWithExpiry(MemoryModuleType.AVOID_TARGET, bearer, MMS_FLEE_DURATION);
         }

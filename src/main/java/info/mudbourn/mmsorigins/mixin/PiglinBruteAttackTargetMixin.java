@@ -17,7 +17,9 @@ import java.util.Optional;
  * Kinsmen, for the brutes: a brute will not pick a spared kinsman to fight.
  *
  * <p>Brutes hunt on their own lookup, so their attack choice is refused the same
- * way. A provoked kinsman is not spared, so a struck brute still answers.
+ * way. A provoked kinsman is not spared, so a struck brute still answers. A brute
+ * shuns a zombified player the same as its kin do, though it never flees one; a
+ * zombified player who strikes the brute is provoked prey and hunted like any.
  */
 @Mixin(PiglinBruteAi.class)
 public class PiglinBruteAttackTargetMixin {
@@ -26,7 +28,8 @@ public class PiglinBruteAttackTargetMixin {
     private static void mmsOrigins$spareKin(ServerLevel level, AbstractPiglin brute,
                                             CallbackInfoReturnable<Optional<? extends LivingEntity>> cir) {
         Optional<? extends LivingEntity> found = cir.getReturnValue();
-        if (found.isPresent() && found.get() instanceof Player player && PiglinKinship.isSpared(brute, player)) {
+        if (found.isPresent() && found.get() instanceof Player player
+                && (PiglinKinship.isSpared(brute, player) || PiglinKinship.sparesZombified(brute, player))) {
             cir.setReturnValue(Optional.empty());
         }
     }

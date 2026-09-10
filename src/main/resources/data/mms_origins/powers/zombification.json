@@ -69,6 +69,12 @@
           "resource": "mms_origins:zombie_meter",
           "comparison": ">",
           "compare_to": 0
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:zombie_meter",
+          "comparison": "<",
+          "compare_to": 600
         }
       ]
     }
@@ -201,18 +207,6 @@
       "resource": "mms_origins:zombie_meter",
       "comparison": ">=",
       "compare_to": 600
-    }
-  },
-  "cure_on_death": {
-    "type": "mms_origins:action_on_death",
-    "bientity_action": {
-      "type": "origins:target_action",
-      "action": {
-        "type": "origins:change_resource",
-        "resource": "mms_origins:zombie_meter",
-        "change": 0,
-        "operation": "set"
-      }
     }
   }
 }

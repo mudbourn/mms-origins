@@ -23,6 +23,8 @@ public class MmsOrigins implements ModInitializer {
         MmsItems.register();
         MmsSounds.register();
         VerdantGrowth.register();
+        ZombieMeterDeathReset.register();
+        ZombifyCommand.register();
         LOGGER.info("MMS Origins loaded.");
     }
 }
