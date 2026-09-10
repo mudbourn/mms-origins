@@ -18,6 +18,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Map;
+
 /**
  * Reads the player's origin during extraction and stamps it onto the render state.
  *
@@ -54,10 +56,10 @@ public abstract class PlayerRendererMixin {
             Identifier.fromNamespaceAndPath("originstweaks", "feline_no_collar");
     private static final Identifier FELINE_NOCOLLAR_FUR =
             Identifier.fromNamespaceAndPath("originstweaks", "feline_nocollar");
-    private static final Identifier CIRNO_WINGS =
-            Identifier.fromNamespaceAndPath("mms_origins", "cirno_wings");
-    private static final Identifier FAIRY_CIRNO_FUR =
-            Identifier.fromNamespaceAndPath("mms_origins", "fairy_cirno");
+    private static final Map<String, Identifier> FAIRY_WING_FURS = Map.of(
+            "cirno_wings", Identifier.fromNamespaceAndPath("mms_origins", "fairy_cirno"),
+            "pixie_wings", Identifier.fromNamespaceAndPath("mms_origins", "fairy_pixie"),
+            "slime_wings", Identifier.fromNamespaceAndPath("mms_origins", "fairy_slime"));
 
     private static Identifier mmsOrigins$originOf(Avatar player) {
         OriginComponent component = ModComponents.ORIGIN.maybeGet(player).orElse(null);
@@ -76,20 +78,26 @@ public abstract class PlayerRendererMixin {
         if ("feline".equals(id.getPath()) && mmsOrigins$hasNoCollar(component)) {
             return FELINE_NOCOLLAR_FUR;
         }
-        if ("fairy".equals(id.getPath()) && mmsOrigins$hasCirnoWings(component)) {
-            return FAIRY_CIRNO_FUR;
+        if ("fairy".equals(id.getPath())) {
+            Identifier variant = mmsOrigins$fairyWingFur(component);
+            if (variant != null) {
+                return variant;
+            }
         }
         return id;
     }
 
-    /** Whether the player picked the Cirno option in the fairy wings layer. */
-    private static boolean mmsOrigins$hasCirnoWings(OriginComponent component) {
+    /** The fur variant for the fairy's chosen wing, or null if the choice has no variant. */
+    private static Identifier mmsOrigins$fairyWingFur(OriginComponent component) {
         OriginLayer layer = OriginLayers.getLayer(FAIRY_OPTIONS);
         if (layer == null || !component.hasOrigin(layer)) {
-            return false;
+            return null;
         }
         Origin option = component.getOrigin(layer);
-        return option != null && CIRNO_WINGS.equals(option.getIdentifier());
+        if (option == null) {
+            return null;
+        }
+        return FAIRY_WING_FURS.get(option.getIdentifier().getPath());
     }
 
     /** Whether the player picked the collarless option in the feline options layer. */
