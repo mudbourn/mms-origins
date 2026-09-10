@@ -7,6 +7,7 @@ import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.factory.PowerFactory;
 import io.github.apace100.apoli.power.factory.action.ActionFactory;
 import io.github.apace100.apoli.registry.ApoliRegistries;
+import io.github.apace100.apoli.util.HudRender;
 import io.github.apace100.apoli.util.modifier.Modifier;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataType;
@@ -36,6 +37,32 @@ public final class MmsPowerFactories {
         registerModifyEnchantmentLevel();
         registerEdibleItem();
         registerGrapple();
+        registerActiveSelfHud();
+    }
+
+    private static void registerActiveSelfHud() {
+        Identifier id = id("active_self_hud");
+        Registry.register(
+            ApoliRegistries.POWER_FACTORY,
+            id,
+            new PowerFactory<>(
+                id,
+                new SerializableData()
+                    .add("entity_action", ApoliDataTypes.ENTITY_ACTION)
+                    .add("cooldown", SerializableDataTypes.INT, 1)
+                    .add("hud_render", ApoliDataTypes.HUD_RENDER, HudRender.DONT_RENDER)
+                    .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key()),
+                data -> (type, entity) -> {
+                    HudCooldownPower power = new HudCooldownPower(
+                        type,
+                        entity,
+                        data.getInt("cooldown"),
+                        data.get("hud_render"),
+                        data.get("entity_action"));
+                    power.setKey(data.get("key"));
+                    return power;
+                })
+                .allowCondition());
     }
 
     private static void registerGrapple() {

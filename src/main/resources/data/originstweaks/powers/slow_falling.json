@@ -14,8 +14,50 @@
 		"velocity": 0.01,
 		"take_fall_damage": false,
 		"condition": {
-			"type": "origins:power_active",
-			"power": "originstweaks:slow_falling_toggle"
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "originstweaks:slow_falling_toggle"
+				},
+				{
+					"type": "origins:fall_flying",
+					"inverted": true
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:*_feathers",
+					"comparison": ">",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"glide": {
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Avian glide dampening",
+			"attribute": "minecraft:gravity",
+			"value": -0.6,
+			"operation": "multiply_total"
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "originstweaks:slow_falling_toggle"
+				},
+				{
+					"type": "origins:fall_flying"
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:*_feathers",
+					"comparison": ">",
+					"compare_to": 0
+				}
+			]
 		}
 	},
 	"toggle": {
@@ -25,11 +67,11 @@
 			"key": "key.origins.secondary_active"
 		}
 	},
-	"indicator": {
+	"feathers": {
 		"type": "origins:resource",
 		"min": 0,
-		"max": 1,
-		"start_value": 1,
+		"max": 300,
+		"start_value": 300,
 		"hud_render": {
 			"sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png",
 			"bar_index": 23,
@@ -37,6 +79,62 @@
 				"type": "origins:power_active",
 				"power": "originstweaks:slow_falling_toggle"
 			}
+		}
+	},
+	"feather_delay": {
+		"type": "origins:cooldown",
+		"cooldown": 60
+	},
+	"feather_drain": {
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_feathers",
+					"change": -1
+				},
+				{
+					"type": "origins:trigger_cooldown",
+					"power": "*:*_feather_delay"
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "originstweaks:slow_falling_toggle"
+				},
+				{
+					"type": "origins:on_block",
+					"inverted": true
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:*_feathers",
+					"comparison": ">",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"feather_regenerate": {
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:*_feathers",
+			"change": 3
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_feather_delay",
+			"comparison": "==",
+			"compare_to": 0
 		}
 	}
 }

@@ -24,7 +24,7 @@
 		}
 	],
 	"tame": {
-		"type": "origins:active_self",
+		"type": "mms_origins:active_self_hud",
 		"entity_action": {
 			"type": "origins:raycast",
 			"block": false,
