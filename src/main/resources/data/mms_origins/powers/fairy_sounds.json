@@ -6,17 +6,41 @@
     "entity_action": {
       "type": "origins:if_else",
       "condition": {
-        "type": "origins:health",
-        "comparison": ">",
-        "compare_to": 0
+        "type": "origins:origin",
+        "layer": "mms_origins:fairy_wings",
+        "origin": "mms_origins:cirno_wings"
       },
       "if_action": {
-        "type": "origins:play_sound",
-        "sound": "minecraft:entity.vex.hurt"
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:health",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:play_sound",
+          "sound": "mms_origins:flandre.hurt"
+        },
+        "else_action": {
+          "type": "origins:play_sound",
+          "sound": "mms_origins:flandre.death"
+        }
       },
       "else_action": {
-        "type": "origins:play_sound",
-        "sound": "minecraft:entity.vex.death"
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:health",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.vex.hurt"
+        },
+        "else_action": {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.vex.death"
+        }
       }
     },
     "cooldown": 1

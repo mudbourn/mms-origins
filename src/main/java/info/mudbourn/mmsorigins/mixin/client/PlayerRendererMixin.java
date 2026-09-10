@@ -54,6 +54,10 @@ public abstract class PlayerRendererMixin {
             Identifier.fromNamespaceAndPath("originstweaks", "feline_no_collar");
     private static final Identifier FELINE_NOCOLLAR_FUR =
             Identifier.fromNamespaceAndPath("originstweaks", "feline_nocollar");
+    private static final Identifier CIRNO_WINGS =
+            Identifier.fromNamespaceAndPath("mms_origins", "cirno_wings");
+    private static final Identifier FAIRY_CIRNO_FUR =
+            Identifier.fromNamespaceAndPath("mms_origins", "fairy_cirno");
 
     private static Identifier mmsOrigins$originOf(Avatar player) {
         OriginComponent component = ModComponents.ORIGIN.maybeGet(player).orElse(null);
@@ -72,7 +76,20 @@ public abstract class PlayerRendererMixin {
         if ("feline".equals(id.getPath()) && mmsOrigins$hasNoCollar(component)) {
             return FELINE_NOCOLLAR_FUR;
         }
+        if ("fairy".equals(id.getPath()) && mmsOrigins$hasCirnoWings(component)) {
+            return FAIRY_CIRNO_FUR;
+        }
         return id;
+    }
+
+    /** Whether the player picked the Cirno option in the fairy wings layer. */
+    private static boolean mmsOrigins$hasCirnoWings(OriginComponent component) {
+        OriginLayer layer = OriginLayers.getLayer(FAIRY_OPTIONS);
+        if (layer == null || !component.hasOrigin(layer)) {
+            return false;
+        }
+        Origin option = component.getOrigin(layer);
+        return option != null && CIRNO_WINGS.equals(option.getIdentifier());
     }
 
     /** Whether the player picked the collarless option in the feline options layer. */

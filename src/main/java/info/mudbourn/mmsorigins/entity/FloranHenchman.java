@@ -52,6 +52,7 @@ public class FloranHenchman extends Zombie {
     private static final int TAUNT_INTERVAL = 20;
     private static final double TAUNT_RADIUS = 16.0;
     private static final double LEASH_RANGE = 32.0;
+    private static final float DOOR_SOUND_VOLUME = 0.35f;
     private static final Identifier CHARGE_ID =
         Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "henchman_charge");
 
@@ -224,12 +225,20 @@ public class FloranHenchman extends Zombie {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.WOOD_BREAK;
+        return SoundEvents.ZOMBIE_ATTACK_WOODEN_DOOR;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.WOOD_BREAK;
+        return SoundEvents.ZOMBIE_BREAK_WOODEN_DOOR;
+    }
+
+    @Override
+    public void playSound(SoundEvent sound, float volume, float pitch) {
+        if (sound == SoundEvents.ZOMBIE_ATTACK_WOODEN_DOOR || sound == SoundEvents.ZOMBIE_BREAK_WOODEN_DOOR) {
+            volume *= DOOR_SOUND_VOLUME;
+        }
+        super.playSound(sound, volume, pitch);
     }
 
     @Override

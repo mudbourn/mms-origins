@@ -19,6 +19,9 @@ public final class ButterflyWingModels {
     static {
         register("monarch_butterfly");
         register("blue_butterfly");
+        register("pixie_wings");
+        register("slime_wings");
+        register("cirno_wings");
     }
 
     private ButterflyWingModels() {

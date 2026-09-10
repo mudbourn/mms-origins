@@ -9,7 +9,10 @@
     {
       "origins": [
         "mms_origins:monarch_butterfly",
-        "mms_origins:blue_butterfly"
+        "mms_origins:blue_butterfly",
+        "mms_origins:cirno_wings",
+        "mms_origins:pixie_wings",
+        "mms_origins:slime_wings"
       ],
       "condition": {
         "type": "origins:origin",
