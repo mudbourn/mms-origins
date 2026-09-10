@@ -28,6 +28,30 @@
 	"lava_vision": {
 		"type": "origins:lava_vision",
 		"s": 0.0,
-		"v": 6.0
+		"v": 64.0
+	},
+	"heat_stroke_immunity": {
+		"type": "origins:effect_immunity",
+		"effects": [
+			"scorchful:heat_stroke"
+		]
+	},
+	"active_heat_resistance": {
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Blazeborn heat resistance",
+			"attribute": "thermoo:heat_resistance",
+			"value": 10.0,
+			"operation": "addition"
+		}
+	},
+	"environment_heat_resistance": {
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Blazeborn environment heat resistance",
+			"attribute": "thermoo:environment_heat_resistance",
+			"value": 1.0,
+			"operation": "addition"
+		}
 	}
 }

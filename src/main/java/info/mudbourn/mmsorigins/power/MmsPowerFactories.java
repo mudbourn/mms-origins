@@ -197,7 +197,9 @@ public final class MmsPowerFactories {
                         SerializableDataType.enumValue(ItemUseAnimation.class),
                         ItemUseAnimation.EAT)
                     .add("effects", SerializableDataTypes.STATUS_EFFECT_INSTANCES, List.of())
-                    .add("set_on_fire_seconds", SerializableDataTypes.FLOAT, 0.0f),
+                    .add("set_on_fire_seconds", SerializableDataTypes.FLOAT, 0.0f)
+                    .add("loop_consume_effects", SerializableDataTypes.BOOLEAN, true)
+                    .add("finish_sound", SerializableDataTypes.SOUND_EVENT, null),
                 data -> (type, entity) -> {
                     FoodProperties food = new FoodProperties(
                         data.getInt("nutrition"),
@@ -219,7 +221,9 @@ public final class MmsPowerFactories {
                         data.get("item_condition"),
                         consumable,
                         food,
-                        data.getFloat("set_on_fire_seconds"));
+                        data.getFloat("set_on_fire_seconds"),
+                        data.getBoolean("loop_consume_effects"),
+                        data.get("finish_sound"));
                 })
                 .allowCondition());
     }

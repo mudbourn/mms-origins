@@ -6,17 +6,42 @@
     "entity_action": {
       "type": "origins:if_else",
       "condition": {
-        "type": "origins:health",
-        "comparison": ">",
-        "compare_to": 0
+        "type": "origins:resource",
+        "resource": "mms_origins:zombie_meter",
+        "comparison": ">=",
+        "compare_to": 600
       },
       "if_action": {
-        "type": "origins:play_sound",
-        "sound": "minecraft:entity.piglin.hurt"
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:health",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.zombified_piglin.hurt"
+        },
+        "else_action": {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.zombified_piglin.death"
+        }
       },
       "else_action": {
-        "type": "origins:play_sound",
-        "sound": "minecraft:entity.piglin.death"
+        "type": "origins:if_else",
+        "condition": {
+          "type": "origins:health",
+          "comparison": ">",
+          "compare_to": 0
+        },
+        "if_action": {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.piglin.hurt"
+        },
+        "else_action": {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.piglin.death"
+        }
       }
     },
     "cooldown": 1

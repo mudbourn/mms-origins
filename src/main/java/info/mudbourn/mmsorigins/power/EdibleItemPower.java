@@ -6,6 +6,7 @@ import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.factory.condition.ConditionFactory;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
@@ -32,6 +33,8 @@ public final class EdibleItemPower extends Power {
     private final Consumable consumable;
     private final FoodProperties food;
     private final float fireSeconds;
+    private final boolean loopConsumeEffects;
+    private final SoundEvent finishSound;
 
     public EdibleItemPower(
             PowerType<?> type,
@@ -39,12 +42,16 @@ public final class EdibleItemPower extends Power {
             ConditionFactory<ItemStack>.Instance itemCondition,
             Consumable consumable,
             FoodProperties food,
-            float fireSeconds) {
+            float fireSeconds,
+            boolean loopConsumeEffects,
+            SoundEvent finishSound) {
         super(type, entity);
         this.itemCondition = itemCondition;
         this.consumable = consumable;
         this.food = food;
         this.fireSeconds = fireSeconds;
+        this.loopConsumeEffects = loopConsumeEffects;
+        this.finishSound = finishSound;
         BY_TYPE.put(type.getIdentifier(), this);
     }
 
@@ -91,5 +98,15 @@ public final class EdibleItemPower extends Power {
     /** @return how many seconds to set the eater alight on consuming, or zero to leave them unlit. */
     public float getFireSeconds() {
         return fireSeconds;
+    }
+
+    /** @return whether to repeat the chewing sound and particles mid-bite, or only emit once on completion. */
+    public boolean loopsConsumeEffects() {
+        return loopConsumeEffects;
+    }
+
+    /** @return a one-shot sound played when the bite completes, like a food burp, or {@code null} for none. */
+    public SoundEvent getFinishSound() {
+        return finishSound;
     }
 }

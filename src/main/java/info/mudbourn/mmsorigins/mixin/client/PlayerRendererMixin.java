@@ -57,6 +57,16 @@ public abstract class PlayerRendererMixin {
                 && meter.getValue() >= MmsOriginsPowers.ZOMBIE_SHAKE_THRESHOLD;
     }
 
+    /** Whether the player's zombification has reached its cap and the rot has set in. */
+    private static boolean mmsOrigins$zombified(Avatar player) {
+        Power power = MmsOriginsPowers.ZOMBIE_METER.get(player);
+        return power instanceof VariableIntPower meter && meter.getValue() >= ZOMBIE_METER_CAP;
+    }
+
+    private static final Identifier PIGLIN_ZOMBIE_FUR =
+            Identifier.fromNamespaceAndPath("mms_origins", "piglin_zombie");
+    private static final int ZOMBIE_METER_CAP = 600;
+
     private static final Identifier FAIRY_OPTIONS =
             Identifier.fromNamespaceAndPath("mms_origins", "fairy_wings");
 
@@ -87,6 +97,9 @@ public abstract class PlayerRendererMixin {
             return null;
         }
         Identifier id = origin.getIdentifier();
+        if ("piglin".equals(id.getPath()) && mmsOrigins$zombified(player)) {
+            return PIGLIN_ZOMBIE_FUR;
+        }
         if ("feline".equals(id.getPath()) && mmsOrigins$hasNoCollar(component)) {
             return FELINE_NOCOLLAR_FUR;
         }

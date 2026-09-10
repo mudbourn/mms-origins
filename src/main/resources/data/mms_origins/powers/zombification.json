@@ -88,6 +88,13 @@
             "tag": "mms_origins:zombie_diet"
           },
           "inverted": true
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "originstweaks:golden_food"
+          },
+          "inverted": true
         }
       ]
     },
@@ -96,6 +103,69 @@
       "resource": "mms_origins:zombie_meter",
       "comparison": ">=",
       "compare_to": 600
+    }
+  },
+  "zombify_toll": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.piglin.death"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "mms_origins:zombify_sounded",
+          "change": 1,
+          "operation": "set"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:zombie_meter",
+          "comparison": ">=",
+          "compare_to": 600
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:zombify_sounded",
+          "comparison": "==",
+          "compare_to": 0
+        }
+      ]
+    }
+  },
+  "zombify_toll_reset": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:zombify_sounded",
+      "change": 0,
+      "operation": "set"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:zombie_meter",
+          "comparison": "<",
+          "compare_to": 600
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:zombify_sounded",
+          "comparison": "==",
+          "compare_to": 1
+        }
+      ]
     }
   },
   "cure": {
@@ -108,10 +178,29 @@
       }
     },
     "entity_action": {
-      "type": "origins:change_resource",
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:play_sound",
+          "sound": "minecraft:entity.zombie_villager.cure"
+        },
+        {
+          "type": "origins:delay",
+          "ticks": 120,
+          "action": {
+            "type": "origins:change_resource",
+            "resource": "mms_origins:zombie_meter",
+            "change": 0,
+            "operation": "set"
+          }
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:resource",
       "resource": "mms_origins:zombie_meter",
-      "change": 0,
-      "operation": "set"
+      "comparison": ">=",
+      "compare_to": 600
     }
   },
   "cure_on_death": {

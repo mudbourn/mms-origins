@@ -7,6 +7,7 @@
     }
   },
   "consume_sound": "minecraft:entity.generic.eat",
+  "finish_sound": "minecraft:entity.player.burp",
   "nutrition": 2,
   "saturation": 0.2,
   "eat_seconds": 1.6,

@@ -119,6 +119,12 @@ public final class FurModels {
                 "mms_origins:textures/fur/piglin.png",
                 null,
                 null);
+        register("mms_origins", "piglin_zombie",
+                "mms_origins:fur/geo/piglin.geo.json",
+                new PiglinEarAnimator(),
+                "mms_origins:textures/fur/piglin_zombie.png",
+                null,
+                null);
         register("mms_origins", "truffle",
                 null,
                 null,
