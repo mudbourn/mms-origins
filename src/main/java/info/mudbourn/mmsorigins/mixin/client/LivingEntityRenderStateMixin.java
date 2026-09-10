@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins.mixin.client;
 
+import info.mudbourn.mmsorigins.client.ZombieShakeState;
 import info.mudbourn.mmsorigins.client.fur.FurState;
 import info.mudbourn.mmsorigins.client.wings.WingState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
@@ -8,16 +9,20 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 /**
- * Storage for {@link FurState} and {@link WingState} on every living render state.
+ * Storage for {@link FurState}, {@link WingState} and {@link ZombieShakeState} on
+ * every living render state.
  *
  * <p>Stamped on {@code PlayerRenderer} extraction and cleared on every other entity's,
  * since render states are pooled and reused.
  */
 @Mixin(LivingEntityRenderState.class)
-public abstract class LivingEntityRenderStateMixin implements FurState, WingState {
+public abstract class LivingEntityRenderStateMixin implements FurState, WingState, ZombieShakeState {
 
     @Unique
     private Identifier mmsOrigins$furOrigin;
+
+    @Unique
+    private boolean mmsOrigins$zombieShaking;
 
     @Unique
     private Identifier mmsOrigins$wingOption;
@@ -53,5 +58,15 @@ public abstract class LivingEntityRenderStateMixin implements FurState, WingStat
     @Override
     public void mmsOrigins$setWingFlapDegrees(float degrees) {
         this.mmsOrigins$wingFlapDegrees = degrees;
+    }
+
+    @Override
+    public boolean mmsOrigins$zombieShaking() {
+        return this.mmsOrigins$zombieShaking;
+    }
+
+    @Override
+    public void mmsOrigins$setZombieShaking(boolean shaking) {
+        this.mmsOrigins$zombieShaking = shaking;
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -23,7 +24,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Kinsmen: a piglin pays out its finer stock to one of its own, and takes gold
@@ -32,8 +36,9 @@ import java.util.List;
  * <p>Vanilla rolls {@code minecraft:gameplay/piglin_bartering} for every ingot
  * barter and never trades for a gold block at all. When a bartering piglin has a
  * Kinsmen player within reach, its ingot response is rolled from the mod's own
- * barter table, and a gold block it finishes admiring pays out from that same
- * table instead of being kept. The vanilla table and the piglin's dealings with
+ * barter table, and a gold block it finishes admiring pays out three distinct
+ * goods from that same table instead of being kept, the block being worth far
+ * more than a single ingot. The vanilla table and the piglin's dealings with
  * everyone else are left untouched.
  */
 @Mixin(PiglinAi.class)
@@ -41,6 +46,12 @@ public class PiglinBarterMixin {
 
     @Unique
     private static final double MMS_KIN_RANGE = 16.0;
+
+    @Unique
+    private static final int MMS_BLOCK_DROP_COUNT = 3;
+
+    @Unique
+    private static final int MMS_BLOCK_ROLL_ATTEMPTS = 32;
 
     @Unique
     private static final ResourceKey<LootTable> MMS_KIN_BARTER =
@@ -74,7 +85,7 @@ public class PiglinBarterMixin {
             return;
         }
         piglin.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
-        for (ItemStack loot : mmsOrigins$rollKinBarter(level, piglin)) {
+        for (ItemStack loot : mmsOrigins$rollDistinctKinBarter(level, piglin, MMS_BLOCK_DROP_COUNT)) {
             piglin.spawnAtLocation(level, loot);
         }
         ci.cancel();
@@ -87,5 +98,23 @@ public class PiglinBarterMixin {
             .withParameter(LootContextParams.THIS_ENTITY, piglin)
             .create(LootContextParamSets.PIGLIN_BARTER);
         return table.getRandomItems(params);
+    }
+
+    // Rolls the barter table repeatedly, keeping only fresh item types, so a gold block pays out distinct goods.
+    @Unique
+    private static List<ItemStack> mmsOrigins$rollDistinctKinBarter(ServerLevel level, Piglin piglin, int wanted) {
+        List<ItemStack> picks = new ArrayList<>();
+        Set<Item> seen = new HashSet<>();
+        for (int attempt = 0; attempt < MMS_BLOCK_ROLL_ATTEMPTS && picks.size() < wanted; attempt++) {
+            for (ItemStack loot : mmsOrigins$rollKinBarter(level, piglin)) {
+                if (picks.size() >= wanted) {
+                    break;
+                }
+                if (!loot.isEmpty() && seen.add(loot.getItem())) {
+                    picks.add(loot);
+                }
+            }
+        }
+        return picks;
     }
 }

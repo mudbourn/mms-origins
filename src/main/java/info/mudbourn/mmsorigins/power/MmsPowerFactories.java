@@ -24,9 +24,12 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
+import net.minecraft.world.item.consume_effects.ConsumeEffect;
 import java.util.List;
 
 /**
@@ -192,19 +195,31 @@ public final class MmsPowerFactories {
                     .add("eat_seconds", SerializableDataTypes.FLOAT, 1.6f)
                     .add("use_action",
                         SerializableDataType.enumValue(ItemUseAnimation.class),
-                        ItemUseAnimation.EAT),
+                        ItemUseAnimation.EAT)
+                    .add("effects", SerializableDataTypes.STATUS_EFFECT_INSTANCES, List.of())
+                    .add("set_on_fire_seconds", SerializableDataTypes.FLOAT, 0.0f),
                 data -> (type, entity) -> {
                     FoodProperties food = new FoodProperties(
                         data.getInt("nutrition"),
                         data.getFloat("saturation"),
                         false);
+                    List<MobEffectInstance> effects = data.get("effects");
+                    List<ConsumeEffect> onConsume = effects.isEmpty()
+                        ? List.of()
+                        : List.of(new ApplyStatusEffectsConsumeEffect(effects));
                     Consumable consumable = new Consumable(
                         data.getFloat("eat_seconds"),
                         data.get("use_action"),
                         Holder.direct(data.get("consume_sound")),
                         true,
-                        List.of());
-                    return new EdibleItemPower(type, entity, data.get("item_condition"), consumable, food);
+                        onConsume);
+                    return new EdibleItemPower(
+                        type,
+                        entity,
+                        data.get("item_condition"),
+                        consumable,
+                        food,
+                        data.getFloat("set_on_fire_seconds"));
                 })
                 .allowCondition());
     }

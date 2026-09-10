@@ -1,0 +1,28 @@
+{
+  "type": "origins:effect_immunity",
+  "effects": [
+    "scorchful:heat_stroke"
+  ],
+  "condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:dimension",
+        "dimension": "minecraft:the_nether"
+      },
+      {
+        "type": "origins:exposed_to_sun",
+        "inverted": true
+      }
+    ]
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.nether_heat_immunity.0"
+      }
+    }
+  ]
+}

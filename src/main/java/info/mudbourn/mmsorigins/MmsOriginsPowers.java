@@ -45,6 +45,16 @@ public final class MmsOriginsPowers {
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "zombified"));
 
     /**
+     * The overworld zombification meter. Read client-side by the render mixins so
+     * a piglin whose sickness has passed the halfway mark visibly quivers.
+     */
+    public static final PowerType<?> ZOMBIE_METER =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "zombie_meter"));
+
+    /** Half of the zombie meter's cap, past which the shakes set in. */
+    public static final int ZOMBIE_SHAKE_THRESHOLD = 300;
+
+    /**
      * Piglin trade shunning. Villagers refuse to open trade with the bearer, a
      * merchant-interaction call no Apoli factory reaches, so
      * {@code VillagerBeastlyRefusalMixin} cancels the interaction unless a carved

@@ -2,6 +2,9 @@
   "powers": [
     "mms_origins:nether_born",
     "mms_origins:fire_resilience",
+    "mms_origins:nether_heat_immunity",
+    "mms_origins:nether_forage",
+    "mms_origins:shroomlight_snack",
     "mms_origins:sun_shy",
     "mms_origins:gilded_bearing",
     "mms_origins:kinsmen",

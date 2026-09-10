@@ -1,8 +1,12 @@
 package info.mudbourn.mmsorigins.mixin.client;
 
+import info.mudbourn.mmsorigins.MmsOriginsPowers;
+import info.mudbourn.mmsorigins.client.ZombieShakeState;
 import info.mudbourn.mmsorigins.client.fur.FurState;
 import info.mudbourn.mmsorigins.client.wings.ButterflyFlap;
 import info.mudbourn.mmsorigins.client.wings.WingState;
+import io.github.apace100.apoli.power.Power;
+import io.github.apace100.apoli.power.VariableIntPower;
 import net.minecraft.world.entity.player.Player;
 import io.github.apace100.origins.component.OriginComponent;
 import io.github.apace100.origins.origin.Origin;
@@ -39,10 +43,18 @@ public abstract class PlayerRendererMixin {
                                         CallbackInfo ci) {
         ((FurState) state).mmsOrigins$setFurOrigin(mmsOrigins$originOf(player));
         ((WingState) state).mmsOrigins$setWingOption(mmsOrigins$wingOf(player));
+        ((ZombieShakeState) state).mmsOrigins$setZombieShaking(mmsOrigins$zombieShaking(player));
         if (player instanceof Player concrete) {
             ((WingState) state).mmsOrigins$setWingFlapDegrees(
                     ButterflyFlap.degreesFor(concrete, partialTick));
         }
+    }
+
+    /** Whether the player's zombification has crept past the halfway mark. */
+    private static boolean mmsOrigins$zombieShaking(Avatar player) {
+        Power power = MmsOriginsPowers.ZOMBIE_METER.get(player);
+        return power instanceof VariableIntPower meter
+                && meter.getValue() >= MmsOriginsPowers.ZOMBIE_SHAKE_THRESHOLD;
     }
 
     private static final Identifier FAIRY_OPTIONS =

@@ -31,17 +31,20 @@ public final class EdibleItemPower extends Power {
     private final ConditionFactory<ItemStack>.Instance itemCondition;
     private final Consumable consumable;
     private final FoodProperties food;
+    private final float fireSeconds;
 
     public EdibleItemPower(
             PowerType<?> type,
             LivingEntity entity,
             ConditionFactory<ItemStack>.Instance itemCondition,
             Consumable consumable,
-            FoodProperties food) {
+            FoodProperties food,
+            float fireSeconds) {
         super(type, entity);
         this.itemCondition = itemCondition;
         this.consumable = consumable;
         this.food = food;
+        this.fireSeconds = fireSeconds;
         BY_TYPE.put(type.getIdentifier(), this);
     }
 
@@ -83,5 +86,10 @@ public final class EdibleItemPower extends Power {
 
     public FoodProperties getFood() {
         return food;
+    }
+
+    /** @return how many seconds to set the eater alight on consuming, or zero to leave them unlit. */
+    public float getFireSeconds() {
+        return fireSeconds;
     }
 }

@@ -92,15 +92,15 @@
           "resource": "mms_origins:combat_spores_charge",
           "comparison": ">=",
           "compare_to": 20
-        },
-        {
-          "type": "origins:target_condition",
-          "condition": {
-            "type": "mms_origins:caustic_marked",
-            "inverted": true
-          }
         }
       ]
+    },
+    "bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "mms_origins:caustic_marked",
+        "inverted": true
+      }
     },
     "bientity_action": {
       "type": "origins:and",

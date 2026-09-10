@@ -75,9 +75,15 @@
       }
     }
   },
-  "haste": {
-    "type": "origins:action_over_time",
-    "interval": 10,
+  "quick_strikes": {
+    "type": "origins:conditioned_attribute",
+    "tick_rate": 5,
+    "modifier": {
+      "name": "Drifting spores attack speed bonus",
+      "attribute": "minecraft:generic.attack_speed",
+      "value": 0.4,
+      "operation": "multiply_base"
+    },
     "condition": {
       "type": "origins:and",
       "conditions": [
@@ -97,16 +103,6 @@
           "compare_to": 0
         }
       ]
-    },
-    "entity_action": {
-      "type": "origins:apply_effect",
-      "effect": {
-        "effect": "minecraft:haste",
-        "duration": 20,
-        "amplifier": 1,
-        "show_icon": false,
-        "show_particles": false
-      }
     }
   },
   "move_drain": {

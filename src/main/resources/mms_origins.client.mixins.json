@@ -9,7 +9,8 @@
     "LocalPlayerCrouchMixin",
     "PiglinBruteAdmirePoseMixin",
     "PlayerRendererMixin",
-    "WingsElytraTextureMixin"
+    "WingsElytraTextureMixin",
+    "ZombieShakeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

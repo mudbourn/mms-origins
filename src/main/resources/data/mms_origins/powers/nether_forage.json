@@ -1,0 +1,23 @@
+{
+  "type": "mms_origins:edible_item",
+  "item_condition": {
+    "type": "origins:ingredient",
+    "ingredient": {
+      "tag": "mms_origins:piglin_forage"
+    }
+  },
+  "consume_sound": "minecraft:entity.generic.eat",
+  "nutrition": 2,
+  "saturation": 0.2,
+  "eat_seconds": 1.6,
+  "use_action": "eat",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.nether_forage.0"
+      }
+    }
+  ]
+}

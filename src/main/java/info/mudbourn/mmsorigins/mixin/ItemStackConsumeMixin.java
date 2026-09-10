@@ -66,6 +66,10 @@ public class ItemStackConsumeMixin {
         if (!level.isClientSide() && entity instanceof Player player) {
             player.getFoodData().eat(power.getFood().nutrition(), power.getFood().saturation());
         }
+        // Blazeborn stoke themselves on the fuel; the flame is thematic since they shrug off burning.
+        if (power.getFireSeconds() > 0.0f) {
+            entity.igniteForSeconds(power.getFireSeconds());
+        }
         cir.setReturnValue(power.getConsumable().onConsume(level, entity, self));
     }
 }
