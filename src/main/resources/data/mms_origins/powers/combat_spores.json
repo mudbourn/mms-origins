@@ -92,6 +92,13 @@
           "resource": "mms_origins:combat_spores_charge",
           "comparison": ">=",
           "compare_to": 20
+        },
+        {
+          "type": "origins:target_condition",
+          "condition": {
+            "type": "mms_origins:caustic_marked",
+            "inverted": true
+          }
         }
       ]
     },
@@ -128,12 +135,11 @@
             "type": "origins:and",
             "actions": [
               {
-                "type": "origins:execute_command",
-                "command": "effect give @s minecraft:poison 2 1"
+                "type": "mms_origins:caustic_spores"
               },
               {
                 "type": "origins:damage",
-                "damage_type": "mms_origins:caustic_spores",
+                "damage_type": "minecraft:magic",
                 "amount": 2
               }
             ]

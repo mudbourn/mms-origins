@@ -58,6 +58,7 @@
   "power.mms_origins.spore_shift.description": "You always drift a little faster. Swap between drifting spores for quicker attacks and acrid spores to poison your hits; each spends a reserve that recovers when unused.",
   "badge.mms_origins.spore_shift.0": "Press [Primary] to switch between drifting and acrid spores.",
   "badge.mms_origins.spore_shift.1": "Press [Secondary] to stow both spores and stop spending the reserve.",
+  "effect.mms_origins.caustic_spores": "Caustic Spores",
   "power.mms_origins.combat_spores.name": "Acrid Spores",
   "power.mms_origins.combat_spores.description": "Acrid spores cling to every strike while these are drawn.",
   "badge.mms_origins.combat_spores.0": "Attacks deal extra damage and poison the target, spending the reserve per hit.",

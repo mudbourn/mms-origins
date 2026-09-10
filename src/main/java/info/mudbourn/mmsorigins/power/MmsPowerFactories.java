@@ -1,8 +1,10 @@
 package info.mudbourn.mmsorigins.power;
 
 import info.mudbourn.mmsorigins.MmsOrigins;
+import info.mudbourn.mmsorigins.power.action.CausticSporesAction;
 import info.mudbourn.mmsorigins.power.action.RandomTeleportAction;
 import info.mudbourn.mmsorigins.power.action.SummonHenchmenAction;
+import info.mudbourn.mmsorigins.power.condition.CausticMarkedCondition;
 import info.mudbourn.mmsorigins.power.condition.HeightAboveGroundCondition;
 import info.mudbourn.mmsorigins.power.condition.HenchmenCountCondition;
 import io.github.apace100.apoli.data.ApoliDataTypes;
@@ -46,6 +48,30 @@ public final class MmsPowerFactories {
         registerFairyFlight();
         registerSummonHenchmen();
         registerHenchmenCount();
+        registerCausticSpores();
+        registerCausticMarked();
+    }
+
+    private static void registerCausticSpores() {
+        Identifier id = id("caustic_spores");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            id,
+            new ActionFactory<Entity>(
+                id,
+                CausticSporesAction.data(),
+                CausticSporesAction::action));
+    }
+
+    private static void registerCausticMarked() {
+        Identifier id = id("caustic_marked");
+        Registry.register(
+            ApoliRegistries.ENTITY_CONDITION,
+            id,
+            new ConditionFactory<Entity>(
+                id,
+                CausticMarkedCondition.data(),
+                CausticMarkedCondition::condition));
     }
 
     private static void registerHenchmenCount() {
