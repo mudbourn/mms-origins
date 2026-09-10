@@ -25,6 +25,7 @@
     "ReplaceLootTablePowerGuardMixin",
     "ServerPlayerGameModeMixin",
     "VillagerBeastlyRefusalMixin",
+    "VillagerCharmMixin",
     "VillagerSwindleMixin"
   ],
   "injectors": {

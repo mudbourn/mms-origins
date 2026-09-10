@@ -53,6 +53,15 @@ public final class MmsOriginsPowers {
     public static final PowerType<?> BEASTLY =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "beastly"));
 
+    /**
+     * Fairy charm. Villagers, taken with the fairy, discount their goods. The
+     * mirror of {@link #LANGUAGE_BARRIER}: no Apoli factory reaches a merchant
+     * offer, so the power is a marker and {@code VillagerCharmMixin} does the
+     * pricing.
+     */
+    public static final PowerType<?> FAIRY_CHARM =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "fairy_charm"));
+
     private MmsOriginsPowers() {
     }
 }

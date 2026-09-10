@@ -15,4 +15,8 @@ public interface WingState {
     Identifier mmsOrigins$wingOption();
 
     void mmsOrigins$setWingOption(Identifier option);
+
+    float mmsOrigins$wingFlapDegrees();
+
+    void mmsOrigins$setWingFlapDegrees(float degrees);
 }

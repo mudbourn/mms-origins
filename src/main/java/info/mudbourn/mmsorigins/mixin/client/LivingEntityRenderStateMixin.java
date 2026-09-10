@@ -22,6 +22,9 @@ public abstract class LivingEntityRenderStateMixin implements FurState, WingStat
     @Unique
     private Identifier mmsOrigins$wingOption;
 
+    @Unique
+    private float mmsOrigins$wingFlapDegrees;
+
     @Override
     public Identifier mmsOrigins$furOrigin() {
         return this.mmsOrigins$furOrigin;
@@ -40,5 +43,15 @@ public abstract class LivingEntityRenderStateMixin implements FurState, WingStat
     @Override
     public void mmsOrigins$setWingOption(Identifier option) {
         this.mmsOrigins$wingOption = option;
+    }
+
+    @Override
+    public float mmsOrigins$wingFlapDegrees() {
+        return this.mmsOrigins$wingFlapDegrees;
+    }
+
+    @Override
+    public void mmsOrigins$setWingFlapDegrees(float degrees) {
+        this.mmsOrigins$wingFlapDegrees = degrees;
     }
 }

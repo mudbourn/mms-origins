@@ -1,7 +1,9 @@
 package info.mudbourn.mmsorigins.mixin.client;
 
 import info.mudbourn.mmsorigins.client.fur.FurState;
+import info.mudbourn.mmsorigins.client.wings.ButterflyFlap;
 import info.mudbourn.mmsorigins.client.wings.WingState;
+import net.minecraft.world.entity.player.Player;
 import io.github.apace100.origins.component.OriginComponent;
 import io.github.apace100.origins.origin.Origin;
 import io.github.apace100.origins.origin.OriginLayer;
@@ -35,7 +37,14 @@ public abstract class PlayerRendererMixin {
                                         CallbackInfo ci) {
         ((FurState) state).mmsOrigins$setFurOrigin(mmsOrigins$originOf(player));
         ((WingState) state).mmsOrigins$setWingOption(mmsOrigins$wingOf(player));
+        if (player instanceof Player concrete) {
+            ((WingState) state).mmsOrigins$setWingFlapDegrees(
+                    ButterflyFlap.degreesFor(concrete, partialTick));
+        }
     }
+
+    private static final Identifier FAIRY_OPTIONS =
+            Identifier.fromNamespaceAndPath("mms_origins", "fairy_wings");
 
     private static final Identifier ELYTRIAN_OPTIONS =
             Identifier.fromNamespaceAndPath("originstweaks", "elytrian_options");
@@ -87,10 +96,18 @@ public abstract class PlayerRendererMixin {
             return null;
         }
         Origin origin = component.getOrigin(base);
-        if (origin == null || !"elytrian".equals(origin.getIdentifier().getPath())) {
+        if (origin == null) {
             return null;
         }
-        OriginLayer options = OriginLayers.getLayer(ELYTRIAN_OPTIONS);
+        Identifier optionsLayer = switch (origin.getIdentifier().getPath()) {
+            case "elytrian" -> ELYTRIAN_OPTIONS;
+            case "fairy" -> FAIRY_OPTIONS;
+            default -> null;
+        };
+        if (optionsLayer == null) {
+            return null;
+        }
+        OriginLayer options = OriginLayers.getLayer(optionsLayer);
         if (options == null || !component.hasOrigin(options)) {
             return null;
         }
