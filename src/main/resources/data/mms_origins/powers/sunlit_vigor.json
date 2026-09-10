@@ -6,7 +6,17 @@
     "operation": "multiply_base"
   },
   "condition": {
-    "type": "origins:exposed_to_sun"
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:exposed_to_sun"
+      },
+      {
+        "type": "origins:power_active",
+        "power": "mms_origins:sunlit_fury_toggle",
+        "inverted": true
+      }
+    ]
   },
   "badges": [
     {

@@ -20,7 +20,7 @@
 		"type": "origins:action_on_hit",
 		"bientity_action": {
 			"type": "origins:chance",
-			"chance": 0.25,
+			"chance": 0.2,
 			"action": {
 				"type": "origins:if_else_list",
 				"actions": [

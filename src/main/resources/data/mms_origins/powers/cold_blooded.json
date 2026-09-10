@@ -76,6 +76,41 @@
       "value": 1.5
     }
   },
+  "dash_lock": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 10,
+    "start_value": 0
+  },
+  "dash_lock_tick": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:cold_blooded_dash_lock",
+      "operation": "add",
+      "change": -1
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "mms_origins:cold_blooded_dash_lock",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
+  "jump_lock": {
+    "type": "origins:modify_jump",
+    "modifier": {
+      "operation": "multiply_total",
+      "value": -1
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "mms_origins:cold_blooded_dash_lock",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
   "vision": {
     "type": "origins:toggle_night_vision",
     "strength": 1.0,
@@ -95,14 +130,10 @@
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:apply_effect",
-          "effect": {
-            "effect": "minecraft:jump_boost",
-            "duration": 10,
-            "amplifier": 249,
-            "show_icon": false,
-            "show_particles": false
-          }
+          "type": "origins:change_resource",
+          "resource": "mms_origins:cold_blooded_dash_lock",
+          "operation": "set",
+          "change": 10
         },
         {
           "type": "origins:if_else_list",

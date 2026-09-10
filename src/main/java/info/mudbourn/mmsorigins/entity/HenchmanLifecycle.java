@@ -15,10 +15,10 @@ import net.minecraft.server.level.ServerPlayer;
 /**
  * Ties a floran's henchmen to the summoner's presence and paces their return.
  *
- * <p>The whole pack vanishes and the charge bar refills the moment the summoner
- * dies or leaves the game, so a fresh spawn never inherits a stranded pack. A
- * henchman killed in the field instead refunds its charge only after a delay, so
- * a summoner cannot replace one the instant it falls.
+ * <p>The whole pack vanishes and the charge bar empties the moment the summoner
+ * dies or leaves the game, so a fresh spawn never inherits a stranded pack nor
+ * stored sunlight. A henchman killed in the field instead refunds its charge only
+ * after a delay, so a summoner cannot replace one the instant it falls.
  */
 public final class HenchmanLifecycle {
 

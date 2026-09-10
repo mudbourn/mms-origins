@@ -19,7 +19,7 @@
     "type": "origins:resource",
     "resource": "mms_origins:sun_power",
     "comparison": ">=",
-    "compare_to": 2
+    "compare_to": 20
   },
   "cooldown": 20,
   "key": {

@@ -4,6 +4,7 @@ import info.mudbourn.mmsorigins.MmsOrigins;
 import info.mudbourn.mmsorigins.power.action.RandomTeleportAction;
 import info.mudbourn.mmsorigins.power.action.SummonHenchmenAction;
 import info.mudbourn.mmsorigins.power.condition.HeightAboveGroundCondition;
+import info.mudbourn.mmsorigins.power.condition.HenchmenCountCondition;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -44,6 +45,18 @@ public final class MmsPowerFactories {
         registerHeightAboveGround();
         registerFairyFlight();
         registerSummonHenchmen();
+        registerHenchmenCount();
+    }
+
+    private static void registerHenchmenCount() {
+        Identifier id = id("henchmen_count");
+        Registry.register(
+            ApoliRegistries.ENTITY_CONDITION,
+            id,
+            new ConditionFactory<Entity>(
+                id,
+                HenchmenCountCondition.data(),
+                HenchmenCountCondition::condition));
     }
 
     private static void registerSummonHenchmen() {

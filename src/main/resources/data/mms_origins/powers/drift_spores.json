@@ -48,6 +48,26 @@
       "attribute": "minecraft:generic.movement_speed",
       "value": 0.3,
       "operation": "multiply_base"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "mms_origins:spore_shift_enable"
+        },
+        {
+          "type": "origins:power_active",
+          "power": "mms_origins:spore_shift_mode",
+          "inverted": true
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:drift_spores_charge",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
     }
   },
   "haste": {

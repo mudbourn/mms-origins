@@ -3,7 +3,7 @@
   "hidden": true,
   "bask": {
     "type": "origins:action_over_time",
-    "interval": 120,
+    "interval": 12,
     "entity_action": {
       "type": "origins:change_resource",
       "resource": "mms_origins:sun_power",
@@ -11,22 +11,42 @@
       "change": 1
     },
     "condition": {
-      "type": "origins:exposed_to_sun"
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:exposed_to_sun"
+        },
+        {
+          "type": "origins:power_active",
+          "power": "mms_origins:sunlit_fury_toggle",
+          "inverted": true
+        }
+      ]
     }
   },
   "drink": {
     "type": "origins:action_on_item_use",
     "condition": {
-      "type": "origins:resource",
-      "resource": "mms_origins:sun_power",
-      "comparison": "<",
-      "compare_to": 3
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:sun_power",
+          "comparison": "<",
+          "compare_to": 30
+        },
+        {
+          "type": "origins:power_active",
+          "power": "mms_origins:sunlit_fury_toggle",
+          "inverted": true
+        }
+      ]
     },
     "entity_action": {
       "type": "origins:change_resource",
       "resource": "mms_origins:sun_power",
       "operation": "add",
-      "change": 1
+      "change": 10
     },
     "item_condition": {
       "type": "origins:ingredient",
