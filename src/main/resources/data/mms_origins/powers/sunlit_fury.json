@@ -1,10 +1,84 @@
 {
   "type": "origins:multiple",
-  "toggle": {
-    "type": "origins:toggle",
+  "active": {
+    "type": "origins:resource",
+    "hidden": true,
+    "min": 0,
+    "max": 1,
+    "start_value": 0
+  },
+  "activate": {
+    "type": "origins:active_self",
+    "cooldown": 3,
+    "hud_render": {
+      "should_render": false
+    },
     "key": {
-      "key": "key.origins.primary_active",
-      "continuous": false
+      "key": "key.origins.primary_active"
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "mms_origins:sun_power",
+      "comparison": ">",
+      "compare_to": 0
+    },
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "resource": "mms_origins:sunlit_fury_active",
+        "comparison": "==",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:change_resource",
+            "resource": "mms_origins:sunlit_fury_active",
+            "operation": "set",
+            "change": 1
+          },
+          {
+            "type": "origins:play_sound",
+            "category": "players",
+            "sound": "minecraft:item.bone_meal.use"
+          }
+        ]
+      },
+      "else_action": {
+        "type": "origins:change_resource",
+        "resource": "mms_origins:sunlit_fury_active",
+        "operation": "set",
+        "change": 0
+      }
+    }
+  },
+  "auto_off": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:sunlit_fury_active",
+      "operation": "set",
+      "change": 0
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:sunlit_fury_active",
+          "comparison": "==",
+          "compare_to": 1
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:sun_power",
+          "comparison": "==",
+          "compare_to": 0
+        }
+      ]
     }
   },
   "strength": {
@@ -13,8 +87,10 @@
       "type": "origins:and",
       "conditions": [
         {
-          "type": "origins:power_active",
-          "power": "*:*_toggle"
+          "type": "origins:resource",
+          "resource": "mms_origins:sunlit_fury_active",
+          "comparison": "==",
+          "compare_to": 1
         },
         {
           "type": "origins:resource",
@@ -26,20 +102,8 @@
     },
     "modifier": {
       "name": "Sunlit fury",
-      "value": 0.5,
-      "operation": "multiply_base"
-    }
-  },
-  "flare": {
-    "type": "origins:action_on_callback",
-    "condition": {
-      "type": "origins:power_active",
-      "power": "*:*_toggle"
-    },
-    "entity_action_gained": {
-      "type": "origins:play_sound",
-      "category": "players",
-      "sound": "minecraft:item.bone_meal.use"
+      "value": 3,
+      "operation": "addition"
     }
   },
   "drain_solo": {
@@ -55,8 +119,10 @@
       "type": "origins:and",
       "conditions": [
         {
-          "type": "origins:power_active",
-          "power": "*:*_toggle"
+          "type": "origins:resource",
+          "resource": "mms_origins:sunlit_fury_active",
+          "comparison": "==",
+          "compare_to": 1
         },
         {
           "type": "origins:resource",
@@ -85,8 +151,10 @@
       "type": "origins:and",
       "conditions": [
         {
-          "type": "origins:power_active",
-          "power": "*:*_toggle"
+          "type": "origins:resource",
+          "resource": "mms_origins:sunlit_fury_active",
+          "comparison": "==",
+          "compare_to": 1
         },
         {
           "type": "origins:resource",
@@ -115,8 +183,10 @@
       "type": "origins:and",
       "conditions": [
         {
-          "type": "origins:power_active",
-          "power": "*:*_toggle"
+          "type": "origins:resource",
+          "resource": "mms_origins:sunlit_fury_active",
+          "comparison": "==",
+          "compare_to": 1
         },
         {
           "type": "origins:resource",

@@ -29,7 +29,9 @@
     "fabric-api": "*",
     "origins": ">=1.12.0",
     "apoli": ">=2.12.0",
-    "mms_render_common": "*"
+    "mms_render_common": "*",
+    "scorchful": ">=0.16.8",
+    "frostiful": ">=2.4.0"
   },
   "recommends": {
     "origins-classes": "*",

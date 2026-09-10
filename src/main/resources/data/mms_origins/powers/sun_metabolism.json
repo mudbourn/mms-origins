@@ -17,9 +17,10 @@
           "type": "origins:exposed_to_sun"
         },
         {
-          "type": "origins:power_active",
-          "power": "mms_origins:sunlit_fury_toggle",
-          "inverted": true
+          "type": "origins:resource",
+          "resource": "mms_origins:sunlit_fury_active",
+          "comparison": "==",
+          "compare_to": 0
         }
       ]
     }
@@ -36,9 +37,10 @@
           "compare_to": 30
         },
         {
-          "type": "origins:power_active",
-          "power": "mms_origins:sunlit_fury_toggle",
-          "inverted": true
+          "type": "origins:resource",
+          "resource": "mms_origins:sunlit_fury_active",
+          "comparison": "==",
+          "compare_to": 0
         }
       ]
     },

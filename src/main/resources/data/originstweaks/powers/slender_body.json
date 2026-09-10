@@ -37,11 +37,23 @@
 					},
 					{
 						"type": "origins:execute_command",
+						"command": "attribute @s additionalentityattributes:generic.width base set 1.21"
+					},
+					{
+						"type": "origins:execute_command",
+						"command": "attribute @s additionalentityattributes:generic.height base set 1.21"
+					},
+					{
+						"type": "origins:execute_command",
 						"command": "attribute @s additionalentityattributes:generic.hitbox_width base set 0.75"
 					},
 					{
 						"type": "origins:execute_command",
-						"command": "attribute @s minecraft:player.block_interaction_range base set 6.75"
+						"command": "attribute @s minecraft:player.block_interaction_range base set 5"
+					},
+					{
+						"type": "origins:execute_command",
+						"command": "attribute @s minecraft:player.entity_interaction_range base set 6"
 					}
 				]
 			}
@@ -55,11 +67,23 @@
 				},
 				{
 					"type": "origins:execute_command",
+					"command": "attribute @s additionalentityattributes:generic.width base set 1"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "attribute @s additionalentityattributes:generic.height base set 1"
+				},
+				{
+					"type": "origins:execute_command",
 					"command": "attribute @s additionalentityattributes:generic.hitbox_width base set 1"
 				},
 				{
 					"type": "origins:execute_command",
 					"command": "attribute @s minecraft:player.block_interaction_range base set 4.5"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "attribute @s minecraft:player.entity_interaction_range base set 3"
 				}
 			]
 		}
@@ -104,7 +128,7 @@
 	},
 	"dodge_cooldown": {
 		"type": "origins:cooldown",
-		"cooldown": 60,
+		"cooldown": 50,
 		"hud_render": {
 			"should_render": true,
 			"sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
@@ -115,10 +139,10 @@
 		"type": "origins:modify_damage_taken",
 		"self_action": {
 			"type": "mms_origins:random_teleport",
-			"area_width": 8,
-			"area_height": 8,
+			"area_width": 4,
+			"area_height": 4,
 			"landing_offset": {
-				"y": 0.1
+				"y": 1.0
 			},
 			"landing_block_condition": {
 				"type": "origins:and",

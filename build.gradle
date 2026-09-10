@@ -47,6 +47,11 @@ dependencies {
     // JobsPlusConfig exposes maxJobs/amountOfFreeJobs as yamlconfig entries, and
     // the auto-join has to read both to honour the same limits the jobs menu does.
     modCompileOnly files("libs/yamlconfig-19.1.2-fabric.jar")
+
+    // Temperature source for the origins' heat and cold traits; both build on
+    // the shared Thermoo API, supplied at runtime by the pack.
+    modCompileOnly files("libs/scorchful-0.16.8+1.21.11.jar")
+    modCompileOnly files("libs/frostiful-2.4.0+1.21.11.jar")
 }
 
 tasks.withType(JavaCompile).configureEach {
