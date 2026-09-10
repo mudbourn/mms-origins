@@ -2,7 +2,9 @@
   "powers": [
     "mms_origins:bark_skin",
     "mms_origins:photosynthesis",
-    "mms_origins:kindling",
+    "mms_origins:heat_adaptation",
+    "mms_origins:cold_sensitivity",
+    "mms_origins:quick_metabolism",
     "mms_origins:verdant_diet",
     "mms_origins:grass_matchup",
     "mms_origins:sunlit_vigor",
@@ -17,5 +19,5 @@
     "item": "minecraft:oak_sapling"
   },
   "order": 20,
-  "impact": 2
+  "impact": 3
 }

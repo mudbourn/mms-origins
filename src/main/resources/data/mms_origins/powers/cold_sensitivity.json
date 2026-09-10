@@ -1,0 +1,33 @@
+{
+  "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.cold_sensitivity.0"
+      }
+    }
+  ],
+  "chill_pace": {
+    "type": "origins:attribute",
+    "modifier": {
+      "attribute": "thermoo:frost_resistance",
+      "id": "mms_origins:floran_chill_pace",
+      "operation": "addition",
+      "value": -10
+    }
+  },
+  "chill_wound": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "name": "Floran cold frailty",
+      "operation": "multiply_base",
+      "value": 1.0
+    },
+    "damage_condition": {
+      "type": "origins:in_tag",
+      "tag": "minecraft:is_freezing"
+    }
+  }
+}
