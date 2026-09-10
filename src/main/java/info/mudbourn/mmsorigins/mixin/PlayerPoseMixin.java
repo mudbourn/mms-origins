@@ -12,7 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Applies {@link PosePower} after the player has chosen its own pose for the
  * tick, replacing the newer Apoli {@code pose} power type that Apoli-Legacy
  * omits. Injecting here, rather than at the end of {@code LivingEntity.tick},
- * keeps {@code updatePlayerPose} from overwriting the forced pose.
+ * keeps {@code updatePlayerPose} from overwriting the forced pose. A crouching
+ * pose makes vanilla treat the holder as moving slowly, so the sneak slowdown
+ * comes for free without a separate speed penalty.
  */
 @Mixin(Player.class)
 public class PlayerPoseMixin {
