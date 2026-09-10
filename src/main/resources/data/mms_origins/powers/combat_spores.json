@@ -133,7 +133,7 @@
               },
               {
                 "type": "origins:damage",
-                "damage_type": "minecraft:magic",
+                "damage_type": "mms_origins:caustic_spores",
                 "amount": 2
               }
             ]

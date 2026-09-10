@@ -38,17 +38,12 @@
     "type": "origins:resource",
     "hidden": true,
     "min": 0,
-    "max": 30,
+    "max": 40,
     "start_value": 0
   },
   "speed": {
-    "type": "origins:attribute",
-    "modifier": {
-      "name": "Drifting spores speed bonus",
-      "attribute": "minecraft:generic.movement_speed",
-      "value": 0.3,
-      "operation": "multiply_base"
-    },
+    "type": "origins:action_over_time",
+    "interval": 10,
     "condition": {
       "type": "origins:and",
       "conditions": [
@@ -68,16 +63,21 @@
           "compare_to": 0
         }
       ]
+    },
+    "entity_action": {
+      "type": "origins:apply_effect",
+      "effect": {
+        "effect": "minecraft:speed",
+        "duration": 20,
+        "amplifier": 1,
+        "show_icon": false,
+        "show_particles": false
+      }
     }
   },
   "haste": {
-    "type": "origins:attribute",
-    "modifier": {
-      "name": "Drifting spores attack speed bonus",
-      "attribute": "minecraft:generic.attack_speed",
-      "value": 0.4,
-      "operation": "multiply_base"
-    },
+    "type": "origins:action_over_time",
+    "interval": 10,
     "condition": {
       "type": "origins:and",
       "conditions": [
@@ -97,6 +97,16 @@
           "compare_to": 0
         }
       ]
+    },
+    "entity_action": {
+      "type": "origins:apply_effect",
+      "effect": {
+        "effect": "minecraft:haste",
+        "duration": 20,
+        "amplifier": 1,
+        "show_icon": false,
+        "show_particles": false
+      }
     }
   },
   "move_drain": {
@@ -137,7 +147,7 @@
         {
           "type": "origins:change_resource",
           "resource": "mms_origins:drift_spores_cooldown",
-          "change": 30,
+          "change": 40,
           "operation": "set"
         }
       ]
@@ -180,13 +190,13 @@
           {
             "type": "origins:change_resource",
             "resource": "mms_origins:drift_spores_charge",
-            "change": -8,
+            "change": -10,
             "operation": "add"
           },
           {
             "type": "origins:change_resource",
             "resource": "mms_origins:drift_spores_cooldown",
-            "change": 30,
+            "change": 40,
             "operation": "set"
           }
         ]

@@ -1,6 +1,5 @@
 {
-    "replace": false,
-    "values": [
-        "originstweaks:feline_slash"
-    ]
+  "values": [
+    "mms_origins:caustic_spores"
+  ]
 }
