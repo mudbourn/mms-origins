@@ -1,5 +1,21 @@
 {
   "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.saprophyte_diet.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.saprophyte_diet.1"
+      }
+    }
+  ],
   "restrict": {
     "type": "origins:prevent_item_use",
     "item_condition": {

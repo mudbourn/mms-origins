@@ -5,7 +5,7 @@
     "actions": [
       {
         "type": "mms_origins:summon_henchmen",
-        "count": 2,
+        "resource": "mms_origins:henchman_charge",
         "max_active": 2
       },
       {
@@ -15,13 +15,15 @@
       }
     ]
   },
-  "cooldown": 1200,
-  "key": {
-    "key": "key.origins.primary_active"
+  "condition": {
+    "type": "origins:resource",
+    "resource": "mms_origins:henchman_charge",
+    "comparison": ">",
+    "compare_to": 0
   },
-  "hud_render": {
-    "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
-    "bar_index": 15
+  "cooldown": 20,
+  "key": {
+    "key": "key.origins.secondary_active"
   },
   "badges": [
     {
@@ -36,6 +38,13 @@
       "sprite": "origins:textures/gui/badge/info.png",
       "text": {
         "translate": "badge.mms_origins.summon_henchmen.1"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.summon_henchmen.2"
       }
     }
   ]

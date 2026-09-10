@@ -1,5 +1,14 @@
 {
   "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.drift_spores.0"
+      }
+    }
+  ],
   "charge": {
     "type": "origins:resource",
     "min": 0,

@@ -2,6 +2,10 @@ package info.mudbourn.mmsorigins.power.action;
 
 import info.mudbourn.mmsorigins.entity.FloranHenchman;
 import info.mudbourn.mmsorigins.entity.MmsEntities;
+import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.github.apace100.apoli.data.ApoliDataTypes;
+import io.github.apace100.apoli.power.PowerType;
+import io.github.apace100.apoli.power.VariableIntPower;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import java.util.List;
@@ -12,9 +16,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
 
 /**
- * Summons a floran's henchmen up to a cap, filling only the empty slots so a
- * second press never overruns the limit. Each henchman is bound to the caster
- * as its owner and dropped in a ring around them.
+ * Summons a single floran henchman, letting the caster ration their pack one
+ * press at a time. Each summon fills one empty slot up to the cap and spends a
+ * point of the charge resource, which the henchman refunds when it leaves.
  */
 public final class SummonHenchmenAction {
 
@@ -23,7 +27,7 @@ public final class SummonHenchmenAction {
 
     public static SerializableData data() {
         return new SerializableData()
-            .add("count", SerializableDataTypes.INT, 2)
+            .add("resource", ApoliDataTypes.POWER_TYPE, null)
             .add("max_active", SerializableDataTypes.INT, 2);
     }
 
@@ -35,16 +39,24 @@ public final class SummonHenchmenAction {
         AABB search = owner.getBoundingBox().inflate(SEARCH_RADIUS);
         List<FloranHenchman> existing =
             level.getEntities(MmsEntities.FLORAN_HENCHMAN, search, henchman -> owner.equals(henchman.getOwner()));
-        int toSpawn = Math.min(data.getInt("count"), maxActive - existing.size());
+        if (existing.size() >= maxActive) {
+            return;
+        }
+        VariableIntPower charge = FloranHenchman.chargeOf(owner, data.get("resource"));
+        if (charge != null && charge.getValue() <= 0) {
+            return;
+        }
         RandomSource random = owner.getRandom();
-        for (int i = 0; i < toSpawn; i++) {
-            double angle = random.nextDouble() * Math.PI * 2.0;
-            double x = owner.getX() + Math.cos(angle) * RING_RADIUS;
-            double z = owner.getZ() + Math.sin(angle) * RING_RADIUS;
-            FloranHenchman henchman = new FloranHenchman(MmsEntities.FLORAN_HENCHMAN, level);
-            henchman.snapTo(x, owner.getY(), z, owner.getYRot(), 0.0f);
-            henchman.setOwner(owner);
-            level.addFreshEntity(henchman);
+        double angle = random.nextDouble() * Math.PI * 2.0;
+        double x = owner.getX() + Math.cos(angle) * RING_RADIUS;
+        double z = owner.getZ() + Math.sin(angle) * RING_RADIUS;
+        FloranHenchman henchman = new FloranHenchman(MmsEntities.FLORAN_HENCHMAN, level);
+        henchman.snapTo(x, owner.getY(), z, owner.getYRot(), 0.0f);
+        henchman.setOwner(owner);
+        level.addFreshEntity(henchman);
+        if (charge != null) {
+            charge.decrement();
+            PowerHolderComponent.syncPower(owner, charge.getType());
         }
     }
 

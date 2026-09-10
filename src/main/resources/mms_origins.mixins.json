@@ -24,6 +24,7 @@
     "PlayerPoseMixin",
     "ReplaceLootTablePowerGuardMixin",
     "ServerPlayerGameModeMixin",
+    "TridentRiptideMixin",
     "VillagerBeastlyRefusalMixin",
     "VillagerCharmMixin",
     "VillagerSwindleMixin"

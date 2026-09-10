@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins;
 
+import info.mudbourn.mmsorigins.entity.HenchmanLifecycle;
 import info.mudbourn.mmsorigins.entity.MmsEntities;
 import info.mudbourn.mmsorigins.item.MmsItems;
 import info.mudbourn.mmsorigins.power.MmsPowerFactories;
@@ -16,6 +17,7 @@ public class MmsOrigins implements ModInitializer {
     public void onInitialize() {
         MmsPowerFactories.register();
         MmsEntities.register();
+        HenchmanLifecycle.register();
         MmsItems.register();
         MmsSounds.register();
         VerdantGrowth.register();

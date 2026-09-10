@@ -1,5 +1,14 @@
 {
   "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.seaborn.0"
+      }
+    }
+  ],
   "ocean_spawn": {
     "type": "origins:modify_player_spawn",
     "dimension": "minecraft:overworld",

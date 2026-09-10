@@ -1,3 +1,12 @@
 {
-  "type": "origins:simple"
+  "type": "origins:simple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.language_barrier.0"
+      }
+    }
+  ]
 }

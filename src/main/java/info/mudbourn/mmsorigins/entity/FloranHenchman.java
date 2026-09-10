@@ -1,7 +1,13 @@
 package info.mudbourn.mmsorigins.entity;
 
+import info.mudbourn.mmsorigins.MmsOrigins;
+import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.github.apace100.apoli.power.PowerType;
+import io.github.apace100.apoli.power.VariableIntPower;
 import java.util.UUID;
 import net.minecraft.core.UUIDUtil;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -45,9 +51,13 @@ public class FloranHenchman extends Zombie {
     private static final int LIFESPAN_TICKS = 2400;
     private static final int TAUNT_INTERVAL = 20;
     private static final double TAUNT_RADIUS = 16.0;
+    private static final double LEASH_RANGE = 32.0;
+    private static final Identifier CHARGE_ID =
+        Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "henchman_charge");
 
     private UUID ownerUuid;
     private int age;
+    private boolean refundOnRemoval = true;
 
     public FloranHenchman(EntityType<? extends Zombie> type, Level level) {
         super(type, level);
@@ -70,6 +80,38 @@ public class FloranHenchman extends Zombie {
 
     public LivingEntity getOwner() {
         return this.ownerUuid == null ? null : this.level().getPlayerByUUID(this.ownerUuid);
+    }
+
+    public boolean isOwnedBy(UUID uuid) {
+        return uuid.equals(this.ownerUuid);
+    }
+
+    public static void despawnOwnedBy(MinecraftServer server, UUID ownerUuid) {
+        for (ServerLevel level : server.getAllLevels()) {
+            for (FloranHenchman henchman
+                    : level.getEntities(MmsEntities.FLORAN_HENCHMAN, henchman -> henchman.isOwnedBy(ownerUuid))) {
+                henchman.refundOnRemoval = false;
+                henchman.discard();
+            }
+        }
+        LivingEntity owner = server.getPlayerList().getPlayer(ownerUuid);
+        VariableIntPower charge = chargeOf(owner, null);
+        if (charge != null && charge.getValue() != charge.getMax()) {
+            charge.setValue(charge.getMax());
+            PowerHolderComponent.syncPower(owner, charge.getType());
+        }
+    }
+
+    public static VariableIntPower chargeOf(LivingEntity owner, PowerType<?> resource) {
+        if (owner == null) {
+            return null;
+        }
+        for (VariableIntPower power : PowerHolderComponent.getPowers(owner, VariableIntPower.class)) {
+            if (power.getType() == resource || CHARGE_ID.equals(power.getType().getIdentifier())) {
+                return power;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -103,8 +145,34 @@ public class FloranHenchman extends Zombie {
             this.discard();
             return;
         }
+        LivingEntity owner = this.getOwner();
+        if (owner != null && this.distanceToSqr(owner) > LEASH_RANGE * LEASH_RANGE) {
+            this.discard();
+            return;
+        }
         if (this.age % TAUNT_INTERVAL == 0) {
             this.pullAggroOffOwner(level);
+        }
+    }
+
+    @Override
+    public void remove(Entity.RemovalReason reason) {
+        if (this.level() instanceof ServerLevel && this.refundOnRemoval) {
+            if (reason == Entity.RemovalReason.KILLED) {
+                HenchmanLifecycle.scheduleRefund(this.level().getServer(), this.ownerUuid);
+            } else if (reason == Entity.RemovalReason.DISCARDED) {
+                this.refundNow();
+            }
+        }
+        super.remove(reason);
+    }
+
+    private void refundNow() {
+        LivingEntity owner = this.getOwner();
+        VariableIntPower charge = chargeOf(owner, null);
+        if (charge != null && charge.getValue() < charge.getMax()) {
+            charge.increment();
+            PowerHolderComponent.syncPower(owner, charge.getType());
         }
     }
 
