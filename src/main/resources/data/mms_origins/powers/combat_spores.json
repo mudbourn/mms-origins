@@ -1,12 +1,125 @@
 {
-  "type": "origins:modify_damage_dealt",
-  "condition": {
-    "type": "origins:power_active",
-    "power": "mms_origins:spore_shift"
+  "type": "origins:multiple",
+  "charge": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 60,
+    "start_value": 60,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_02.png",
+      "bar_index": 18,
+      "order": 0,
+      "condition": {
+        "type": "origins:power_active",
+        "power": "mms_origins:spore_shift_toggle"
+      }
+    }
   },
-  "modifier": {
-    "name": "Acrid spores",
-    "value": 2,
-    "operation": "addition"
+  "cooldown": {
+    "type": "origins:resource",
+    "hidden": true,
+    "min": 0,
+    "max": 60,
+    "start_value": 0
+  },
+  "bite": {
+    "type": "origins:modify_damage_dealt",
+    "condition": {
+      "type": "origins:power_active",
+      "power": "mms_origins:spore_shift_toggle"
+    },
+    "modifier": {
+      "name": "Acrid spores",
+      "value": 2,
+      "operation": "addition"
+    }
+  },
+  "caustic": {
+    "type": "origins:action_on_hit",
+    "damage_condition": {
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:name",
+          "name": "player"
+        },
+        {
+          "type": "origins:name",
+          "name": "player.item"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "mms_origins:spore_shift_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:combat_spores_charge",
+          "comparison": ">=",
+          "compare_to": 20
+        }
+      ]
+    },
+    "bientity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:actor_action",
+          "action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:change_resource",
+                "resource": "mms_origins:combat_spores_charge",
+                "change": -20,
+                "operation": "add"
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "mms_origins:combat_spores_cooldown",
+                "change": 60,
+                "operation": "set"
+              }
+            ]
+          }
+        },
+        {
+          "type": "origins:target_action",
+          "action": {
+            "type": "origins:execute_command",
+            "command": "effect give @s minecraft:poison 2 1"
+          }
+        }
+      ]
+    }
+  },
+  "regen": {
+    "type": "origins:action_over_time",
+    "interval": 2,
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "resource": "mms_origins:combat_spores_cooldown",
+        "comparison": ">",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:change_resource",
+        "resource": "mms_origins:combat_spores_cooldown",
+        "change": -2,
+        "operation": "add"
+      },
+      "else_action": {
+        "type": "origins:change_resource",
+        "resource": "mms_origins:combat_spores_charge",
+        "change": 4,
+        "operation": "add"
+      }
+    }
   }
 }

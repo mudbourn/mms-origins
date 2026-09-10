@@ -20,8 +20,8 @@
 		"count": 3,
 		"interval": 5,
 		"start_delay": 5,
-		"speed": 1,
-		"divergence": 1,
+		"speed": 0.1,
+		"divergence": 0,
 		"sound": "entity.blaze.shoot",
 		"tag": "{NoGravity:1b}",
 		"key": {

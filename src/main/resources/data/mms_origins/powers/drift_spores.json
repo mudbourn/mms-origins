@@ -1,14 +1,194 @@
 {
-  "type": "origins:attribute",
-  "modifier": {
-    "name": "Drifting spores speed bonus",
-    "attribute": "minecraft:generic.movement_speed",
-    "value": 0.15,
-    "operation": "multiply_base"
+  "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": {
+        "translate": "badge.mms_origins.drift_spores.0"
+      }
+    }
+  ],
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": false
+    },
+    "retain_state": true
   },
-  "condition": {
-    "type": "origins:power_active",
-    "power": "mms_origins:spore_shift",
-    "inverted": true
+  "charge": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 60,
+    "start_value": 60,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 1,
+      "order": 0,
+      "condition": {
+        "type": "origins:power_active",
+        "power": "mms_origins:drift_spores_toggle"
+      }
+    }
+  },
+  "cooldown": {
+    "type": "origins:resource",
+    "hidden": true,
+    "min": 0,
+    "max": 30,
+    "start_value": 0
+  },
+  "speed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "name": "Drifting spores speed bonus",
+      "attribute": "minecraft:generic.movement_speed",
+      "value": 0.3,
+      "operation": "multiply_base"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "mms_origins:drift_spores_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:drift_spores_charge",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
+    }
+  },
+  "haste": {
+    "type": "origins:attribute",
+    "modifier": {
+      "name": "Drifting spores attack speed bonus",
+      "attribute": "minecraft:generic.attack_speed",
+      "value": 0.4,
+      "operation": "multiply_base"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "mms_origins:drift_spores_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:drift_spores_charge",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
+    }
+  },
+  "sprint_drain": {
+    "type": "origins:action_over_time",
+    "interval": 2,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "mms_origins:drift_spores_toggle"
+        },
+        {
+          "type": "origins:sprinting"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:drift_spores_charge",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "mms_origins:drift_spores_charge",
+          "change": -1,
+          "operation": "add"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "mms_origins:drift_spores_cooldown",
+          "change": 30,
+          "operation": "set"
+        }
+      ]
+    }
+  },
+  "attack_drain": {
+    "type": "origins:action_on_hit",
+    "damage_condition": {
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:name",
+          "name": "player"
+        },
+        {
+          "type": "origins:name",
+          "name": "player.item"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:power_active",
+      "power": "mms_origins:drift_spores_toggle"
+    },
+    "bientity_action": {
+      "type": "origins:actor_action",
+      "action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:change_resource",
+            "resource": "mms_origins:drift_spores_charge",
+            "change": -8,
+            "operation": "add"
+          },
+          {
+            "type": "origins:change_resource",
+            "resource": "mms_origins:drift_spores_cooldown",
+            "change": 30,
+            "operation": "set"
+          }
+        ]
+      }
+    }
+  },
+  "regen": {
+    "type": "origins:action_over_time",
+    "interval": 2,
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "resource": "mms_origins:drift_spores_cooldown",
+        "comparison": ">",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:change_resource",
+        "resource": "mms_origins:drift_spores_cooldown",
+        "change": -2,
+        "operation": "add"
+      },
+      "else_action": {
+        "type": "origins:change_resource",
+        "resource": "mms_origins:drift_spores_charge",
+        "change": 3,
+        "operation": "add"
+      }
+    }
   }
 }

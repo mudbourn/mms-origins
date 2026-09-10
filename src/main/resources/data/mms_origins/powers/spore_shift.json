@@ -1,7 +1,20 @@
 {
-  "type": "origins:toggle",
-  "key": {
-    "key": "key.origins.primary_active",
-    "continuous": false
+  "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/toggle.png",
+      "text": {
+        "translate": "badge.mms_origins.spore_shift.0"
+      }
+    }
+  ],
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": false
+    },
+    "retain_state": true
   }
 }
