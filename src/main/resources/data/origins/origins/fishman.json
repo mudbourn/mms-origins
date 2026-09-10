@@ -1,9 +1,8 @@
 {
   "powers": [
     "origins:water_breathing",
-    "origins:water_vision",
-    "origins:aqua_affinity",
     "origins:like_water",
+    "mms_origins:like_water",
     "originstweaks:aquatic",
     "origins:conduit_power_on_land",
     "origins:air_from_potions",

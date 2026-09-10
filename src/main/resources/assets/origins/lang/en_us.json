@@ -1,8 +1,6 @@
 {
   "origin.origins.fishman.name": "Fishman",
   "origin.origins.fishman.description": "Ocean-dwellers who breathe water and hit harder while wet. They cannot sleep out of water, and villagers charge them more to trade.",
-  "power.origins.water_breathing.name": "Aqua-Humanoid",
-  "power.origins.water_breathing.description": "Gills and lungs both. In water or rain you breathe freely; on dry land you live off your stored moisture, and only once it runs out does your air begin to fail.",
   "power.origins.conduit_power_on_land.name": "Conduit Power",
   "power.origins.conduit_power_on_land.description": "While wet — submerged or under open rain — you carry the strength of a conduit with you."
 }
