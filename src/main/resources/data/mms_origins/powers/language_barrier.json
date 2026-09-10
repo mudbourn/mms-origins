@@ -1,5 +1,5 @@
 {
-  "type": "origins:simple",
+  "type": "origins:multiple",
   "badges": [
     {
       "type": "origins:tooltip",
@@ -7,6 +7,43 @@
       "text": {
         "translate": "badge.mms_origins.language_barrier.0"
       }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.language_barrier.1"
+      }
     }
-  ]
+  ],
+  "meager_harvest": {
+    "type": "origins:modify_food",
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "tag": "mms_origins:crops"
+      }
+    },
+    "food_modifier": {
+      "operation": "multiply_base",
+      "value": -0.6
+    },
+    "saturation_modifier": {
+      "operation": "multiply_base",
+      "value": -0.6
+    },
+    "prevent_effects": false
+  },
+  "meager_harvest_tooltip": {
+    "type": "origins:tooltip",
+    "text": {
+      "translate": "power.mms_origins.language_barrier.crop_tooltip"
+    },
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "tag": "mms_origins:crops"
+      }
+    }
+  }
 }

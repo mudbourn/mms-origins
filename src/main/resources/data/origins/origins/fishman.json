@@ -1,9 +1,6 @@
 {
   "powers": [
     "origins:water_breathing",
-    "originstweaks:body_moisture",
-    "originstweaks:aquadynamic",
-    "originstweaks:swim_speed",
     "origins:water_vision",
     "origins:aqua_affinity",
     "origins:like_water",
@@ -17,8 +14,7 @@
     "mms_origins:wetness",
     "mms_origins:seaborn",
     "mms_origins:water_power",
-    "mms_origins:water_matchup",
-    "mms_origins:poor_farmer"
+    "mms_origins:water_matchup"
   ],
   "icon": {
     "item": "minecraft:tropical_fish"
