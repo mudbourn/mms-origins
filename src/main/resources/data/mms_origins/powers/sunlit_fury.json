@@ -1,0 +1,74 @@
+{
+  "type": "origins:multiple",
+  "toggle": {
+    "type": "origins:toggle",
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": false
+    }
+  },
+  "strength": {
+    "type": "origins:modify_damage_dealt",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:sun_power",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
+    },
+    "modifier": {
+      "name": "Sunlit fury",
+      "value": 3,
+      "operation": "addition"
+    }
+  },
+  "drain": {
+    "type": "origins:action_over_time",
+    "interval": 40,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:sun_power",
+      "operation": "add",
+      "change": -1
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power_active",
+          "power": "*:*_toggle"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:sun_power",
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
+    }
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/active.png",
+      "text": {
+        "translate": "badge.mms_origins.sunlit_fury.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.sunlit_fury.1"
+      }
+    }
+  ]
+}

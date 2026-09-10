@@ -56,7 +56,7 @@ public final class HenchmanLifecycle {
             ServerPlayer owner = server.getPlayerList().getPlayer(refund.owner);
             VariableIntPower charge = FloranHenchman.chargeOf(owner, null);
             if (charge != null && charge.getValue() < charge.getMax()) {
-                charge.increment();
+                charge.setValue(Math.min(charge.getMax(), charge.getValue() + FloranHenchman.CHARGE_COST));
                 PowerHolderComponent.syncPower(owner, charge.getType());
             }
         }

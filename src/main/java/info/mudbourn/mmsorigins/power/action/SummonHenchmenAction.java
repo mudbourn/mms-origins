@@ -17,8 +17,8 @@ import net.minecraft.world.phys.AABB;
 
 /**
  * Summons a single floran henchman, letting the caster ration their pack one
- * press at a time. Each summon fills one empty slot up to the cap and spends a
- * point of the charge resource, which the henchman refunds when it leaves.
+ * press at a time. Each summon fills one empty slot up to the cap and spends
+ * {@link FloranHenchman#CHARGE_COST} sun power, which the henchman refunds when it leaves.
  */
 public final class SummonHenchmenAction {
 
@@ -43,7 +43,7 @@ public final class SummonHenchmenAction {
             return;
         }
         VariableIntPower charge = FloranHenchman.chargeOf(owner, data.get("resource"));
-        if (charge != null && charge.getValue() <= 0) {
+        if (charge != null && charge.getValue() < FloranHenchman.CHARGE_COST) {
             return;
         }
         RandomSource random = owner.getRandom();
@@ -55,7 +55,7 @@ public final class SummonHenchmenAction {
         henchman.setOwner(owner);
         level.addFreshEntity(henchman);
         if (charge != null) {
-            charge.decrement();
+            charge.setValue(charge.getValue() - FloranHenchman.CHARGE_COST);
             PowerHolderComponent.syncPower(owner, charge.getType());
         }
     }

@@ -54,7 +54,8 @@ public class FloranHenchman extends Zombie {
     private static final double LEASH_RANGE = 32.0;
     private static final float DOOR_SOUND_VOLUME = 0.35f;
     private static final Identifier CHARGE_ID =
-        Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "henchman_charge");
+        Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "sun_power");
+    public static final int CHARGE_COST = 2;
 
     private UUID ownerUuid;
     private int age;
@@ -172,7 +173,7 @@ public class FloranHenchman extends Zombie {
         LivingEntity owner = this.getOwner();
         VariableIntPower charge = chargeOf(owner, null);
         if (charge != null && charge.getValue() < charge.getMax()) {
-            charge.increment();
+            charge.setValue(Math.min(charge.getMax(), charge.getValue() + CHARGE_COST));
             PowerHolderComponent.syncPower(owner, charge.getType());
         }
     }

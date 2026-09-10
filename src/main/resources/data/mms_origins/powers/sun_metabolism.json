@@ -1,0 +1,38 @@
+{
+  "type": "origins:multiple",
+  "hidden": true,
+  "bask": {
+    "type": "origins:action_over_time",
+    "interval": 120,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:sun_power",
+      "operation": "add",
+      "change": 1
+    },
+    "condition": {
+      "type": "origins:exposed_to_sun"
+    }
+  },
+  "drink": {
+    "type": "origins:action_on_item_use",
+    "condition": {
+      "type": "origins:resource",
+      "resource": "mms_origins:sun_power",
+      "comparison": "<",
+      "compare_to": 3
+    },
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:sun_power",
+      "operation": "add",
+      "change": 1
+    },
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "item": "minecraft:potion"
+      }
+    }
+  }
+}
