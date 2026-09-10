@@ -148,7 +148,7 @@
 				}
 			]
 		},
-		"interval": 4,
+		"interval": 2,
 		"condition": {
 			"type": "origins:and",
 			"conditions": [
@@ -230,7 +230,7 @@
 					"power": "*:*_leap_cooldown"
 				},
 				{
-					"type": "origins:add_exhaustion",
+					"type": "origins:exhaust",
 					"amount": 12.0
 				},
 				{
@@ -257,18 +257,38 @@
 									"type": "origins:and",
 									"actions": [
 										{
-											"type": "origins:add_velocity",
-											"z": 1.1,
-											"space": "local",
-											"set": false,
-											"client": false
+											"type": "origins:if_else_list",
+											"actions": [
+												{
+													"condition": {
+														"type": "origins:moving"
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.1,
+														"space": "velocity_horizontal_normalized",
+														"set": false
+													}
+												},
+												{
+													"condition": {
+														"type": "origins:moving",
+														"inverted": true
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.1,
+														"space": "local_horizontal_normalized",
+														"set": false
+													}
+												}
+											]
 										},
 										{
 											"type": "origins:add_velocity",
 											"y": 0.4,
 											"space": "world",
-											"set": false,
-											"client": false
+											"set": false
 										}
 									]
 								}
@@ -288,18 +308,38 @@
 									"type": "origins:and",
 									"actions": [
 										{
-											"type": "origins:add_velocity",
-											"z": 1.2,
-											"space": "local",
-											"set": false,
-											"client": false
+											"type": "origins:if_else_list",
+											"actions": [
+												{
+													"condition": {
+														"type": "origins:moving"
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.2,
+														"space": "velocity_horizontal_normalized",
+														"set": false
+													}
+												},
+												{
+													"condition": {
+														"type": "origins:moving",
+														"inverted": true
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.2,
+														"space": "local_horizontal_normalized",
+														"set": false
+													}
+												}
+											]
 										},
 										{
 											"type": "origins:add_velocity",
 											"y": 0.5,
 											"space": "world",
-											"set": false,
-											"client": false
+											"set": false
 										}
 									]
 								}
@@ -319,18 +359,38 @@
 									"type": "origins:and",
 									"actions": [
 										{
-											"type": "origins:add_velocity",
-											"z": 1.3,
-											"space": "local",
-											"set": false,
-											"client": false
+											"type": "origins:if_else_list",
+											"actions": [
+												{
+													"condition": {
+														"type": "origins:moving"
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.3,
+														"space": "velocity_horizontal_normalized",
+														"set": false
+													}
+												},
+												{
+													"condition": {
+														"type": "origins:moving",
+														"inverted": true
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.3,
+														"space": "local_horizontal_normalized",
+														"set": false
+													}
+												}
+											]
 										},
 										{
 											"type": "origins:add_velocity",
 											"y": 0.6,
 											"space": "world",
-											"set": false,
-											"client": false
+											"set": false
 										}
 									]
 								}
@@ -350,18 +410,38 @@
 									"type": "origins:and",
 									"actions": [
 										{
-											"type": "origins:add_velocity",
-											"z": 1.4,
-											"space": "local",
-											"set": false,
-											"client": false
+											"type": "origins:if_else_list",
+											"actions": [
+												{
+													"condition": {
+														"type": "origins:moving"
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.4,
+														"space": "velocity_horizontal_normalized",
+														"set": false
+													}
+												},
+												{
+													"condition": {
+														"type": "origins:moving",
+														"inverted": true
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.4,
+														"space": "local_horizontal_normalized",
+														"set": false
+													}
+												}
+											]
 										},
 										{
 											"type": "origins:add_velocity",
 											"y": 0.7,
 											"space": "world",
-											"set": false,
-											"client": false
+											"set": false
 										}
 									]
 								}
@@ -381,18 +461,38 @@
 									"type": "origins:and",
 									"actions": [
 										{
-											"type": "origins:add_velocity",
-											"z": 1.5,
-											"space": "local",
-											"set": false,
-											"client": false
+											"type": "origins:if_else_list",
+											"actions": [
+												{
+													"condition": {
+														"type": "origins:moving"
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.5,
+														"space": "velocity_horizontal_normalized",
+														"set": false
+													}
+												},
+												{
+													"condition": {
+														"type": "origins:moving",
+														"inverted": true
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.5,
+														"space": "local_horizontal_normalized",
+														"set": false
+													}
+												}
+											]
 										},
 										{
 											"type": "origins:add_velocity",
 											"y": 0.8,
 											"space": "world",
-											"set": false,
-											"client": false
+											"set": false
 										}
 									]
 								}
@@ -412,18 +512,38 @@
 									"type": "origins:and",
 									"actions": [
 										{
-											"type": "origins:add_velocity",
-											"z": 1.6,
-											"space": "local",
-											"set": false,
-											"client": false
+											"type": "origins:if_else_list",
+											"actions": [
+												{
+													"condition": {
+														"type": "origins:moving"
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.6,
+														"space": "velocity_horizontal_normalized",
+														"set": false
+													}
+												},
+												{
+													"condition": {
+														"type": "origins:moving",
+														"inverted": true
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.6,
+														"space": "local_horizontal_normalized",
+														"set": false
+													}
+												}
+											]
 										},
 										{
 											"type": "origins:add_velocity",
 											"y": 0.9,
 											"space": "world",
-											"set": false,
-											"client": false
+											"set": false
 										}
 									]
 								}
@@ -443,18 +563,38 @@
 									"type": "origins:and",
 									"actions": [
 										{
-											"type": "origins:add_velocity",
-											"z": 1.7,
-											"space": "local",
-											"set": false,
-											"client": false
+											"type": "origins:if_else_list",
+											"actions": [
+												{
+													"condition": {
+														"type": "origins:moving"
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.7,
+														"space": "velocity_horizontal_normalized",
+														"set": false
+													}
+												},
+												{
+													"condition": {
+														"type": "origins:moving",
+														"inverted": true
+													},
+													"action": {
+														"type": "origins:add_velocity",
+														"z": 1.7,
+														"space": "local_horizontal_normalized",
+														"set": false
+													}
+												}
+											]
 										},
 										{
 											"type": "origins:add_velocity",
 											"y": 1.0,
 											"space": "world",
-											"set": false,
-											"client": false
+											"set": false
 										}
 									]
 								}
@@ -557,6 +697,21 @@
 	"charge_pose": {
 		"type": "mms_origins:pose",
 		"entity_pose": "crouching",
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_hold_timer",
+			"comparison": "!=",
+			"compare_to": 0
+		}
+	},
+	"charge_slow": {
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Rooted while charging a leap",
+			"attribute": "minecraft:generic.movement_speed",
+			"value": -0.6,
+			"operation": "multiply_total"
+		},
 		"condition": {
 			"type": "origins:resource",
 			"resource": "*:*_hold_timer",
