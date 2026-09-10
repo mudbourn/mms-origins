@@ -31,7 +31,7 @@ public final class ZombifyCommand {
     public static void register() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
             dispatcher.register(Commands.literal("zombify")
-                .requires(source -> source.hasPermission(2))
+                .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                 .executes(context -> zombify(
                         context.getSource(),
                         List.of(context.getSource().getPlayerOrException()),
