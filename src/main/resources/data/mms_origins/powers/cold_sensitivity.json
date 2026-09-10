@@ -3,7 +3,7 @@
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "sprite": "origins:textures/gui/badge/arrow_down.png",
       "text": {
         "translate": "badge.mms_origins.cold_sensitivity.0"
       }
