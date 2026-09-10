@@ -6,6 +6,7 @@
     "AvatarBodyHideMixin",
     "ChooseOriginGridMixin",
     "LivingEntityRenderStateMixin",
+    "LocalPlayerCrouchMixin",
     "PiglinBruteAdmirePoseMixin",
     "PlayerRendererMixin",
     "WingsElytraTextureMixin"
