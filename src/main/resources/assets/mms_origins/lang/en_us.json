@@ -89,5 +89,9 @@
   "power.mms_origins.seaborn.cant_sleep": "You cannot rest out of the water.",
   "power.mms_origins.water_power.name": "Water Power",
   "power.mms_origins.water_power.description": "Wet, whether submerged or under rain, your blows land far harder. Somewhere hot, or in the Nether, the same tide runs against you.",
+  "power.mms_origins.wetness.name": "Wetness",
+  "power.mms_origins.wetness.description": "The damp clinging to your skin, full while you are in water or rain and slowly drying on land. While any remains you still count as wet, so your water powers carry over onto dry land until it runs out.",
+  "badge.mms_origins.wetness.0": "Step into water or stand in the rain to soak through, or drink a bottle of water to dampen your skin on the move.",
+  "badge.mms_origins.wetness.1": "While the bar holds, your water powers work on land; once it dries out, they fade until you are wet again.",
   "item.mms_origins.umbrella": "Umbrella"
 }
