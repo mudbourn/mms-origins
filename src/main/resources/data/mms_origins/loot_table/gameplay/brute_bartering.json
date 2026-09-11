@@ -6,17 +6,17 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 1,
           "name": "minecraft:netherite_upgrade_smithing_template"
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
+          "weight": 2,
           "name": "minecraft:enchanted_golden_apple"
         },
         {
           "type": "minecraft:item",
-          "weight": 6,
+          "weight": 3,
           "name": "minecraft:diamond_sword",
           "functions": [
             {
@@ -27,7 +27,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 6,
+          "weight": 3,
           "name": "minecraft:diamond_pickaxe",
           "functions": [
             {
@@ -38,7 +38,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 6,
+          "weight": 3,
           "name": "minecraft:diamond_axe",
           "functions": [
             {
@@ -49,7 +49,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
+          "weight": 3,
           "name": "minecraft:diamond_chestplate",
           "functions": [
             {
@@ -60,7 +60,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
+          "weight": 3,
           "name": "minecraft:diamond_helmet",
           "functions": [
             {
@@ -71,7 +71,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 6,
+          "weight": 3,
           "name": "minecraft:diamond_boots",
           "functions": [
             {
@@ -82,18 +82,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 8,
-          "name": "minecraft:crossbow",
-          "functions": [
-            {
-              "function": "minecraft:enchant_randomly",
-              "options": "#minecraft:on_random_loot"
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
+          "weight": 5,
           "name": "minecraft:golden_boots",
           "functions": [
             {
@@ -104,7 +93,18 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 12,
+          "name": "minecraft:crossbow",
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly",
+              "options": "#minecraft:on_random_loot"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 18,
           "name": "minecraft:iron_sword",
           "functions": [
             {
@@ -115,7 +115,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 18,
           "name": "minecraft:iron_chestplate",
           "functions": [
             {
@@ -126,7 +126,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 12,
+          "weight": 24,
           "name": "minecraft:enchanted_book",
           "functions": [
             {

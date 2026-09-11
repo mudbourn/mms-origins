@@ -195,10 +195,19 @@
           "type": "origins:delay",
           "ticks": 120,
           "action": {
-            "type": "origins:change_resource",
-            "resource": "mms_origins:zombie_meter",
-            "change": 0,
-            "operation": "set"
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:change_resource",
+                "resource": "mms_origins:zombie_meter",
+                "change": 0,
+                "operation": "set"
+              },
+              {
+                "type": "origins:play_sound",
+                "sound": "minecraft:entity.zombie_villager.converted"
+              }
+            ]
           }
         }
       ]

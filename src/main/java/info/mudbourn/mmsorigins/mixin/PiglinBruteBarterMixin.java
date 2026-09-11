@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * admires it for a spell, the way a common piglin would, before paying out from
  * its bastion-gear table. An ingot is stiffed six times in ten and a block three
  * times in ten, the brute pocketing the gold. Anything that is not a gold ingot or
- * block is ignored.
+ * block is ignored, and a zombified dealer is refused the trade outright.
  *
  * <p>The admire timer does not survive a save, but the held gold does, so a brute
  * reloaded mid-admire would hold its gold forever with no timer left to finish it.
@@ -86,7 +86,9 @@ public class PiglinBruteBarterMixin {
             if (!block && !ingot) {
                 continue;
             }
-            if (!(dropped.getOwner() instanceof Player player) || !MmsOriginsPowers.ARMS_DEALING.isActive(player)) {
+            if (!(dropped.getOwner() instanceof Player player)
+                    || !MmsOriginsPowers.ARMS_DEALING.isActive(player)
+                    || MmsOriginsPowers.ZOMBIFIED.isActive(player)) {
                 continue;
             }
             stack.shrink(1);
