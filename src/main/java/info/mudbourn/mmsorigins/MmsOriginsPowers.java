@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins;
 
+import io.github.apace100.apoli.power.CooldownPower;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeReference;
 import net.minecraft.resources.Identifier;
@@ -79,6 +80,26 @@ public final class MmsOriginsPowers {
      */
     public static final PowerType<?> VERDANT_GROWTH =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "verdant_growth"));
+
+    /**
+     * Enderian gaze kinship. Endermen aggro when a player stares at them, a
+     * check baked into the mob with no Apoli hook, so the power is a marker and
+     * {@code EndermanKinshipMixin} spares the bearer from it.
+     */
+    public static final PowerType<?> ENDER_KINSHIP =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "ender_kinship"));
+
+    /**
+     * The fairy's anxious-heart cooldown. Apoli's {@code action_when_hit} sees
+     * only the raw incoming damage, so {@code FairyStartleMixin} measures the
+     * true health lost to a single blow and triggers this cooldown when it
+     * reaches the faint threshold; {@code fairy_flight} is gated on it.
+     */
+    public static final PowerType<CooldownPower> ANXIOUS_HEART_TIMER =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "anxious_heart_timer"));
+
+    /** Health lost to one blow, at or above which a fairy is startled from the air. */
+    public static final float STARTLE_DAMAGE_THRESHOLD = 8.0F;
 
     private MmsOriginsPowers() {
     }

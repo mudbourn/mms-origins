@@ -27,11 +27,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Arms Dealing: piglin brutes learn to barter, which vanilla never lets them do.
  *
  * <p>A brute normally ignores gold entirely. When an arms-dealing piglin drops a
- * gold ingot or block within reach, the brute takes one into its off hand and
- * admires it for a spell, the way a common piglin would, before paying out from
- * its bastion-gear table. An ingot is stiffed six times in ten and a block three
- * times in ten, the brute pocketing the gold. Anything that is not a gold ingot or
- * block is ignored, and a zombified dealer is refused the trade outright.
+ * gold ingot or block nearby, the brute walks over to the nearest such piece and,
+ * once within two blocks, takes it into its off hand and admires it for a spell,
+ * the way a common piglin would, before paying out from its bastion-gear table.
+ * An ingot pays half the time and a block a little more often, so a block is a
+ * touch better as well as being worth more, without leaving ingots pointless.
+ * Anything that is not a gold ingot or block is ignored. A zombified player within
+ * 128 blocks freezes the brute's dealing entirely, so none may trade while the
+ * sickness is in the air.
  *
  * <p>The admire timer does not survive a save, but the held gold does, so a brute
  * reloaded mid-admire would hold its gold forever with no timer left to finish it.
@@ -47,13 +50,25 @@ public class PiglinBruteBarterMixin {
             Identifier.fromNamespaceAndPath("mms_origins", "gameplay/brute_bartering"));
 
     @Unique
-    private static final float MMS_INGOT_STIFF_CHANCE = 0.60F;
+    private static final float MMS_INGOT_STIFF_CHANCE = 0.50F;
 
     @Unique
-    private static final float MMS_BLOCK_STIFF_CHANCE = 0.30F;
+    private static final float MMS_BLOCK_STIFF_CHANCE = 0.45F;
 
     @Unique
     private static final int MMS_ADMIRE_TICKS = 120;
+
+    @Unique
+    private static final double MMS_ZOMBIE_WARD_RANGE = 128.0;
+
+    @Unique
+    private static final double MMS_DETECT_RANGE = 12.0;
+
+    @Unique
+    private static final double MMS_PICKUP_RANGE = 2.0;
+
+    @Unique
+    private static final double MMS_WALK_SPEED = 1.0;
 
     @Unique
     private int mmsOrigins$admireTicks;
@@ -64,6 +79,10 @@ public class PiglinBruteBarterMixin {
     @Inject(method = "customServerAiStep", at = @At("TAIL"))
     private void mmsOrigins$barterForGear(ServerLevel level, CallbackInfo ci) {
         PiglinBrute brute = (PiglinBrute) (Object) this;
+        // A zombified player within sight freezes all dealing: no pickup, and no admire pays out until they leave.
+        if (mmsOrigins$zombifiedNear(level, brute)) {
+            return;
+        }
         if (this.mmsOrigins$admireTicks > 0) {
             this.mmsOrigins$admireTicks--;
             if (this.mmsOrigins$admireTicks == 0) {
@@ -78,31 +97,61 @@ public class PiglinBruteBarterMixin {
             this.mmsOrigins$admireTicks = MMS_ADMIRE_TICKS;
             return;
         }
-        AABB reach = brute.getBoundingBox().inflate(4.0);
-        for (ItemEntity dropped : level.getEntitiesOfClass(ItemEntity.class, reach)) {
-            ItemStack stack = dropped.getItem();
-            boolean block = stack.is(Items.GOLD_BLOCK);
-            boolean ingot = stack.is(Items.GOLD_INGOT);
-            if (!block && !ingot) {
-                continue;
-            }
-            if (!(dropped.getOwner() instanceof Player player)
-                    || !MmsOriginsPowers.ARMS_DEALING.isActive(player)
-                    || MmsOriginsPowers.ZOMBIFIED.isActive(player)) {
-                continue;
-            }
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                dropped.discard();
-            } else {
-                dropped.setItem(stack);
-            }
-            brute.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(block ? Items.GOLD_BLOCK : Items.GOLD_INGOT));
-            brute.playSound(SoundEvents.PIGLIN_ADMIRING_ITEM, 1.0F, 1.0F);
-            this.mmsOrigins$admirePays = mmsOrigins$rollPays(brute, block);
-            this.mmsOrigins$admireTicks = MMS_ADMIRE_TICKS;
+        ItemEntity target = mmsOrigins$nearestGold(level, brute);
+        if (target == null) {
             return;
         }
+        // Walk up to the gold first; a brute only takes it once it is close enough to reach down for it.
+        if (brute.distanceToSqr(target) > MMS_PICKUP_RANGE * MMS_PICKUP_RANGE) {
+            brute.getNavigation().moveTo(target, MMS_WALK_SPEED);
+            return;
+        }
+        ItemStack stack = target.getItem();
+        boolean block = stack.is(Items.GOLD_BLOCK);
+        stack.shrink(1);
+        if (stack.isEmpty()) {
+            target.discard();
+        } else {
+            target.setItem(stack);
+        }
+        brute.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(block ? Items.GOLD_BLOCK : Items.GOLD_INGOT));
+        brute.playSound(SoundEvents.PIGLIN_ADMIRING_ITEM, 1.0F, 1.0F);
+        this.mmsOrigins$admirePays = mmsOrigins$rollPays(brute, block);
+        this.mmsOrigins$admireTicks = MMS_ADMIRE_TICKS;
+    }
+
+    // The closest gold ingot or block an arms dealer has dropped in reach, or null when none is on offer.
+    @Unique
+    private static ItemEntity mmsOrigins$nearestGold(ServerLevel level, PiglinBrute brute) {
+        AABB reach = brute.getBoundingBox().inflate(MMS_DETECT_RANGE);
+        ItemEntity nearest = null;
+        double nearestSq = Double.MAX_VALUE;
+        for (ItemEntity dropped : level.getEntitiesOfClass(ItemEntity.class, reach)) {
+            ItemStack stack = dropped.getItem();
+            if (!stack.is(Items.GOLD_BLOCK) && !stack.is(Items.GOLD_INGOT)) {
+                continue;
+            }
+            if (!(dropped.getOwner() instanceof Player player) || !MmsOriginsPowers.ARMS_DEALING.isActive(player)) {
+                continue;
+            }
+            double distSq = brute.distanceToSqr(dropped);
+            if (distSq < nearestSq) {
+                nearest = dropped;
+                nearestSq = distSq;
+            }
+        }
+        return nearest;
+    }
+
+    @Unique
+    private static boolean mmsOrigins$zombifiedNear(ServerLevel level, PiglinBrute brute) {
+        double wardSq = MMS_ZOMBIE_WARD_RANGE * MMS_ZOMBIE_WARD_RANGE;
+        for (Player player : level.players()) {
+            if (MmsOriginsPowers.ZOMBIFIED.isActive(player) && player.distanceToSqr(brute) <= wardSq) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Unique

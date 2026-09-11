@@ -1,8 +1,19 @@
 {
-  "type": "origins:modify_damage_taken",
-  "modifier": {
-    "name": "Fragile frame",
-    "value": 0.5,
-    "operation": "multiply_base"
+  "type": "origins:multiple",
+  "damage_taken": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "name": "Fragile frame",
+      "value": 0.5,
+      "operation": "multiply_base"
+    }
+  },
+  "damage_dealt": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "name": "Frail hands",
+      "value": -0.5,
+      "operation": "multiply_total"
+    }
   }
 }

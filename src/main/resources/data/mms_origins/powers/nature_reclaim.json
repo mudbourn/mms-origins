@@ -1,0 +1,64 @@
+{
+  "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/active.png",
+      "text": {
+        "translate": "badge.mms_origins.nature_reclaim.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.nature_reclaim.1"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.nature_reclaim.2"
+      }
+    }
+  ],
+  "uses": {
+    "type": "origins:resource",
+    "hidden": true,
+    "min": 0,
+    "max": 2,
+    "start_value": 2
+  },
+  "renew": {
+    "type": "origins:action_over_time",
+    "interval": 40,
+    "condition": {
+      "type": "origins:time_of_day",
+      "comparison": ">=",
+      "compare_to": 12000
+    },
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:nature_reclaim_uses",
+      "operation": "set",
+      "change": 2
+    }
+  },
+  "cast": {
+    "type": "mms_origins:nature_reclaim",
+    "cast_ticks": 100,
+    "sound_delay": 20,
+    "charging_sound": "minecraft:block.beacon.ambient",
+    "finish_sound": "minecraft:block.amethyst_block.chime",
+    "uses_resource": "mms_origins:nature_reclaim_uses",
+    "sun_resource": "mms_origins:sun_power",
+    "sun_cost": 20,
+    "noon_min": 5000,
+    "noon_max": 7000,
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": true
+    }
+  }
+}

@@ -1,5 +1,11 @@
 {
   "type": "mms_origins:fairy_flight",
+  "condition": {
+    "type": "origins:resource",
+    "resource": "mms_origins:anxious_heart_timer",
+    "comparison": "==",
+    "compare_to": 0
+  },
   "badges": [
     {
       "type": "origins:tooltip",

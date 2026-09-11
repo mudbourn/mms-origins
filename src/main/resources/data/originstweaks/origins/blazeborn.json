@@ -7,6 +7,8 @@
 	"loading_priority": 1,
 	"powers": [
 		"originstweaks:burning_wrath",
+		"originstweaks:blaze_flight",
+		"originstweaks:molten_core",
 		"originstweaks:feed_the_flame",
 		"originstweaks:firecharged_projectile",
 		"originstweaks:fire_immunity",

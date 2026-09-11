@@ -1,0 +1,19 @@
+{
+	"type": "mms_origins:blaze_flight",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/active.png",
+			"text": {
+				"translate": "badge.originstweaks.blaze_flight.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.blaze_flight.1"
+			}
+		}
+	]
+}

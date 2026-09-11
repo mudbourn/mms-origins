@@ -49,10 +49,49 @@ public final class MmsPowerFactories {
         registerActiveSelfHud();
         registerHeightAboveGround();
         registerFairyFlight();
+        registerBlazeFlight();
         registerSummonHenchmen();
         registerHenchmenCount();
         registerCausticSpores();
         registerCausticMarked();
+        registerNatureReclaim();
+    }
+
+    private static void registerNatureReclaim() {
+        Identifier id = id("nature_reclaim");
+        Registry.register(
+            ApoliRegistries.POWER_FACTORY,
+            id,
+            new PowerFactory<>(
+                id,
+                new SerializableData()
+                    .add("cast_ticks", SerializableDataTypes.INT, 100)
+                    .add("sound_delay", SerializableDataTypes.INT, 20)
+                    .add("charging_sound", SerializableDataTypes.SOUND_EVENT, null)
+                    .add("finish_sound", SerializableDataTypes.SOUND_EVENT, null)
+                    .add("uses_resource", ApoliDataTypes.POWER_TYPE, null)
+                    .add("sun_resource", ApoliDataTypes.POWER_TYPE, null)
+                    .add("sun_cost", SerializableDataTypes.INT, 0)
+                    .add("noon_min", SerializableDataTypes.INT, 5000)
+                    .add("noon_max", SerializableDataTypes.INT, 7000)
+                    .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key()),
+                data -> (type, entity) -> {
+                    NatureReclaimPower power = new NatureReclaimPower(
+                        type,
+                        entity,
+                        data.getInt("cast_ticks"),
+                        data.getInt("sound_delay"),
+                        data.get("charging_sound"),
+                        data.get("finish_sound"),
+                        data.get("uses_resource"),
+                        data.get("sun_resource"),
+                        data.getInt("sun_cost"),
+                        data.getInt("noon_min"),
+                        data.getInt("noon_max"));
+                    power.setKey(data.get("key"));
+                    return power;
+                })
+                .allowCondition());
     }
 
     private static void registerCausticSpores() {
@@ -108,6 +147,18 @@ public final class MmsPowerFactories {
                 id,
                 new SerializableData(),
                 data -> (type, entity) -> new FairyFlightPower(type, entity))
+                .allowCondition());
+    }
+
+    private static void registerBlazeFlight() {
+        Identifier id = id("blaze_flight");
+        Registry.register(
+            ApoliRegistries.POWER_FACTORY,
+            id,
+            new PowerFactory<>(
+                id,
+                new SerializableData(),
+                data -> (type, entity) -> new BlazeFlightPower(type, entity))
                 .allowCondition());
     }
 

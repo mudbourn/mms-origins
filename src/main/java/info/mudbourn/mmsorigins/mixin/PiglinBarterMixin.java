@@ -40,12 +40,21 @@ import java.util.Set;
  * goods from that same table instead of being kept, the block being worth far
  * more than a single ingot. The vanilla table and the piglin's dealings with
  * everyone else are left untouched.
+ *
+ * <p>A piglin that finishes admiring gold with no player within reach, or with a
+ * zombified player anywhere within 128 blocks, keeps the gold in hand instead of
+ * paying out, so dropping currency and fleeing earns nothing and the sickness
+ * spoils trade for all. This holds for every piglin, not just those with a
+ * kinsman near.
  */
 @Mixin(PiglinAi.class)
 public class PiglinBarterMixin {
 
     @Unique
     private static final double MMS_KIN_RANGE = 16.0;
+
+    @Unique
+    private static final double MMS_ZOMBIE_WARD_RANGE = 128.0;
 
     @Unique
     private static final int MMS_BLOCK_DROP_COUNT = 3;
@@ -71,6 +80,33 @@ public class PiglinBarterMixin {
         cir.setReturnValue(mmsOrigins$rollKinBarter(serverLevel, piglin));
     }
 
+    // A zombified player anywhere near sours the piglin on trade; it keeps the gold instead of paying out.
+    @Unique
+    private static boolean mmsOrigins$zombifiedNear(Level level, Piglin piglin) {
+        double wardSq = MMS_ZOMBIE_WARD_RANGE * MMS_ZOMBIE_WARD_RANGE;
+        for (Player player : level.players()) {
+            if (MmsOriginsPowers.ZOMBIFIED.isActive(player) && player.distanceToSqr(piglin) <= wardSq) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Inject(method = "stopHoldingOffHandItem", at = @At("HEAD"), cancellable = true)
+    private static void mmsOrigins$keepGoldWhenAlone(ServerLevel level, Piglin piglin, boolean bartering, CallbackInfo ci) {
+        if (!bartering || !piglin.isAdult()) {
+            return;
+        }
+        ItemStack offhand = piglin.getItemInHand(InteractionHand.OFF_HAND);
+        if (!offhand.is(Items.GOLD_INGOT) && !offhand.is(Items.GOLD_BLOCK)) {
+            return;
+        }
+        // No one is left to trade with, or a zombified player has spoiled the mood; keep the gold rather than paying out.
+        if (level.getNearestPlayer(piglin, MMS_KIN_RANGE) == null || mmsOrigins$zombifiedNear(level, piglin)) {
+            ci.cancel();
+        }
+    }
+
     @Inject(method = "stopHoldingOffHandItem", at = @At("HEAD"), cancellable = true)
     private static void mmsOrigins$blockBarter(ServerLevel level, Piglin piglin, boolean bartering, CallbackInfo ci) {
         if (!piglin.isAdult()) {
@@ -82,6 +118,10 @@ public class PiglinBarterMixin {
         }
         Player player = level.getNearestPlayer(piglin, MMS_KIN_RANGE);
         if (player == null || !MmsOriginsPowers.KINSMEN.isActive(player)) {
+            return;
+        }
+        // The keep-gold guard already holds the block when a zombified player is near; do not pay over it.
+        if (mmsOrigins$zombifiedNear(level, piglin)) {
             return;
         }
         piglin.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);

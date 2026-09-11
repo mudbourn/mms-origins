@@ -37,8 +37,14 @@
     "modifier": {
       "name": "Fairy luck",
       "attribute": "minecraft:generic.luck",
-      "value": 2,
+      "value": 18,
       "operation": "addition"
+    }
+  },
+  "fishing_catch": {
+    "type": "origins:replace_loot_table",
+    "replace": {
+      "minecraft:gameplay/fishing": "mms_origins:gameplay/fairy_fishing"
     }
   }
 }

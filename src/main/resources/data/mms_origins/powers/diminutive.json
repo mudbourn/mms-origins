@@ -1,14 +1,5 @@
 {
   "type": "origins:multiple",
-  "scale": {
-    "type": "origins:attribute",
-    "modifier": {
-      "name": "Fairy scale",
-      "attribute": "minecraft:generic.scale",
-      "value": -0.6,
-      "operation": "multiply_base"
-    }
-  },
   "reach": {
     "type": "origins:attribute",
     "modifier": {

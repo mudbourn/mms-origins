@@ -1,0 +1,27 @@
+{
+  "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "text": {
+        "translate": "badge.mms_origins.anxious_heart.0"
+      }
+    }
+  ],
+  "timer": {
+    "type": "origins:cooldown",
+    "cooldown": 200,
+    "hud_render": {
+      "should_render": true,
+      "bar_index": 7,
+      "sprite_location": "origins:textures/gui/resource_bar.png",
+      "condition": {
+        "type": "origins:resource",
+        "resource": "*:*_anxious_heart_timer",
+        "comparison": ">",
+        "compare_to": 0
+      }
+    }
+  }
+}

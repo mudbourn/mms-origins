@@ -17,10 +17,14 @@ public final class FairyFlightPower extends Power {
 
     private static final int REQUIRED_FOOD_LEVEL = 6;
     private static final float EXHAUSTION_PER_FLYING_TICK = 1.0E-4F;
+    private static final float FAINT_HEALTH_THRESHOLD = 6.0F;
+    private static final float NORMAL_FLYING_SPEED = 0.05F;
+    private static final float FAINT_FLYING_SPEED = 0.025F;
 
     public FairyFlightPower(PowerType<?> type, LivingEntity entity) {
         super(type, entity);
-        this.setTicking();
+        // Tick even while a condition holds this inactive, so Anxious Heart can strip flight in flight.
+        this.setTicking(true);
     }
 
     @Override
@@ -34,8 +38,12 @@ public final class FairyFlightPower extends Power {
         Abilities abilities = player.getAbilities();
         boolean fedEnough = isActive() && player.getFoodData().getFoodLevel() >= REQUIRED_FOOD_LEVEL;
         if (fedEnough) {
-            if (!abilities.mayfly) {
-                abilities.mayfly = true;
+            // A fairy down to three hearts or less flies at a faltering pace.
+            float wantedSpeed = player.getHealth() <= FAINT_HEALTH_THRESHOLD ? FAINT_FLYING_SPEED : NORMAL_FLYING_SPEED;
+            boolean changed = !abilities.mayfly || abilities.getFlyingSpeed() != wantedSpeed;
+            abilities.mayfly = true;
+            abilities.setFlyingSpeed(wantedSpeed);
+            if (changed) {
                 player.onUpdateAbilities();
             }
             if (abilities.flying) {
@@ -44,6 +52,7 @@ public final class FairyFlightPower extends Power {
         } else if (abilities.mayfly || abilities.flying) {
             abilities.mayfly = false;
             abilities.flying = false;
+            abilities.setFlyingSpeed(NORMAL_FLYING_SPEED);
             player.onUpdateAbilities();
         }
     }
@@ -60,6 +69,7 @@ public final class FairyFlightPower extends Power {
         if (abilities.mayfly || abilities.flying) {
             abilities.mayfly = false;
             abilities.flying = false;
+            abilities.setFlyingSpeed(NORMAL_FLYING_SPEED);
             player.onUpdateAbilities();
         }
     }
