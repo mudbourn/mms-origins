@@ -99,6 +99,15 @@ public final class MmsOriginsPowers {
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "ender_kinship"));
 
     /**
+     * Guardian kinship. Guardians and elder guardians take a fishman for one of
+     * their own and never hunt them. Their targeting carries no Apoli hook, so
+     * the power is a marker and {@code GuardianKinshipMixin} and
+     * {@code GuardianForgetTargetMixin} spare the bearer while unprovoked.
+     */
+    public static final PowerType<?> GUARDIAN_KINSHIP =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "guardian_kinship"));
+
+    /**
      * Avian peace. The overworld's hostile mobs leave the beloved bird-folk be,
      * a truce baked into mob targeting with no Apoli hook, so the power is a
      * marker and {@code AvianPeaceMixin} and {@code AvianForgetTargetMixin} spare
