@@ -19,6 +19,7 @@
     "PiglinBruteBarterMixin",
     "PiglinDefendMixin",
     "PiglinFleeZombifiedMixin",
+    "PiglinGoldGorgeMixin",
     "PiglinGrudgeMixin",
     "PiglinGrudgePursuitMixin",
     "PlayerHurtSoundMixin",

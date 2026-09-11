@@ -188,7 +188,8 @@
       "actions": [
         {
           "type": "origins:play_sound",
-          "sound": "minecraft:entity.zombie_villager.cure"
+          "sound": "minecraft:entity.zombie_villager.cure",
+          "pitch": 0.65
         },
         {
           "type": "origins:delay",
