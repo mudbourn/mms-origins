@@ -1,6 +1,11 @@
 {
 	"type": "mms_origins:blaze_flight",
 	"resource": "originstweaks:fire_power",
+	"condition": {
+		"type": "origins:food_level",
+		"comparison": ">",
+		"compare_to": 6
+	},
 	"badges": [
 		{
 			"type": "origins:tooltip",

@@ -59,7 +59,8 @@ public abstract class LavaSwimMixin {
         double vertical = motion.y;
         if (self.isCrouching()) {
             vertical -= SINK_PER_TICK;
-        } else if (!jumping && vertical < 0.0) {
+        } else if (jumping) {
+            // Holding jump treads the lava in place instead of sinking or rising.
             vertical = 0.0;
         }
         self.setDeltaMovement(motion.x, vertical, motion.z);

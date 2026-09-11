@@ -11,6 +11,11 @@
 	],
 	"fireballs": {
 		"type": "origins:fire_projectile",
+		"condition": {
+			"type": "origins:food_level",
+			"comparison": ">",
+			"compare_to": 6
+		},
 		"entity_type": "small_fireball",
 		"cooldown": 200,
 		"hud_render": {

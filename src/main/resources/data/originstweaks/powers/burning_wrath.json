@@ -26,10 +26,20 @@
 	"set_on_fire": {
 		"type": "origins:active_self",
 		"condition": {
-			"type": "origins:resource",
-			"resource": "originstweaks:fire_power",
-			"comparison": ">=",
-			"compare_to": 40
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"resource": "originstweaks:fire_power",
+					"comparison": ">=",
+					"compare_to": 40
+				},
+				{
+					"type": "origins:food_level",
+					"comparison": ">",
+					"compare_to": 6
+				}
+			]
 		},
 		"entity_action": {
 			"type": "origins:and",

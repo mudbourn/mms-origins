@@ -4,6 +4,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AbstractPiglinGrudgeMixin",
+    "AvianForgetTargetMixin",
+    "AvianPeaceMixin",
     "CooldownAccelMixin",
     "CreativeTabDuplicateGuardMixin",
     "CropYieldMixin",

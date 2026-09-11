@@ -90,6 +90,15 @@ public final class MmsOriginsPowers {
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "ender_kinship"));
 
     /**
+     * Avian peace. The overworld's hostile mobs leave the beloved bird-folk be,
+     * a truce baked into mob targeting with no Apoli hook, so the power is a
+     * marker and {@code AvianPeaceMixin} and {@code AvianForgetTargetMixin} spare
+     * the bearer while they have not struck first.
+     */
+    public static final PowerType<?> AVIAN_PEACE =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "avian_peace"));
+
+    /**
      * The fairy's anxious-heart cooldown. Apoli's {@code action_when_hit} sees
      * only the raw incoming damage, so {@code FairyStartleMixin} measures the
      * true health lost to a single blow and triggers this cooldown when it

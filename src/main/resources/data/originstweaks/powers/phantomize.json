@@ -21,6 +21,13 @@
 			"text": {
 				"translate": "badge.originstweaks.phantomize.2"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/active.png",
+			"text": {
+				"translate": "badge.originstweaks.phantomize.3"
+			}
 		}
 	],
 	"toggle": {
@@ -48,6 +55,47 @@
 		"condition": {
 			"type": "origins:power_active",
 			"power": "*:*_toggle"
+		}
+	},
+	"flight": {
+		"type": "origins:elytra_flight",
+		"render_elytra": false,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:soulbound_energy",
+					"comparison": ">",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"flight_toll": {
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:soulbound_energy",
+			"change": -1,
+			"operation": "add"
+		},
+		"interval": 20,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:fall_flying"
+				}
+			]
 		}
 	}
 }
