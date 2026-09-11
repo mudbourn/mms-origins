@@ -6,10 +6,13 @@
 	"impact": 3,
 	"loading_priority": 1,
 	"powers": [
+		"originstweaks:fire_power",
+		"originstweaks:fire_power_regen",
 		"originstweaks:burning_wrath",
 		"originstweaks:blaze_flight",
 		"originstweaks:molten_core",
 		"originstweaks:feed_the_flame",
+		"originstweaks:fiery_metabolism",
 		"originstweaks:firecharged_projectile",
 		"originstweaks:fire_immunity",
 		"originstweaks:blaze_kinship",

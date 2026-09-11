@@ -1,0 +1,33 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.originstweaks.heat_sensitivity.0"
+			}
+		}
+	],
+	"warmth_pace": {
+		"type": "origins:attribute",
+		"modifier": {
+			"attribute": "thermoo:heat_resistance",
+			"id": "originstweaks:heat_sensitivity_warmth_pace",
+			"operation": "addition",
+			"value": -10
+		}
+	},
+	"warmth_wound": {
+		"type": "origins:modify_damage_taken",
+		"modifier": {
+			"name": "Heat sensitivity",
+			"operation": "multiply_base",
+			"value": 1.0
+		},
+		"damage_condition": {
+			"type": "origins:in_tag",
+			"tag": "mms_origins:is_heat"
+		}
+	}
+}

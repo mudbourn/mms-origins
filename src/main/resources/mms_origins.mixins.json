@@ -13,6 +13,7 @@
     "EndermanKinshipMixin",
     "FairyStartleMixin",
     "ItemStackConsumeMixin",
+    "LavaSwimMixin",
     "LivingEntityDeathMixin",
     "PhantomForgetTargetMixin",
     "PhantomUnseenMixin",

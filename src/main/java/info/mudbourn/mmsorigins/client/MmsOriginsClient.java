@@ -42,6 +42,7 @@ public class MmsOriginsClient implements ClientModInitializer {
                     }
                 });
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            LavaViewState.tick(client);
             if (client.level != null) {
                 ButterflyFlap.tickAll(client.level.players());
             }

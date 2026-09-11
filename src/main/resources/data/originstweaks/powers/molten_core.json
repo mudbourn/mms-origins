@@ -22,6 +22,9 @@
 			"name": "Molten stride",
 			"operation": "multiply_base",
 			"value": 2.0
+		},
+		"condition": {
+			"type": "origins:swimming"
 		}
 	}
 }

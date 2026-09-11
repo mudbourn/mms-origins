@@ -172,7 +172,7 @@ public final class NatureReclaimPower extends Power implements Active {
             return null;
         }
         for (VariableIntPower power : PowerHolderComponent.getPowers(player, VariableIntPower.class)) {
-            if (power.getType() == resourceType) {
+            if (power.getType().getIdentifier().equals(resourceType.getIdentifier())) {
                 return power;
             }
         }

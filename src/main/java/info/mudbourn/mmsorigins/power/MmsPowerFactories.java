@@ -157,8 +157,9 @@ public final class MmsPowerFactories {
             id,
             new PowerFactory<>(
                 id,
-                new SerializableData(),
-                data -> (type, entity) -> new BlazeFlightPower(type, entity))
+                new SerializableData()
+                    .add("resource", ApoliDataTypes.POWER_TYPE, null),
+                data -> (type, entity) -> new BlazeFlightPower(type, entity, data.get("resource")))
                 .allowCondition());
     }
 

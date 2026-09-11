@@ -1,0 +1,11 @@
+{
+	"type": "origins:resource",
+	"hidden": true,
+	"min": 0,
+	"max": 100,
+	"start_value": 0,
+	"hud_render": {
+		"sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+		"bar_index": 15
+	}
+}

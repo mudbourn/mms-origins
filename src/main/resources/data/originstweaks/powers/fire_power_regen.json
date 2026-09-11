@@ -1,0 +1,118 @@
+{
+	"type": "origins:multiple",
+	"hidden": true,
+	"stoke": {
+		"type": "origins:action_over_time",
+		"interval": 5,
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": ">",
+					"compare_to": 0.0
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:in_tag",
+						"tag": "minecraft:fire"
+					}
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "originstweaks:fire_power",
+			"operation": "add",
+			"change": 3
+		}
+	},
+	"stoke_lava": {
+		"type": "origins:action_over_time",
+		"interval": 5,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": ">",
+					"compare_to": 0.0
+				},
+				{
+					"type": "origins:power_active",
+					"power": "originstweaks:molten_core"
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "originstweaks:fire_power",
+			"operation": "add",
+			"change": 3
+		}
+	},
+	"stoke_fire": {
+		"type": "origins:action_over_time",
+		"interval": 10,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:in_tag",
+						"tag": "minecraft:fire"
+					}
+				},
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": "<=",
+					"compare_to": 0.0
+				},
+				{
+					"type": "origins:power_active",
+					"power": "originstweaks:molten_core"
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "originstweaks:fire_power",
+			"operation": "add",
+			"change": 3
+		}
+	},
+	"cool": {
+		"type": "origins:action_over_time",
+		"interval": 10,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:lava",
+					"comparison": "<=",
+					"compare_to": 0.0
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:in_tag",
+						"tag": "minecraft:fire"
+					},
+					"inverted": true
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "originstweaks:fire_power",
+			"operation": "add",
+			"change": -1
+		}
+	}
+}

@@ -25,6 +25,12 @@
 	],
 	"set_on_fire": {
 		"type": "origins:active_self",
+		"condition": {
+			"type": "origins:resource",
+			"resource": "originstweaks:fire_power",
+			"comparison": ">=",
+			"compare_to": 40
+		},
 		"entity_action": {
 			"type": "origins:and",
 			"actions": [
@@ -33,19 +39,21 @@
 					"duration": 30
 				},
 				{
+					"type": "origins:change_resource",
+					"resource": "originstweaks:fire_power",
+					"operation": "add",
+					"change": -40
+				},
+				{
 					"type": "origins:play_sound",
 					"category": "players",
 					"sound": "minecraft:item.flintandsteel.use"
 				}
 			]
 		},
-		"cooldown": 1200,
+		"cooldown": 10,
 		"key": {
 			"key": "key.origins.primary_active"
-		},
-		"hud_render": {
-			"sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
-			"bar_index": 15
 		}
 	},
 	"damage_bonus_on_fire": {

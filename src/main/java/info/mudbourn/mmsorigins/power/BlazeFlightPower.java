@@ -1,25 +1,31 @@
 package info.mudbourn.mmsorigins.power;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
+import io.github.apace100.apoli.power.VariableIntPower;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
 
 /**
- * Lets a blazeborn take wing for as long as it burns. Flight is granted only
- * while the bearer is alight, and staying aloft saps that fire far faster than
- * it would ebb on the ground, so a blaze must keep stoking itself in lava or
- * flame to stay in the air. When the last of the fire dies the wings fail and
- * the blaze drops. Only {@code mayfly} is set; vanilla's double-tap-jump toggles
- * {@code flying} from there.
+ * Lets a blazeborn take wing for as long as their fire power lasts. Flight is
+ * granted while the shared fire power bar holds any charge, and staying aloft
+ * spends it, so a blaze must keep stoking the bar in lava or flame to stay up.
+ * The bar itself grows and cools from heat contact in the datapack; this power
+ * only draws on it. When it empties the wings fail and the blaze drops. Only
+ * {@code mayfly} is set; vanilla's double-tap-jump toggles {@code flying}.
  */
 public final class BlazeFlightPower extends Power {
 
-    private static final int EXTRA_FIRE_DRAIN_PER_TICK = 3;
+    private static final int FLIGHT_DRAIN_PER_TICK = 1;
+    private static final int FLIGHT_FIRE_TICKS = 20;
 
-    public BlazeFlightPower(PowerType<?> type, LivingEntity entity) {
+    private final PowerType<?> resource;
+
+    public BlazeFlightPower(PowerType<?> type, LivingEntity entity, PowerType<?> resource) {
         super(type, entity);
+        this.resource = resource;
         this.setTicking();
     }
 
@@ -32,16 +38,19 @@ public final class BlazeFlightPower extends Power {
             return;
         }
         Abilities abilities = player.getAbilities();
-        boolean alight = player.getRemainingFireTicks() > 0;
-        if (isActive() && alight) {
+        VariableIntPower fire = fuel();
+        boolean fueled = fire != null && fire.getValue() > 0;
+        if (isActive() && fueled) {
             if (!abilities.mayfly) {
                 abilities.mayfly = true;
                 player.onUpdateAbilities();
             }
-            if (abilities.flying) {
-                // Staying aloft burns through the fire that fuels the flight.
-                int remaining = player.getRemainingFireTicks();
-                player.setRemainingFireTicks(Math.max(0, remaining - EXTRA_FIRE_DRAIN_PER_TICK));
+            if (abilities.flying && !player.level().isClientSide()) {
+                // Staying aloft spends the fire power that fuels the flight.
+                fire.setValue(Math.max(0, fire.getValue() - FLIGHT_DRAIN_PER_TICK));
+                PowerHolderComponent.syncPower(player, fire.getType());
+                // Burning openly marks the fire power being spent to fly.
+                player.setRemainingFireTicks(Math.max(player.getRemainingFireTicks(), FLIGHT_FIRE_TICKS));
             }
         } else if (abilities.mayfly || abilities.flying) {
             abilities.mayfly = false;
@@ -64,5 +73,17 @@ public final class BlazeFlightPower extends Power {
             abilities.flying = false;
             player.onUpdateAbilities();
         }
+    }
+
+    private VariableIntPower fuel() {
+        if (resource == null) {
+            return null;
+        }
+        for (VariableIntPower power : PowerHolderComponent.getPowers(entity, VariableIntPower.class)) {
+            if (power.getType().getIdentifier().equals(resource.getIdentifier())) {
+                return power;
+            }
+        }
+        return null;
     }
 }

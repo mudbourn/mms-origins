@@ -5,6 +5,9 @@
   "client": [
     "AvatarBodyHideMixin",
     "ChooseOriginGridMixin",
+    "FireOverlayLowerMixin",
+    "LavaSurfaceAlphaMixin",
+    "LavaTranslucentLayerMixin",
     "LivingEntityRenderStateMixin",
     "LocalPlayerCrouchMixin",
     "PiglinBruteAdmirePoseMixin",
