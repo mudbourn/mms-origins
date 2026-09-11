@@ -16,8 +16,18 @@
 				{
 					"type": "origins:in_block",
 					"block_condition": {
-						"type": "origins:in_tag",
-						"tag": "minecraft:fire"
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:in_tag",
+								"tag": "minecraft:fire"
+							},
+							{
+								"type": "origins:block",
+								"block": "minecraft:soul_fire",
+								"inverted": true
+							}
+						]
 					}
 				}
 			]
@@ -27,6 +37,41 @@
 			"resource": "originstweaks:fire_power",
 			"operation": "add",
 			"change": 3
+		}
+	},
+	"stoke_soul_fire": {
+		"type": "origins:action_over_time",
+		"interval": 5,
+		"condition": {
+			"type": "origins:in_block",
+			"block_condition": {
+				"type": "origins:block",
+				"block": "minecraft:soul_fire"
+			}
+		},
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "originstweaks:fire_power",
+			"operation": "add",
+			"change": 4.95
+		}
+	},
+	"stoke_magma_block": {
+		"type": "origins:action_over_time",
+		"interval": 5,
+		"condition": {
+			"type": "origins:block_collision",
+			"offset_y": -0.05,
+			"block_condition": {
+				"type": "origins:block",
+				"block": "minecraft:magma_block"
+			}
+		},
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "originstweaks:fire_power",
+			"operation": "add",
+			"change": 3.45
 		}
 	},
 	"stoke_lava": {
@@ -63,8 +108,18 @@
 				{
 					"type": "origins:in_block",
 					"block_condition": {
-						"type": "origins:in_tag",
-						"tag": "minecraft:fire"
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:in_tag",
+								"tag": "minecraft:fire"
+							},
+							{
+								"type": "origins:block",
+								"block": "minecraft:soul_fire",
+								"inverted": true
+							}
+						]
 					}
 				},
 				{
