@@ -1,5 +1,14 @@
 {
   "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "text": {
+        "translate": "badge.mms_origins.fragile_frame.0"
+      }
+    }
+  ],
   "damage_taken": {
     "type": "origins:modify_damage_taken",
     "modifier": {

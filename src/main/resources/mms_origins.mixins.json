@@ -13,6 +13,7 @@
     "EnchantmentHelperMixin",
     "EnderianPearlLandingMixin",
     "EndermanKinshipMixin",
+    "FairyAllureMixin",
     "FairyStartleMixin",
     "ItemStackConsumeMixin",
     "LavaSwimMixin",

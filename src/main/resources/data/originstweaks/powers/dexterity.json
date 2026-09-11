@@ -644,7 +644,7 @@
 	},
 	"leap_cooldown": {
 		"type": "origins:cooldown",
-		"cooldown": 80,
+		"cooldown": 60,
 		"hud_render": {
 			"bar_index": 3,
 			"order": 1,

@@ -14,6 +14,13 @@
 			"text": {
 				"translate": "badge.originstweaks.phasing.1"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.phasing.2"
+			}
 		}
 	],
 	"phase": {

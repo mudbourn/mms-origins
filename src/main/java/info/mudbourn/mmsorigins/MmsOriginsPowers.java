@@ -74,6 +74,15 @@ public final class MmsOriginsPowers {
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "fairy_charm"));
 
     /**
+     * Fairy allure. The mystique that charms villagers draws monsters too: they
+     * hunt a fairy from farther off and in preference to others. Mob targeting
+     * has no Apoli hook, so the power is a marker and {@code FairyAllureMixin}
+     * draws hostile mobs to the bearer.
+     */
+    public static final PowerType<?> FAIRY_ALLURE =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "fairy_allure"));
+
+    /**
      * Floran growth aura. Apoli has no factory that quickens block growth, so
      * the power is a marker and {@code VerdantGrowth} hastens plants around the
      * bearer each world tick.

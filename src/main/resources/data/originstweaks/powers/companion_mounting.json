@@ -10,6 +10,13 @@
 		},
 		{
 			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.companion_mounting.2"
+			}
+		},
+		{
+			"type": "origins:tooltip",
 			"sprite": "minecraft:textures/item/diamond.png",
 			"text": {
 				"translate": "badge.originstweaks.companion_mounting.1",
