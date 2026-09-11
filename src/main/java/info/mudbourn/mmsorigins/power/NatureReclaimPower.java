@@ -13,6 +13,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.biome.Biomes;
 
 /**
  * A slow nature spell cast from the off hand. The floran holds the primary key
@@ -119,6 +120,10 @@ public final class NatureReclaimPower extends Power implements Active {
     }
 
     private void cast(Player player, ServerLevel level) {
+        if (!level.getBiome(player.blockPosition()).is(Biomes.DARK_FOREST)) {
+            message(player, "message.mms_origins.nature_reclaim.not_forest");
+            return;
+        }
         if (!isAroundNoon(level)) {
             message(player, "message.mms_origins.nature_reclaim.not_noon");
             return;
