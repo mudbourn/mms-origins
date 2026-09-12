@@ -1,0 +1,24 @@
+{
+	"type": "origins:modify_damage_taken",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.originstweaks.bird_bones.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.originstweaks.bird_bones.1"
+			}
+		}
+	],
+	"modifier": {
+		"name": "Hollow bones",
+		"value": 0.3,
+		"operation": "multiply_total"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"type": "origins:modify_healing",
+	"hidden": true,
+	"modifier": {
+		"name": "Slow to mend",
+		"value": -0.25,
+		"operation": "multiply_total"
+	}
+}

@@ -251,6 +251,7 @@ public final class MmsPowerFactories {
                     .add("effects", SerializableDataTypes.STATUS_EFFECT_INSTANCES, List.of())
                     .add("set_on_fire_seconds", SerializableDataTypes.FLOAT, 0.0f)
                     .add("loop_consume_effects", SerializableDataTypes.BOOLEAN, true)
+                    .add("consume_sound_times", SerializableDataTypes.INT, 0)
                     .add("finish_sound", SerializableDataTypes.SOUND_EVENT, null),
                 data -> (type, entity) -> {
                     FoodProperties food = new FoodProperties(
@@ -275,6 +276,7 @@ public final class MmsPowerFactories {
                         food,
                         data.getFloat("set_on_fire_seconds"),
                         data.getBoolean("loop_consume_effects"),
+                        data.getInt("consume_sound_times"),
                         data.get("finish_sound"));
                 })
                 .allowCondition());

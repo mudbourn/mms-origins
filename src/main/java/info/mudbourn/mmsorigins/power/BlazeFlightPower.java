@@ -19,9 +19,12 @@ import net.minecraft.world.entity.player.Player;
 public final class BlazeFlightPower extends Power {
 
     private static final int FLIGHT_DRAIN_PER_TICK = 1;
+    private static final int DRAIN_INTERVAL = 2;
+    private static final int LAVA_CHARGE_PER_TICK = 1;
     private static final int FLIGHT_FIRE_TICKS = 20;
 
     private final PowerType<?> resource;
+    private int flightTicks;
 
     public BlazeFlightPower(PowerType<?> type, LivingEntity entity, PowerType<?> resource) {
         super(type, entity);
@@ -46,8 +49,14 @@ public final class BlazeFlightPower extends Power {
                 player.onUpdateAbilities();
             }
             if (abilities.flying && !player.level().isClientSide()) {
-                // Staying aloft spends the fire power that fuels the flight.
-                fire.setValue(Math.max(0, fire.getValue() - FLIGHT_DRAIN_PER_TICK));
+                flightTicks++;
+                if (player.isInLava()) {
+                    // Flying through lava feeds the bar instead of spending it.
+                    fire.setValue(Math.min(fire.getMax(), fire.getValue() + LAVA_CHARGE_PER_TICK));
+                } else if (flightTicks % DRAIN_INTERVAL == 0) {
+                    // Staying aloft spends the fire power, but only once every few ticks to keep it cheap.
+                    fire.setValue(Math.max(fire.getMin(), fire.getValue() - FLIGHT_DRAIN_PER_TICK));
+                }
                 PowerHolderComponent.syncPower(player, fire.getType());
                 // Burning openly marks the fire power being spent to fly.
                 player.setRemainingFireTicks(Math.max(player.getRemainingFireTicks(), FLIGHT_FIRE_TICKS));

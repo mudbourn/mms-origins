@@ -1,21 +1,5 @@
 {
-  "type": "origins:effect_immunity",
-  "effects": [
-    "scorchful:heat_stroke"
-  ],
-  "condition": {
-    "type": "origins:or",
-    "conditions": [
-      {
-        "type": "origins:dimension",
-        "dimension": "minecraft:the_nether"
-      },
-      {
-        "type": "origins:exposed_to_sun",
-        "inverted": true
-      }
-    ]
-  },
+  "type": "origins:multiple",
   "badges": [
     {
       "type": "origins:tooltip",
@@ -24,5 +8,32 @@
         "translate": "badge.mms_origins.nether_heat_immunity.0"
       }
     }
-  ]
+  ],
+  "heat_stroke_immunity": {
+    "type": "origins:effect_immunity",
+    "effects": [
+      "scorchful:heat_stroke"
+    ]
+  },
+  "warmth_pace": {
+    "type": "origins:attribute",
+    "modifier": {
+      "attribute": "thermoo:heat_resistance",
+      "id": "mms_origins:piglin_warmth_pace",
+      "operation": "addition",
+      "value": 7
+    }
+  },
+  "warmth_shield": {
+    "type": "origins:modify_damage_taken",
+    "modifier": {
+      "name": "Piglin heat resistance",
+      "operation": "multiply_base",
+      "value": -0.7
+    },
+    "damage_condition": {
+      "type": "origins:in_tag",
+      "tag": "mms_origins:is_heat"
+    }
+  }
 }

@@ -7,6 +7,8 @@
 	"loading_priority": 1,
 	"powers": [
 		"originstweaks:slow_falling",
+		"originstweaks:bird_bones",
+		"originstweaks:slow_healing",
 		"originstweaks:animal_friendship",
 		"originstweaks:avian_peace",
 		"originstweaks:green_thumb",

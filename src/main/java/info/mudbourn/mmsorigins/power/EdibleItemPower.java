@@ -34,6 +34,7 @@ public final class EdibleItemPower extends Power {
     private final FoodProperties food;
     private final float fireSeconds;
     private final boolean loopConsumeEffects;
+    private final int consumeSoundTimes;
     private final SoundEvent finishSound;
 
     public EdibleItemPower(
@@ -44,6 +45,7 @@ public final class EdibleItemPower extends Power {
             FoodProperties food,
             float fireSeconds,
             boolean loopConsumeEffects,
+            int consumeSoundTimes,
             SoundEvent finishSound) {
         super(type, entity);
         this.itemCondition = itemCondition;
@@ -51,6 +53,7 @@ public final class EdibleItemPower extends Power {
         this.food = food;
         this.fireSeconds = fireSeconds;
         this.loopConsumeEffects = loopConsumeEffects;
+        this.consumeSoundTimes = consumeSoundTimes;
         this.finishSound = finishSound;
         BY_TYPE.put(type.getIdentifier(), this);
     }
@@ -103,6 +106,11 @@ public final class EdibleItemPower extends Power {
     /** @return whether to repeat the chewing sound and particles mid-bite, or only emit once on completion. */
     public boolean loopsConsumeEffects() {
         return loopConsumeEffects;
+    }
+
+    /** @return how many evenly spaced consume-sound beats to play mid-bite, or zero for the vanilla cadence. */
+    public int getConsumeSoundTimes() {
+        return consumeSoundTimes;
     }
 
     /** @return a one-shot sound played when the bite completes, like a food burp, or {@code null} for none. */

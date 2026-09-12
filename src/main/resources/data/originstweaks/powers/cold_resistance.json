@@ -15,7 +15,7 @@
 			"attribute": "thermoo:frost_resistance",
 			"id": "originstweaks:cold_resistance_chill_pace",
 			"operation": "addition",
-			"value": 5
+			"value": 7
 		}
 	},
 	"chill_shield": {
@@ -23,7 +23,7 @@
 		"modifier": {
 			"name": "Cold resistance",
 			"operation": "multiply_base",
-			"value": -0.5
+			"value": -0.7
 		},
 		"damage_condition": {
 			"type": "origins:in_tag",

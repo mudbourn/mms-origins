@@ -53,10 +53,26 @@ public class ItemStackConsumeMixin {
         EdibleItemPower power = EdibleItemPower.find(entity, self);
         // The stack has no consumable component, so vanilla's onUseTick skips the chewing
         // sounds and particles; drive them from the power's own Consumable on the same beat.
-        if (power == null || !power.loopsConsumeEffects()) {
+        if (power == null) {
             return;
         }
         Consumable consumable = power.getConsumable();
+        int times = power.getConsumeSoundTimes();
+        // A fixed count spaces the consume sound evenly across the bite instead of the vanilla cadence.
+        if (times > 0) {
+            int total = consumable.consumeTicks();
+            int consumed = total - remainingTicks;
+            for (int i = 1; i <= times; i++) {
+                if (consumed == Math.round((float) total * i / (times + 1))) {
+                    consumable.emitParticlesAndSounds(entity.getRandom(), entity, self, 5);
+                    break;
+                }
+            }
+            return;
+        }
+        if (!power.loopsConsumeEffects()) {
+            return;
+        }
         if (consumable.shouldEmitParticlesAndSounds(remainingTicks)) {
             consumable.emitParticlesAndSounds(entity.getRandom(), entity, self, 5);
         }

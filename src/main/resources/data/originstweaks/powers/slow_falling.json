@@ -34,7 +34,8 @@
 		}
 	},
 	"glide": {
-		"type": "origins:attribute",
+		"type": "origins:conditioned_attribute",
+		"tick_rate": 1,
 		"modifier": {
 			"name": "Avian glide dampening",
 			"attribute": "minecraft:gravity",
@@ -50,6 +51,60 @@
 				},
 				{
 					"type": "origins:fall_flying"
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:*_feathers",
+					"comparison": ">",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"hop": {
+		"type": "origins:conditioned_attribute",
+		"tick_rate": 1,
+		"modifier": {
+			"name": "Avian lightness",
+			"attribute": "minecraft:gravity",
+			"value": -0.375,
+			"operation": "multiply_total"
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "originstweaks:slow_falling_toggle"
+				},
+				{
+					"type": "origins:fall_flying",
+					"inverted": true
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:*_feathers",
+					"comparison": ">",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"swift": {
+		"type": "origins:conditioned_attribute",
+		"tick_rate": 1,
+		"modifier": {
+			"name": "Avian swiftness",
+			"attribute": "minecraft:generic.movement_speed",
+			"value": 0.15,
+			"operation": "multiply_total"
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "originstweaks:slow_falling_toggle"
 				},
 				{
 					"type": "origins:resource",

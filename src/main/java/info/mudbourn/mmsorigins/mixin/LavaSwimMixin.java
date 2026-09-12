@@ -26,6 +26,7 @@ public abstract class LavaSwimMixin {
         Identifier.fromNamespaceAndPath("originstweaks", "fire_power");
 
     private static final double SINK_PER_TICK = 0.05;
+    private static final double RISE_PER_TICK = 0.05;
 
     @Shadow
     protected boolean jumping;
@@ -58,9 +59,13 @@ public abstract class LavaSwimMixin {
         Vec3 motion = self.getDeltaMovement();
         double vertical = motion.y;
         if (self.isCrouching()) {
+            // Sneaking dives, the way a fishman sinks in water.
             vertical -= SINK_PER_TICK;
         } else if (jumping) {
-            // Holding jump treads the lava in place instead of sinking or rising.
+            // Holding jump swims upward and breaks the surface.
+            vertical = RISE_PER_TICK;
+        } else {
+            // Idle holds depth, so the bearer neither sinks nor drifts to the surface.
             vertical = 0.0;
         }
         self.setDeltaMovement(motion.x, vertical, motion.z);

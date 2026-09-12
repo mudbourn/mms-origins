@@ -6,7 +6,8 @@
       "tag": "originstweaks:blazeborn_fuel"
     }
   },
-  "consume_sound": "minecraft:block.furnace.fire_crackle",
+  "consume_sound": "minecraft:block.fire.extinguish",
+  "consume_sound_times": 3,
   "finish_sound": "minecraft:entity.blaze.shoot",
   "nutrition": 8,
   "saturation": 0.8,
