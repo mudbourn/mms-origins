@@ -150,6 +150,14 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      # Loom reads the composite dependency's jar at CONFIGURATION time, before
+      # the origins build would otherwise build it. Locally the sibling jar
+      # already exists from prior builds; a fresh CI checkout has none, so build
+      # render-common first to produce build/libs/mms-render-common-*.jar.
+      - name: Pre-build mms-render-common
+        working-directory: mms-render-common
+        run: ./gradlew build --no-daemon --stacktrace
+
       - name: Build
         run: ./gradlew build --no-daemon --stacktrace
 
