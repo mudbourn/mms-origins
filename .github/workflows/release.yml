@@ -122,6 +122,27 @@ jobs:
           fi
           echo "All referenced jars present."
 
+      # info.mudbourn:mms-render-common is consumed as a Gradle composite build
+      # (see settings.gradle), not from a Maven repo — so its SOURCE must be
+      # present or the coordinate cannot resolve. Local dev uses the sibling
+      # '../mms-render-common'; actions/checkout cannot write above the
+      # workspace, so CI checks it out into './mms-render-common', which
+      # settings.gradle also looks for. Pin to the tag matching
+      # render_common_version so the composite artifact equals what we declare.
+      - name: Resolve render-common version
+        id: rc
+        run: |
+          set -euo pipefail
+          RC=$(grep -E '^render_common_version=' gradle.properties | cut -d= -f2- | tr -d '[:space:]')
+          echo "ref=v${RC}" >> "$GITHUB_OUTPUT"
+
+      - name: Check out mms-render-common (composite build)
+        uses: actions/checkout@v5
+        with:
+          repository: mudbourn/mms-render-common
+          ref: ${{ steps.rc.outputs.ref }}
+          path: mms-render-common
+
       - uses: actions/setup-java@v5
         with:
           distribution: temurin

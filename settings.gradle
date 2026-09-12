@@ -7,6 +7,23 @@ pluginManagement {
 }
 
 // The fur model layer is drawn through mms-render-common's CEM pose relay; a
-// composite build wires the sibling source tree in directly, so an edit upstream
-// rebuilds here without a jar copy.
-includeBuild '../mms-render-common'
+// composite build wires its source tree in directly, so an edit upstream
+// rebuilds here without a jar copy — and info.mudbourn:mms-render-common is not
+// published to any Maven repo, so this substitution is the ONLY way that
+// coordinate resolves.
+//
+// Local dev keeps it as the sibling '../mms-render-common'. CI has no sibling
+// (actions/checkout cannot write above the workspace), so the release workflow
+// checks the repo out into './mms-render-common' instead. Include whichever
+// exists; fail loudly if neither does rather than emitting an unresolved-
+// dependency error three steps later.
+def renderCommon = ['../mms-render-common', 'mms-render-common']
+        .collect { file(it) }
+        .find { it.directory }
+if (renderCommon == null) {
+    throw new GradleException(
+        "mms-render-common source not found at ../mms-render-common or " +
+        "./mms-render-common. Clone it beside this repo (local dev) or check " +
+        "it out into ./mms-render-common (CI).")
+}
+includeBuild renderCommon
