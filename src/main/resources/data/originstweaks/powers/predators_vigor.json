@@ -1,0 +1,84 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.predators_vigor.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.predators_vigor.1"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.originstweaks.predators_vigor.2"
+			}
+		}
+	],
+	"chill_pace": {
+		"type": "origins:attribute",
+		"modifier": {
+			"attribute": "thermoo:frost_resistance",
+			"id": "originstweaks:predators_vigor_chill_pace",
+			"operation": "addition",
+			"value": 7
+		}
+	},
+	"warmth_pace": {
+		"type": "origins:attribute",
+		"modifier": {
+			"attribute": "thermoo:heat_resistance",
+			"id": "originstweaks:predators_vigor_warmth_pace",
+			"operation": "addition",
+			"value": 7
+		}
+	},
+	"chill_shield": {
+		"type": "origins:modify_damage_taken",
+		"modifier": {
+			"name": "Predator's vigor",
+			"operation": "multiply_base",
+			"value": -0.7
+		},
+		"damage_condition": {
+			"type": "origins:in_tag",
+			"tag": "minecraft:is_freezing"
+		}
+	},
+	"warmth_shield": {
+		"type": "origins:modify_damage_taken",
+		"modifier": {
+			"name": "Predator's vigor",
+			"operation": "multiply_base",
+			"value": -0.7
+		},
+		"damage_condition": {
+			"type": "origins:in_tag",
+			"tag": "mms_origins:is_heat"
+		}
+	},
+	"predators_strength": {
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Predator's vigor",
+			"attribute": "minecraft:generic.attack_damage",
+			"operation": "multiply_base",
+			"value": 0.15
+		}
+	},
+	"hungry_hunter": {
+		"type": "origins:modify_exhaustion",
+		"modifier": {
+			"operation": "multiply_base",
+			"value": 0.25
+		}
+	}
+}
