@@ -23,6 +23,14 @@ public final class MmsOriginsPowers {
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "language_barrier"));
 
     /**
+     * Beastfolk trade markup. Villagers charge the beast-tongued more, the same
+     * markup a fishman's {@link #LANGUAGE_BARRIER} draws but without its crop
+     * penalty, so {@code VillagerSwindleMixin} reads this too.
+     */
+    public static final PowerType<?> BEAST_TONGUE =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "beast_tongue"));
+
+    /**
      * Piglin kinship. Piglins and brutes leave the bearer alone; Apoli has no
      * factory to pacify a brain-driven mob, so {@code PiglinKinshipMixin} clears
      * their target while this is active and the bearer is not zombified.

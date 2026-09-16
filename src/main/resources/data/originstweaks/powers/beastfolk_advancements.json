@@ -5,14 +5,14 @@
 		"type": "origins:action_on_callback",
 		"entity_action_added": {
 			"type": "origins:grant_advancement",
-			"advancement": "originstweaks:feline/root"
+			"advancement": "originstweaks:beastfolk/root"
 		}
 	},
 	"break_tough_stone": {
 		"type": "origins:action_on_block_break",
 		"entity_action": {
 			"type": "origins:grant_advancement",
-			"advancement": "originstweaks:feline/break_tough_stone"
+			"advancement": "originstweaks:beastfolk/break_tough_stone"
 		},
 		"only_when_harvested": true,
 		"block_condition": {
@@ -24,7 +24,7 @@
 		"type": "origins:action_over_time",
 		"rising_action": {
 			"type": "origins:grant_advancement",
-			"advancement": "originstweaks:feline/cooked_fish_stack"
+			"advancement": "originstweaks:beastfolk/cooked_fish_stack"
 		},
 		"condition": {
 			"type": "origins:inventory",
@@ -43,7 +43,7 @@
 		"type": "origins:action_on_wake_up",
 		"entity_action": {
 			"type": "origins:grant_advancement",
-			"advancement": "originstweaks:feline/sleep_in_village"
+			"advancement": "originstweaks:beastfolk/sleep_in_village"
 		},
 		"condition": {
 			"type": "origins:and",

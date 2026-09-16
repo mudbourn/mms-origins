@@ -7,6 +7,7 @@ import info.mudbourn.mmsorigins.power.action.SummonHenchmenAction;
 import info.mudbourn.mmsorigins.power.condition.CausticMarkedCondition;
 import info.mudbourn.mmsorigins.power.condition.HeightAboveGroundCondition;
 import info.mudbourn.mmsorigins.power.condition.HenchmenCountCondition;
+import info.mudbourn.mmsorigins.power.condition.IncapacitatedCondition;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -55,6 +56,18 @@ public final class MmsPowerFactories {
         registerCausticSpores();
         registerCausticMarked();
         registerNatureReclaim();
+        registerIncapacitated();
+    }
+
+    private static void registerIncapacitated() {
+        Identifier id = id("incapacitated");
+        Registry.register(
+            ApoliRegistries.ENTITY_CONDITION,
+            id,
+            new ConditionFactory<Entity>(
+                id,
+                IncapacitatedCondition.data(),
+                IncapacitatedCondition::condition));
     }
 
     private static void registerNatureReclaim() {

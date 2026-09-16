@@ -72,12 +72,12 @@ public abstract class PlayerRendererMixin {
 
     private static final Identifier ELYTRIAN_OPTIONS =
             Identifier.fromNamespaceAndPath("originstweaks", "elytrian_options");
-    private static final Identifier FELINE_OPTIONS =
-            Identifier.fromNamespaceAndPath("originstweaks", "feline_options");
-    private static final Identifier FELINE_NO_COLLAR =
-            Identifier.fromNamespaceAndPath("originstweaks", "feline_no_collar");
-    private static final Identifier FELINE_NOCOLLAR_FUR =
-            Identifier.fromNamespaceAndPath("originstweaks", "feline_nocollar");
+    private static final Identifier BEASTFOLK_OPTIONS =
+            Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_options");
+    private static final Identifier BEASTFOLK_NO_COLLAR =
+            Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_no_collar");
+    private static final Identifier BEASTFOLK_NOCOLLAR_FUR =
+            Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_nocollar");
     private static final Map<String, Identifier> FAIRY_WING_FURS = Map.of(
             "cirno_wings", Identifier.fromNamespaceAndPath("mms_origins", "fairy_cirno"),
             "pixie_wings", Identifier.fromNamespaceAndPath("mms_origins", "fairy_pixie"),
@@ -100,8 +100,8 @@ public abstract class PlayerRendererMixin {
         if ("piglin".equals(id.getPath()) && mmsOrigins$zombified(player)) {
             return PIGLIN_ZOMBIE_FUR;
         }
-        if ("feline".equals(id.getPath()) && mmsOrigins$hasNoCollar(component)) {
-            return FELINE_NOCOLLAR_FUR;
+        if ("beastfolk".equals(id.getPath()) && mmsOrigins$hasNoCollar(component)) {
+            return BEASTFOLK_NOCOLLAR_FUR;
         }
         if ("fairy".equals(id.getPath())) {
             Identifier variant = mmsOrigins$fairyWingFur(component);
@@ -125,14 +125,14 @@ public abstract class PlayerRendererMixin {
         return FAIRY_WING_FURS.get(option.getIdentifier().getPath());
     }
 
-    /** Whether the player picked the collarless option in the feline options layer. */
+    /** Whether the player picked the collarless option in the beastfolk options layer. */
     private static boolean mmsOrigins$hasNoCollar(OriginComponent component) {
-        OriginLayer layer = OriginLayers.getLayer(FELINE_OPTIONS);
+        OriginLayer layer = OriginLayers.getLayer(BEASTFOLK_OPTIONS);
         if (layer == null || !component.hasOrigin(layer)) {
             return false;
         }
         Origin option = component.getOrigin(layer);
-        return option != null && FELINE_NO_COLLAR.equals(option.getIdentifier());
+        return option != null && BEASTFOLK_NO_COLLAR.equals(option.getIdentifier());
     }
 
     /** The elytrian's chosen wing option, or null if the player is not an elytrian. */

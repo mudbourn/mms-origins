@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Language Barrier: villagers cannot understand a fishman and mark their goods up.
+ * Villager markup: villagers cannot understand a fishman or a beastfolk and mark their goods up.
  *
  * <p>{@code updateSpecialPrices} is where vanilla already applies its reputation
  * discount and the Hero of the Village discount, both by adding to each offer's
@@ -28,7 +28,8 @@ public class VillagerSwindleMixin {
 
     @Inject(method = "updateSpecialPrices", at = @At("RETURN"))
     private void mmsOrigins$swindleTheUnintelligible(Player player, CallbackInfo ci) {
-        if (!MmsOriginsPowers.LANGUAGE_BARRIER.isActive(player)) {
+        if (!MmsOriginsPowers.LANGUAGE_BARRIER.isActive(player)
+            && !MmsOriginsPowers.BEAST_TONGUE.isActive(player)) {
             return;
         }
         for (MerchantOffer offer : ((Merchant) (Object) this).getOffers()) {

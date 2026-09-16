@@ -25,7 +25,7 @@
 		"type": "origins:action_on_callback",
 		"entity_action_added": {
 			"type": "origins:execute_command",
-			"command": "scoreboard objectives add feline_sleep minecraft.custom:minecraft.time_since_rest"
+			"command": "scoreboard objectives add beastfolk_sleep minecraft.custom:minecraft.time_since_rest"
 		}
 	},
 	"sleep": {
@@ -39,7 +39,7 @@
 		},
 		"condition": {
 			"type": "origins:scoreboard",
-			"objective": "feline_sleep",
+			"objective": "beastfolk_sleep",
 			"compare_to": 0,
 			"comparison": "=="
 		}

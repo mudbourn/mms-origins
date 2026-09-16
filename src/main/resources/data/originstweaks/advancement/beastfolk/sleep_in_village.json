@@ -1,10 +1,10 @@
 {
 	"display": {
 		"title": {
-			"translate": "advancement.originstweaks.feline.sleep_in_village.title"
+			"translate": "advancement.originstweaks.beastfolk.sleep_in_village.title"
 		},
 		"description": {
-			"translate": "advancement.originstweaks.feline.sleep_in_village.description"
+			"translate": "advancement.originstweaks.beastfolk.sleep_in_village.description"
 		},
 		"icon": {
 			"id": "minecraft:feather"
@@ -19,5 +19,5 @@
 			"trigger": "minecraft:impossible"
 		}
 	},
-	"parent": "originstweaks:feline/root"
+	"parent": "originstweaks:beastfolk/root"
 }

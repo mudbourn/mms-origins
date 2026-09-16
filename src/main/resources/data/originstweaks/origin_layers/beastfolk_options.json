@@ -8,13 +8,13 @@
 	"origins": [
 		{
 			"origins": [
-				"originstweaks:feline_collar",
-				"originstweaks:feline_no_collar"
+				"originstweaks:beastfolk_collar",
+				"originstweaks:beastfolk_no_collar"
 			],
 			"condition": {
 				"type": "origins:origin",
 				"layer": "origins:origin",
-				"origin": "originstweaks:feline"
+				"origin": "originstweaks:beastfolk"
 			}
 		}
 	]

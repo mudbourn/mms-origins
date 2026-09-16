@@ -1,10 +1,10 @@
 {
 	"display": {
 		"title": {
-			"translate": "advancement.originstweaks.feline.cooked_fish_stack.title"
+			"translate": "advancement.originstweaks.beastfolk.cooked_fish_stack.title"
 		},
 		"description": {
-			"translate": "advancement.originstweaks.feline.cooked_fish_stack.description"
+			"translate": "advancement.originstweaks.beastfolk.cooked_fish_stack.description"
 		},
 		"icon": {
 			"id": "minecraft:cooked_cod"
@@ -19,5 +19,5 @@
 			"trigger": "minecraft:impossible"
 		}
 	},
-	"parent": "originstweaks:feline/root"
+	"parent": "originstweaks:beastfolk/root"
 }

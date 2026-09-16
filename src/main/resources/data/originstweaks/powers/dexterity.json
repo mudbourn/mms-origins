@@ -166,6 +166,15 @@
 				},
 				{
 					"type": "origins:on_block"
+				},
+				{
+					"type": "origins:food_level",
+					"comparison": ">=",
+					"compare_to": 6
+				},
+				{
+					"type": "mms_origins:incapacitated",
+					"inverted": true
 				}
 			]
 		}
@@ -638,6 +647,15 @@
 				},
 				{
 					"type": "origins:on_block"
+				},
+				{
+					"type": "origins:food_level",
+					"comparison": ">=",
+					"compare_to": 6
+				},
+				{
+					"type": "mms_origins:incapacitated",
+					"inverted": true
 				}
 			]
 		}

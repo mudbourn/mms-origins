@@ -1,10 +1,10 @@
 {
 	"display": {
 		"title": {
-			"translate": "advancement.originstweaks.feline.root.title"
+			"translate": "advancement.originstweaks.beastfolk.root.title"
 		},
 		"description": {
-			"translate": "advancement.originstweaks.feline.root.description"
+			"translate": "advancement.originstweaks.beastfolk.root.description"
 		},
 		"icon": {
 			"id": "minecraft:salmon"
@@ -16,7 +16,7 @@
 		"background": "minecraft:textures/block/orange_wool.png"
 	},
 	"criteria": {
-		"chose_feline": {
+		"chose_beastfolk": {
 			"trigger": "minecraft:impossible"
 		}
 	}

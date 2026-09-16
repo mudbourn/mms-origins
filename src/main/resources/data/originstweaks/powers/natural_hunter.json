@@ -36,7 +36,7 @@
 		"max": 350,
 		"max_action": {
 			"type": "origins:grant_advancement",
-			"advancement": "originstweaks:feline/sharp_claws"
+			"advancement": "originstweaks:beastfolk/sharp_claws"
 		},
 		"hud_render": {
 			"sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
@@ -80,7 +80,7 @@
 								{
 									"action": {
 										"type": "origins:damage",
-										"damage_type": "originstweaks:feline_slash",
+										"damage_type": "originstweaks:beastfolk_slash",
 										"amount": 2
 									},
 									"condition": {
@@ -107,7 +107,7 @@
 								{
 									"action": {
 										"type": "origins:damage",
-										"damage_type": "originstweaks:feline_slash",
+										"damage_type": "originstweaks:beastfolk_slash",
 										"amount": 4
 									},
 									"condition": {
@@ -134,7 +134,7 @@
 								{
 									"action": {
 										"type": "origins:damage",
-										"damage_type": "originstweaks:feline_slash",
+										"damage_type": "originstweaks:beastfolk_slash",
 										"amount": 6
 									},
 									"condition": {
@@ -161,7 +161,7 @@
 								{
 									"action": {
 										"type": "origins:damage",
-										"damage_type": "originstweaks:feline_slash",
+										"damage_type": "originstweaks:beastfolk_slash",
 										"amount": 8
 									},
 									"condition": {

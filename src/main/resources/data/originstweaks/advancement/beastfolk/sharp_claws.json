@@ -1,10 +1,10 @@
 {
 	"display": {
 		"title": {
-			"translate": "advancement.originstweaks.feline.sharp_claws.title"
+			"translate": "advancement.originstweaks.beastfolk.sharp_claws.title"
 		},
 		"description": {
-			"translate": "advancement.originstweaks.feline.sharp_claws.description"
+			"translate": "advancement.originstweaks.beastfolk.sharp_claws.description"
 		},
 		"icon": {
 			"id": "minecraft:diamond_block"
@@ -19,5 +19,5 @@
 			"trigger": "minecraft:impossible"
 		}
 	},
-	"parent": "originstweaks:feline/cooked_fish_stack"
+	"parent": "originstweaks:beastfolk/cooked_fish_stack"
 }
