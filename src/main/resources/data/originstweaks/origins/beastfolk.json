@@ -1,6 +1,6 @@
 {
 	"icon": {
-		"id": "minecraft:orange_wool"
+		"id": "minecraft:mutton"
 	},
 	"order": 0,
 	"impact": 2,
@@ -18,6 +18,7 @@
 		"originstweaks:predators_vigor",
 		"originstweaks:beastfolk_sounds",
 		"originstweaks:beastfolk_advancements",
-		"mms_origins:beast_tongue"
+		"mms_origins:beast_tongue",
+		"mms_origins:carnivore_diet"
 	]
 }

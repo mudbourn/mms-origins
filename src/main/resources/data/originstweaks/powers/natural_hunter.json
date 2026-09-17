@@ -91,7 +91,7 @@
 												{
 													"type": "origins:resource",
 													"resource": "*:*_claws_sharpness",
-													"comparison": ">",
+													"comparison": ">=",
 													"compare_to": 0
 												},
 												{
