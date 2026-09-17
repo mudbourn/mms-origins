@@ -1,0 +1,73 @@
+{
+  "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.carnivore_diet.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.carnivore_diet.1"
+      }
+    }
+  ],
+  "restrict": {
+    "type": "origins:prevent_item_use",
+    "item_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:food"
+        },
+        {
+          "type": "origins:and",
+          "conditions": [
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "tag": "origins:meat"
+              },
+              "inverted": true
+            },
+            {
+              "type": "origins:meat",
+              "inverted": true
+            }
+          ]
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:ignore_diet"
+          },
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "raw_vigor": {
+    "type": "origins:action_on_item_use",
+    "trigger_type": "finish",
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "tag": "mms_origins:raw_meat"
+      }
+    },
+    "entity_action": {
+      "type": "origins:apply_effect",
+      "effect": {
+        "effect": "minecraft:saturation",
+        "duration": 6,
+        "amplifier": 0,
+        "show_icon": true,
+        "show_particles": false
+      }
+    }
+  }
+}
