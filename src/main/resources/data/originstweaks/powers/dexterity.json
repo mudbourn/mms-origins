@@ -735,5 +735,35 @@
 				}
 			]
 		}
+	},
+	"charge_immobilize": {
+		"type": "origins:conditioned_attribute",
+		"tick_rate": 1,
+		"modifier": {
+			"name": "Rooted while charging leap",
+			"attribute": "minecraft:generic.movement_speed",
+			"value": -1,
+			"operation": "multiply_total"
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"resource": "*:*_hold_timer",
+					"comparison": "!=",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:*_leap_cooldown",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:on_block"
+				}
+			]
+		}
 	}
 }

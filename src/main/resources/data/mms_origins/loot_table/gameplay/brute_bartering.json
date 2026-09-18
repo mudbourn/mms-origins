@@ -5,6 +5,11 @@
       "rolls": 1,
       "entries": [
         {
+          "type": "minecraft:loot_table",
+          "weight": 100,
+          "value": "minecraft:gameplay/piglin_bartering"
+        },
+        {
           "type": "minecraft:item",
           "weight": 1,
           "name": "minecraft:netherite_upgrade_smithing_template"

@@ -310,7 +310,8 @@
 		}
 	},
 	"claws_replace_fist": {
-		"type": "origins:attribute",
+		"type": "origins:conditioned_attribute",
+		"tick_rate": 5,
 		"modifier": {
 			"name": "Bare fists replaced by claw strikes",
 			"attribute": "minecraft:generic.attack_damage",
