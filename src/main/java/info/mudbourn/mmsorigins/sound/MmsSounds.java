@@ -16,6 +16,12 @@ public final class MmsSounds {
     public static final SoundEvent FLANDRE_HURT = register("flandre.hurt");
     public static final SoundEvent FLANDRE_DEATH = register("flandre.death");
 
+    public static final SoundEvent BEASTFOLK_HURT = register("beastfolk.hurt");
+    public static final SoundEvent BEASTFOLK_DEATH = register("beastfolk.death");
+
+    /** The beastfolk's drawn-out death cry, reserved for the wolf-kill easter egg. */
+    public static final SoundEvent BEASTFOLK_DEATH_LONG = register("beastfolk.death_long");
+
     private MmsSounds() {
     }
 

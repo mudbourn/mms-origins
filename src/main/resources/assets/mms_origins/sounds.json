@@ -8,5 +8,23 @@
     "sounds": [
       "mms_origins:flandre/pldead00"
     ]
+  },
+  "beastfolk.hurt": {
+    "sounds": [
+      "mms_origins:beastfolk/hurt1",
+      "mms_origins:beastfolk/hurt2",
+      "mms_origins:beastfolk/hurt3"
+    ]
+  },
+  "beastfolk.death": {
+    "sounds": [
+      "mms_origins:beastfolk/death1",
+      "mms_origins:beastfolk/death3"
+    ]
+  },
+  "beastfolk.death_long": {
+    "sounds": [
+      "mms_origins:beastfolk/death2"
+    ]
   }
 }

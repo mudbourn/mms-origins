@@ -12,11 +12,7 @@
 			},
 			"if_action": {
 				"type": "origins:play_sound",
-				"sound": "minecraft:entity.cat.hurt"
-			},
-			"else_action": {
-				"type": "origins:play_sound",
-				"sound": "minecraft:entity.cat.death"
+				"sound": "mms_origins:beastfolk.hurt"
 			}
 		},
 		"cooldown": 1

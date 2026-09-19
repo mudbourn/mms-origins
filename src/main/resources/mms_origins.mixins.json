@@ -7,6 +7,8 @@
     "ApoliActivePowerGateMixin",
     "AvianForgetTargetMixin",
     "AvianPeaceMixin",
+    "BeastfolkDeathCryMixin",
+    "CombatTrackerAccessor",
     "CooldownAccelMixin",
     "CreativeTabDuplicateGuardMixin",
     "CropYieldMixin",
