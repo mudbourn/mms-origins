@@ -249,8 +249,93 @@
 					"power": "*:*_leap_cooldown"
 				},
 				{
-					"type": "origins:exhaust",
-					"amount": 12.0
+					"type": "origins:if_else_list",
+					"actions": [
+						{
+							"condition": {
+								"type": "origins:resource",
+								"resource": "*:*_jump_strength",
+								"compare_to": 1,
+								"comparison": "=="
+							},
+							"action": {
+								"type": "origins:exhaust",
+								"amount": 4.0
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"resource": "*:*_jump_strength",
+								"compare_to": 2,
+								"comparison": "=="
+							},
+							"action": {
+								"type": "origins:exhaust",
+								"amount": 7.0
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"resource": "*:*_jump_strength",
+								"compare_to": 3,
+								"comparison": "=="
+							},
+							"action": {
+								"type": "origins:exhaust",
+								"amount": 10.0
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"resource": "*:*_jump_strength",
+								"compare_to": 4,
+								"comparison": "=="
+							},
+							"action": {
+								"type": "origins:exhaust",
+								"amount": 13.0
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"resource": "*:*_jump_strength",
+								"compare_to": 5,
+								"comparison": "=="
+							},
+							"action": {
+								"type": "origins:exhaust",
+								"amount": 16.0
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"resource": "*:*_jump_strength",
+								"compare_to": 6,
+								"comparison": "=="
+							},
+							"action": {
+								"type": "origins:exhaust",
+								"amount": 20.0
+							}
+						},
+						{
+							"condition": {
+								"type": "origins:resource",
+								"resource": "*:*_jump_strength",
+								"compare_to": 7,
+								"comparison": "=="
+							},
+							"action": {
+								"type": "origins:exhaust",
+								"amount": 24.0
+							}
+						}
+					]
 				},
 				{
 					"type": "origins:play_sound",
