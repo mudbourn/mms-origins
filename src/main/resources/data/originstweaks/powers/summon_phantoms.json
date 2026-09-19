@@ -1,0 +1,70 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/active.png",
+			"text": {
+				"translate": "badge.originstweaks.summon_phantoms.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.originstweaks.summon_phantoms.1"
+			}
+		}
+	],
+	"summon": {
+		"type": "origins:active_self",
+		"cooldown": 200,
+		"hud_render": {
+			"should_render": false
+		},
+		"key": {
+			"key": "key.origins.secondary_active"
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:sneaking"
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:soulbound_energy",
+					"comparison": ">=",
+					"compare_to": 40
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:change_resource",
+					"resource": "*:soulbound_energy",
+					"change": -40,
+					"operation": "add"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "summon minecraft:phantom ~ ~3 ~"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "summon minecraft:phantom ~ ~3 ~"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "particle minecraft:soul ~ ~1 ~ 0.5 0.5 0.5 0.1 20"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "playsound entity.phantom.swoop player @a ~ ~ ~ 2 0.7"
+				}
+			]
+		}
+	}
+}

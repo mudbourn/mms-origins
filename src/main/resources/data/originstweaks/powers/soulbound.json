@@ -221,6 +221,40 @@
 			]
 		}
 	},
+	"soul_fire_aspect_harvest": {
+		"type": "origins:self_action_on_kill",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_energy",
+					"change": 15,
+					"operation": "add"
+				},
+				{
+					"type": "origins:spawn_particles",
+					"particle": "minecraft:soul_fire_flame",
+					"offset_y": 1,
+					"speed": 0.1,
+					"count": 15
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:equipped_item",
+			"equipment_slot": "mainhand",
+			"item_condition": {
+				"type": "origins:enchantment",
+				"enchantment": "minecraft:soul_fire_aspect",
+				"comparison": ">=",
+				"compare_to": 1
+			}
+		},
+		"target_condition": {
+			"type": "origins:living"
+		}
+	},
 	"respawn": {
 		"type": "origins:action_on_callback",
 		"entity_action_respawned": {
