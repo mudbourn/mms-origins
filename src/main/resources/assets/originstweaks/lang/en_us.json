@@ -123,7 +123,7 @@
 	"badge.originstweaks.predators_vigor.2": "You grow hungry 25% faster.",
 	"power.originstweaks.dexterity.name": "Acrobatics",
 	"power.originstweaks.dexterity.description": "The Beastfolk's dexterity allows them to move around their environment easily.",
-	"badge.originstweaks.dexterity.0": "Hold [Primary] to charge a leap, then jump to spring in the direction you face. Walking off a ledge cancels the charge. Each leap costs hunger.",
+	"badge.originstweaks.dexterity.0": "Hold [Primary] to charge a leap, then release or jump to spring in the direction you face. Falling a block cancels the charge. Each leap costs hunger.",
 	"badge.originstweaks.dexterity.1": "You never take fall damage, no matter from what height you fall.",
 	"power.originstweaks.weak_arms.name": "Weak Arms",
 	"power.originstweaks.weak_arms.description": "Your arms wont allow mining stone as quickly as others would, and some types of stone are too tough to be mined at all.",

@@ -650,12 +650,36 @@
 					"compare_to": 0
 				},
 				{
-					"type": "origins:on_block",
-					"inverted": true
-				},
-				{
-					"type": "origins:distance_to_ground",
-					"distance": 1
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"resource": "*:*_hold_timer",
+									"comparison": "==",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:on_block"
+								}
+							]
+						},
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:on_block",
+									"inverted": true
+								},
+								{
+									"type": "origins:distance_to_ground",
+									"distance": 1
+								}
+							]
+						}
+					]
 				},
 				{
 					"type": "origins:food_level",
