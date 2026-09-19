@@ -195,8 +195,18 @@
 					"type": "origins:or",
 					"conditions": [
 						{
-							"type": "origins:on_block",
-							"inverted": true
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:on_block",
+									"inverted": true
+								},
+								{
+									"type": "origins:distance_to_ground",
+									"distance": 1,
+									"inverted": true
+								}
+							]
 						},
 						{
 							"type": "origins:resource",
@@ -640,13 +650,12 @@
 					"compare_to": 0
 				},
 				{
-					"type": "origins:resource",
-					"resource": "*:*_hold_timer",
-					"comparison": "==",
-					"compare_to": 0
+					"type": "origins:on_block",
+					"inverted": true
 				},
 				{
-					"type": "origins:on_block"
+					"type": "origins:distance_to_ground",
+					"distance": 1
 				},
 				{
 					"type": "origins:food_level",
@@ -715,36 +724,6 @@
 	"charge_pose": {
 		"type": "mms_origins:pose",
 		"entity_pose": "crouching",
-		"condition": {
-			"type": "origins:and",
-			"conditions": [
-				{
-					"type": "origins:resource",
-					"resource": "*:*_hold_timer",
-					"comparison": "!=",
-					"compare_to": 0
-				},
-				{
-					"type": "origins:resource",
-					"resource": "*:*_leap_cooldown",
-					"comparison": "==",
-					"compare_to": 0
-				},
-				{
-					"type": "origins:on_block"
-				}
-			]
-		}
-	},
-	"charge_immobilize": {
-		"type": "origins:conditioned_attribute",
-		"tick_rate": 1,
-		"modifier": {
-			"name": "Rooted while charging leap",
-			"attribute": "minecraft:generic.movement_speed",
-			"value": -1,
-			"operation": "multiply_total"
-		},
 		"condition": {
 			"type": "origins:and",
 			"conditions": [
