@@ -202,7 +202,7 @@
 									"inverted": true
 								},
 								{
-									"type": "origins:distance_to_ground",
+									"type": "apoli_legacy:distance_to_ground",
 									"distance": 1,
 									"inverted": true
 								}
@@ -674,7 +674,7 @@
 									"inverted": true
 								},
 								{
-									"type": "origins:distance_to_ground",
+									"type": "apoli_legacy:distance_to_ground",
 									"distance": 1
 								}
 							]
