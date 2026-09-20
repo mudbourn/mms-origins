@@ -1,6 +1,7 @@
 package info.mudbourn.mmsorigins.mixin;
 
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.chicken.Chicken;
@@ -25,12 +26,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * near a beastfolk drops its quarry and paths to open ground away from them; once
  * it is beyond the dread's reach its own goals take back over.
  */
-@Mixin(PathfinderMob.class)
+@Mixin(Mob.class)
 public abstract class ViciousAppearanceMixin {
 
     @Inject(method = "serverAiStep", at = @At("RETURN"))
     private void mmsOrigins$flee(CallbackInfo ci) {
-        PathfinderMob mob = (PathfinderMob) (Object) this;
+        if (!((Object) this instanceof PathfinderMob mob)) {
+            return;
+        }
         if (mob.tickCount % 10 != 0 || !mmsOrigins$isTimid(mob)) {
             return;
         }

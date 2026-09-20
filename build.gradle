@@ -24,6 +24,10 @@ dependencies {
     // fur models are posed through its CEM/EMF pose relay.
     modImplementation "info.mudbourn:mms-render-common:${project.render_common_version}"
 
+    // mms-combat's logout-body event and Mannequin body; compile-only and guarded
+    // by isModLoaded at runtime, so this mod still loads without it.
+    modCompileOnly "info.mudbourn:mms-combat:${project.mms_combat_version}"
+
     modCompileOnly files("libs/Origins-Legacy-1.12.16+1.21.11.jar")
     modCompileOnly files("libs/origins-legacy-classes-1.7.2+1.21.11.jar")
     // Origins: Legacy ships Apoli and Calio as nested jars, and nested jars are

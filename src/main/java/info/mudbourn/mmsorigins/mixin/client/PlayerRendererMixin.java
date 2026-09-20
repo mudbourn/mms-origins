@@ -5,32 +5,29 @@ import info.mudbourn.mmsorigins.client.ZombieShakeState;
 import info.mudbourn.mmsorigins.client.fur.FurState;
 import info.mudbourn.mmsorigins.client.wings.ButterflyFlap;
 import info.mudbourn.mmsorigins.client.wings.WingState;
+import info.mudbourn.mmsorigins.fur.BodyFurAttachment;
+import info.mudbourn.mmsorigins.fur.FurResolver;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.VariableIntPower;
-import net.minecraft.world.entity.player.Player;
-import io.github.apace100.origins.component.OriginComponent;
-import io.github.apace100.origins.origin.Origin;
-import io.github.apace100.origins.origin.OriginLayer;
-import io.github.apace100.origins.origin.OriginLayers;
-import io.github.apace100.origins.registry.ModComponents;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
-import net.minecraft.world.entity.Avatar;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.Avatar;
+import net.minecraft.world.entity.decoration.Mannequin;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Map;
-
 /**
- * Reads the player's origin during extraction and stamps it onto the render state.
+ * Reads the avatar's origin during extraction and stamps its fur, wing, and zombie
+ * state onto the render state.
  *
- * <p>The origin lives on the player entity, which the fur feature layer never sees;
- * this is the one place both are in scope. The lookup is null-guarded end to end so a
- * player with no origin, or a world where the layer has not synced, simply carries no
- * fur rather than crashing the entity render.
+ * <p>Players carry the origin on an Apoli component the fur layer never sees; a logout
+ * mannequin has no such component, so it falls back to the synced fur attachment
+ * mms-combat's body carries. Everything is null-guarded so an origin-less avatar simply
+ * carries no fur rather than crashing the entity render.
  */
 @Mixin(AvatarRenderer.class)
 public abstract class PlayerRendererMixin {
@@ -41,8 +38,12 @@ public abstract class PlayerRendererMixin {
                                         AvatarRenderState state,
                                         float partialTick,
                                         CallbackInfo ci) {
-        ((FurState) state).mmsOrigins$setFurOrigin(mmsOrigins$originOf(player));
-        ((WingState) state).mmsOrigins$setWingOption(mmsOrigins$wingOf(player));
+        Identifier fur = FurResolver.resolve(player);
+        if (fur == null && player instanceof Mannequin) {
+            fur = player.getAttachedOrElse(BodyFurAttachment.TYPE, null);
+        }
+        ((FurState) state).mmsOrigins$setFurOrigin(fur);
+        ((WingState) state).mmsOrigins$setWingOption(FurResolver.wingOption(player));
         ((ZombieShakeState) state).mmsOrigins$setZombieShaking(mmsOrigins$zombieShaking(player));
         if (player instanceof Player concrete) {
             ((WingState) state).mmsOrigins$setWingFlapDegrees(
@@ -55,113 +56,5 @@ public abstract class PlayerRendererMixin {
         Power power = MmsOriginsPowers.ZOMBIE_METER.get(player);
         return power instanceof VariableIntPower meter
                 && meter.getValue() >= MmsOriginsPowers.ZOMBIE_SHAKE_THRESHOLD;
-    }
-
-    /** Whether the player's zombification has reached its cap and the rot has set in. */
-    private static boolean mmsOrigins$zombified(Avatar player) {
-        Power power = MmsOriginsPowers.ZOMBIE_METER.get(player);
-        return power instanceof VariableIntPower meter && meter.getValue() >= ZOMBIE_METER_CAP;
-    }
-
-    private static final Identifier PIGLIN_ZOMBIE_FUR =
-            Identifier.fromNamespaceAndPath("mms_origins", "piglin_zombie");
-    private static final int ZOMBIE_METER_CAP = 600;
-
-    private static final Identifier FAIRY_OPTIONS =
-            Identifier.fromNamespaceAndPath("mms_origins", "fairy_wings");
-
-    private static final Identifier ELYTRIAN_OPTIONS =
-            Identifier.fromNamespaceAndPath("originstweaks", "elytrian_options");
-    private static final Identifier BEASTFOLK_OPTIONS =
-            Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_options");
-    private static final Identifier BEASTFOLK_NO_COLLAR =
-            Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_no_collar");
-    private static final Identifier BEASTFOLK_NOCOLLAR_FUR =
-            Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_nocollar");
-    private static final Map<String, Identifier> FAIRY_WING_FURS = Map.of(
-            "cirno_wings", Identifier.fromNamespaceAndPath("mms_origins", "fairy_cirno"),
-            "pixie_wings", Identifier.fromNamespaceAndPath("mms_origins", "fairy_pixie"),
-            "slime_wings", Identifier.fromNamespaceAndPath("mms_origins", "fairy_slime"));
-
-    private static Identifier mmsOrigins$originOf(Avatar player) {
-        OriginComponent component = ModComponents.ORIGIN.maybeGet(player).orElse(null);
-        if (component == null) {
-            return null;
-        }
-        OriginLayer layer = OriginLayers.getLayer(Identifier.fromNamespaceAndPath("origins", "origin"));
-        if (layer == null || !component.hasOrigin(layer)) {
-            return null;
-        }
-        Origin origin = component.getOrigin(layer);
-        if (origin == null) {
-            return null;
-        }
-        Identifier id = origin.getIdentifier();
-        if ("piglin".equals(id.getPath()) && mmsOrigins$zombified(player)) {
-            return PIGLIN_ZOMBIE_FUR;
-        }
-        if ("beastfolk".equals(id.getPath()) && mmsOrigins$hasNoCollar(component)) {
-            return BEASTFOLK_NOCOLLAR_FUR;
-        }
-        if ("fairy".equals(id.getPath())) {
-            Identifier variant = mmsOrigins$fairyWingFur(component);
-            if (variant != null) {
-                return variant;
-            }
-        }
-        return id;
-    }
-
-    /** The fur variant for the fairy's chosen wing, or null if the choice has no variant. */
-    private static Identifier mmsOrigins$fairyWingFur(OriginComponent component) {
-        OriginLayer layer = OriginLayers.getLayer(FAIRY_OPTIONS);
-        if (layer == null || !component.hasOrigin(layer)) {
-            return null;
-        }
-        Origin option = component.getOrigin(layer);
-        if (option == null) {
-            return null;
-        }
-        return FAIRY_WING_FURS.get(option.getIdentifier().getPath());
-    }
-
-    /** Whether the player picked the collarless option in the beastfolk options layer. */
-    private static boolean mmsOrigins$hasNoCollar(OriginComponent component) {
-        OriginLayer layer = OriginLayers.getLayer(BEASTFOLK_OPTIONS);
-        if (layer == null || !component.hasOrigin(layer)) {
-            return false;
-        }
-        Origin option = component.getOrigin(layer);
-        return option != null && BEASTFOLK_NO_COLLAR.equals(option.getIdentifier());
-    }
-
-    /** The elytrian's chosen wing option, or null if the player is not an elytrian. */
-    private static Identifier mmsOrigins$wingOf(Avatar player) {
-        OriginComponent component = ModComponents.ORIGIN.maybeGet(player).orElse(null);
-        if (component == null) {
-            return null;
-        }
-        OriginLayer base = OriginLayers.getLayer(Identifier.fromNamespaceAndPath("origins", "origin"));
-        if (base == null || !component.hasOrigin(base)) {
-            return null;
-        }
-        Origin origin = component.getOrigin(base);
-        if (origin == null) {
-            return null;
-        }
-        Identifier optionsLayer = switch (origin.getIdentifier().getPath()) {
-            case "elytrian" -> ELYTRIAN_OPTIONS;
-            case "fairy" -> FAIRY_OPTIONS;
-            default -> null;
-        };
-        if (optionsLayer == null) {
-            return null;
-        }
-        OriginLayer options = OriginLayers.getLayer(optionsLayer);
-        if (options == null || !component.hasOrigin(options)) {
-            return null;
-        }
-        Origin option = component.getOrigin(options);
-        return option == null ? null : option.getIdentifier();
     }
 }

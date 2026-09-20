@@ -3,10 +3,13 @@ package info.mudbourn.mmsorigins;
 import info.mudbourn.mmsorigins.effect.MmsMobEffects;
 import info.mudbourn.mmsorigins.entity.HenchmanLifecycle;
 import info.mudbourn.mmsorigins.entity.MmsEntities;
+import info.mudbourn.mmsorigins.fur.BodyFurAttachment;
+import info.mudbourn.mmsorigins.fur.LogoutBodyFurBridge;
 import info.mudbourn.mmsorigins.item.MmsItems;
 import info.mudbourn.mmsorigins.power.MmsPowerFactories;
 import info.mudbourn.mmsorigins.sound.MmsSounds;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +30,10 @@ public class MmsOrigins implements ModInitializer {
         MoltenChargeCharger.register();
         ZombieMeterDeathReset.register();
         ZombifyCommand.register();
+        BodyFurAttachment.touch();
+        if (FabricLoader.getInstance().isModLoaded("mms_combat")) {
+            LogoutBodyFurBridge.register();
+        }
         LOGGER.info("MMS Origins loaded.");
     }
 }

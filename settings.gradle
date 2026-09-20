@@ -18,3 +18,6 @@ pluginManagement {
 // release workflow both discover sibling deps by reading exactly this line.
 def siblingRoot = providers.gradleProperty('mmsSiblingRoot').getOrElse('..')
 includeBuild "$siblingRoot/mms-render-common"
+// mms-combat fires the logout-body event this mod dresses with fur; wired as a
+// composite build so info.mudbourn:mms-combat resolves with no Maven repo.
+includeBuild "$siblingRoot/mms-combat"

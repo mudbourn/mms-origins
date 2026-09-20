@@ -36,5 +36,8 @@
   "recommends": {
     "origins-classes": "*",
     "jobsplus": "*"
+  },
+  "suggests": {
+    "mms_combat": "*"
   }
 }
