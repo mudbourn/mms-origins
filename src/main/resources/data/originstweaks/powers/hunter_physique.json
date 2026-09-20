@@ -5,25 +5,41 @@
 			"type": "origins:tooltip",
 			"sprite": "origins:textures/gui/badge/info.png",
 			"text": {
-				"translate": "badge.originstweaks.weak_arms.0"
+				"translate": "badge.originstweaks.hunter_physique.0"
 			}
 		},
 		{
 			"type": "origins:tooltip",
 			"sprite": "origins:textures/gui/badge/info.png",
 			"text": {
-				"translate": "badge.originstweaks.weak_arms.1"
+				"translate": "badge.originstweaks.hunter_physique.1"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.originstweaks.hunter_physique.2"
 			}
 		},
 		{
 			"type": "origins:tooltip",
 			"sprite": "origins:textures/gui/badge/arrow_up.png",
 			"text": {
-				"translate": "badge.originstweaks.weak_arms.2"
+				"translate": "badge.originstweaks.hunter_physique.3"
 			}
 		}
 	],
 	"loading_priority": 1,
+	"short_reach": {
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Hunter physique block reach",
+			"attribute": "minecraft:player.block_interaction_range",
+			"value": -1.0,
+			"operation": "addition"
+		}
+	},
 	"slower_mining": {
 		"type": "origins:modify_break_speed",
 		"modifier": {

@@ -137,6 +137,18 @@ public final class MmsOriginsPowers {
     public static final float STARTLE_DAMAGE_THRESHOLD = 8.0F;
 
     /**
+     * Beastfolk dread. A predator's mien sends the overworld's timid creatures
+     * bolting, a flight response baked into mob AI with no Apoli hook, so the
+     * power is a marker and {@code ViciousAppearanceMixin} drives the nearby
+     * quarry away.
+     */
+    public static final PowerType<?> VICIOUS_APPEARANCE =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "vicious_appearance"));
+
+    /** Range, in blocks, at which a beastfolk's viciousness spooks timid mobs. */
+    public static final double VICIOUS_APPEARANCE_RANGE = 8.0;
+
+    /**
      * Share of a beastfolk's combat damage a single player must have dealt for
      * their death to read as a fall in worthy battle and earn the drawn-out howl.
      */
