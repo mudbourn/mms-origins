@@ -4,6 +4,7 @@ import info.mudbourn.mmsorigins.effect.MmsMobEffects;
 import info.mudbourn.mmsorigins.entity.HenchmanLifecycle;
 import info.mudbourn.mmsorigins.entity.MmsEntities;
 import info.mudbourn.mmsorigins.fur.BodyFurAttachment;
+import info.mudbourn.mmsorigins.fur.BodyWingAttachment;
 import info.mudbourn.mmsorigins.fur.LogoutBodyFurBridge;
 import info.mudbourn.mmsorigins.item.MmsItems;
 import info.mudbourn.mmsorigins.power.MmsPowerFactories;
@@ -31,6 +32,7 @@ public class MmsOrigins implements ModInitializer {
         ZombieMeterDeathReset.register();
         ZombifyCommand.register();
         BodyFurAttachment.touch();
+        BodyWingAttachment.touch();
         if (FabricLoader.getInstance().isModLoaded("mms_combat")) {
             LogoutBodyFurBridge.register();
         }

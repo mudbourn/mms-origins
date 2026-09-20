@@ -6,6 +6,7 @@ import info.mudbourn.mmsorigins.client.fur.FurState;
 import info.mudbourn.mmsorigins.client.wings.ButterflyFlap;
 import info.mudbourn.mmsorigins.client.wings.WingState;
 import info.mudbourn.mmsorigins.fur.BodyFurAttachment;
+import info.mudbourn.mmsorigins.fur.BodyWingAttachment;
 import info.mudbourn.mmsorigins.fur.FurResolver;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.VariableIntPower;
@@ -43,7 +44,11 @@ public abstract class PlayerRendererMixin {
             fur = player.getAttachedOrElse(BodyFurAttachment.TYPE, null);
         }
         ((FurState) state).mmsOrigins$setFurOrigin(fur);
-        ((WingState) state).mmsOrigins$setWingOption(FurResolver.wingOption(player));
+        Identifier wing = FurResolver.wingOption(player);
+        if (wing == null && player instanceof Mannequin) {
+            wing = player.getAttachedOrElse(BodyWingAttachment.TYPE, null);
+        }
+        ((WingState) state).mmsOrigins$setWingOption(wing);
         ((ZombieShakeState) state).mmsOrigins$setZombieShaking(mmsOrigins$zombieShaking(player));
         if (player instanceof Player concrete) {
             ((WingState) state).mmsOrigins$setWingFlapDegrees(

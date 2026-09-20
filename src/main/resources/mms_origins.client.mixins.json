@@ -10,6 +10,7 @@
     "LavaTranslucentLayerMixin",
     "LivingEntityRenderStateMixin",
     "LocalPlayerCrouchMixin",
+    "OriginScaleHideMixin",
     "PiglinBruteAdmirePoseMixin",
     "PlayerRendererMixin",
     "WingsElytraTextureMixin",
