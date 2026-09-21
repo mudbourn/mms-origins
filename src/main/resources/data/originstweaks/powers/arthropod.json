@@ -27,11 +27,11 @@
 		"type": "origins:action_on_callback",
 		"entity_action_added": {
 			"type": "origins:execute_command",
-			"command": "attribute @s minecraft:generic.scale base set 0.6"
+			"command": "attribute @s minecraft:scale base set 0.6"
 		},
 		"entity_action_lost": {
 			"type": "origins:execute_command",
-			"command": "attribute @s minecraft:generic.scale base set 1"
+			"command": "attribute @s minecraft:scale base set 1"
 		}
 	},
 	"entity_group": {

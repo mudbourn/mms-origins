@@ -53,6 +53,9 @@ public abstract class PlayerRendererMixin {
         if (player instanceof Player concrete) {
             ((WingState) state).mmsOrigins$setWingFlapDegrees(
                     ButterflyFlap.degreesFor(concrete, partialTick));
+        } else {
+            ((WingState) state).mmsOrigins$setWingFlapDegrees(
+                    ButterflyFlap.idleDegrees(state.ageInTicks));
         }
     }
 

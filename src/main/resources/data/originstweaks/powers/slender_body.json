@@ -33,15 +33,15 @@
 				"actions": [
 					{
 						"type": "origins:execute_command",
-						"command": "attribute @s minecraft:generic.scale base set 1.33"
+						"command": "attribute @s minecraft:scale base set 1.33"
 					},
 					{
 						"type": "origins:execute_command",
-						"command": "attribute @s additionalentityattributes:generic.width base set 1.21"
+						"command": "attribute @s additionalentityattributes:generic.width base set 1"
 					},
 					{
 						"type": "origins:execute_command",
-						"command": "attribute @s additionalentityattributes:generic.height base set 1.21"
+						"command": "attribute @s additionalentityattributes:generic.height base set 1"
 					},
 					{
 						"type": "origins:execute_command",
@@ -49,11 +49,11 @@
 					},
 					{
 						"type": "origins:execute_command",
-						"command": "attribute @s minecraft:player.block_interaction_range base set 5"
+						"command": "attribute @s minecraft:block_interaction_range base set 5"
 					},
 					{
 						"type": "origins:execute_command",
-						"command": "attribute @s minecraft:player.entity_interaction_range base set 6"
+						"command": "attribute @s minecraft:entity_interaction_range base set 6"
 					}
 				]
 			}
@@ -63,7 +63,7 @@
 			"actions": [
 				{
 					"type": "origins:execute_command",
-					"command": "attribute @s minecraft:generic.scale base set 1"
+					"command": "attribute @s minecraft:scale base set 1"
 				},
 				{
 					"type": "origins:execute_command",
@@ -79,11 +79,11 @@
 				},
 				{
 					"type": "origins:execute_command",
-					"command": "attribute @s minecraft:player.block_interaction_range base set 4.5"
+					"command": "attribute @s minecraft:block_interaction_range base set 4.5"
 				},
 				{
 					"type": "origins:execute_command",
-					"command": "attribute @s minecraft:player.entity_interaction_range base set 3"
+					"command": "attribute @s minecraft:entity_interaction_range base set 3"
 				}
 			]
 		}

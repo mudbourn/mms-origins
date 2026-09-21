@@ -45,6 +45,11 @@ public final class ButterflyFlap {
         return flap == null ? REST_DEGREES : flap.degrees(partialTick);
     }
 
+    /** A gentle idle sweep for an avatar with no tracked cycle, driven by its own age so it still flaps. */
+    public static float idleDegrees(float ageInTicks) {
+        return Mth.sin(ageInTicks * IDLE_FLAP_RATE) * AMPLITUDE_DEGREES + REST_DEGREES;
+    }
+
     private void tick(boolean airborne) {
         float target = airborne ? LIFT_FLAP_RATE : IDLE_FLAP_RATE;
         this.prevFlapCycle = this.flapCycle;
