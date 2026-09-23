@@ -50,14 +50,17 @@ public final class BlazeFlightPower extends Power {
             }
             if (abilities.flying && !player.level().isClientSide()) {
                 flightTicks++;
+                int before = fire.getValue();
                 if (player.isInLava()) {
                     // Flying through lava feeds the bar instead of spending it.
-                    fire.setValue(Math.min(fire.getMax(), fire.getValue() + LAVA_CHARGE_PER_TICK));
+                    fire.setValue(Math.min(fire.getMax(), before + LAVA_CHARGE_PER_TICK));
                 } else if (flightTicks % DRAIN_INTERVAL == 0) {
-                    // Staying aloft spends the fire power, but only once every few ticks to keep it cheap.
-                    fire.setValue(Math.max(fire.getMin(), fire.getValue() - FLIGHT_DRAIN_PER_TICK));
+                    // Staying aloft spends the fire power once every few ticks.
+                    fire.setValue(Math.max(fire.getMin(), before - FLIGHT_DRAIN_PER_TICK));
                 }
-                PowerHolderComponent.syncPower(player, fire.getType());
+                if (fire.getValue() != before) {
+                    PowerHolderComponent.syncPower(player, fire.getType());
+                }
                 // Burning openly marks the fire power being spent to fly.
                 player.setRemainingFireTicks(Math.max(player.getRemainingFireTicks(), FLIGHT_FIRE_TICKS));
             }

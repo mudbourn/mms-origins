@@ -53,6 +53,6 @@ public class LavaSurfaceAlphaMixin {
             target = "Lcom/mojang/blaze3d/vertex/VertexConsumer;setColor(FFFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;"),
         index = 3)
     private float mmsOrigins$fadeLava(float alpha) {
-        return TESSELATING_LAVA.get() && LavaViewState.isSubmerged() ? LAVA_ALPHA : alpha;
+        return LavaViewState.isSubmerged() && TESSELATING_LAVA.get() ? LAVA_ALPHA : alpha;
     }
 }

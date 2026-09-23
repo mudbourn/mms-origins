@@ -71,6 +71,9 @@ public class PiglinBruteBarterMixin {
     private static final double MMS_WALK_SPEED = 1.0;
 
     @Unique
+    private static final int MMS_GOLD_SCAN_INTERVAL = 5;
+
+    @Unique
     private int mmsOrigins$admireTicks;
 
     @Unique
@@ -95,6 +98,9 @@ public class PiglinBruteBarterMixin {
         if (heldBlock || held.is(Items.GOLD_INGOT)) {
             this.mmsOrigins$admirePays = mmsOrigins$rollPays(brute, heldBlock);
             this.mmsOrigins$admireTicks = MMS_ADMIRE_TICKS;
+            return;
+        }
+        if ((brute.tickCount + brute.getId()) % MMS_GOLD_SCAN_INTERVAL != 0) {
             return;
         }
         ItemEntity target = mmsOrigins$nearestGold(level, brute);

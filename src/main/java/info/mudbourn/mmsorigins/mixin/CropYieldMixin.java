@@ -1,7 +1,8 @@
 package info.mudbourn.mmsorigins.mixin;
 
-import io.github.apace100.apoli.component.PowerHolderComponent;
+import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import io.github.apace100.apoli.power.PowerType;
+import io.github.apace100.apoli.power.PowerTypeReference;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -41,8 +42,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Block.class)
 public abstract class CropYieldMixin {
 
-    private static final Identifier GREEN_THUMB =
-        Identifier.fromNamespaceAndPath("originstweaks", "green_thumb");
+    private static final PowerType<?> GREEN_THUMB =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "green_thumb"));
     private static final TagKey<Block> HOE_CROPS =
         TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("mms_origins", "hoe_crops"));
     private static final double GOLD_CHANCE = 0.12;
@@ -64,7 +65,7 @@ public abstract class CropYieldMixin {
         }
         boolean crop = state.is(HOE_CROPS);
         boolean goldenLeaf = state.is(Blocks.OAK_LEAVES) || state.is(Blocks.DARK_OAK_LEAVES);
-        if ((!crop && !goldenLeaf) || !mmsOrigins$hasGreenThumb(player)) {
+        if ((!crop && !goldenLeaf) || !MmsOriginsPowers.holds(player, GREEN_THUMB)) {
             return;
         }
         List<ItemStack> drops = cir.getReturnValue();
@@ -91,19 +92,6 @@ public abstract class CropYieldMixin {
             }
         }
         cir.setReturnValue(boosted);
-    }
-
-    private static boolean mmsOrigins$hasGreenThumb(Player player) {
-        PowerHolderComponent component = PowerHolderComponent.KEY.getNullable(player);
-        if (component == null) {
-            return false;
-        }
-        for (PowerType<?> type : component.getPowerTypes(true)) {
-            if (GREEN_THUMB.equals(type.getIdentifier())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private static boolean mmsOrigins$isSeed(ItemStack stack) {

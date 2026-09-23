@@ -1,16 +1,18 @@
 package info.mudbourn.mmsorigins;
 
+import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.CooldownPower;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeReference;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.Entity;
 
 /**
  * References to powers this mod ships that also need a Java-side check.
  *
  * <p>Apoli resolves a {@link PowerTypeReference} lazily by id, so these are safe
  * to create before the power datapack has loaded. Only powers that no Apoli
- * factory can express belong here — everything else stays pure data.
+ * factory can express belong here; everything else stays pure data.
  */
 public final class MmsOriginsPowers {
 
@@ -145,6 +147,13 @@ public final class MmsOriginsPowers {
     public static final PowerType<?> VICIOUS_APPEARANCE =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "vicious_appearance"));
 
+    /**
+     * Blazeborn fire power, the resource bar a bearer spends to fly. Holding it
+     * lets {@code LavaSwimMixin} swim lava like water and lowers the fire overlay.
+     */
+    public static final PowerType<?> FIRE_POWER =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "fire_power"));
+
     /** Range, in blocks, at which a beastfolk's viciousness spooks timid mobs. */
     public static final double VICIOUS_APPEARANCE_RANGE = 8.0;
 
@@ -159,6 +168,12 @@ public final class MmsOriginsPowers {
      * mark of a boss-tier hit rather than an ordinary mob's swing.
      */
     public static final float WORTHY_HEAVY_BLOW = 12.0F;
+
+    /** Whether the entity holds the power at all, active or not, by a single map lookup. */
+    public static boolean holds(Entity entity, PowerType<?> type) {
+        PowerHolderComponent component = PowerHolderComponent.KEY.getNullable(entity);
+        return component != null && component.hasPower(type);
+    }
 
     private MmsOriginsPowers() {
     }

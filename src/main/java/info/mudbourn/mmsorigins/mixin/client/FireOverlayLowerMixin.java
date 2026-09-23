@@ -1,10 +1,8 @@
 package info.mudbourn.mmsorigins.mixin.client;
 
-import io.github.apace100.apoli.component.PowerHolderComponent;
-import io.github.apace100.apoli.power.VariableIntPower;
+import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ScreenEffectRenderer;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,8 +17,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(ScreenEffectRenderer.class)
 public class FireOverlayLowerMixin {
 
-    private static final Identifier FIRE_POWER =
-        Identifier.fromNamespaceAndPath("originstweaks", "fire_power");
     private static final float DROP = 0.45f;
 
     @ModifyArg(
@@ -31,13 +27,8 @@ public class FireOverlayLowerMixin {
         index = 1)
     private static float mmsOrigins$lowerFire(float y) {
         Player player = Minecraft.getInstance().player;
-        if (player == null) {
-            return y;
-        }
-        for (VariableIntPower power : PowerHolderComponent.getPowers(player, VariableIntPower.class)) {
-            if (power.getType().getIdentifier().equals(FIRE_POWER)) {
-                return y - DROP;
-            }
+        if (player != null && MmsOriginsPowers.holds(player, MmsOriginsPowers.FIRE_POWER)) {
+            return y - DROP;
         }
         return y;
     }

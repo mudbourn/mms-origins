@@ -1,10 +1,8 @@
 package info.mudbourn.mmsorigins.client;
 
-import io.github.apace100.apoli.component.PowerHolderComponent;
-import io.github.apace100.apoli.power.VariableIntPower;
+import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.SectionPos;
-import net.minecraft.resources.Identifier;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 
@@ -21,9 +19,6 @@ public final class LavaViewState {
 
     private static final int VERTICAL_SECTION_RADIUS = 4;
 
-    private static final Identifier FIRE_POWER =
-        Identifier.fromNamespaceAndPath("originstweaks", "fire_power");
-
     private static volatile boolean submerged;
 
     public static boolean isSubmerged() {
@@ -34,7 +29,7 @@ public final class LavaViewState {
         Player player = client.player;
         boolean now = player != null
             && player.isEyeInFluid(FluidTags.LAVA)
-            && hasFirePower(player);
+            && MmsOriginsPowers.holds(player, MmsOriginsPowers.FIRE_POWER);
         if (now != submerged) {
             submerged = now;
             markNearbySectionsDirty(client, player);
@@ -58,15 +53,6 @@ public final class LavaViewState {
             centerX + radius,
             maxY,
             centerZ + radius);
-    }
-
-    private static boolean hasFirePower(Player player) {
-        for (VariableIntPower power : PowerHolderComponent.getPowers(player, VariableIntPower.class)) {
-            if (power.getType().getIdentifier().equals(FIRE_POWER)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private LavaViewState() {

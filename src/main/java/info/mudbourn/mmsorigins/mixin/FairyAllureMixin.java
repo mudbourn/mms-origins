@@ -6,7 +6,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -27,7 +26,7 @@ public class FairyAllureMixin {
     @Inject(method = "serverAiStep", at = @At("RETURN"))
     private void mmsOrigins$lureToFairy(CallbackInfo ci) {
         Mob mob = (Mob) (Object) this;
-        if (!(mob instanceof Enemy) || mob.tickCount % 10 != 0) {
+        if (!(mob instanceof Enemy) || (mob.tickCount + mob.getId()) % 10 != 0) {
             return;
         }
         LivingEntity current = mob.getTarget();
@@ -38,18 +37,17 @@ public class FairyAllureMixin {
         if (range <= 0.0) {
             return;
         }
-        AABB reach = mob.getBoundingBox().inflate(range);
         Player nearest = null;
         double nearestSqr = range * range;
-        for (Player player : mob.level().getEntitiesOfClass(Player.class, reach)) {
+        for (Player player : mob.level().players()) {
+            double distanceSqr = mob.distanceToSqr(player);
+            if (distanceSqr >= nearestSqr) {
+                continue;
+            }
             if (player.isSpectator() || player.getAbilities().instabuild || !player.isAlive()) {
                 continue;
             }
-            if (!MmsOriginsPowers.FAIRY_ALLURE.isActive(player)) {
-                continue;
-            }
-            double distanceSqr = mob.distanceToSqr(player);
-            if (distanceSqr < nearestSqr && mob.getSensing().hasLineOfSight(player)) {
+            if (MmsOriginsPowers.FAIRY_ALLURE.isActive(player) && mob.getSensing().hasLineOfSight(player)) {
                 nearest = player;
                 nearestSqr = distanceSqr;
             }

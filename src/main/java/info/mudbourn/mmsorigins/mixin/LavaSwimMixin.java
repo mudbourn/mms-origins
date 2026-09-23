@@ -1,8 +1,6 @@
 package info.mudbourn.mmsorigins.mixin;
 
-import io.github.apace100.apoli.component.PowerHolderComponent;
-import io.github.apace100.apoli.power.VariableIntPower;
-import net.minecraft.resources.Identifier;
+import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -22,9 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public abstract class LavaSwimMixin {
 
-    private static final Identifier FIRE_POWER =
-        Identifier.fromNamespaceAndPath("originstweaks", "fire_power");
-
     private static final double SINK_PER_TICK = 0.05;
     private static final double RISE_PER_TICK = 0.05;
 
@@ -42,17 +37,12 @@ public abstract class LavaSwimMixin {
             double speed,
             CallbackInfo ci) {
         LivingEntity self = (LivingEntity) (Object) this;
-        if (!(self instanceof Player)) {
+        if (!(self instanceof Player) || !MmsOriginsPowers.holds(self, MmsOriginsPowers.FIRE_POWER)) {
             return;
         }
-        for (VariableIntPower power : PowerHolderComponent.getPowers(self, VariableIntPower.class)) {
-            if (power.getType().getIdentifier().equals(FIRE_POWER)) {
-                travelInWater(movementInput, gravity, falling, speed);
-                mmsOrigins$holdDepth(self);
-                ci.cancel();
-                return;
-            }
-        }
+        travelInWater(movementInput, gravity, falling, speed);
+        mmsOrigins$holdDepth(self);
+        ci.cancel();
     }
 
     private void mmsOrigins$holdDepth(LivingEntity self) {

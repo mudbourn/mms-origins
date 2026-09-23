@@ -1,11 +1,8 @@
 package info.mudbourn.mmsorigins;
 
-import io.github.apace100.apoli.component.PowerHolderComponent;
-import io.github.apace100.apoli.power.PowerType;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
@@ -33,8 +30,6 @@ import net.minecraft.world.level.block.state.BlockState;
  */
 public final class VerdantGrowth {
 
-    private static final Identifier MARKER =
-        Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "verdant_growth");
     private static final int CHUNK_RADIUS = 2;
     private static final float GROWTH_BONUS = 0.3f;
 
@@ -52,7 +47,7 @@ public final class VerdantGrowth {
         }
         int extraPerSection = Math.max(1, Math.round(randomTickSpeed * GROWTH_BONUS));
         for (ServerPlayer player : level.players()) {
-            if (!hasVerdantGrowth(player)) {
+            if (!MmsOriginsPowers.holds(player, MmsOriginsPowers.VERDANT_GROWTH)) {
                 continue;
             }
             int centerX = player.chunkPosition().x;
@@ -97,18 +92,5 @@ public final class VerdantGrowth {
             || state.getBlock() instanceof SugarCaneBlock
             || state.getBlock() instanceof CactusBlock
             || state.getBlock() instanceof BambooStalkBlock;
-    }
-
-    private static boolean hasVerdantGrowth(ServerPlayer player) {
-        PowerHolderComponent component = PowerHolderComponent.KEY.getNullable(player);
-        if (component == null) {
-            return false;
-        }
-        for (PowerType<?> type : component.getPowerTypes(true)) {
-            if (MARKER.equals(type.getIdentifier())) {
-                return true;
-            }
-        }
-        return false;
     }
 }

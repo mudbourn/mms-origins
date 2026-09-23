@@ -17,6 +17,8 @@ public final class FurResolver {
 
     private static final int ZOMBIE_METER_CAP = 600;
 
+    private static final Identifier BASE_LAYER =
+        Identifier.fromNamespaceAndPath("origins", "origin");
     private static final Identifier PIGLIN_ZOMBIE_FUR =
         Identifier.fromNamespaceAndPath("mms_origins", "piglin_zombie");
     private static final Identifier FAIRY_OPTIONS =
@@ -43,7 +45,7 @@ public final class FurResolver {
         if (component == null) {
             return null;
         }
-        OriginLayer layer = OriginLayers.getLayer(Identifier.fromNamespaceAndPath("origins", "origin"));
+        OriginLayer layer = OriginLayers.getLayer(BASE_LAYER);
         if (layer == null || !component.hasOrigin(layer)) {
             return null;
         }
@@ -73,7 +75,7 @@ public final class FurResolver {
         if (component == null) {
             return null;
         }
-        OriginLayer base = OriginLayers.getLayer(Identifier.fromNamespaceAndPath("origins", "origin"));
+        OriginLayer base = OriginLayers.getLayer(BASE_LAYER);
         if (base == null || !component.hasOrigin(base)) {
             return null;
         }

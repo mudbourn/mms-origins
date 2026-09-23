@@ -11,7 +11,6 @@ import net.minecraft.world.entity.animal.pig.Pig;
 import net.minecraft.world.entity.animal.sheep.Sheep;
 import net.minecraft.world.entity.monster.spider.Spider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,7 +33,7 @@ public abstract class ViciousAppearanceMixin {
         if (!((Object) this instanceof PathfinderMob mob)) {
             return;
         }
-        if (mob.tickCount % 10 != 0 || !mmsOrigins$isTimid(mob)) {
+        if ((mob.tickCount + mob.getId()) % 10 != 0 || !mmsOrigins$isTimid(mob)) {
             return;
         }
         Player predator = mmsOrigins$nearestPredator(mob);
@@ -59,18 +58,17 @@ public abstract class ViciousAppearanceMixin {
 
     private static Player mmsOrigins$nearestPredator(PathfinderMob mob) {
         double range = MmsOriginsPowers.VICIOUS_APPEARANCE_RANGE;
-        AABB reach = mob.getBoundingBox().inflate(range);
         Player nearest = null;
         double nearestSqr = range * range;
-        for (Player player : mob.level().getEntitiesOfClass(Player.class, reach)) {
+        for (Player player : mob.level().players()) {
+            double distanceSqr = mob.distanceToSqr(player);
+            if (distanceSqr >= nearestSqr) {
+                continue;
+            }
             if (player.isSpectator() || player.getAbilities().instabuild || !player.isAlive()) {
                 continue;
             }
-            if (!MmsOriginsPowers.VICIOUS_APPEARANCE.isActive(player)) {
-                continue;
-            }
-            double distanceSqr = mob.distanceToSqr(player);
-            if (distanceSqr < nearestSqr) {
+            if (MmsOriginsPowers.VICIOUS_APPEARANCE.isActive(player)) {
                 nearest = player;
                 nearestSqr = distanceSqr;
             }

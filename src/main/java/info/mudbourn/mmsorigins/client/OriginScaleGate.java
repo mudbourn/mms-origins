@@ -1,8 +1,8 @@
 package info.mudbourn.mmsorigins.client;
 
-import io.github.apace100.apoli.component.PowerHolderComponent;
+import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import io.github.apace100.apoli.power.PowerType;
-import java.util.Set;
+import io.github.apace100.apoli.power.PowerTypeReference;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -12,9 +12,10 @@ public final class OriginScaleGate {
 
     private static final double DEFAULT_SCALE = 1.0;
     private static final double SETTLED_EPSILON = 1.0E-3;
-    private static final Set<Identifier> SCALE_POWERS = Set.of(
-        Identifier.fromNamespaceAndPath("originstweaks", "slender_body"),
-        Identifier.fromNamespaceAndPath("originstweaks", "arthropod"));
+    private static final PowerType<?> SLENDER_BODY =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "slender_body"));
+    private static final PowerType<?> ARTHROPOD =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "arthropod"));
 
     private OriginScaleGate() {
     }
@@ -30,15 +31,6 @@ public final class OriginScaleGate {
 
     // Whether the player holds a power known to change their scale.
     private static boolean hasScalePower(Player player) {
-        PowerHolderComponent component = PowerHolderComponent.KEY.getNullable(player);
-        if (component == null) {
-            return false;
-        }
-        for (PowerType<?> type : component.getPowerTypes(true)) {
-            if (SCALE_POWERS.contains(type.getIdentifier())) {
-                return true;
-            }
-        }
-        return false;
+        return MmsOriginsPowers.holds(player, SLENDER_BODY) || MmsOriginsPowers.holds(player, ARTHROPOD);
     }
 }

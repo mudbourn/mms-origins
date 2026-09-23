@@ -38,6 +38,7 @@ public final class GrappleHookPower extends Power implements Active {
 
     private static final int HOLD_GRACE_TICKS = 3;
     private static final int WEB_COLOR = 0xFFFFFF;
+    private static final int WEB_REDRAW_INTERVAL = 2;
 
     private final double maxLength;
     private final double reelSpeed;
@@ -157,8 +158,10 @@ public final class GrappleHookPower extends Power implements Active {
         Vec3 eye = player.getEyePosition();
         Vec3 toAnchor = anchorPoint.subtract(eye);
         double dist = toAnchor.length();
-        drawWeb(player, eye, anchorPoint);
-        markAnchor(player, anchorPoint);
+        if (player.tickCount % WEB_REDRAW_INTERVAL == 0) {
+            drawWeb(player, eye, anchorPoint);
+            markAnchor(player, anchorPoint);
+        }
         if (dist < arriveDistance) {
             drive(player, player.getDeltaMovement().scale(0.2));
             return;
@@ -177,7 +180,9 @@ public final class GrappleHookPower extends Power implements Active {
             release();
             return;
         }
-        drawWeb(player, player.getEyePosition(), anchorEntity.getEyePosition());
+        if (player.tickCount % WEB_REDRAW_INTERVAL == 0) {
+            drawWeb(player, player.getEyePosition(), anchorEntity.getEyePosition());
+        }
         if (dist < arriveDistance) {
             return;
         }

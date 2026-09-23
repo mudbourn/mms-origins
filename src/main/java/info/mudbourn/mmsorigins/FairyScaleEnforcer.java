@@ -1,7 +1,7 @@
 package info.mudbourn.mmsorigins;
 
-import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.PowerType;
+import io.github.apace100.apoli.power.PowerTypeReference;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -22,8 +22,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
  */
 public final class FairyScaleEnforcer {
 
-    private static final Identifier MARKER =
-        Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "diminutive");
+    private static final PowerType<?> MARKER =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "diminutive"));
     private static final Identifier SCALE_MODIFIER_ID =
         Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "fairy_scale");
     private static final double SCALE_MULTIPLIER = -0.6;
@@ -41,7 +41,7 @@ public final class FairyScaleEnforcer {
             if (scale == null) {
                 continue;
             }
-            boolean fairy = isDiminutive(player);
+            boolean fairy = MmsOriginsPowers.holds(player, MARKER);
             boolean applied = scale.getModifier(SCALE_MODIFIER_ID) != null;
             if (fairy && !applied) {
                 scale.addTransientModifier(new AttributeModifier(
@@ -52,18 +52,5 @@ public final class FairyScaleEnforcer {
                 scale.removeModifier(SCALE_MODIFIER_ID);
             }
         }
-    }
-
-    private static boolean isDiminutive(ServerPlayer player) {
-        PowerHolderComponent component = PowerHolderComponent.KEY.getNullable(player);
-        if (component == null) {
-            return false;
-        }
-        for (PowerType<?> type : component.getPowerTypes(true)) {
-            if (MARKER.equals(type.getIdentifier())) {
-                return true;
-            }
-        }
-        return false;
     }
 }

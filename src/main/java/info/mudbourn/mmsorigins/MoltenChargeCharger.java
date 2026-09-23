@@ -3,6 +3,7 @@ package info.mudbourn.mmsorigins;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.CooldownPower;
 import io.github.apace100.apoli.power.PowerType;
+import io.github.apace100.apoli.power.PowerTypeReference;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -19,8 +20,8 @@ import net.minecraft.server.level.ServerPlayer;
  */
 public final class MoltenChargeCharger {
 
-    private static final Identifier MARKER =
-        Identifier.fromNamespaceAndPath("originstweaks", "molten_core");
+    private static final PowerType<?> MARKER =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "molten_core"));
 
     private MoltenChargeCharger() {
     }
@@ -32,7 +33,7 @@ public final class MoltenChargeCharger {
     private static void onEndWorldTick(ServerLevel level) {
         boolean fireTickHalf = level.getGameTime() % 2 == 0;
         for (ServerPlayer player : level.players()) {
-            if (!isMoltenCharged(player)) {
+            if (!MmsOriginsPowers.holds(player, MARKER)) {
                 continue;
             }
             long extraTicks;
@@ -50,18 +51,5 @@ public final class MoltenChargeCharger {
                 ((MoltenCharge) cooldown).mmsOrigins$accelerate(extraTicks);
             }
         }
-    }
-
-    private static boolean isMoltenCharged(ServerPlayer player) {
-        PowerHolderComponent component = PowerHolderComponent.KEY.getNullable(player);
-        if (component == null) {
-            return false;
-        }
-        for (PowerType<?> type : component.getPowerTypes(true)) {
-            if (MARKER.equals(type.getIdentifier())) {
-                return true;
-            }
-        }
-        return false;
     }
 }
