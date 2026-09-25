@@ -1,0 +1,46 @@
+{
+  "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.skyris_homeland.0"
+      }
+    }
+  ],
+  "homeland_strength": {
+    "type": "origins:conditioned_attribute",
+    "tick_rate": 20,
+    "modifier": {
+      "name": "Skyris homeland strength",
+      "attribute": "minecraft:generic.attack_damage",
+      "value": 2.0,
+      "operation": "addition"
+    },
+    "condition": {
+      "type": "origins:biome",
+      "condition": {
+        "type": "origins:in_tag",
+        "tag": "mms_origins:fairy_homeland"
+      }
+    }
+  },
+  "homeland_luck": {
+    "type": "origins:conditioned_attribute",
+    "tick_rate": 20,
+    "modifier": {
+      "name": "Skyris homeland luck",
+      "attribute": "minecraft:generic.luck",
+      "value": 3.0,
+      "operation": "addition"
+    },
+    "condition": {
+      "type": "origins:biome",
+      "condition": {
+        "type": "origins:in_tag",
+        "tag": "mms_origins:fairy_homeland"
+      }
+    }
+  }
+}

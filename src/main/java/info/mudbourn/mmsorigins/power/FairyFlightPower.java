@@ -2,7 +2,11 @@ package info.mudbourn.mmsorigins.power;
 
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
 
@@ -20,6 +24,11 @@ public final class FairyFlightPower extends Power {
     private static final float FAINT_HEALTH_THRESHOLD = 6.0F;
     private static final float NORMAL_FLYING_SPEED = 0.05F;
     private static final float FAINT_FLYING_SPEED = 0.025F;
+    private static final float HOMELAND_SPEED_MULTIPLIER = 1.5F;
+
+    // the fairy homeland, where flight quickens
+    private static final ResourceKey<Biome> HOMELAND_BIOME =
+        ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("biomeswevegone", "skyris_vale"));
 
     public FairyFlightPower(PowerType<?> type, LivingEntity entity) {
         super(type, entity);
@@ -40,6 +49,9 @@ public final class FairyFlightPower extends Power {
         if (fedEnough) {
             // A fairy down to three hearts or less flies at a faltering pace.
             float wantedSpeed = player.getHealth() <= FAINT_HEALTH_THRESHOLD ? FAINT_FLYING_SPEED : NORMAL_FLYING_SPEED;
+            if (inHomeland(player)) {
+                wantedSpeed *= HOMELAND_SPEED_MULTIPLIER;
+            }
             boolean changed = !abilities.mayfly || abilities.getFlyingSpeed() != wantedSpeed;
             abilities.mayfly = true;
             abilities.setFlyingSpeed(wantedSpeed);
@@ -55,6 +67,10 @@ public final class FairyFlightPower extends Power {
             abilities.setFlyingSpeed(NORMAL_FLYING_SPEED);
             player.onUpdateAbilities();
         }
+    }
+
+    private boolean inHomeland(Player player) {
+        return player.level().getBiome(player.blockPosition()).is(HOMELAND_BIOME);
     }
 
     @Override

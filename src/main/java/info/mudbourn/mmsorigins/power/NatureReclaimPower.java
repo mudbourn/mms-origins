@@ -12,8 +12,13 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.biome.Biome;
+
+import java.util.Set;
 
 /**
  * A slow nature spell cast from the off hand. The floran holds the primary key
@@ -28,6 +33,19 @@ import net.minecraft.world.level.biome.Biomes;
 public final class NatureReclaimPower extends Power implements Active {
 
     private static final int HOLD_GRACE_TICKS = 3;
+
+    // biomes whose growth is strong enough for the floran to unmake an item
+    private static final Set<ResourceKey<Biome>> RECLAIM_BIOMES = Set.of(
+        reclaimBiome("minecraft", "dark_forest"),
+        reclaimBiome("biomeswevegone", "weeping_witch_forest"),
+        reclaimBiome("biomeswevegone", "enchanted_tangle"),
+        reclaimBiome("biomeswevegone", "ebony_woods"),
+        reclaimBiome("biomeswevegone", "forgotten_forest"),
+        reclaimBiome("biomeswevegone", "jacaranda_jungle"));
+
+    private static ResourceKey<Biome> reclaimBiome(String namespace, String path) {
+        return ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(namespace, path));
+    }
 
     private final int castTicks;
     private final int soundDelay;
@@ -120,7 +138,9 @@ public final class NatureReclaimPower extends Power implements Active {
     }
 
     private void cast(Player player, ServerLevel level) {
-        if (!level.getBiome(player.blockPosition()).is(Biomes.DARK_FOREST)) {
+        boolean inReclaimBiome = RECLAIM_BIOMES.stream()
+            .anyMatch(level.getBiome(player.blockPosition())::is);
+        if (!inReclaimBiome) {
             message(player, "message.mms_origins.nature_reclaim.not_forest");
             return;
         }
