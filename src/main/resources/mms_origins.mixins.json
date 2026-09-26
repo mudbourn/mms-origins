@@ -23,6 +23,7 @@
     "ItemStackConsumeMixin",
     "LavaSwimMixin",
     "LivingEntityDeathMixin",
+    "OriginFlushMixin",
     "PhantomForgetTargetMixin",
     "PhantomUnseenMixin",
     "PiglinAttackTargetMixin",

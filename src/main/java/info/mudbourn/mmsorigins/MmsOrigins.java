@@ -31,6 +31,7 @@ public class MmsOrigins implements ModInitializer {
         MoltenChargeCharger.register();
         ZombieMeterDeathReset.register();
         ZombifyCommand.register();
+        OriginFlush.register();
         BodyFurAttachment.touch();
         BodyWingAttachment.touch();
         if (FabricLoader.getInstance().isModLoaded("mms_combat")) {
