@@ -203,7 +203,7 @@
 								},
 								{
 									"type": "apoli_legacy:distance_to_ground",
-									"distance": 1,
+									"distance": 2,
 									"inverted": true
 								}
 							]
@@ -760,7 +760,7 @@
 								},
 								{
 									"type": "apoli_legacy:distance_to_ground",
-									"distance": 1
+									"distance": 2
 								}
 							]
 						}
@@ -795,14 +795,14 @@
 	"hold_timer": {
 		"type": "origins:resource",
 		"min": 0,
-		"max": 3
+		"max": 6
 	},
 	"hold_check": {
 		"type": "origins:active_self",
 		"entity_action": {
 			"type": "origins:change_resource",
 			"resource": "*:*_hold_timer",
-			"change": 3,
+			"change": 6,
 			"operation": "set"
 		},
 		"key": {

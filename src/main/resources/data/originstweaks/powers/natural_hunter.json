@@ -335,6 +335,32 @@
 			]
 		}
 	},
+	"claws_reach": {
+		"type": "origins:conditioned_attribute",
+		"tick_rate": 5,
+		"modifier": {
+			"name": "Claw strike reach",
+			"attribute": "minecraft:player.entity_interaction_range",
+			"value": 1.0,
+			"operation": "addition"
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "originstweaks:claw_mode"
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition": {
+						"type": "origins:empty"
+					}
+				}
+			]
+		}
+	},
 	"claws_death_penalty": {
 		"type": "origins:action_on_callback",
 		"entity_action_removed": {

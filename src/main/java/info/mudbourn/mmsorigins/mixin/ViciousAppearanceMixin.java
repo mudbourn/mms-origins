@@ -44,7 +44,7 @@ public abstract class ViciousAppearanceMixin {
         if (!((Object) this instanceof Animal mob) || mob.level().isClientSide()) {
             return;
         }
-        if ((mob.tickCount + mob.getId()) % 10 != 0 || mob.getType().is(UNAFRAID) || mmsOrigins$isTamed(mob)) {
+        if ((mob.tickCount + mob.getId()) % 5 != 0 || mob.getType().is(UNAFRAID) || mmsOrigins$isTamed(mob)) {
             return;
         }
         for (Entity passenger : mob.getPassengers()) {
@@ -58,7 +58,7 @@ public abstract class ViciousAppearanceMixin {
             return;
         }
         mob.setTarget(null);
-        Vec3 away = DefaultRandomPos.getPosAway(mob, 16, 7, predator.position());
+        Vec3 away = DefaultRandomPos.getPosAway(mob, 15, 7, predator.position());
         if (away != null) {
             mob.getNavigation().moveTo(away.x, away.y, away.z, 1.4);
         }

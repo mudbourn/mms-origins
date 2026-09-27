@@ -159,19 +159,8 @@ public final class MmsOriginsPowers {
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "claw_mode"));
 
     /** Range, in blocks, at which a beastfolk's viciousness spooks timid mobs. */
-    public static final double VICIOUS_APPEARANCE_RANGE = 8.0;
+    public static final double VICIOUS_APPEARANCE_RANGE = 12.0;
 
-    /**
-     * Share of a beastfolk's combat damage a single player must have dealt for
-     * their death to read as a fall in worthy battle and earn the drawn-out howl.
-     */
-    public static final float WORTHY_KILL_DAMAGE_SHARE = 0.8F;
-
-    /**
-     * Damage a single killing blow must land to earn the howl on its own, the
-     * mark of a boss-tier hit rather than an ordinary mob's swing.
-     */
-    public static final float WORTHY_HEAVY_BLOW = 12.0F;
 
     /** Whether the entity holds the power at all, active or not, by a single map lookup. */
     public static boolean holds(Entity entity, PowerType<?> type) {

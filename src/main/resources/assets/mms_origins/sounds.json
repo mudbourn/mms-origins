@@ -18,8 +18,18 @@
   },
   "beastfolk.death": {
     "sounds": [
-      "mms_origins:beastfolk/death1",
-      "mms_origins:beastfolk/death3"
+      {
+        "name": "mms_origins:beastfolk/death1",
+        "weight": 99
+      },
+      {
+        "name": "mms_origins:beastfolk/death3",
+        "weight": 99
+      },
+      {
+        "name": "mms_origins:beastfolk/death2",
+        "weight": 2
+      }
     ]
   },
   "beastfolk.collar_hurt": {
@@ -31,8 +41,18 @@
   },
   "beastfolk.collar_death": {
     "sounds": [
-      "mms_origins:beastfolk/wolf_hurt2",
-      "mms_origins:beastfolk/wolf_hurt3"
+      {
+        "name": "mms_origins:beastfolk/wolf_hurt2",
+        "weight": 99
+      },
+      {
+        "name": "mms_origins:beastfolk/wolf_hurt3",
+        "weight": 99
+      },
+      {
+        "name": "mms_origins:beastfolk/death2",
+        "weight": 2
+      }
     ]
   },
   "beastfolk.fox_hurt": {
@@ -45,8 +65,22 @@
   },
   "beastfolk.fox_death": {
     "sounds": [
-      "mms_origins:beastfolk/fox_death1",
-      "mms_origins:beastfolk/fox_death2"
+      {
+        "name": "mms_origins:beastfolk/fox_death1",
+        "weight": 99
+      },
+      {
+        "name": "mms_origins:beastfolk/fox_death2",
+        "weight": 99
+      },
+      {
+        "name": "mms_origins:beastfolk/fox_screech1",
+        "weight": 1
+      },
+      {
+        "name": "mms_origins:beastfolk/fox_screech2",
+        "weight": 1
+      }
     ]
   },
   "beastfolk.fox_collarless_hurt": {
@@ -60,19 +94,22 @@
   },
   "beastfolk.fox_collarless_death": {
     "sounds": [
-      "mms_origins:beastfolk/fox_collarless_death1",
-      "mms_origins:beastfolk/fox_collarless_death2"
-    ]
-  },
-  "beastfolk.fox_screech": {
-    "sounds": [
-      "mms_origins:beastfolk/fox_screech1",
-      "mms_origins:beastfolk/fox_screech2"
-    ]
-  },
-  "beastfolk.death_long": {
-    "sounds": [
-      "mms_origins:beastfolk/death2"
+      {
+        "name": "mms_origins:beastfolk/fox_collarless_death1",
+        "weight": 99
+      },
+      {
+        "name": "mms_origins:beastfolk/fox_collarless_death2",
+        "weight": 99
+      },
+      {
+        "name": "mms_origins:beastfolk/fox_screech1",
+        "weight": 1
+      },
+      {
+        "name": "mms_origins:beastfolk/fox_screech2",
+        "weight": 1
+      }
     ]
   }
 }
