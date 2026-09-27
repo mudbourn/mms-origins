@@ -1,5 +1,9 @@
 package info.mudbourn.mmsorigins.client;
 
+import info.mudbourn.mmsorigins.client.beastfolk.BeastfolkFeatureRenderer;
+import info.mudbourn.mmsorigins.client.beastfolk.ClawsModel;
+import info.mudbourn.mmsorigins.client.beastfolk.EarsModel;
+import info.mudbourn.mmsorigins.client.beastfolk.TailModel;
 import info.mudbourn.mmsorigins.client.entity.FloranHenchmanRenderer;
 import info.mudbourn.mmsorigins.client.fur.FurFeatureRenderer;
 import info.mudbourn.mmsorigins.client.fur.FurModels;
@@ -31,10 +35,14 @@ public class MmsOriginsClient implements ClientModInitializer {
         FurModels.init();
         EntityRendererRegistry.register(MmsEntities.FLORAN_HENCHMAN, FloranHenchmanRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ButterflyWingsModel.LAYER, ButterflyWingsModel::createLayer);
+        EntityModelLayerRegistry.registerModelLayer(TailModel.LAYER, TailModel::createLayer);
+        EntityModelLayerRegistry.registerModelLayer(EarsModel.LAYER, EarsModel::createLayer);
+        EntityModelLayerRegistry.registerModelLayer(ClawsModel.LAYER, ClawsModel::createLayer);
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register(
                 (entityType, renderer, helper, context) -> {
                     if (renderer instanceof AvatarRenderer player) {
                         helper.register(new FurFeatureRenderer(player));
+                        helper.register(new BeastfolkFeatureRenderer(player, context::bakeLayer));
                         helper.register(new WingsFeatureRenderer(player,
                                 context.bakeLayer(ModelLayers.ELYTRA)));
                         helper.register(new ButterflyWingsFeatureRenderer(player,

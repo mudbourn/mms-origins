@@ -18,6 +18,15 @@ public final class MmsSounds {
 
     public static final SoundEvent BEASTFOLK_HURT = register("beastfolk.hurt");
     public static final SoundEvent BEASTFOLK_DEATH = register("beastfolk.death");
+    public static final SoundEvent BEASTFOLK_COLLAR_HURT = register("beastfolk.collar_hurt");
+    public static final SoundEvent BEASTFOLK_COLLAR_DEATH = register("beastfolk.collar_death");
+    public static final SoundEvent BEASTFOLK_FOX_HURT = register("beastfolk.fox_hurt");
+    public static final SoundEvent BEASTFOLK_FOX_DEATH = register("beastfolk.fox_death");
+    public static final SoundEvent BEASTFOLK_FOX_COLLARLESS_HURT = register("beastfolk.fox_collarless_hurt");
+    public static final SoundEvent BEASTFOLK_FOX_COLLARLESS_DEATH = register("beastfolk.fox_collarless_death");
+
+    /** The fox-tailed beastfolk's screech, their stand-in for the worthy-death howl. */
+    public static final SoundEvent BEASTFOLK_FOX_SCREECH = register("beastfolk.fox_screech");
 
     /** The beastfolk's drawn-out death cry, reserved for the wolf-kill easter egg. */
     public static final SoundEvent BEASTFOLK_DEATH_LONG = register("beastfolk.death_long");

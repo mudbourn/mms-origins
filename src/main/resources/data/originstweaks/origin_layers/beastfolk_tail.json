@@ -1,0 +1,22 @@
+{
+	"gui_title": {
+		"choose_origin": "originstweaks.gui.choose_tail.title",
+		"view_origin": "originstweaks.gui.view_tail.title"
+	},
+	"order": 4,
+	"auto_choose": false,
+	"origins": [
+		{
+			"origins": [
+				"originstweaks:beastfolk_tail_fox",
+				"originstweaks:beastfolk_tail_wolf",
+				"originstweaks:beastfolk_no_tail"
+			],
+			"condition": {
+				"type": "origins:origin",
+				"layer": "origins:origin",
+				"origin": "originstweaks:beastfolk"
+			}
+		}
+	]
+}

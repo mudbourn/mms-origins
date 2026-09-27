@@ -11,8 +11,44 @@
 				"compare_to": 0
 			},
 			"if_action": {
-				"type": "origins:play_sound",
-				"sound": "mms_origins:beastfolk.hurt"
+				"type": "origins:if_else",
+				"condition": {
+					"type": "origins:origin",
+					"layer": "originstweaks:beastfolk_tail",
+					"origin": "originstweaks:beastfolk_tail_fox"
+				},
+				"if_action": {
+					"type": "origins:if_else",
+					"condition": {
+						"type": "origins:origin",
+						"layer": "originstweaks:beastfolk_options",
+						"origin": "originstweaks:beastfolk_collar"
+					},
+					"if_action": {
+						"type": "origins:play_sound",
+						"sound": "mms_origins:beastfolk.fox_hurt"
+					},
+					"else_action": {
+						"type": "origins:play_sound",
+						"sound": "mms_origins:beastfolk.fox_collarless_hurt"
+					}
+				},
+				"else_action": {
+					"type": "origins:if_else",
+					"condition": {
+						"type": "origins:origin",
+						"layer": "originstweaks:beastfolk_options",
+						"origin": "originstweaks:beastfolk_collar"
+					},
+					"if_action": {
+						"type": "origins:play_sound",
+						"sound": "mms_origins:beastfolk.collar_hurt"
+					},
+					"else_action": {
+						"type": "origins:play_sound",
+						"sound": "mms_origins:beastfolk.hurt"
+					}
+				}
 			}
 		},
 		"cooldown": 1

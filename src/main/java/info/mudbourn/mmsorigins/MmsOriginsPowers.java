@@ -154,6 +154,10 @@ public final class MmsOriginsPowers {
     public static final PowerType<?> FIRE_POWER =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "fire_power"));
 
+    /** Beastfolk claw mode, the toggle that bares the claws the client draws on their hands. */
+    public static final PowerType<?> CLAW_MODE =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "claw_mode"));
+
     /** Range, in blocks, at which a beastfolk's viciousness spooks timid mobs. */
     public static final double VICIOUS_APPEARANCE_RANGE = 8.0;
 

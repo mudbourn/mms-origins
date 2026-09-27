@@ -1,8 +1,10 @@
 package info.mudbourn.mmsorigins.mixin;
 
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
+import info.mudbourn.mmsorigins.fur.FurResolver;
 import info.mudbourn.mmsorigins.sound.MmsSounds;
 import java.util.List;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -11,6 +13,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -30,6 +33,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public abstract class BeastfolkDeathCryMixin {
 
+    @Unique
+    private static final Identifier FOX_TAIL = Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_tail_fox");
+
     @Inject(method = "die", at = @At("HEAD"))
     private void mmsOrigins$deathCry(DamageSource source, CallbackInfo ci) {
         if (!(((Object) this) instanceof Player player) || !(player.level() instanceof ServerLevel level)) {
@@ -38,11 +44,21 @@ public abstract class BeastfolkDeathCryMixin {
         if (!MmsOriginsPowers.BEAST_TONGUE.isActive(player)) {
             return;
         }
-        SoundEvent cry = mmsOrigins$isWorthyDeath(player, source)
-            ? MmsSounds.BEASTFOLK_DEATH_LONG
-            : MmsSounds.BEASTFOLK_DEATH;
+        SoundEvent cry = mmsOrigins$cry(player, source);
         level.playSound(null, player.getX(), player.getY(), player.getZ(),
             cry, SoundSource.PLAYERS, 1.0F, 1.0F);
+    }
+
+    private static SoundEvent mmsOrigins$cry(Player player, DamageSource source) {
+        boolean collared = FurResolver.wearsCollar(player);
+        boolean fox = FOX_TAIL.equals(FurResolver.tailOption(player));
+        if (mmsOrigins$isWorthyDeath(player, source)) {
+            return fox ? MmsSounds.BEASTFOLK_FOX_SCREECH : MmsSounds.BEASTFOLK_DEATH_LONG;
+        }
+        if (fox) {
+            return collared ? MmsSounds.BEASTFOLK_FOX_DEATH : MmsSounds.BEASTFOLK_FOX_COLLARLESS_DEATH;
+        }
+        return collared ? MmsSounds.BEASTFOLK_COLLAR_DEATH : MmsSounds.BEASTFOLK_DEATH;
     }
 
     private static boolean mmsOrigins$isWorthyDeath(Player player, DamageSource source) {

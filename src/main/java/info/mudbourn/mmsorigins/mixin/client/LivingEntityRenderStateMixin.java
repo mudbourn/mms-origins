@@ -22,6 +22,12 @@ public abstract class LivingEntityRenderStateMixin implements FurState, WingStat
     private Identifier mmsOrigins$furOrigin;
 
     @Unique
+    private Identifier mmsOrigins$tailOption;
+
+    @Unique
+    private boolean mmsOrigins$clawsOut;
+
+    @Unique
     private boolean mmsOrigins$zombieShaking;
 
     @Unique
@@ -38,6 +44,26 @@ public abstract class LivingEntityRenderStateMixin implements FurState, WingStat
     @Override
     public void mmsOrigins$setFurOrigin(Identifier origin) {
         this.mmsOrigins$furOrigin = origin;
+    }
+
+    @Override
+    public Identifier mmsOrigins$tailOption() {
+        return this.mmsOrigins$tailOption;
+    }
+
+    @Override
+    public void mmsOrigins$setTailOption(Identifier option) {
+        this.mmsOrigins$tailOption = option;
+    }
+
+    @Override
+    public boolean mmsOrigins$clawsOut() {
+        return this.mmsOrigins$clawsOut;
+    }
+
+    @Override
+    public void mmsOrigins$setClawsOut(boolean out) {
+        this.mmsOrigins$clawsOut = out;
     }
 
     @Override

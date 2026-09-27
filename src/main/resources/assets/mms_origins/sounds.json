@@ -22,6 +22,54 @@
       "mms_origins:beastfolk/death3"
     ]
   },
+  "beastfolk.collar_hurt": {
+    "sounds": [
+      "mms_origins:beastfolk/wolf_hurt1",
+      "mms_origins:beastfolk/wolf_hurt2",
+      "mms_origins:beastfolk/wolf_hurt3"
+    ]
+  },
+  "beastfolk.collar_death": {
+    "sounds": [
+      "mms_origins:beastfolk/wolf_hurt2",
+      "mms_origins:beastfolk/wolf_hurt3"
+    ]
+  },
+  "beastfolk.fox_hurt": {
+    "sounds": [
+      "mms_origins:beastfolk/fox_hurt1",
+      "mms_origins:beastfolk/fox_hurt2",
+      "mms_origins:beastfolk/fox_hurt3",
+      "mms_origins:beastfolk/fox_hurt4"
+    ]
+  },
+  "beastfolk.fox_death": {
+    "sounds": [
+      "mms_origins:beastfolk/fox_death1",
+      "mms_origins:beastfolk/fox_death2"
+    ]
+  },
+  "beastfolk.fox_collarless_hurt": {
+    "sounds": [
+      "mms_origins:beastfolk/fox_collarless_hurt1",
+      "mms_origins:beastfolk/fox_collarless_hurt2",
+      "mms_origins:beastfolk/fox_collarless_hurt3",
+      "mms_origins:beastfolk/fox_collarless_hurt4",
+      "mms_origins:beastfolk/fox_collarless_hurt5"
+    ]
+  },
+  "beastfolk.fox_collarless_death": {
+    "sounds": [
+      "mms_origins:beastfolk/fox_collarless_death1",
+      "mms_origins:beastfolk/fox_collarless_death2"
+    ]
+  },
+  "beastfolk.fox_screech": {
+    "sounds": [
+      "mms_origins:beastfolk/fox_screech1",
+      "mms_origins:beastfolk/fox_screech2"
+    ]
+  },
   "beastfolk.death_long": {
     "sounds": [
       "mms_origins:beastfolk/death2"

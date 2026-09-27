@@ -4,6 +4,7 @@ import info.mudbourn.mmsorigins.effect.MmsMobEffects;
 import info.mudbourn.mmsorigins.entity.HenchmanLifecycle;
 import info.mudbourn.mmsorigins.entity.MmsEntities;
 import info.mudbourn.mmsorigins.fur.BodyFurAttachment;
+import info.mudbourn.mmsorigins.fur.BodyTailAttachment;
 import info.mudbourn.mmsorigins.fur.BodyWingAttachment;
 import info.mudbourn.mmsorigins.fur.LogoutBodyFurBridge;
 import info.mudbourn.mmsorigins.item.MmsItems;
@@ -33,6 +34,7 @@ public class MmsOrigins implements ModInitializer {
         ZombifyCommand.register();
         OriginFlush.register();
         BodyFurAttachment.touch();
+        BodyTailAttachment.touch();
         BodyWingAttachment.touch();
         if (FabricLoader.getInstance().isModLoaded("origins-classes") && FabricLoader.getInstance().isModLoaded("jobsplus")) {
             ClassJobs.register();

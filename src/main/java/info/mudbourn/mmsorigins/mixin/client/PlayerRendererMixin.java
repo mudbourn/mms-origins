@@ -6,6 +6,7 @@ import info.mudbourn.mmsorigins.client.fur.FurState;
 import info.mudbourn.mmsorigins.client.wings.ButterflyFlap;
 import info.mudbourn.mmsorigins.client.wings.WingState;
 import info.mudbourn.mmsorigins.fur.BodyFurAttachment;
+import info.mudbourn.mmsorigins.fur.BodyTailAttachment;
 import info.mudbourn.mmsorigins.fur.BodyWingAttachment;
 import info.mudbourn.mmsorigins.fur.FurResolver;
 import io.github.apace100.apoli.power.Power;
@@ -22,8 +23,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Reads the avatar's origin during extraction and stamps its fur, wing, and zombie
- * state onto the render state.
+ * Reads the avatar's origin during extraction and stamps its fur, tail, claw, wing,
+ * and zombie state onto the render state.
  *
  * <p>Players carry the origin on an Apoli component the fur layer never sees; a logout
  * mannequin has no such component, so it falls back to the synced fur attachment
@@ -44,6 +45,12 @@ public abstract class PlayerRendererMixin {
             fur = player.getAttachedOrElse(BodyFurAttachment.TYPE, null);
         }
         ((FurState) state).mmsOrigins$setFurOrigin(fur);
+        Identifier tail = FurResolver.tailOption(player);
+        if (tail == null && player instanceof Mannequin) {
+            tail = player.getAttachedOrElse(BodyTailAttachment.TYPE, null);
+        }
+        ((FurState) state).mmsOrigins$setTailOption(tail);
+        ((FurState) state).mmsOrigins$setClawsOut(FurResolver.clawsOut(player));
         Identifier wing = FurResolver.wingOption(player);
         if (wing == null && player instanceof Mannequin) {
             wing = player.getAttachedOrElse(BodyWingAttachment.TYPE, null);
