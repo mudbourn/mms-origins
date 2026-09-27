@@ -34,6 +34,9 @@ public class MmsOrigins implements ModInitializer {
         OriginFlush.register();
         BodyFurAttachment.touch();
         BodyWingAttachment.touch();
+        if (FabricLoader.getInstance().isModLoaded("origins-classes") && FabricLoader.getInstance().isModLoaded("jobsplus")) {
+            ClassJobs.register();
+        }
         if (FabricLoader.getInstance().isModLoaded("mms_combat")) {
             LogoutBodyFurBridge.register();
         }

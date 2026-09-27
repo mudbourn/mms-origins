@@ -1,0 +1,20 @@
+{
+	"replace": false,
+	"values": [
+		"#minecraft:undead",
+		"#minecraft:aquatic",
+		"minecraft:wolf",
+		"minecraft:polar_bear",
+		"minecraft:cat",
+		"minecraft:ocelot",
+		"minecraft:bee",
+		{
+			"id": "minecraft:nautilus",
+			"required": false
+		},
+		{
+			"id": "minecraft:zombie_nautilus",
+			"required": false
+		}
+	]
+}

@@ -1,40 +1,57 @@
 package info.mudbourn.mmsorigins.mixin;
 
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
-import net.minecraft.world.entity.animal.chicken.Chicken;
-import net.minecraft.world.entity.animal.cow.Cow;
-import net.minecraft.world.entity.animal.equine.Horse;
-import net.minecraft.world.entity.animal.pig.Pig;
-import net.minecraft.world.entity.animal.sheep.Sheep;
-import net.minecraft.world.entity.monster.spider.Spider;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Vicious Appearance: the overworld's timid creatures bolt from a beastfolk.
+ * Vicious Appearance: prey animals bolt from a beastfolk and refuse to carry one.
  *
- * <p>Cows, pigs, sheep, chickens, horses, and even spiders read a beastfolk as a
- * predator and flee. Flight has no Apoli hook, so every half second a scared mob
- * near a beastfolk drops its quarry and paths to open ground away from them; once
- * it is beyond the dread's reach its own goals take back over.
+ * <p>Every animal reads a beastfolk as a predator unless its type is in
+ * {@code originstweaks:unafraid_of_beastfolk} (undead, aquatic, and predator
+ * animals) or it has been tamed. Every half second a scared animal throws off
+ * a beastfolk rider, drops its quarry, and paths to open ground away from the
+ * nearest beastfolk;
+ * once it is beyond the dread's reach its own goals take back over.
  */
 @Mixin(Mob.class)
 public abstract class ViciousAppearanceMixin {
 
-    @Inject(method = "serverAiStep", at = @At("RETURN"))
+    @Unique
+    private static final TagKey<EntityType<?>> UNAFRAID = TagKey.create(
+        Registries.ENTITY_TYPE,
+        Identifier.fromNamespaceAndPath("originstweaks", "unafraid_of_beastfolk")
+    );
+
+    @Inject(method = "baseTick", at = @At("RETURN"))
     private void mmsOrigins$flee(CallbackInfo ci) {
-        if (!((Object) this instanceof PathfinderMob mob)) {
+        if (!((Object) this instanceof Animal mob) || mob.level().isClientSide()) {
             return;
         }
-        if ((mob.tickCount + mob.getId()) % 10 != 0 || !mmsOrigins$isTimid(mob)) {
+        if ((mob.tickCount + mob.getId()) % 10 != 0 || mob.getType().is(UNAFRAID) || mmsOrigins$isTamed(mob)) {
             return;
+        }
+        for (Entity passenger : mob.getPassengers()) {
+            if (passenger instanceof Player rider && MmsOriginsPowers.VICIOUS_APPEARANCE.isActive(rider)) {
+                mob.ejectPassengers();
+                break;
+            }
         }
         Player predator = mmsOrigins$nearestPredator(mob);
         if (predator == null) {
@@ -47,13 +64,9 @@ public abstract class ViciousAppearanceMixin {
         }
     }
 
-    private static boolean mmsOrigins$isTimid(PathfinderMob mob) {
-        return mob instanceof Cow
-            || mob instanceof Pig
-            || mob instanceof Sheep
-            || mob instanceof Chicken
-            || mob instanceof Horse
-            || mob instanceof Spider;
+    private static boolean mmsOrigins$isTamed(Animal mob) {
+        return mob instanceof TamableAnimal tamable && tamable.isTame()
+            || mob instanceof AbstractHorse horse && horse.isTamed();
     }
 
     private static Player mmsOrigins$nearestPredator(PathfinderMob mob) {
