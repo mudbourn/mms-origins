@@ -14,7 +14,7 @@
 				"condition": {
 					"type": "origins:origin",
 					"origin": "originstweaks:elytrian",
-					"layer": "originstweaks:origin"
+					"layer": "origins:origin"
 				}
 			}
 		},
@@ -33,7 +33,7 @@
 				"condition": {
 					"type": "origins:origin",
 					"origin": "originstweaks:elytrian",
-					"layer": "originstweaks:origin"
+					"layer": "origins:origin"
 				}
 			},
 			"inverted": true
@@ -63,7 +63,7 @@
 						"condition": {
 							"type": "origins:origin",
 							"origin": "originstweaks:elytrian",
-							"layer": "originstweaks:origin"
+							"layer": "origins:origin"
 						}
 					}
 				}
