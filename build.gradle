@@ -56,6 +56,7 @@ dependencies {
     // the shared Thermoo API, supplied at runtime by the pack.
     modCompileOnly files("libs/scorchful-0.16.8+1.21.11.jar")
     modCompileOnly files("libs/frostiful-2.4.0+1.21.11.jar")
+    modCompileOnly files("libs/thermoo-9.1.0.jar")
 }
 
 tasks.withType(JavaCompile).configureEach {

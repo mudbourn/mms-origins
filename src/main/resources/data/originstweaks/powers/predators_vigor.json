@@ -29,7 +29,7 @@
 			"attribute": "thermoo:frost_resistance",
 			"id": "originstweaks:predators_vigor_chill_pace",
 			"operation": "addition",
-			"value": 7
+			"value": 3.5
 		}
 	},
 	"warmth_pace": {
@@ -38,7 +38,7 @@
 			"attribute": "thermoo:heat_resistance",
 			"id": "originstweaks:predators_vigor_warmth_pace",
 			"operation": "addition",
-			"value": 7
+			"value": 3.5
 		}
 	},
 	"chill_shield": {

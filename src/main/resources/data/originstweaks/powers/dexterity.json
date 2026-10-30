@@ -16,20 +16,15 @@
 			}
 		}
 	],
-	"fall_immunity": {
-		"type": "origins:invulnerability",
+	"fall_resistance": {
+		"type": "origins:modify_damage_taken",
 		"damage_condition": {
-			"type": "origins:or",
-			"conditions": [
-				{
-					"type": "origins:name",
-					"name": "fall"
-				},
-				{
-					"type": "origins:name",
-					"name": "fall.player"
-				}
-			]
+			"type": "origins:in_tag",
+			"tag": "minecraft:is_fall"
+		},
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.25
 		}
 	},
 	"jump_strength": {

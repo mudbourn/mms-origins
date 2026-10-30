@@ -42,15 +42,25 @@
           {
             "type": "origins:play_sound",
             "category": "players",
-            "sound": "minecraft:item.bone_meal.use"
+            "sound": "mms_origins:floran.sun_power_on"
           }
         ]
       },
       "else_action": {
-        "type": "origins:change_resource",
-        "resource": "mms_origins:sunlit_fury_active",
-        "operation": "set",
-        "change": 0
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:change_resource",
+            "resource": "mms_origins:sunlit_fury_active",
+            "operation": "set",
+            "change": 0
+          },
+          {
+            "type": "origins:play_sound",
+            "category": "players",
+            "sound": "mms_origins:floran.sun_power_off"
+          }
+        ]
       }
     }
   },
@@ -58,10 +68,20 @@
     "type": "origins:action_over_time",
     "interval": 1,
     "entity_action": {
-      "type": "origins:change_resource",
-      "resource": "mms_origins:sunlit_fury_active",
-      "operation": "set",
-      "change": 0
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "mms_origins:sunlit_fury_active",
+          "operation": "set",
+          "change": 0
+        },
+        {
+          "type": "origins:play_sound",
+          "category": "players",
+          "sound": "mms_origins:floran.sun_power_off"
+        }
+      ]
     },
     "condition": {
       "type": "origins:and",

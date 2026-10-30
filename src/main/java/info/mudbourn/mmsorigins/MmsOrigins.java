@@ -9,6 +9,7 @@ import info.mudbourn.mmsorigins.fur.BodyWingAttachment;
 import info.mudbourn.mmsorigins.fur.LogoutBodyFurBridge;
 import info.mudbourn.mmsorigins.item.MmsItems;
 import info.mudbourn.mmsorigins.power.MmsPowerFactories;
+import info.mudbourn.mmsorigins.power.action.SummonHenchmenAction;
 import info.mudbourn.mmsorigins.sound.MmsSounds;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -33,6 +34,8 @@ public class MmsOrigins implements ModInitializer {
         ZombieMeterDeathReset.register();
         ZombifyCommand.register();
         OriginFlush.register();
+        SummonHenchmenAction.register();
+        TemperatureBaseline.register();
         BodyFurAttachment.touch();
         BodyTailAttachment.touch();
         BodyWingAttachment.touch();

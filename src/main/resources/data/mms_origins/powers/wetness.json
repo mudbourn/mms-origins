@@ -103,10 +103,21 @@
       "change": 150
     },
     "item_condition": {
-      "type": "origins:ingredient",
-      "ingredient": {
-        "item": "minecraft:potion"
-      }
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "minecraft:potion"
+          }
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "scorchful:water_skin"
+          }
+        }
+      ]
     }
   },
   "drink_tooltip": {
@@ -116,10 +127,21 @@
       "color": "aqua"
     },
     "item_condition": {
-      "type": "origins:ingredient",
-      "ingredient": {
-        "item": "minecraft:potion"
-      }
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "minecraft:potion"
+          }
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "scorchful:water_skin"
+          }
+        }
+      ]
     }
   },
   "respawn": {
@@ -186,10 +208,21 @@
       "operation": "add"
     },
     "item_condition": {
-      "type": "origins:ingredient",
-      "ingredient": {
-        "item": "minecraft:potion"
-      }
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "minecraft:potion"
+          }
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "scorchful:water_skin"
+          }
+        }
+      ]
     }
   },
   "moisture_water_bottle_tooltip": {
@@ -199,10 +232,21 @@
       "color": "aqua"
     },
     "item_condition": {
-      "type": "origins:ingredient",
-      "ingredient": {
-        "item": "minecraft:potion"
-      }
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "minecraft:potion"
+          }
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "scorchful:water_skin"
+          }
+        }
+      ]
     }
   },
   "moisture_respawn": {

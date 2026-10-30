@@ -15,7 +15,7 @@
       "attribute": "thermoo:frost_resistance",
       "id": "mms_origins:floran_chill_pace",
       "operation": "addition",
-      "value": -10
+      "value": -5
     }
   },
   "chill_wound": {

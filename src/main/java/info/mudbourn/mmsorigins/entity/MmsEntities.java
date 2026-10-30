@@ -18,9 +18,9 @@ public final class MmsEntities {
 
     public static final EntityType<FloranHenchman> FLORAN_HENCHMAN = register(
         "floran_henchman",
-        EntityType.Builder.of(FloranHenchman::new, MobCategory.MONSTER)
-            .sized(0.6f, 1.95f)
-            .eyeHeight(1.74f)
+        EntityType.Builder.of(FloranHenchman::new, MobCategory.MISC)
+            .sized(0.9f, 2.7f)
+            .eyeHeight(2.3f)
             .clientTrackingRange(8));
 
     private MmsEntities() {

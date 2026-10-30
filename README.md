@@ -19,3 +19,8 @@ are from LocusAzzurro's Icarus Wings
 GNU General Public License v3.0. Those files remain under the GPL-3.0; the full
 license and a list of the exact files and changes are in `licenses/`. The rest
 of mms-origins is under the MIT License (see `LICENSE`).
+
+The Grovekeeper's jungle textures (`grovekeeper.png` and `grovekeeper_layer.png`
+under `assets/mms_origins/textures/entity/`) are the jungle creaking textures from
+DialingSpoon527's Grafted Creaking (https://github.com/19Phin/Grafted-Creaking),
+used unmodified under the MIT License; see `licenses/NOTICE-GraftedCreaking.txt`.

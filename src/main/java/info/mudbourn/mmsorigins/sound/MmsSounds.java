@@ -25,6 +25,11 @@ public final class MmsSounds {
     public static final SoundEvent BEASTFOLK_FOX_COLLARLESS_HURT = register("beastfolk.fox_collarless_hurt");
     public static final SoundEvent BEASTFOLK_FOX_COLLARLESS_DEATH = register("beastfolk.fox_collarless_death");
 
+    public static final SoundEvent FLORAN_HURT = register("floran.hurt");
+    public static final SoundEvent FLORAN_DEATH = register("floran.death");
+    public static final SoundEvent FLORAN_SUN_POWER_ON = register("floran.sun_power_on");
+    public static final SoundEvent FLORAN_SUN_POWER_OFF = register("floran.sun_power_off");
+
     private MmsSounds() {
     }
 

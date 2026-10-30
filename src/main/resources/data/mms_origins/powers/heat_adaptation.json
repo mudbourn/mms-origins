@@ -15,7 +15,7 @@
       "attribute": "thermoo:heat_resistance",
       "id": "mms_origins:floran_warmth_pace",
       "operation": "addition",
-      "value": 7
+      "value": 3.5
     }
   },
   "warmth_shield": {

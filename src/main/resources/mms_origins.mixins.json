@@ -42,7 +42,9 @@
     "VillagerBeastlyRefusalMixin",
     "ViciousAppearanceMixin",
     "VillagerCharmMixin",
-    "VillagerSwindleMixin"
+    "VillagerSwindleMixin",
+    "WaterSkinBucketFillMixin",
+    "WaterSkinCoolingMixin"
   ],
   "injectors": {
     "defaultRequire": 1

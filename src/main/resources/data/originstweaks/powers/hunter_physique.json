@@ -28,9 +28,26 @@
 			"text": {
 				"translate": "badge.originstweaks.hunter_physique.3"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.hunter_physique.4"
+			}
 		}
 	],
 	"loading_priority": 1,
+	"extra_health": {
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Hunter physique max health",
+			"attribute": "minecraft:generic.max_health",
+			"value": 4.0,
+			"operation": "addition"
+		},
+		"update_health": true
+	},
 	"short_reach": {
 		"type": "origins:attribute",
 		"modifier": {

@@ -15,7 +15,7 @@
 			"attribute": "thermoo:heat_resistance",
 			"id": "originstweaks:heat_sensitivity_warmth_pace",
 			"operation": "addition",
-			"value": -10
+			"value": -5
 		}
 	},
 	"warmth_wound": {

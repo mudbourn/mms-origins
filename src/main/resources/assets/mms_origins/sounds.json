@@ -111,5 +111,29 @@
         "weight": 1
       }
     ]
+  },
+  "floran.hurt": {
+    "sounds": [
+      "mms_origins:floran/hurt1",
+      "mms_origins:floran/hurt2",
+      "mms_origins:floran/hurt3"
+    ]
+  },
+  "floran.death": {
+    "sounds": [
+      "mms_origins:floran/death1",
+      "mms_origins:floran/death2",
+      "mms_origins:floran/death3"
+    ]
+  },
+  "floran.sun_power_on": {
+    "sounds": [
+      "mms_origins:floran/sunpoweron"
+    ]
+  },
+  "floran.sun_power_off": {
+    "sounds": [
+      "mms_origins:floran/sunpoweroff"
+    ]
   }
 }
