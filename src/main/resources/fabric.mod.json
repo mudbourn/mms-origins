@@ -34,7 +34,7 @@
     "frostiful": ">=2.4.0"
   },
   "recommends": {
-    "origins-classes": "*",
+    "origins-legacy-classes": "*",
     "jobsplus": "*"
   },
   "suggests": {

@@ -39,7 +39,7 @@ public class MmsOrigins implements ModInitializer {
         BodyFurAttachment.touch();
         BodyTailAttachment.touch();
         BodyWingAttachment.touch();
-        if (FabricLoader.getInstance().isModLoaded("origins-classes") && FabricLoader.getInstance().isModLoaded("jobsplus")) {
+        if (FabricLoader.getInstance().isModLoaded("origins-legacy-classes") && FabricLoader.getInstance().isModLoaded("jobsplus")) {
             ClassJobs.register();
         }
         if (FabricLoader.getInstance().isModLoaded("mms_combat")) {
