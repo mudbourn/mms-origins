@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins.power;
 
+import info.mudbourn.mmsorigins.effect.MmsMobEffects;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.Power;
@@ -11,6 +12,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -39,8 +41,10 @@ public final class GrappleHookPower extends Power implements Active {
     private static final int HOLD_GRACE_TICKS = 3;
     private static final int WEB_COLOR = 0xFFFFFF;
     private static final int WEB_REDRAW_INTERVAL = 2;
+    private static final int WEBBED_TICKS = 60;
 
     private final double maxLength;
+    private final double blockMaxLength;
     private final double reelSpeed;
     private final double entityReelSpeed;
     private final double arriveDistance;
@@ -58,6 +62,7 @@ public final class GrappleHookPower extends Power implements Active {
             PowerType<?> type,
             LivingEntity entity,
             double maxLength,
+            double blockMaxLength,
             double reelSpeed,
             double entityReelSpeed,
             double arriveDistance,
@@ -66,6 +71,7 @@ public final class GrappleHookPower extends Power implements Active {
             SoundEvent sound) {
         super(type, entity);
         this.maxLength = maxLength;
+        this.blockMaxLength = blockMaxLength;
         this.reelSpeed = reelSpeed;
         this.entityReelSpeed = entityReelSpeed;
         this.arriveDistance = arriveDistance;
@@ -124,10 +130,13 @@ public final class GrappleHookPower extends Power implements Active {
         Level level = player.level();
         Vec3 eye = player.getEyePosition();
         Vec3 look = player.getViewVector(1.0F);
-        Vec3 end = eye.add(look.scale(maxLength));
+        Vec3 end = eye.add(look.scale(blockMaxLength));
         BlockHitResult block = level.clip(
             new ClipContext(eye, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-        double reach = block.getType() == HitResult.Type.MISS ? maxLength : eye.distanceTo(block.getLocation());
+        double blockReach = block.getType() == HitResult.Type.MISS
+            ? blockMaxLength
+            : eye.distanceTo(block.getLocation());
+        double reach = Math.min(blockReach, maxLength);
         AABB search = player.getBoundingBox().expandTowards(look.scale(reach)).inflate(1.0);
         EntityHitResult hit = ProjectileUtil.getEntityHitResult(
             player,
@@ -139,6 +148,7 @@ public final class GrappleHookPower extends Power implements Active {
         Vec3 to;
         if (hit != null && hit.getEntity() instanceof LivingEntity living) {
             anchorEntity = living;
+            living.addEffect(new MobEffectInstance(MmsMobEffects.WEBBED, WEBBED_TICKS), player);
             to = living.getEyePosition();
         } else if (block.getType() == HitResult.Type.BLOCK) {
             anchorPoint = block.getLocation();

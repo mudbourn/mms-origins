@@ -34,6 +34,7 @@
     "PiglinGoldGorgeMixin",
     "PiglinGrudgeMixin",
     "PiglinGrudgePursuitMixin",
+    "PoisonMobEffectMixin",
     "PlayerHurtSoundMixin",
     "PlayerPoseMixin",
     "ReplaceLootTablePowerGuardMixin",

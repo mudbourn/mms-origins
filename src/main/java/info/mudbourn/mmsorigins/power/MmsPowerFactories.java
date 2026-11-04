@@ -4,6 +4,7 @@ import info.mudbourn.mmsorigins.MmsOrigins;
 import info.mudbourn.mmsorigins.power.action.CausticSporesAction;
 import info.mudbourn.mmsorigins.power.action.RandomTeleportAction;
 import info.mudbourn.mmsorigins.power.action.SummonHenchmenAction;
+import info.mudbourn.mmsorigins.power.action.VenomPoisonAction;
 import info.mudbourn.mmsorigins.power.condition.CausticMarkedCondition;
 import info.mudbourn.mmsorigins.power.condition.HeightAboveGroundCondition;
 import info.mudbourn.mmsorigins.power.condition.HenchmenCountCondition;
@@ -54,6 +55,7 @@ public final class MmsPowerFactories {
         registerSummonHenchmen();
         registerHenchmenCount();
         registerCausticSpores();
+        registerVenomPoison();
         registerCausticMarked();
         registerNatureReclaim();
         registerIncapacitated();
@@ -116,6 +118,17 @@ public final class MmsPowerFactories {
                 id,
                 CausticSporesAction.data(),
                 CausticSporesAction::action));
+    }
+
+    private static void registerVenomPoison() {
+        Identifier id = id("venom_poison");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            id,
+            new ActionFactory<Entity>(
+                id,
+                VenomPoisonAction.data(),
+                VenomPoisonAction::action));
     }
 
     private static void registerCausticMarked() {
@@ -221,6 +234,7 @@ public final class MmsPowerFactories {
                 id,
                 new SerializableData()
                     .add("max_length", SerializableDataTypes.DOUBLE, 24.0)
+                    .add("block_max_length", SerializableDataTypes.DOUBLE, 24.0)
                     .add("reel_speed", SerializableDataTypes.DOUBLE, 1.0)
                     .add("entity_reel_speed", SerializableDataTypes.DOUBLE, 0.9)
                     .add("arrive_distance", SerializableDataTypes.DOUBLE, 1.5)
@@ -233,6 +247,7 @@ public final class MmsPowerFactories {
                         type,
                         entity,
                         data.getDouble("max_length"),
+                        data.getDouble("block_max_length"),
                         data.getDouble("reel_speed"),
                         data.getDouble("entity_reel_speed"),
                         data.getDouble("arrive_distance"),

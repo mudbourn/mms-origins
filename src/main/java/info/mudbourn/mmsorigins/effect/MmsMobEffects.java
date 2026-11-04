@@ -11,6 +11,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
 /**
  * Registers the caustic spores effect and owns the per-mob mark that stops
@@ -28,9 +30,12 @@ public final class MmsMobEffects {
     public static final float TICK_DAMAGE = 1.0F;
 
     private static final int COLOR = 0x4E9331;
+    private static final int WEBBED_COLOR = 0xE6E6E6;
+    private static final double WEBBED_SLOW = -0.35;
     private static final Map<LivingEntity, Long> MARKS = new WeakHashMap<>();
 
     public static final Holder<MobEffect> CAUSTIC_SPORES = create();
+    public static final Holder<MobEffect> WEBBED = createWebbed();
 
     private MmsMobEffects() {
     }
@@ -57,6 +62,19 @@ public final class MmsMobEffects {
             new MobEffectInstance(CAUSTIC_SPORES, EFFECT_DURATION, 0, false, true, true),
             null);
         MARKS.put(entity, entity.level().getGameTime() + MARK_TICKS);
+    }
+
+    private static Holder<MobEffect> createWebbed() {
+        Identifier id = Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "webbed");
+        return Registry.registerForHolder(
+            BuiltInRegistries.MOB_EFFECT,
+            id,
+            new WebbedMobEffect(MobEffectCategory.HARMFUL, WEBBED_COLOR)
+                .addAttributeModifier(
+                    Attributes.MOVEMENT_SPEED,
+                    id,
+                    WEBBED_SLOW,
+                    AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     }
 
     private static Holder<MobEffect> create() {

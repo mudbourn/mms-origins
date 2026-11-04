@@ -48,8 +48,9 @@
 								{
 									"type": "origins:target_action",
 									"action": {
-										"type": "origins:execute_command",
-										"command": "effect give @s minecraft:poison 5 1"
+										"type": "mms_origins:venom_poison",
+										"duration": 100,
+										"amplifier": 1
 									}
 								}
 							]
@@ -89,8 +90,9 @@
 								{
 									"type": "origins:target_action",
 									"action": {
-										"type": "origins:execute_command",
-										"command": "effect give @s minecraft:poison 5 1"
+										"type": "mms_origins:venom_poison",
+										"duration": 100,
+										"amplifier": 1
 									}
 								}
 							]
@@ -130,8 +132,9 @@
 								{
 									"type": "origins:target_action",
 									"action": {
-										"type": "origins:execute_command",
-										"command": "effect give @s minecraft:poison 5 1"
+										"type": "mms_origins:venom_poison",
+										"duration": 100,
+										"amplifier": 1
 									}
 								}
 							]
@@ -171,8 +174,9 @@
 								{
 									"type": "origins:target_action",
 									"action": {
-										"type": "origins:execute_command",
-										"command": "effect give @s minecraft:poison 5 1"
+										"type": "mms_origins:venom_poison",
+										"duration": 100,
+										"amplifier": 1
 									}
 								}
 							]
@@ -212,8 +216,9 @@
 								{
 									"type": "origins:target_action",
 									"action": {
-										"type": "origins:execute_command",
-										"command": "effect give @s minecraft:poison 5 1"
+										"type": "mms_origins:venom_poison",
+										"duration": 100,
+										"amplifier": 1
 									}
 								}
 							]
@@ -253,8 +258,9 @@
 								{
 									"type": "origins:target_action",
 									"action": {
-										"type": "origins:execute_command",
-										"command": "effect give @s minecraft:poison 5 1"
+										"type": "mms_origins:venom_poison",
+										"duration": 100,
+										"amplifier": 1
 									}
 								}
 							]
@@ -294,8 +300,9 @@
 								{
 									"type": "origins:target_action",
 									"action": {
-										"type": "origins:execute_command",
-										"command": "effect give @s minecraft:poison 5 1"
+										"type": "mms_origins:venom_poison",
+										"duration": 100,
+										"amplifier": 1
 									}
 								}
 							]

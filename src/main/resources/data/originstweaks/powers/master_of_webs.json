@@ -80,7 +80,7 @@
 			"order": 1,
 			"condition": {
 				"type": "origins:raycast",
-				"distance": 24,
+				"distance": 72,
 				"shape_type": "collider",
 				"block_condition": {
 					"type": "origins:fluid",
@@ -123,6 +123,7 @@
 	"web_shot": {
 		"type": "mms_origins:grapple",
 		"max_length": 24,
+		"block_max_length": 72,
 		"reel_speed": 1.0,
 		"entity_reel_speed": 0.9,
 		"arrive_distance": 1.5,
