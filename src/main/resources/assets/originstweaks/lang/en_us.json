@@ -4,7 +4,7 @@
 	"power.originstweaks.master_of_webs.name": "Master of Webs",
 	"power.originstweaks.master_of_webs.description": "Arachnids have mastered the delicate handling of cobwebs, using them to their advantage and navigating through them with ease.",
 	"badge.originstweaks.master_of_webs.0": "Grapple toward a block within 72 blocks, or pull a mob within 24 blocks, using [Primary]. Webbed mobs move 35% slower for 3 seconds.",
-	"badge.originstweaks.master_of_webs.1": "Webshot holds 7 charges and fully regenerates over 30 seconds.",
+	"badge.originstweaks.master_of_webs.1": "Webshot holds 7 charges and fully regenerates over 30 seconds. A block grapple costs one charge; reeling a mob keeps draining them.",
 	"badge.originstweaks.master_of_webs.2": "You move freely through cobwebs and can use them for climbing.",
 	"badge.originstweaks.master_of_webs.3.prefix": "Combine 9 String to craft Cobweb.",
 	"badge.originstweaks.master_of_webs.3.suffix": "Sneaking and breaking a cobweb block refunds the 9 string used to craft it.",

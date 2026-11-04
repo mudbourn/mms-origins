@@ -115,7 +115,7 @@ public final class GrappleHookPower extends Power implements Active {
             acquire(player, silk);
             return;
         }
-        if (!spendSilk(player)) {
+        if (anchorEntity != null && !spendSilk(player)) {
             release();
             return;
         }

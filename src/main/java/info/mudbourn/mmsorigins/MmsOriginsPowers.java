@@ -158,6 +158,10 @@ public final class MmsOriginsPowers {
     public static final PowerType<?> CLAW_MODE =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "claw_mode"));
 
+    /** Arachnid wall climbing toggle, read by {@code ArachnidClimbMixin} to climb at running speed. */
+    public static final PowerType<?> ARACHNID_CLIMBING =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "climbing_toggle"));
+
     /** Range, in blocks, at which a beastfolk's viciousness spooks timid mobs. */
     public static final double VICIOUS_APPEARANCE_RANGE = 12.0;
 

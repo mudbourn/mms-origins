@@ -5,6 +5,7 @@
   "mixins": [
     "AbstractPiglinGrudgeMixin",
     "ApoliActivePowerGateMixin",
+    "ArachnidClimbMixin",
     "AvianForgetTargetMixin",
     "AvianPeaceMixin",
     "BeastfolkDeathCryMixin",
