@@ -159,7 +159,7 @@
   "badge.mms_origins.cold_blooded.0": "Immune to freezing damage.",
   "badge.mms_origins.cold_blooded.1": "Take 50% more fire damage.",
   "badge.mms_origins.cold_blooded.2": "Swim 50% faster.",
-  "badge.mms_origins.cold_blooded.3": "Tap [Secondary] to dash forward 6 blocks, in water or at 35% moisture or more. Costs half your Tide Magic and 10% moisture. You cannot jump for 0.5 s after.",
+  "badge.mms_origins.cold_blooded.3": "Tap [Secondary] to dash forward 6 blocks (+1 per Depth Strider level), in water or at 35% moisture or more. Costs half your Tide Magic and 10% moisture. You cannot jump for 0.5 s after.",
   "badge.mms_origins.cold_blooded.4": "Hold [Secondary] for half a second to toggle clear underwater vision.",
   "power.mms_origins.tide_magic.name": "Tide Magic",
   "power.mms_origins.tide_magic.description": "You channel the sea through the water you carry, in dash and beam and tide.",

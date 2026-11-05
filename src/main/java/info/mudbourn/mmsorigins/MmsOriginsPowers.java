@@ -109,6 +109,13 @@ public final class MmsOriginsPowers {
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "ender_kinship"));
 
     /**
+     * Phantom kinship. Phantoms pick their prey in their own goal with no Apoli
+     * hook, so {@code PhantomKinshipMixin} reads this sub-power to spare the bearer.
+     */
+    public static final PowerType<?> PHANTOM_KINSHIP =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "phantom_kinship_harmless"));
+
+    /**
      * Arachnid arthropod kinship. Arthropod mobs leave the bearer alone unless
      * struck and defend them when hurt. The power is a marker read by
      * {@code ArthropodKinshipMixin} and {@code ArthropodDefendMixin}.

@@ -224,11 +224,17 @@
 		}
 	},
 	"cobweb_harvest": {
-		"type": "origins:modify_harvest",
-		"allow": true,
+		"type": "origins:modify_break_speed",
+		"modifier": {
+			"operation": "set_total",
+			"value": 15
+		},
 		"block_condition": {
 			"type": "origins:block",
 			"block": "minecraft:cobweb"
+		},
+		"condition": {
+			"type": "origins:sneaking"
 		}
 	},
 	"cobweb_drop": {
@@ -246,6 +252,10 @@
 		"block_condition": {
 			"type": "origins:block",
 			"block": "minecraft:cobweb"
+		},
+		"condition": {
+			"type": "origins:sneaking",
+			"inverted": true
 		}
 	}
 }

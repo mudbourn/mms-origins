@@ -6,6 +6,7 @@ import com.daqem.jobsplus.player.JobsPlayer;
 import com.daqem.jobsplus.player.job.Job;
 import info.mudbourn.mmsorigins.OriginsClasses;
 import io.github.apace100.origins.origin.Origin;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -24,7 +25,7 @@ import java.util.Map;
  * <p>Every class in the {@code origins-classes:class} layer has a Jobs+ job of the
  * same name (see the lang override in {@code assets/origins-classes/lang}), but a
  * player choosing a class has no way to learn that.  The lang override states the
- * pairing statically; this mixin adds the part that has to be live — whether you
+ * pairing statically; this mixin adds the part that has to be live: whether you
  * already hold the job and at what level.</p>
  *
  * <p>Hooking {@code getDescription()} rather than the screen's render method means
@@ -57,8 +58,7 @@ public class ClassJobSynergyMixin {
      */
     @Unique
     private static MutableComponent mmsOrigins$statusLine(Identifier jobId) {
-        // The client only knows about jobs the server has synced.  If the id is
-        // not a real job (e.g. nitwit) there is no synergy to report.
+        // Synced jobs only; a class with no job reports nothing
         Map<Identifier, JobInstance> known = JobManager.getInstance().getJobs();
         JobInstance instance = known.get(jobId);
         if (instance == null) return null;
@@ -67,11 +67,13 @@ public class ClassJobSynergyMixin {
 
         Job held = jobsPlayer.jobsplus$getJob(jobId);
         if (held != null) {
-            return Component.literal("§a✔ You have this job at level " + held.getLevel() + ".");
+            return Component.literal("You have this job at level " + held.getLevel() + ".")
+                .withStyle(ChatFormatting.GREEN);
         }
 
-        // Picking the class grants the job outright — never charged, whatever the
-        // job's listed price says. See ClassJobAutoJoinMixin.
-        return Component.literal("§7➜ Picking this class joins this job §8(free).");
+        // Free join granted by ClassJobAutoJoinMixin
+        return Component.literal("Picking this class joins this job ")
+            .withStyle(ChatFormatting.GRAY)
+            .append(Component.literal("(free).").withStyle(ChatFormatting.DARK_GRAY));
     }
 }

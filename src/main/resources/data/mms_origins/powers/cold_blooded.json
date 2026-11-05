@@ -303,7 +303,7 @@
                           "actions": [
                             {
                               "type": "mms_origins:launch",
-                              "distance": 6
+                              "distance": 7
                             },
                             {
                               "type": "origins:play_sound",
@@ -326,7 +326,7 @@
                           "actions": [
                             {
                               "type": "mms_origins:launch",
-                              "distance": 6
+                              "distance": 8
                             },
                             {
                               "type": "origins:play_sound",
@@ -349,7 +349,7 @@
                           "actions": [
                             {
                               "type": "mms_origins:launch",
-                              "distance": 6
+                              "distance": 9
                             },
                             {
                               "type": "origins:play_sound",
