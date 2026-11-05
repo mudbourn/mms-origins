@@ -1,0 +1,197 @@
+{
+  "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/active.png",
+      "text": {
+        "translate": "badge.mms_origins.guardian_beam.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.guardian_beam.1"
+      }
+    }
+  ],
+  "charge": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 30,
+    "start_value": 0,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 10,
+      "condition": {
+        "type": "origins:resource",
+        "resource": "mms_origins:guardian_beam_charge",
+        "comparison": ">",
+        "compare_to": 0
+      }
+    }
+  },
+  "held": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 3,
+    "start_value": 0
+  },
+  "release": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "resource": "mms_origins:guardian_beam_held",
+        "comparison": ">",
+        "compare_to": 0
+      },
+      "if_action": {
+        "type": "origins:change_resource",
+        "resource": "mms_origins:guardian_beam_held",
+        "change": -1
+      },
+      "else_action": {
+        "type": "origins:change_resource",
+        "resource": "mms_origins:guardian_beam_charge",
+        "operation": "set",
+        "change": 0
+      }
+    }
+  },
+  "beam": {
+    "type": "origins:active_self",
+    "cooldown": 1,
+    "key": {
+      "key": "key.origins.primary_active",
+      "continuous": true
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:wetness_resource",
+          "comparison": ">=",
+          "compare_to": 105
+        },
+        {
+          "type": "origins:and",
+          "inverted": true,
+          "conditions": [
+            {
+              "type": "origins:resource",
+              "resource": "mms_origins:cold_blooded_fin_dash",
+              "comparison": "==",
+              "compare_to": 0
+            },
+            {
+              "type": "origins:or",
+              "conditions": [
+                {
+                  "type": "origins:and",
+                  "conditions": [
+                    {
+                      "type": "origins:submerged_in",
+                      "fluid": "minecraft:water"
+                    },
+                    {
+                      "type": "origins:swimming"
+                    }
+                  ]
+                },
+                {
+                  "type": "origins:and",
+                  "conditions": [
+                    {
+                      "type": "origins:in_rain"
+                    },
+                    {
+                      "type": "origins:on_block"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "mms_origins:guardian_beam_held",
+          "operation": "set",
+          "change": 3
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "mms_origins:guardian_beam_charge",
+          "change": 1
+        },
+        {
+          "type": "origins:if_else",
+          "condition": {
+            "type": "origins:resource",
+            "resource": "mms_origins:guardian_beam_charge",
+            "comparison": ">=",
+            "compare_to": 30
+          },
+          "if_action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:raycast",
+                "distance": 16,
+                "block": true,
+                "entity": true,
+                "shape_type": "visual",
+                "fluid_handling": "none",
+                "bientity_action": {
+                  "type": "origins:damage",
+                  "damage_type": "minecraft:magic",
+                  "amount": 6
+                },
+                "command_along_ray": "particle minecraft:glow ~ ~ ~ 0 0 0 0 1 force",
+                "command_step": 0.5,
+                "command_along_ray_only_on_hit": false
+              },
+              {
+                "type": "origins:play_sound",
+                "category": "players",
+                "sound": "minecraft:entity.guardian.attack"
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "mms_origins:wetness_resource",
+                "change": -45
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "mms_origins:guardian_beam_charge",
+                "operation": "set",
+                "change": 0
+              }
+            ]
+          },
+          "else_action": {
+            "type": "origins:raycast",
+            "distance": 16,
+            "block": true,
+            "entity": true,
+            "shape_type": "visual",
+            "fluid_handling": "none",
+            "command_along_ray": "particle minecraft:bubble_pop ~ ~ ~ 0 0 0 0 1",
+            "command_step": 1.0,
+            "command_along_ray_only_on_hit": false
+          }
+        }
+      ]
+    }
+  }
+}

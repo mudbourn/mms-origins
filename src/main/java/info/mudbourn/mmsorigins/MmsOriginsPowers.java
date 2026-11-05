@@ -109,6 +109,14 @@ public final class MmsOriginsPowers {
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "ender_kinship"));
 
     /**
+     * Arachnid arthropod kinship. Arthropod mobs leave the bearer alone unless
+     * struck and defend them when hurt. The power is a marker read by
+     * {@code ArthropodKinshipMixin} and {@code ArthropodDefendMixin}.
+     */
+    public static final PowerType<?> ARTHROPOD_KINSHIP =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "arthropod_kinship"));
+
+    /**
      * Guardian kinship. Guardians and elder guardians take a fishman for one of
      * their own and never hunt them. Their targeting carries no Apoli hook, so
      * the power is a marker and {@code GuardianKinshipMixin} and
