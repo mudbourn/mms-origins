@@ -7,6 +7,11 @@
 	"loading_priority": 1,
 	"powers": [
 		"originstweaks:slow_falling",
+		"originstweaks:gift_of_the_skies",
+		"originstweaks:aerial_combatant",
+		"originstweaks:companion_mounting",
+		"origins:more_kinetic_damage",
+		"origins:claustrophobia",
 		"originstweaks:bird_bones",
 		"originstweaks:slow_healing",
 		"originstweaks:animal_friendship",

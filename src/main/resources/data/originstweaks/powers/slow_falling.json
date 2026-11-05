@@ -7,6 +7,13 @@
 			"text": {
 				"translate": "badge.originstweaks.slow_falling.0"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.slow_falling.1"
+			}
 		}
 	],
 	"modifier": {
@@ -23,34 +30,6 @@
 				{
 					"type": "origins:fall_flying",
 					"inverted": true
-				},
-				{
-					"type": "origins:resource",
-					"resource": "*:*_feathers",
-					"comparison": ">",
-					"compare_to": 0
-				}
-			]
-		}
-	},
-	"glide": {
-		"type": "origins:conditioned_attribute",
-		"tick_rate": 1,
-		"modifier": {
-			"name": "Avian glide dampening",
-			"attribute": "minecraft:gravity",
-			"value": -0.6,
-			"operation": "multiply_total"
-		},
-		"condition": {
-			"type": "origins:and",
-			"conditions": [
-				{
-					"type": "origins:power_active",
-					"power": "originstweaks:slow_falling_toggle"
-				},
-				{
-					"type": "origins:fall_flying"
 				},
 				{
 					"type": "origins:resource",
@@ -119,7 +98,7 @@
 		"type": "origins:toggle",
 		"active_by_default": true,
 		"key": {
-			"key": "key.origins.secondary_active"
+			"key": "key.mms_origins.unbound"
 		}
 	},
 	"feathers": {
@@ -163,6 +142,10 @@
 				{
 					"type": "origins:power_active",
 					"power": "originstweaks:slow_falling_toggle"
+				},
+				{
+					"type": "origins:fall_flying",
+					"inverted": true
 				},
 				{
 					"type": "mms_origins:height_above_ground",

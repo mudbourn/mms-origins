@@ -67,5 +67,28 @@
         }
       ]
     }
+  },
+  "sun_intake": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:sun_power",
+      "operation": "add",
+      "change": 1
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:exposed_to_sun"
+        },
+        {
+          "type": "mms_origins:sun_intake",
+          "peak": 0.4,
+          "sharpness": 3.0
+        }
+      ]
+    }
   }
 }

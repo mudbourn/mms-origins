@@ -1,5 +1,14 @@
 {
 	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.fire_immunity.0"
+			}
+		}
+	],
 	"fire_immune": {
 		"type": "origins:invulnerability",
 		"damage_condition": {

@@ -1,0 +1,421 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#minecraft:meat",
+      "required": false
+    },
+    {
+      "id": "#c:foods/raw_meat",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cooked_meat",
+      "required": false
+    },
+    {
+      "id": "#c:foods/raw_fish",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cooked_fish",
+      "required": false
+    },
+    {
+      "id": "#c:foods/raw_bacon",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cooked_bacon",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:bacon_sandwich",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:baked_cod_stew",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:barbecue_stick",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:beef_stew",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:bone_broth",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:chicken_sandwich",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:chicken_soup",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cod_roll",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:dumplings",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:egg_sandwich",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:fish_stew",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:fried_rice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:grilled_salmon",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:hamburger",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:honey_glazed_ham",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:mutton_wrap",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:noodle_soup",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:pasta_with_meatballs",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:pasta_with_mutton_chop",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:roast_chicken",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:roasted_mutton_chops",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:salmon_roll",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:shepherds_pie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:squid_ink_pasta",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:steak_and_potatoes",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:quiche",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:quiche_slice",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:vegetable_omelet",
+      "required": false
+    },
+    {
+      "id": "aerialhell:phantom_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:cooked_phantom_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:frozen_phantom_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:vibrant_phantom_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:turtle_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:cooked_turtle_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:frozen_turtle_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:vibrant_turtle_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:frozen_chicken",
+      "required": false
+    },
+    {
+      "id": "aerialhell:vibrant_chicken",
+      "required": false
+    },
+    {
+      "id": "aerialhell:frozen_mutton",
+      "required": false
+    },
+    {
+      "id": "aerialhell:golden_nether_meat_piece",
+      "required": false
+    },
+    {
+      "id": "aerialhell:golden_nether_steak",
+      "required": false
+    },
+    {
+      "id": "aerialhell:vibrant_golden_nether_steak",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:bass",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:catfish",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:eel",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:large_tuna",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:sardine",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:trout",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:octopus",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:weird_octopus",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:shrimp",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:crab",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:lobster",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:blue_lobster",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:clam",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:amethyst_fish",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:rifteye",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:fish_chips",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:sushi",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:shrimp_fried_rice",
+      "required": false
+    },
+    {
+      "id": "eastersdelight:boiled_egg",
+      "required": false
+    },
+    {
+      "id": "eastersdelight:egg_slice",
+      "required": false
+    },
+    {
+      "id": "enderscape:raw_shadoline",
+      "required": false
+    },
+    {
+      "id": "moredelight:chicken_salad",
+      "required": false
+    },
+    {
+      "id": "moredelight:chicken_sandwich_with_egg_and_tomato",
+      "required": false
+    },
+    {
+      "id": "moredelight:cooked_rice_with_beef",
+      "required": false
+    },
+    {
+      "id": "moredelight:cooked_rice_with_chicken_cuts",
+      "required": false
+    },
+    {
+      "id": "moredelight:cooked_rice_with_porkchop",
+      "required": false
+    },
+    {
+      "id": "moredelight:creamy_pasta_with_chicken_cuts",
+      "required": false
+    },
+    {
+      "id": "moredelight:creamy_pasta_with_ham",
+      "required": false
+    },
+    {
+      "id": "moredelight:diced_potatoes_with_beef",
+      "required": false
+    },
+    {
+      "id": "moredelight:diced_potatoes_with_chicken_cuts",
+      "required": false
+    },
+    {
+      "id": "moredelight:diced_potatoes_with_egg_and_tomato",
+      "required": false
+    },
+    {
+      "id": "moredelight:diced_potatoes_with_porkchop",
+      "required": false
+    },
+    {
+      "id": "moredelight:egg_with_bacon_sandwich",
+      "required": false
+    },
+    {
+      "id": "moredelight:hamburger_with_cheese",
+      "required": false
+    },
+    {
+      "id": "moredelight:hamburger_with_egg",
+      "required": false
+    },
+    {
+      "id": "moredelight:loaded_hamburger",
+      "required": false
+    },
+    {
+      "id": "moredelight:omelette",
+      "required": false
+    },
+    {
+      "id": "moredelight:porkchop_sandwich",
+      "required": false
+    },
+    {
+      "id": "moredelight:simple_hamburger",
+      "required": false
+    },
+    {
+      "id": "moredelight:steak_sandwich",
+      "required": false
+    },
+    {
+      "id": "moredelight:steak_with_egg_sandwich",
+      "required": false
+    },
+    {
+      "id": "moredelight:toast_with_egg",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:calamari",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:calamari_slice",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:cooked_calamari",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:cooked_calamari_slice",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:fried_calamari",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:calamari_roll",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:calamari_soup",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:coffee_braised_beef",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:fried_chicken",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:fried_fish",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:fried_dumplings",
+      "required": false
+    },
+    {
+      "id": "bubblellaneous:burger",
+      "required": false
+    },
+    {
+      "id": "bubblellaneous:omelette",
+      "required": false
+    }
+  ]
+}

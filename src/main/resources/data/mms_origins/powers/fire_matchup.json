@@ -1,5 +1,28 @@
 {
   "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.fire_matchup.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "text": {
+        "translate": "badge.mms_origins.fire_matchup.1"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "text": {
+        "translate": "badge.mms_origins.fire_matchup.2"
+      }
+    }
+  ],
   "scorch": {
     "type": "origins:modify_damage_dealt",
     "modifier": {
@@ -13,16 +36,7 @@
         "type": "origins:origin",
         "origin": "mms_origins:floran"
       }
-    },
-    "badges": [
-      {
-        "type": "origins:tooltip",
-        "sprite": "origins:textures/gui/badge/arrow_up.png",
-        "text": {
-          "translate": "badge.mms_origins.fire_matchup.0"
-        }
-      }
-    ]
+    }
   },
   "immolate": {
     "type": "origins:modify_damage_dealt",
@@ -40,16 +54,7 @@
         "type": "origins:origin",
         "origin": "mms_origins:floran"
       }
-    },
-    "badges": [
-      {
-        "type": "origins:tooltip",
-        "sprite": "origins:textures/gui/badge/arrow_up.png",
-        "text": {
-          "translate": "badge.mms_origins.fire_matchup.2"
-        }
-      }
-    ]
+    }
   },
   "resisted": {
     "type": "origins:modify_damage_dealt",
@@ -113,16 +118,7 @@
           }
         ]
       }
-    },
-    "badges": [
-      {
-        "type": "origins:tooltip",
-        "sprite": "origins:textures/gui/badge/info.png",
-        "text": {
-          "translate": "badge.mms_origins.fire_matchup.3"
-        }
-      }
-    ]
+    }
   },
   "doused": {
     "type": "origins:modify_damage_taken",
@@ -154,15 +150,6 @@
           }
         ]
       }
-    },
-    "badges": [
-      {
-        "type": "origins:tooltip",
-        "sprite": "origins:textures/gui/badge/info.png",
-        "text": {
-          "translate": "badge.mms_origins.fire_matchup.1"
-        }
-      }
-    ]
+    }
   }
 }

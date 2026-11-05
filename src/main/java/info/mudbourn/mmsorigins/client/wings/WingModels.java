@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The table of Icarus wing options, keyed by the {@code elytrian_options} origin they belong to.
+ * The table of Icarus wing options, keyed by the {@code avian_wings} origin they belong to.
  *
  * <p>Ported from LocusAzzurro's Icarus Wings, which renders every wing on the vanilla
  * elytra model. Feather-style wings have a single texture and never change shape. Synapse
@@ -49,7 +49,7 @@ public final class WingModels {
     private WingModels() {
     }
 
-    /** The wing for an elytrian option, or null if the option draws no custom wing. */
+    /** The wing for an avian wing option, or null if the option draws no custom wing. */
     public static Wing resolve(Identifier option) {
         return option == null ? null : WINGS.get(option);
     }

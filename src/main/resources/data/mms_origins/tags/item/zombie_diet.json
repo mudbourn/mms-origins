@@ -8,6 +8,10 @@
     "minecraft:mutton",
     "minecraft:rabbit",
     "minecraft:cod",
-    "minecraft:salmon"
+    "minecraft:salmon",
+    {
+      "id": "#mms_origins:raw_meat",
+      "required": false
+    }
   ]
 }

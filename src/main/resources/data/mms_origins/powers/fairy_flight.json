@@ -16,7 +16,7 @@
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
+      "sprite": "origins:textures/gui/badge/arrow_down.png",
       "text": {
         "translate": "badge.mms_origins.fairy_flight.1"
       }

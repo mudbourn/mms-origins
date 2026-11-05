@@ -24,8 +24,8 @@ public final class FurResolver {
         Identifier.fromNamespaceAndPath("mms_origins", "piglin_zombie");
     private static final Identifier FAIRY_OPTIONS =
         Identifier.fromNamespaceAndPath("mms_origins", "fairy_wings");
-    private static final Identifier ELYTRIAN_OPTIONS =
-        Identifier.fromNamespaceAndPath("originstweaks", "elytrian_options");
+    private static final Identifier AVIAN_WINGS =
+        Identifier.fromNamespaceAndPath("originstweaks", "avian_wings");
     private static final Identifier BEASTFOLK_OPTIONS =
         Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_options");
     private static final Identifier BEASTFOLK_TAIL =
@@ -44,13 +44,23 @@ public final class FurResolver {
     private FurResolver() {
     }
 
+    // The loaded layer with this id, or null while layers are absent or cleared.
+    private static OriginLayer layer(Identifier id) {
+        for (OriginLayer candidate : OriginLayers.getLayers()) {
+            if (id.equals(candidate.getIdentifier())) {
+                return candidate;
+            }
+        }
+        return null;
+    }
+
     // The fur id for this bearer, or null when they have no origin or no fur.
     public static Identifier resolve(Avatar bearer) {
         OriginComponent component = ModComponents.ORIGIN.maybeGet(bearer).orElse(null);
         if (component == null) {
             return null;
         }
-        OriginLayer layer = OriginLayers.getLayer(BASE_LAYER);
+        OriginLayer layer = layer(BASE_LAYER);
         if (layer == null || !component.hasOrigin(layer)) {
             return null;
         }
@@ -80,7 +90,7 @@ public final class FurResolver {
         if (component == null) {
             return null;
         }
-        OriginLayer base = OriginLayers.getLayer(BASE_LAYER);
+        OriginLayer base = layer(BASE_LAYER);
         if (base == null || !component.hasOrigin(base)) {
             return null;
         }
@@ -89,14 +99,14 @@ public final class FurResolver {
             return null;
         }
         Identifier optionsLayer = switch (origin.getIdentifier().getPath()) {
-            case "elytrian" -> ELYTRIAN_OPTIONS;
+            case "avian" -> AVIAN_WINGS;
             case "fairy" -> FAIRY_OPTIONS;
             default -> null;
         };
         if (optionsLayer == null) {
             return null;
         }
-        OriginLayer options = OriginLayers.getLayer(optionsLayer);
+        OriginLayer options = layer(optionsLayer);
         if (options == null || !component.hasOrigin(options)) {
             return null;
         }
@@ -110,7 +120,7 @@ public final class FurResolver {
         if (component == null) {
             return null;
         }
-        OriginLayer base = OriginLayers.getLayer(BASE_LAYER);
+        OriginLayer base = layer(BASE_LAYER);
         if (base == null || !component.hasOrigin(base)) {
             return null;
         }
@@ -118,7 +128,7 @@ public final class FurResolver {
         if (origin == null || !"beastfolk".equals(origin.getIdentifier().getPath())) {
             return null;
         }
-        OriginLayer tails = OriginLayers.getLayer(BEASTFOLK_TAIL);
+        OriginLayer tails = layer(BEASTFOLK_TAIL);
         if (tails == null || !component.hasOrigin(tails)) {
             return null;
         }
@@ -151,7 +161,7 @@ public final class FurResolver {
 
     // The bearer's pick in the beastfolk options layer, or null when they have none.
     private static Identifier beastfolkOption(OriginComponent component) {
-        OriginLayer layer = OriginLayers.getLayer(BEASTFOLK_OPTIONS);
+        OriginLayer layer = layer(BEASTFOLK_OPTIONS);
         if (layer == null || !component.hasOrigin(layer)) {
             return null;
         }
@@ -161,7 +171,7 @@ public final class FurResolver {
 
     // The fur variant for the fairy's chosen wing, or null when the choice has no variant.
     private static Identifier fairyWingFur(OriginComponent component) {
-        OriginLayer layer = OriginLayers.getLayer(FAIRY_OPTIONS);
+        OriginLayer layer = layer(FAIRY_OPTIONS);
         if (layer == null || !component.hasOrigin(layer)) {
             return null;
         }

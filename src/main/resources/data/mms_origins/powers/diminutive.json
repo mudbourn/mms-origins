@@ -1,5 +1,21 @@
 {
   "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.diminutive.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "text": {
+        "translate": "badge.mms_origins.diminutive.1"
+      }
+    }
+  ],
   "reach": {
     "type": "origins:attribute",
     "modifier": {

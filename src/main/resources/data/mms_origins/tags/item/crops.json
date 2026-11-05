@@ -19,6 +19,22 @@
     "minecraft:enchanted_golden_apple",
     "minecraft:sweet_berries",
     "minecraft:glow_berries",
-    "minecraft:dried_kelp"
+    "minecraft:dried_kelp",
+    {
+      "id": "#c:foods/vegetable",
+      "required": false
+    },
+    {
+      "id": "#c:foods/fruit",
+      "required": false
+    },
+    {
+      "id": "#c:foods/berry",
+      "required": false
+    },
+    {
+      "id": "#c:foods/bread",
+      "required": false
+    }
   ]
 }

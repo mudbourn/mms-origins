@@ -3,9 +3,16 @@
 	"badges": [
 		{
 			"type": "origins:tooltip",
-			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"sprite": "origins:textures/gui/badge/info.png",
 			"text": {
 				"translate": "badge.originstweaks.soulbound.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.soulbound.1"
 			}
 		}
 	],

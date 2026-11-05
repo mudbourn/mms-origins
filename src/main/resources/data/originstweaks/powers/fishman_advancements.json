@@ -23,17 +23,8 @@
 			"entity_type": "minecraft:elder_guardian"
 		},
 		"condition": {
-			"type": "origins:or",
-			"conditions": [
-				{
-					"type": "origins:predicate",
-					"predicate": "originstweaks:in_monument"
-				},
-				{
-					"type": "origins:predicate",
-					"predicate": "originstweaks:in_yungs_monument"
-				}
-			]
+			"type": "origins:predicate",
+			"predicate": "originstweaks:in_monument"
 		}
 	},
 	"loyalty_channeling": {

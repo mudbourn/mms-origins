@@ -3,7 +3,7 @@
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
       "text": {
         "translate": "badge.mms_origins.cold_blooded.0"
       }
@@ -34,13 +34,6 @@
       "sprite": "origins:textures/gui/badge/active.png",
       "text": {
         "translate": "badge.mms_origins.cold_blooded.4"
-      }
-    },
-    {
-      "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
-      "text": {
-        "translate": "badge.mms_origins.cold_blooded.5"
       }
     }
   ],
@@ -120,174 +113,281 @@
     },
     "active_by_default": true,
     "key": {
-      "key": "key.origins.secondary_active",
-      "continuous": false
+      "key": "key.mms_origins.unbound"
     }
   },
-  "fin_dash": {
+  "hold_ticks": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 11,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "held_recent": {
+    "type": "origins:cooldown",
+    "cooldown": 3,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "hold": {
     "type": "origins:active_self",
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    },
+    "key": {
+      "key": "key.origins.secondary_active",
+      "continuous": true
+    },
     "entity_action": {
       "type": "origins:and",
       "actions": [
         {
-          "type": "origins:change_resource",
-          "resource": "mms_origins:cold_blooded_dash_lock",
-          "operation": "set",
-          "change": 10
+          "type": "origins:trigger_cooldown",
+          "power": "mms_origins:cold_blooded_held_recent"
         },
         {
-          "type": "origins:if_else_list",
-          "actions": [
+          "type": "origins:change_resource",
+          "resource": "mms_origins:cold_blooded_hold_ticks",
+          "change": 1,
+          "operation": "add"
+        },
         {
-          "action": {
+          "type": "origins:if_else",
+          "condition": {
+            "type": "origins:resource",
+            "resource": "mms_origins:cold_blooded_hold_ticks",
+            "comparison": "==",
+            "compare_to": 10
+          },
+          "if_action": {
             "type": "origins:and",
             "actions": [
               {
-                "type": "origins:add_velocity",
-                "space": "local",
-                "z": 2,
-                "server": false,
-                "set": true
+                "type": "origins:toggle",
+                "power": "mms_origins:cold_blooded_vision"
               },
               {
-                "type": "origins:play_sound",
-                "category": "players",
-                "sound": "minecraft:ambient.underwater.enter"
-              },
-              {
-                "type": "origins:apply_effect",
-                "effect": {
-                  "duration": 20,
-                  "show_icon": false,
-                  "show_particles": false,
-                  "effect": "minecraft:dolphins_grace"
+                "type": "origins:if_else",
+                "condition": {
+                  "type": "origins:power_active",
+                  "power": "mms_origins:cold_blooded_vision"
+                },
+                "if_action": {
+                  "type": "origins:execute_command",
+                  "command": "title @s actionbar \"Water vision on\""
+                },
+                "else_action": {
+                  "type": "origins:execute_command",
+                  "command": "title @s actionbar \"Water vision off\""
                 }
               }
             ]
-          },
-          "condition": {
-            "type": "origins:enchantment",
-            "enchantment": "minecraft:depth_strider",
-            "calculation": "sum",
-            "comparison": "==",
-            "compare_to": 0
-          }
-        },
-        {
-          "action": {
-            "type": "origins:and",
-            "actions": [
-              {
-                "type": "origins:add_velocity",
-                "space": "local",
-                "z": 2.25,
-                "server": false,
-                "set": true
-              },
-              {
-                "type": "origins:play_sound",
-                "category": "players",
-                "sound": "minecraft:ambient.underwater.enter"
-              }
-            ]
-          },
-          "condition": {
-            "type": "origins:enchantment",
-            "enchantment": "minecraft:depth_strider",
-            "calculation": "sum",
-            "comparison": "==",
-            "compare_to": 1
-          }
-        },
-        {
-          "action": {
-            "type": "origins:and",
-            "actions": [
-              {
-                "type": "origins:add_velocity",
-                "space": "local",
-                "z": 2.5,
-                "server": false,
-                "set": true
-              },
-              {
-                "type": "origins:play_sound",
-                "category": "players",
-                "sound": "minecraft:ambient.underwater.enter"
-              }
-            ]
-          },
-          "condition": {
-            "type": "origins:enchantment",
-            "enchantment": "minecraft:depth_strider",
-            "calculation": "sum",
-            "comparison": "==",
-            "compare_to": 2
-          }
-        },
-        {
-          "action": {
-            "type": "origins:and",
-            "actions": [
-              {
-                "type": "origins:add_velocity",
-                "space": "local",
-                "z": 2.75,
-                "server": false,
-                "set": true
-              },
-              {
-                "type": "origins:play_sound",
-                "category": "players",
-                "sound": "minecraft:ambient.underwater.enter"
-              }
-            ]
-          },
-          "condition": {
-            "type": "origins:enchantment",
-            "enchantment": "minecraft:depth_strider",
-            "calculation": "sum",
-            "comparison": "==",
-            "compare_to": 3
           }
         }
-          ]
+      ]
+    }
+  },
+  "release": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:cold_blooded_held_recent",
+          "comparison": "==",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:cold_blooded_hold_ticks",
+          "comparison": ">",
+          "compare_to": 0
         }
       ]
     },
-    "cooldown": 100,
-    "hud_render": {
-      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
-      "bar_index": 10
-    },
-    "key": {
-      "key": "key.origins.primary_active"
-    },
-    "condition": {
-      "type": "origins:or",
-      "conditions": [
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
         {
-          "type": "origins:and",
-          "conditions": [
-            {
-              "type": "origins:submerged_in",
-              "fluid": "minecraft:water"
-            },
-            {
-              "type": "origins:swimming"
-            }
-          ]
+          "type": "origins:if_else",
+          "condition": {
+            "type": "origins:and",
+            "conditions": [
+              {
+                "type": "origins:resource",
+                "resource": "mms_origins:cold_blooded_hold_ticks",
+                "comparison": "<",
+                "compare_to": 10
+              },
+              {
+                "type": "origins:resource",
+                "resource": "mms_origins:tide_magic_charge",
+                "comparison": ">=",
+                "compare_to": 50
+              },
+              {
+                "type": "origins:or",
+                "conditions": [
+                  {
+                    "type": "origins:fluid_height",
+                    "fluid": "minecraft:water",
+                    "comparison": ">",
+                    "compare_to": 0.0
+                  },
+                  {
+                    "type": "origins:resource",
+                    "resource": "mms_origins:wetness_moisture",
+                    "comparison": ">=",
+                    "compare_to": 210
+                  }
+                ]
+              }
+            ]
+          },
+          "if_action": {
+            "type": "origins:and",
+            "actions": [
+              {
+                "type": "origins:and",
+                "actions": [
+                  {
+                    "type": "origins:change_resource",
+                    "resource": "mms_origins:cold_blooded_dash_lock",
+                    "operation": "set",
+                    "change": 10
+                  },
+                  {
+                    "type": "origins:if_else_list",
+                    "actions": [
+                      {
+                        "action": {
+                          "type": "origins:and",
+                          "actions": [
+                            {
+                              "type": "mms_origins:launch",
+                              "distance": 6
+                            },
+                            {
+                              "type": "origins:play_sound",
+                              "category": "players",
+                              "sound": "minecraft:ambient.underwater.enter"
+                            },
+                            {
+                              "type": "origins:apply_effect",
+                              "effect": {
+                                "duration": 20,
+                                "show_icon": false,
+                                "show_particles": false,
+                                "effect": "minecraft:dolphins_grace"
+                              }
+                            }
+                          ]
+                        },
+                        "condition": {
+                          "type": "origins:enchantment",
+                          "enchantment": "minecraft:depth_strider",
+                          "calculation": "sum",
+                          "comparison": "==",
+                          "compare_to": 0
+                        }
+                      },
+                      {
+                        "action": {
+                          "type": "origins:and",
+                          "actions": [
+                            {
+                              "type": "mms_origins:launch",
+                              "distance": 6
+                            },
+                            {
+                              "type": "origins:play_sound",
+                              "category": "players",
+                              "sound": "minecraft:ambient.underwater.enter"
+                            }
+                          ]
+                        },
+                        "condition": {
+                          "type": "origins:enchantment",
+                          "enchantment": "minecraft:depth_strider",
+                          "calculation": "sum",
+                          "comparison": "==",
+                          "compare_to": 1
+                        }
+                      },
+                      {
+                        "action": {
+                          "type": "origins:and",
+                          "actions": [
+                            {
+                              "type": "mms_origins:launch",
+                              "distance": 6
+                            },
+                            {
+                              "type": "origins:play_sound",
+                              "category": "players",
+                              "sound": "minecraft:ambient.underwater.enter"
+                            }
+                          ]
+                        },
+                        "condition": {
+                          "type": "origins:enchantment",
+                          "enchantment": "minecraft:depth_strider",
+                          "calculation": "sum",
+                          "comparison": "==",
+                          "compare_to": 2
+                        }
+                      },
+                      {
+                        "action": {
+                          "type": "origins:and",
+                          "actions": [
+                            {
+                              "type": "mms_origins:launch",
+                              "distance": 6
+                            },
+                            {
+                              "type": "origins:play_sound",
+                              "category": "players",
+                              "sound": "minecraft:ambient.underwater.enter"
+                            }
+                          ]
+                        },
+                        "condition": {
+                          "type": "origins:enchantment",
+                          "enchantment": "minecraft:depth_strider",
+                          "calculation": "sum",
+                          "comparison": "==",
+                          "compare_to": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "mms_origins:tide_magic_charge",
+                "change": -50
+              },
+              {
+                "type": "origins:change_resource",
+                "resource": "mms_origins:wetness_moisture",
+                "change": -60
+              }
+            ]
+          }
         },
         {
-          "type": "origins:and",
-          "conditions": [
-            {
-              "type": "origins:in_rain"
-            },
-            {
-              "type": "origins:on_block"
-            }
-          ]
+          "type": "origins:change_resource",
+          "resource": "mms_origins:cold_blooded_hold_ticks",
+          "change": 0,
+          "operation": "set"
         }
       ]
     }

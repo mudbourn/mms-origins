@@ -17,7 +17,7 @@
 		},
 		{
 			"type": "origins:tooltip",
-			"sprite": "origins:textures/gui/badge/info.png",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
 			"text": {
 				"translate": "badge.originstweaks.burning_wrath.2"
 			}

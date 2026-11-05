@@ -10,7 +10,7 @@
 		},
 		{
 			"type": "origins:tooltip",
-			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"sprite": "origins:textures/gui/badge/toggle.png",
 			"text": {
 				"translate": "badge.originstweaks.gift_of_the_skies.1"
 			}
@@ -43,7 +43,7 @@
 		"texture_location": "mms_origins:textures/fur/elytrian_elytra.png",
 		"condition": {
 			"type": "origins:origin",
-			"layer": "originstweaks:elytrian_options",
+			"layer": "originstweaks:avian_wings",
 			"origin": "originstweaks:vanilla_elytra"
 		}
 	},
@@ -56,7 +56,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:feathered_wings"
 				},
 				{
@@ -82,7 +82,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:golden_wings"
 				},
 				{
@@ -108,7 +108,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:colored_wings"
 				},
 				{
@@ -134,7 +134,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:paper_wings"
 				},
 				{
@@ -160,7 +160,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:magic_wings"
 				},
 				{
@@ -186,7 +186,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:flandre_wings"
 				},
 				{
@@ -212,7 +212,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:ikaros_wings"
 				},
 				{
@@ -238,7 +238,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:nymph_wings"
 				},
 				{
@@ -264,7 +264,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:astraea_wings"
 				},
 				{
@@ -290,7 +290,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:chaos_wings"
 				},
 				{
@@ -316,7 +316,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:hiyori_wings"
 				},
 				{
@@ -342,7 +342,7 @@
 			"conditions": [
 				{
 					"type": "origins:origin",
-					"layer": "originstweaks:elytrian_options",
+					"layer": "originstweaks:avian_wings",
 					"origin": "originstweaks:melan_wings"
 				},
 				{
@@ -364,7 +364,7 @@
 		"render_elytra": false,
 		"condition": {
 			"type": "origins:origin",
-			"layer": "originstweaks:elytrian_options",
+			"layer": "originstweaks:avian_wings",
 			"origin": "originstweaks:no_render"
 		}
 	},
@@ -396,15 +396,14 @@
 						"actions": [
 							{
 								"type": "origins:add_velocity",
-								"y": 0.75,
-								"z": 0.5,
-								"space": "local_horizontal_normalized",
+								"z": 1.7,
+								"space": "local",
 								"operation": "set"
 							},
 							{
 								"type": "origins:change_resource",
 								"resource": "*:*_stamina",
-								"change": -25,
+								"change": -40,
 								"operation": "add"
 							},
 							{
@@ -413,10 +412,6 @@
 								"volume": 1,
 								"pitch": 2,
 								"category": "players"
-							},
-							{
-								"type": "origins:emit_game_event",
-								"event": "minecraft:flap"
 							},
 							{
 								"comment": "These two actions adding and removing FlapTrigger are unused tags by default, you may use them in a Figura script to play a wing flap animation with the elytra for example.",
@@ -463,9 +458,8 @@
 						"actions": [
 							{
 								"type": "origins:add_velocity",
-								"y": 0.5,
-								"z": 0.25,
-								"space": "local_horizontal_normalized",
+								"z": 1.1,
+								"space": "local",
 								"operation": "set"
 							},
 							{
@@ -475,12 +469,8 @@
 							{
 								"type": "origins:change_resource",
 								"resource": "*:*_stamina",
-								"change": -50,
+								"change": -75,
 								"operation": "add"
-							},
-							{
-								"type": "origins:emit_game_event",
-								"event": "minecraft:flap"
 							}
 						]
 					}
@@ -579,21 +569,6 @@
 			}
 		}
 	},
-	"flight_toggle": {
-		"type": "origins:toggle",
-		"active_by_default": true,
-		"key": {
-			"key": "key.origins.secondary_active"
-		}
-	},
-	"disable_gliding": {
-		"type": "origins:prevent_elytra_flight",
-		"condition": {
-			"type": "origins:power_active",
-			"power": "originstweaks:gift_of_the_skies_flight_toggle",
-			"inverted": true
-		}
-	},
 	"stamina_regenerate": {
 		"type": "origins:action_over_time",
 		"interval": 3,
@@ -635,6 +610,167 @@
 		},
 		"condition": {
 			"type": "origins:fall_flying"
+		}
+	},
+	"flight_toggle": {
+		"type": "origins:toggle",
+		"active_by_default": true,
+		"key": {
+			"key": "key.mms_origins.unbound"
+		}
+	},
+	"disable_gliding": {
+		"type": "origins:prevent_elytra_flight",
+		"condition": {
+			"type": "origins:power_active",
+			"power": "originstweaks:gift_of_the_skies_flight_toggle",
+			"inverted": true
+		}
+	},
+	"hold_ticks": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 11,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"held_recent": {
+		"type": "origins:cooldown",
+		"cooldown": 3,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"hold": {
+		"type": "origins:active_self",
+		"cooldown": 1,
+		"hud_render": {
+			"should_render": false
+		},
+		"key": {
+			"key": "key.origins.secondary_active",
+			"continuous": true
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:trigger_cooldown",
+					"power": "*:*_held_recent"
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_hold_ticks",
+					"change": 1,
+					"operation": "add"
+				},
+				{
+					"type": "origins:if_else",
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_hold_ticks",
+						"comparison": "==",
+						"compare_to": 10
+					},
+					"if_action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:toggle",
+								"power": "originstweaks:gift_of_the_skies_flight_toggle"
+							},
+							{
+								"type": "origins:play_sound",
+								"sound": "minecraft:entity.phantom.flap",
+								"volume": 0.6,
+								"pitch": 1.4
+							},
+							{
+								"type": "origins:if_else",
+								"condition": {
+									"type": "origins:power_active",
+									"power": "originstweaks:gift_of_the_skies_flight_toggle"
+								},
+								"if_action": {
+									"type": "origins:execute_command",
+									"command": "title @s actionbar \"Wings spread\""
+								},
+								"else_action": {
+									"type": "origins:execute_command",
+									"command": "title @s actionbar \"Wings folded\""
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"release": {
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:resource",
+					"resource": "*:*_held_recent",
+					"comparison": "==",
+					"compare_to": 0
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:*_hold_ticks",
+					"comparison": ">",
+					"compare_to": 0
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:if_else",
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_hold_ticks",
+						"comparison": "<",
+						"compare_to": 10
+					},
+					"if_action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:toggle",
+								"power": "originstweaks:slow_falling_toggle"
+							},
+							{
+								"type": "origins:if_else",
+								"condition": {
+									"type": "origins:power_active",
+									"power": "originstweaks:slow_falling_toggle"
+								},
+								"if_action": {
+									"type": "origins:execute_command",
+									"command": "title @s actionbar \"Slow falling on\""
+								},
+								"else_action": {
+									"type": "origins:execute_command",
+									"command": "title @s actionbar \"Slow falling off\""
+								}
+							}
+						]
+					}
+				},
+				{
+					"type": "origins:change_resource",
+					"resource": "*:*_hold_ticks",
+					"change": 0,
+					"operation": "set"
+				}
+			]
 		}
 	}
 }

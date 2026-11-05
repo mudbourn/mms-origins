@@ -1,10 +1,10 @@
 {
 	"display": {
 		"title": {
-			"translate": "advancement.originstweaks.elytrian.player_mount.title"
+			"translate": "advancement.originstweaks.avian.player_mount.title"
 		},
 		"description": {
-			"translate": "advancement.originstweaks.elytrian.player_mount.description"
+			"translate": "advancement.originstweaks.avian.player_mount.description"
 		},
 		"icon": {
 			"id": "minecraft:firework_rocket"
@@ -19,5 +19,5 @@
 			"trigger": "minecraft:impossible"
 		}
 	},
-	"parent": "originstweaks:elytrian/root"
+	"parent": "originstweaks:avian/root"
 }

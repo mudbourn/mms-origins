@@ -1,5 +1,14 @@
 {
   "type": "origins:prevent_item_use",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.verdant_diet.0"
+      }
+    }
+  ],
   "item_condition": {
     "type": "origins:and",
     "conditions": [

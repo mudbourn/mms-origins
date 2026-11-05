@@ -3,14 +3,14 @@
 	"badges": [
 		{
 			"type": "origins:tooltip",
-			"sprite": "origins:textures/gui/badge/info.png",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
 			"text": {
 				"translate": "badge.originstweaks.hunter_physique.0"
 			}
 		},
 		{
 			"type": "origins:tooltip",
-			"sprite": "origins:textures/gui/badge/info.png",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
 			"text": {
 				"translate": "badge.originstweaks.hunter_physique.1"
 			}
@@ -24,7 +24,7 @@
 		},
 		{
 			"type": "origins:tooltip",
-			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"sprite": "origins:textures/gui/badge/info.png",
 			"text": {
 				"translate": "badge.originstweaks.hunter_physique.3"
 			}

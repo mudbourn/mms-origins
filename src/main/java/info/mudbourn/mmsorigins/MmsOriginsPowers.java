@@ -135,6 +135,32 @@ public final class MmsOriginsPowers {
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "avian_peace"));
 
     /**
+     * Avian slow mending. Natural regeneration runs inside the hunger tick with
+     * no Apoli hook, so the power is a marker and {@code AvianSlowRegenMixin}
+     * shrinks each regeneration step for the bearer.
+     */
+    public static final PowerType<?> AVIAN_SLOW_REGEN =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "slow_healing"));
+
+    /**
+     * Floran leaf form. Apoli handles the phasing, climbing and breath cost; the
+     * toggle is read on the client so the player renders as a leaf block.
+     */
+    public static final PowerType<?> LEAF_FORM =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "leaf_form_toggle"));
+
+    /**
+     * Floran leaf form morph progress; the leaf block replaces the body only once it is full.
+     */
+    public static final PowerType<?> LEAF_FORM_MORPH =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "leaf_form_morph"));
+
+    /**
+     * Ticks the leaf form morph takes to complete.
+     */
+    public static final int LEAF_FORM_MORPH_TICKS = 20;
+
+    /**
      * The fairy's anxious-heart cooldown. Apoli's {@code action_when_hit} sees
      * only the raw incoming damage, so {@code FairyStartleMixin} measures the
      * true health lost to a single blow and triggers this cooldown when it

@@ -7,6 +7,20 @@
       "text": {
         "translate": "badge.mms_origins.combat_spores.0"
       }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.combat_spores.1"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "text": {
+        "translate": "badge.mms_origins.combat_spores.2"
+      }
     }
   ],
   "charge": {

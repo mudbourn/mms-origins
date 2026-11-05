@@ -3,7 +3,7 @@
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
+      "sprite": "origins:textures/gui/badge/active.png",
       "text": {
         "translate": "badge.mms_origins.arms_dealing.0"
       }

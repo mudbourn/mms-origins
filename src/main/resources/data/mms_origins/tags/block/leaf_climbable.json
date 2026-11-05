@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "#mms_origins:leaf_passable",
+    "#minecraft:sand",
+    "#minecraft:nylium",
+    "#minecraft:wart_blocks",
+    "#minecraft:snow",
+    "minecraft:gravel",
+    "minecraft:clay",
+    "minecraft:mud",
+    "minecraft:packed_mud",
+    "minecraft:dirt_path",
+    "minecraft:farmland",
+    "minecraft:soul_sand",
+    "minecraft:soul_soil",
+    "minecraft:hay_block",
+    "minecraft:pumpkin",
+    "minecraft:melon",
+    "minecraft:cactus",
+    "minecraft:sugar_cane",
+    "minecraft:vine",
+    "minecraft:moss_carpet",
+    "minecraft:sponge",
+    "minecraft:wet_sponge",
+    "minecraft:dried_kelp_block",
+    "minecraft:shroomlight",
+    "minecraft:bee_nest"
+  ]
+}

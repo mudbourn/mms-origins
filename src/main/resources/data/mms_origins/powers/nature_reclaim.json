@@ -27,8 +27,8 @@
     "type": "origins:resource",
     "hidden": true,
     "min": 0,
-    "max": 2,
-    "start_value": 2
+    "max": 4,
+    "start_value": 4
   },
   "renew": {
     "type": "origins:action_over_time",
@@ -42,7 +42,7 @@
       "type": "origins:change_resource",
       "resource": "mms_origins:nature_reclaim_uses",
       "operation": "set",
-      "change": 2
+      "change": 4
     }
   },
   "cast": {

@@ -1,0 +1,69 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "farmersdelight:milk_bottle",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:hot_cocoa",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:apple_cider",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:melon_juice",
+      "required": false
+    },
+    {
+      "id": "scorchful:cactus_juice",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:aloe_vera_juice",
+      "required": false
+    },
+    {
+      "id": "healingsoup:chocolate_milk",
+      "required": false
+    },
+    {
+      "id": "bubblellaneous:coffee_cup",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:coffee",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:dark_coffee",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:milk_coffee",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:honey_coffee",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:chocolate_coffee",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:syrup_coffee",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:pumpkin_coffee",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:cherry_blossom_coffee",
+      "required": false
+    }
+  ]
+}

@@ -7,6 +7,114 @@
     "minecraft:mutton",
     "minecraft:rabbit",
     "minecraft:cod",
-    "minecraft:salmon"
+    "minecraft:salmon",
+    {
+      "id": "#c:foods/raw_meat",
+      "required": false
+    },
+    {
+      "id": "#c:foods/raw_fish",
+      "required": false
+    },
+    {
+      "id": "#c:foods/raw_bacon",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:chicken_cuts",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:minced_beef",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:mutton_chops",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:ham",
+      "required": false
+    },
+    {
+      "id": "aerialhell:phantom_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:turtle_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:frozen_phantom_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:frozen_turtle_meat",
+      "required": false
+    },
+    {
+      "id": "aerialhell:frozen_chicken",
+      "required": false
+    },
+    {
+      "id": "aerialhell:frozen_mutton",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:bass",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:catfish",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:eel",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:large_tuna",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:sardine",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:trout",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:octopus",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:shrimp",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:crab",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:lobster",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:clam",
+      "required": false
+    },
+    {
+      "id": "enderscape:raw_shadoline",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:calamari",
+      "required": false
+    },
+    {
+      "id": "rusticdelight:calamari_slice",
+      "required": false
+    }
   ]
 }

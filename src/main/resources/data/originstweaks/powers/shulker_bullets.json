@@ -1,0 +1,80 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/active.png",
+			"text": {
+				"translate": "badge.originstweaks.shulker_bullets.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.shulker_bullets.1"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.shulker_bullets.2"
+			}
+		}
+	],
+	"store": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 5,
+		"start_value": 5,
+		"hud_render": {
+			"sprite_location": "origins:textures/gui/resource_bar.png",
+			"bar_index": 11
+		}
+	},
+	"fire": {
+		"type": "origins:active_self",
+		"cooldown": 10,
+		"hud_render": {
+			"should_render": false
+		},
+		"key": {
+			"key": "key.origins.primary_active",
+			"continuous": false
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_store",
+			"comparison": ">=",
+			"compare_to": 1
+		},
+		"entity_action": {
+			"type": "mms_origins:shulker_bullet",
+			"range": 24,
+			"cone_degrees": 15,
+			"on_fire": {
+				"type": "origins:change_resource",
+				"resource": "*:*_store",
+				"change": -1,
+				"operation": "add"
+			}
+		}
+	},
+	"recharge": {
+		"type": "origins:action_over_time",
+		"interval": 120,
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:*_store",
+			"change": 1,
+			"operation": "add"
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_store",
+			"comparison": "<",
+			"compare_to": 5
+		}
+	}
+}

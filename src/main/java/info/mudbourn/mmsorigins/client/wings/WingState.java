@@ -3,12 +3,12 @@ package info.mudbourn.mmsorigins.client.wings;
 import net.minecraft.resources.Identifier;
 
 /**
- * Carries the elytrian's chosen wing option from render-state extraction to the wing layer.
+ * Carries the avian's chosen wing option from render-state extraction to the wing layer.
  *
- * <p>The choice lives in the {@code originstweaks:elytrian_options} layer on the player,
+ * <p>The choice lives in the {@code originstweaks:avian_wings} layer on the player,
  * which the wing feature layer never sees; it is read off the player during extraction
  * and stamped here for the layer to resolve against {@link WingModels}. Null means the
- * player is not an elytrian, or picked no custom wing.
+ * player is not an avian, or picked no custom wing.
  */
 public interface WingState {
 

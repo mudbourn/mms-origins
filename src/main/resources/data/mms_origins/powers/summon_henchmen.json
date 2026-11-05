@@ -4,13 +4,23 @@
     "type": "mms_origins:summon_henchmen",
     "resource": "mms_origins:sun_power",
     "max_active": 2,
-    "charge_ticks": 30
+    "charge_ticks": 30,
+    "maels_blessing_max_active": 4
   },
   "condition": {
-    "type": "origins:resource",
-    "resource": "mms_origins:sun_power",
-    "comparison": ">=",
-    "compare_to": 30
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:resource",
+        "resource": "mms_origins:sun_power",
+        "comparison": ">=",
+        "compare_to": 30
+      },
+      {
+        "type": "origins:sneaking",
+        "inverted": true
+      }
+    ]
   },
   "cooldown": 0,
   "key": {
@@ -37,6 +47,20 @@
       "sprite": "origins:textures/gui/badge/info.png",
       "text": {
         "translate": "badge.mms_origins.summon_henchmen.2"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.summon_henchmen.3"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.summon_henchmen.4"
       }
     }
   ]

@@ -10,6 +10,18 @@
     "minecraft:mutton",
     "minecraft:rabbit",
     "minecraft:cod",
-    "minecraft:salmon"
+    "minecraft:salmon",
+    {
+      "id": "#mms_origins:raw_meat",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:rotten_tomato",
+      "required": false
+    },
+    {
+      "id": "aerialhell:shadow_spider_eye",
+      "required": false
+    }
   ]
 }

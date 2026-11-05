@@ -1,5 +1,28 @@
 {
   "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.grass_matchup.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.grass_matchup.1"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "text": {
+        "translate": "badge.mms_origins.grass_matchup.2"
+      }
+    }
+  ],
   "effective": {
     "type": "origins:modify_damage_dealt",
     "modifier": {
@@ -62,16 +85,7 @@
           }
         ]
       }
-    },
-    "badges": [
-      {
-        "type": "origins:tooltip",
-        "sprite": "origins:textures/gui/badge/arrow_up.png",
-        "text": {
-          "translate": "badge.mms_origins.grass_matchup.0"
-        }
-      }
-    ]
+    }
   },
   "resisted": {
     "type": "origins:modify_damage_dealt",
@@ -107,16 +121,7 @@
           }
         ]
       }
-    },
-    "badges": [
-      {
-        "type": "origins:tooltip",
-        "sprite": "origins:textures/gui/badge/info.png",
-        "text": {
-          "translate": "badge.mms_origins.grass_matchup.2"
-        }
-      }
-    ]
+    }
   },
   "drenched": {
     "type": "origins:modify_damage_dealt",
@@ -148,23 +153,14 @@
               },
               {
                 "type": "origins:resource",
-                "resource": "mms_origins:wetness_resource",
-                "comparison": ">",
-                "compare_to": 0
+                "resource": "mms_origins:wetness_moisture",
+                "comparison": ">=",
+                "compare_to": 210
               }
             ]
           }
         ]
       }
-    },
-    "badges": [
-      {
-        "type": "origins:tooltip",
-        "sprite": "origins:textures/gui/badge/arrow_up.png",
-        "text": {
-          "translate": "badge.mms_origins.grass_matchup.1"
-        }
-      }
-    ]
+    }
   }
 }

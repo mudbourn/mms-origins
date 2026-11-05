@@ -1,0 +1,67 @@
+{
+  "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.tide_magic.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.tide_magic.1"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.tide_magic.2"
+      }
+    }
+  ],
+  "charge": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 100,
+    "start_value": 100,
+    "hud_render": {
+      "sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+      "bar_index": 10,
+      "condition": {
+        "type": "origins:resource",
+        "resource": "mms_origins:tide_magic_charge",
+        "comparison": "<",
+        "compare_to": 100
+      }
+    }
+  },
+  "recharge": {
+    "type": "origins:action_over_time",
+    "interval": 2,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:tide_magic_charge",
+      "change": 1,
+      "operation": "add"
+    },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "mms_origins:tide_magic_charge",
+      "comparison": "<",
+      "compare_to": 100
+    }
+  },
+  "respawn": {
+    "type": "origins:action_on_callback",
+    "entity_action_respawned": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:tide_magic_charge",
+      "change": 100,
+      "operation": "set"
+    }
+  }
+}

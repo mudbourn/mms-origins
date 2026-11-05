@@ -14,10 +14,10 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Items;
 
 /**
- * Draws an elytrian's chosen Icarus wing on the vanilla elytra model.
+ * Draws an avian's chosen Icarus wing on the vanilla elytra model.
  *
  * <p>Ported from Icarus Wings' own layer. The wing is stamped onto the render state from
- * the {@code elytrian_options} choice, then drawn here in place of the datapack elytra:
+ * the {@code avian_wings} choice, then drawn here in place of the datapack elytra:
  * folded while grounded, and for a synapse wing swapped to its spread texture and scaled
  * by its expansion factor while the player is gliding. A wearer with a real elytra in the
  * chest slot is left to the vanilla elytra layer, matching the origin's own condition.

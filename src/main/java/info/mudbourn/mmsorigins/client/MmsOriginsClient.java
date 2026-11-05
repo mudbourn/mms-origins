@@ -49,6 +49,7 @@ public class MmsOriginsClient implements ClientModInitializer {
                                 context.bakeLayer(ButterflyWingsModel.LAYER)));
                     }
                 });
+        GuardianBeamClient.register();
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             LavaViewState.tick(client);
             if (client.level != null) {

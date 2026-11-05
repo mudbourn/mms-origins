@@ -1,5 +1,14 @@
 {
   "type": "origins:attribute",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.bark_skin.0"
+      }
+    }
+  ],
   "modifier": {
     "name": "Bark skin armor bonus",
     "attribute": "minecraft:generic.armor",

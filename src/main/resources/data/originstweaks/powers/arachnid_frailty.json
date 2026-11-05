@@ -1,5 +1,14 @@
 {
 	"type": "origins:attribute",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.originstweaks.arachnid_frailty.0"
+			}
+		}
+	],
 	"modifier": {
 		"attribute": "minecraft:max_health",
 		"operation": "add_value",

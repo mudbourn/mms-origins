@@ -16,9 +16,9 @@
       },
       {
         "type": "origins:resource",
-        "resource": "mms_origins:wetness_resource",
-        "comparison": ">",
-        "compare_to": 0
+        "resource": "mms_origins:wetness_moisture",
+        "comparison": ">=",
+        "compare_to": 210
       }
     ]
   }

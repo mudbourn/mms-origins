@@ -1,4 +1,13 @@
 {
   "type": "origins:prevent_game_event",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.light_step.0"
+      }
+    }
+  ],
   "event": "minecraft:step"
 }

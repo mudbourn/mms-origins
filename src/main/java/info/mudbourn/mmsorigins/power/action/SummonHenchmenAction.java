@@ -2,6 +2,7 @@ package info.mudbourn.mmsorigins.power.action;
 
 import info.mudbourn.mmsorigins.entity.FloranHenchman;
 import info.mudbourn.mmsorigins.entity.MmsEntities;
+import info.mudbourn.mmsorigins.power.condition.SunIntakeCondition;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.PowerType;
@@ -53,6 +54,7 @@ public final class SummonHenchmenAction {
         return new SerializableData()
             .add("resource", ApoliDataTypes.POWER_TYPE, null)
             .add("max_active", SerializableDataTypes.INT, 2)
+            .add("maels_blessing_max_active", SerializableDataTypes.INT, 4)
             .add("charge_ticks", SerializableDataTypes.INT, 30);
     }
 
@@ -121,7 +123,8 @@ public final class SummonHenchmenAction {
         AABB search = owner.getBoundingBox().inflate(SEARCH_RADIUS);
         List<FloranHenchman> existing =
             level.getEntities(MmsEntities.FLORAN_HENCHMAN, search, henchman -> owner.equals(henchman.getOwner()));
-        if (existing.size() >= data.getInt("max_active")) {
+        int cap = SunIntakeCondition.maelsBlessing(owner) ? data.getInt("maels_blessing_max_active") : data.getInt("max_active");
+        if (existing.size() >= cap) {
             return false;
         }
         VariableIntPower charge = FloranHenchman.chargeOf(owner, data.<PowerType<?>>get("resource"));
@@ -136,6 +139,9 @@ public final class SummonHenchmenAction {
         FloranHenchman henchman = new FloranHenchman(MmsEntities.FLORAN_HENCHMAN, level);
         henchman.snapTo(x, owner.getY(), z, owner.getYRot(), 0.0f);
         henchman.setOwner(owner);
+        if (SunIntakeCondition.maelsBlessing(owner)) {
+            henchman.empower();
+        }
         level.addFreshEntity(henchman);
         henchman.playSound(SoundEvents.CREAKING_SPAWN, 1.0f, 1.0f);
         VariableIntPower charge = FloranHenchman.chargeOf(owner, data.<PowerType<?>>get("resource"));

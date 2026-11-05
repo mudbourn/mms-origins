@@ -8,8 +8,8 @@
 	"origins": [
 		{
 			"origins": [
-				"originstweaks:vanilla_elytra",
 				"originstweaks:feathered_wings",
+				"originstweaks:vanilla_elytra",
 				"originstweaks:golden_wings",
 				"originstweaks:colored_wings",
 				"originstweaks:paper_wings",
@@ -26,8 +26,9 @@
 			"condition": {
 				"type": "origins:origin",
 				"layer": "origins:origin",
-				"origin": "originstweaks:elytrian"
+				"origin": "originstweaks:avian"
 			}
 		}
-	]
+	],
+	"default_origin": "originstweaks:feathered_wings"
 }

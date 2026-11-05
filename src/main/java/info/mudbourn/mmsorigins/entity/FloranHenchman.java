@@ -1,6 +1,7 @@
 package info.mudbourn.mmsorigins.entity;
 
 import info.mudbourn.mmsorigins.MmsOrigins;
+import info.mudbourn.mmsorigins.power.condition.SunIntakeCondition;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.VariableIntPower;
@@ -29,6 +30,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
@@ -99,6 +102,14 @@ public class FloranHenchman extends AbstractGolem {
     private int age;
     private boolean refundOnRemoval = true;
 
+    private static final Identifier MAELS_BLESSING_ID = Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "maels_blessing");
+
+    private static final double MAELS_BLESSING_BONUS = 0.5;
+
+    private static final Identifier SUN_SPEED_ID = Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "sun_speed");
+
+    private static final double SUN_SPEED_PEAK = 0.3;
+
     public FloranHenchman(EntityType<? extends AbstractGolem> type, Level level) {
         super(type, level);
         this.setPersistenceRequired();
@@ -114,6 +125,31 @@ public class FloranHenchman extends AbstractGolem {
             .add(Attributes.MOVEMENT_SPEED, 0.25)
             .add(Attributes.FOLLOW_RANGE, 32.0)
             .add(Attributes.STEP_HEIGHT, 1.0625);
+    }
+
+    /** Strengthens a henchman raised under Mael's Blessing. */
+    public void empower() {
+        this.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(new AttributeModifier(
+            MAELS_BLESSING_ID, MAELS_BLESSING_BONUS, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        this.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(new AttributeModifier(
+            MAELS_BLESSING_ID, MAELS_BLESSING_BONUS, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        this.setHealth(this.getMaxHealth());
+    }
+
+    /** Quickens the henchman along the sun curve while it stands under open sky. */
+    private void updateSunSpeed() {
+        AttributeInstance speed = this.getAttribute(Attributes.MOVEMENT_SPEED);
+        double sun = this.level().canSeeSky(this.blockPosition().above()) ? SunIntakeCondition.strength(this) : 0.0;
+        AttributeModifier current = speed.getModifier(SUN_SPEED_ID);
+        double bonus = SUN_SPEED_PEAK * sun;
+        if (current != null && Math.abs(current.amount() - bonus) < 0.005) {
+            return;
+        }
+        speed.removeModifier(SUN_SPEED_ID);
+        if (bonus > 0.0) {
+            speed.addTransientModifier(new AttributeModifier(
+                SUN_SPEED_ID, bonus, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        }
     }
 
     public void setOwner(LivingEntity owner) {
@@ -254,6 +290,7 @@ public class FloranHenchman extends AbstractGolem {
     @Override
     protected void customServerAiStep(ServerLevel level) {
         super.customServerAiStep(level);
+        this.updateSunSpeed();
         this.age++;
         if (this.age >= LIFESPAN_TICKS) {
             this.crumble();

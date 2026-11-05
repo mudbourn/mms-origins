@@ -7,13 +7,6 @@
 			"text": {
 				"translate": "badge.originstweaks.summon_phantoms.0"
 			}
-		},
-		{
-			"type": "origins:tooltip",
-			"sprite": "origins:textures/gui/badge/arrow_down.png",
-			"text": {
-				"translate": "badge.originstweaks.summon_phantoms.1"
-			}
 		}
 	],
 	"summon": {

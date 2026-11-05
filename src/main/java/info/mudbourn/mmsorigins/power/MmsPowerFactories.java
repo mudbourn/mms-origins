@@ -2,13 +2,18 @@ package info.mudbourn.mmsorigins.power;
 
 import info.mudbourn.mmsorigins.MmsOrigins;
 import info.mudbourn.mmsorigins.power.action.CausticSporesAction;
+import info.mudbourn.mmsorigins.power.action.GuardianBeamAction;
+import info.mudbourn.mmsorigins.power.action.LaunchAction;
 import info.mudbourn.mmsorigins.power.action.RandomTeleportAction;
+import info.mudbourn.mmsorigins.power.action.ShulkerBulletAction;
 import info.mudbourn.mmsorigins.power.action.SummonHenchmenAction;
+import info.mudbourn.mmsorigins.power.action.SurfaceAction;
 import info.mudbourn.mmsorigins.power.action.VenomPoisonAction;
 import info.mudbourn.mmsorigins.power.condition.CausticMarkedCondition;
 import info.mudbourn.mmsorigins.power.condition.HeightAboveGroundCondition;
 import info.mudbourn.mmsorigins.power.condition.HenchmenCountCondition;
 import info.mudbourn.mmsorigins.power.condition.IncapacitatedCondition;
+import info.mudbourn.mmsorigins.power.condition.SunIntakeCondition;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -56,9 +61,14 @@ public final class MmsPowerFactories {
         registerHenchmenCount();
         registerCausticSpores();
         registerVenomPoison();
+        registerShulkerBullet();
+        registerGuardianBeam();
+        registerLaunch();
+        registerSurface();
         registerCausticMarked();
         registerNatureReclaim();
         registerIncapacitated();
+        registerSunIntake();
     }
 
     private static void registerIncapacitated() {
@@ -118,6 +128,76 @@ public final class MmsPowerFactories {
                 id,
                 CausticSporesAction.data(),
                 CausticSporesAction::action));
+    }
+
+    private static void registerSurface() {
+        Identifier id = id("surface");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            id,
+            new ActionFactory<Entity>(
+                id,
+                SurfaceAction.data(),
+                SurfaceAction::action));
+        Registry.register(
+            ApoliRegistries.ENTITY_CONDITION,
+            id,
+            new ConditionFactory<Entity>(
+                id,
+                SurfaceAction.data(),
+                SurfaceAction::condition));
+    }
+
+    private static void registerSunIntake() {
+        Identifier id = id("sun_intake");
+        Registry.register(
+            ApoliRegistries.ENTITY_CONDITION,
+            id,
+            new ConditionFactory<Entity>(
+                id,
+                SunIntakeCondition.data(),
+                SunIntakeCondition::condition));
+        Identifier maelsBlessing = id("maels_blessing");
+        Registry.register(
+            ApoliRegistries.ENTITY_CONDITION,
+            maelsBlessing,
+            new ConditionFactory<Entity>(
+                maelsBlessing,
+                new SerializableData(),
+                SunIntakeCondition::maelsBlessingCondition));
+    }
+
+    private static void registerLaunch() {
+        Identifier id = id("launch");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            id,
+            new ActionFactory<Entity>(
+                id,
+                LaunchAction.data(),
+                LaunchAction::action));
+    }
+
+    private static void registerGuardianBeam() {
+        Identifier id = id("guardian_beam");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            id,
+            new ActionFactory<Entity>(
+                id,
+                GuardianBeamAction.data(),
+                GuardianBeamAction::action));
+    }
+
+    private static void registerShulkerBullet() {
+        Identifier id = id("shulker_bullet");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            id,
+            new ActionFactory<Entity>(
+                id,
+                ShulkerBulletAction.data(),
+                ShulkerBulletAction::action));
     }
 
     private static void registerVenomPoison() {
