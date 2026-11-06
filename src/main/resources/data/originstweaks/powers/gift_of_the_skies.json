@@ -407,6 +407,10 @@
 								"operation": "add"
 							},
 							{
+								"type": "origins:trigger_cooldown",
+								"power": "*:*_surge_recoil"
+							},
+							{
 								"type": "origins:play_sound",
 								"sound": "minecraft:entity.phantom.flap",
 								"volume": 1,
@@ -471,6 +475,10 @@
 								"resource": "*:*_stamina",
 								"change": -150,
 								"operation": "add"
+							},
+							{
+								"type": "origins:trigger_cooldown",
+								"power": "*:*_surge_recoil"
 							}
 						]
 					}
@@ -520,6 +528,26 @@
 					"type": "origins:fall_flying"
 				}
 			]
+		}
+	},
+	"surge_recoil": {
+		"type": "origins:cooldown",
+		"cooldown": 20,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"surge_weakness": {
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "multiply_total",
+			"value": -0.5
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_surge_recoil",
+			"comparison": ">",
+			"compare_to": 0
 		}
 	},
 	"skip_takeoff_damage": {
