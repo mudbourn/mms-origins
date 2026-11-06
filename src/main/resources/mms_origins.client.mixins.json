@@ -11,6 +11,7 @@
     "GuardianRendererInvoker",
     "LavaSurfaceAlphaMixin",
     "LavaTranslucentLayerMixin",
+    "LeafFormFovMixin",
     "LeafFormRenderMixin",
     "LeafFormShadowMixin",
     "LivingEntityRenderStateMixin",

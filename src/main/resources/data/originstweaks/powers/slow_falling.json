@@ -107,12 +107,7 @@
 		"max": 300,
 		"start_value": 300,
 		"hud_render": {
-			"sprite_location": "origins:textures/gui/community/spiderkolo/resource_bar_03.png",
-			"bar_index": 23,
-			"condition": {
-				"type": "origins:power_active",
-				"power": "originstweaks:slow_falling_toggle"
-			}
+			"should_render": false
 		}
 	},
 	"feather_delay": {

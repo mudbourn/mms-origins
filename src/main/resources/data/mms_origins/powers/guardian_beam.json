@@ -36,7 +36,7 @@
           "type": "origins:resource",
           "resource": "mms_origins:tide_magic_charge",
           "comparison": ">=",
-          "compare_to": 50
+          "compare_to": 100
         }
       ]
     },
@@ -52,12 +52,12 @@
           {
             "type": "origins:change_resource",
             "resource": "mms_origins:wetness_moisture",
-            "change": -90
+            "change": -150
           },
           {
             "type": "origins:change_resource",
             "resource": "mms_origins:tide_magic_charge",
-            "change": -50
+            "change": -100
           }
         ]
       }

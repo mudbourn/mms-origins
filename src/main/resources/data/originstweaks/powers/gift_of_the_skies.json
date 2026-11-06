@@ -403,7 +403,7 @@
 							{
 								"type": "origins:change_resource",
 								"resource": "*:*_stamina",
-								"change": -40,
+								"change": -100,
 								"operation": "add"
 							},
 							{
@@ -469,7 +469,7 @@
 							{
 								"type": "origins:change_resource",
 								"resource": "*:*_stamina",
-								"change": -75,
+								"change": -150,
 								"operation": "add"
 							}
 						]

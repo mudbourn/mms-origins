@@ -270,8 +270,24 @@
                           "type": "origins:and",
                           "actions": [
                             {
-                              "type": "mms_origins:launch",
-                              "distance": 6
+                              "type": "origins:if_else",
+                              "condition": {
+                                "type": "origins:fluid_height",
+                                "fluid": "minecraft:water",
+                                "comparison": ">",
+                                "compare_to": 0.0
+                              },
+                              "if_action": {
+                                "type": "origins:add_velocity",
+                                "space": "local",
+                                "z": 2.0,
+                                "server": false,
+                                "set": true
+                              },
+                              "else_action": {
+                                "type": "mms_origins:launch",
+                                "distance": 6
+                              }
                             },
                             {
                               "type": "origins:play_sound",
@@ -302,8 +318,24 @@
                           "type": "origins:and",
                           "actions": [
                             {
-                              "type": "mms_origins:launch",
-                              "distance": 7
+                              "type": "origins:if_else",
+                              "condition": {
+                                "type": "origins:fluid_height",
+                                "fluid": "minecraft:water",
+                                "comparison": ">",
+                                "compare_to": 0.0
+                              },
+                              "if_action": {
+                                "type": "origins:add_velocity",
+                                "space": "local",
+                                "z": 2.25,
+                                "server": false,
+                                "set": true
+                              },
+                              "else_action": {
+                                "type": "mms_origins:launch",
+                                "distance": 7
+                              }
                             },
                             {
                               "type": "origins:play_sound",
@@ -325,8 +357,24 @@
                           "type": "origins:and",
                           "actions": [
                             {
-                              "type": "mms_origins:launch",
-                              "distance": 8
+                              "type": "origins:if_else",
+                              "condition": {
+                                "type": "origins:fluid_height",
+                                "fluid": "minecraft:water",
+                                "comparison": ">",
+                                "compare_to": 0.0
+                              },
+                              "if_action": {
+                                "type": "origins:add_velocity",
+                                "space": "local",
+                                "z": 2.5,
+                                "server": false,
+                                "set": true
+                              },
+                              "else_action": {
+                                "type": "mms_origins:launch",
+                                "distance": 8
+                              }
                             },
                             {
                               "type": "origins:play_sound",
@@ -348,8 +396,24 @@
                           "type": "origins:and",
                           "actions": [
                             {
-                              "type": "mms_origins:launch",
-                              "distance": 9
+                              "type": "origins:if_else",
+                              "condition": {
+                                "type": "origins:fluid_height",
+                                "fluid": "minecraft:water",
+                                "comparison": ">",
+                                "compare_to": 0.0
+                              },
+                              "if_action": {
+                                "type": "origins:add_velocity",
+                                "space": "local",
+                                "z": 2.75,
+                                "server": false,
+                                "set": true
+                              },
+                              "else_action": {
+                                "type": "mms_origins:launch",
+                                "distance": 9
+                              }
                             },
                             {
                               "type": "origins:play_sound",

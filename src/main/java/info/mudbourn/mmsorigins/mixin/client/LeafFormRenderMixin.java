@@ -60,7 +60,7 @@ public abstract class LeafFormRenderMixin {
         Vec3 tail = leaf.mmsOrigins$leafTail();
         float tailYaw = (float) Math.toDegrees(Math.atan2(tail.x, tail.z));
         pose.pushPose();
-        pose.mulPose(Axis.YP.rotationDegrees(180.0F - state.yRot));
+        pose.mulPose(Axis.YP.rotationDegrees(180.0F - (state.bodyRot + state.yRot)));
         mmsOrigins$bush(pose, collector, light, BUSH_SIZE);
         pose.popPose();
         pose.pushPose();

@@ -165,7 +165,7 @@ public final class MmsOriginsPowers {
     /**
      * Ticks the leaf form morph takes to complete.
      */
-    public static final int LEAF_FORM_MORPH_TICKS = 20;
+    public static final int LEAF_FORM_MORPH_TICKS = 10;
 
     /**
      * The fairy's anxious-heart cooldown. Apoli's {@code action_when_hit} sees

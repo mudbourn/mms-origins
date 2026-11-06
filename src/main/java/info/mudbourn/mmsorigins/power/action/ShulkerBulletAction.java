@@ -5,6 +5,7 @@ import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
 import java.util.Comparator;
 import java.util.function.Consumer;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -41,7 +42,7 @@ public final class ShulkerBulletAction {
         if (target == null) {
             return;
         }
-        ShulkerBullet bullet = new ShulkerBullet(level, caster, target, caster.getDirection().getAxis());
+        ShulkerBullet bullet = new ShulkerBullet(level, caster, target, Direction.Axis.Y);
         Vec3 eye = caster.getEyePosition();
         Vec3 look = caster.getLookAngle();
         bullet.setPos(eye.x + look.x, eye.y + look.y - 0.2, eye.z + look.z);

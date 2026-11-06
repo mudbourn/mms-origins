@@ -6,6 +6,7 @@ import info.mudbourn.mmsorigins.power.action.GuardianBeamAction;
 import info.mudbourn.mmsorigins.power.action.LaunchAction;
 import info.mudbourn.mmsorigins.power.action.RandomTeleportAction;
 import info.mudbourn.mmsorigins.power.action.ShulkerBulletAction;
+import info.mudbourn.mmsorigins.power.action.SmallFireballAction;
 import info.mudbourn.mmsorigins.power.action.SummonHenchmenAction;
 import info.mudbourn.mmsorigins.power.action.SurfaceAction;
 import info.mudbourn.mmsorigins.power.action.VenomPoisonAction;
@@ -62,6 +63,7 @@ public final class MmsPowerFactories {
         registerCausticSpores();
         registerVenomPoison();
         registerShulkerBullet();
+        registerSmallFireball();
         registerGuardianBeam();
         registerLaunch();
         registerSurface();
@@ -198,6 +200,17 @@ public final class MmsPowerFactories {
                 id,
                 ShulkerBulletAction.data(),
                 ShulkerBulletAction::action));
+    }
+
+    private static void registerSmallFireball() {
+        Identifier id = id("small_fireball");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            id,
+            new ActionFactory<Entity>(
+                id,
+                SmallFireballAction.data(),
+                SmallFireballAction::action));
     }
 
     private static void registerVenomPoison() {

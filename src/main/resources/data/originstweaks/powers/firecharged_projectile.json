@@ -10,28 +10,49 @@
 		}
 	],
 	"fireballs": {
-		"type": "origins:fire_projectile",
+		"type": "origins:active_self",
 		"condition": {
 			"type": "origins:food_level",
 			"comparison": ">",
 			"compare_to": 6
 		},
-		"entity_type": "small_fireball",
 		"cooldown": 200,
 		"hud_render": {
 			"sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
 			"bar_index": 7
 		},
-		"count": 3,
-		"interval": 12,
-		"start_delay": 5,
-		"speed": 1.5,
-		"divergence": 0,
-		"sound": "entity.blaze.shoot",
-		"tag": "{NoGravity:1b}",
 		"key": {
 			"key": "key.origins.secondary_active",
 			"continuous": false
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:delay",
+					"ticks": 5,
+					"action": {
+						"type": "mms_origins:small_fireball",
+						"speed": 1.5
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 12,
+					"action": {
+						"type": "mms_origins:small_fireball",
+						"speed": 1.5
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 24,
+					"action": {
+						"type": "mms_origins:small_fireball",
+						"speed": 1.5
+					}
+				}
+			]
 		}
 	}
 }
