@@ -3,25 +3,12 @@
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
-      "text": {
-        "translate": "badge.mms_origins.seaborn.0"
-      }
-    },
-    {
-      "type": "origins:tooltip",
       "sprite": "origins:textures/gui/badge/arrow_down.png",
       "text": {
         "translate": "badge.mms_origins.seaborn.1"
       }
     }
   ],
-  "ocean_spawn": {
-    "type": "origins:modify_player_spawn",
-    "dimension": "minecraft:overworld",
-    "biome": "minecraft:ocean",
-    "spawn_strategy": "center"
-  },
   "no_dry_rest": {
     "type": "origins:prevent_sleep",
     "set_spawn_point": false,

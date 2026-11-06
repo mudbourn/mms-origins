@@ -33,6 +33,7 @@ public class MmsOrigins implements ModInitializer {
         FairyScaleEnforcer.register();
         MoltenChargeCharger.register();
         ZombieMeterDeathReset.register();
+        ClimateTolerance.register();
         ZombifyCommand.register();
         OriginFlush.register();
         SummonHenchmenAction.register();

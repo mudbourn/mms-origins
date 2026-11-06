@@ -14,6 +14,7 @@
     "LeafFormFovMixin",
     "LeafFormRenderMixin",
     "LeafFormShadowMixin",
+    "LeafFormSprintMixin",
     "LivingEntityRenderStateMixin",
     "LocalPlayerCrouchMixin",
     "OriginScaleHideMixin",

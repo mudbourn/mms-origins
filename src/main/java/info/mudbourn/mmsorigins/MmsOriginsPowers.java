@@ -2,8 +2,10 @@ package info.mudbourn.mmsorigins;
 
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.CooldownPower;
+import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeReference;
+import io.github.apace100.apoli.power.VariableIntPower;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 
@@ -166,6 +168,14 @@ public final class MmsOriginsPowers {
      * Ticks the leaf form morph takes to complete.
      */
     public static final int LEAF_FORM_MORPH_TICKS = 10;
+
+    /** Whether the entity has finished morphing into leaf form. */
+    public static boolean leafFormComplete(Entity entity) {
+        Power power = LEAF_FORM_MORPH.get(entity);
+        return LEAF_FORM.isActive(entity)
+            && power instanceof VariableIntPower morph
+            && morph.getValue() >= LEAF_FORM_MORPH_TICKS;
+    }
 
     /**
      * The fairy's anxious-heart cooldown. Apoli's {@code action_when_hit} sees

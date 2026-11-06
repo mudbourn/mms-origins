@@ -70,8 +70,9 @@ public class WaterSkinBucketFillMixin {
     }
 
     /**
-     * Fills the waterskin from the bucket and returns what the bucket becomes,
-     * or null when the pair cannot fill.
+     * Fills the waterskin from one bucket of the stack and returns what the
+     * stack becomes, or null when the pair cannot fill. When the stack holds
+     * more than one bucket, the used bucket goes to the player's inventory.
      */
     @Unique
     private static ItemStack mmsOrigins$fill(ItemStack skin, ItemStack bucket, Player player) {
@@ -80,14 +81,26 @@ public class WaterSkinBucketFillMixin {
         }
         DrinkContainer.fillCompletely(skin);
         player.playSound(SSoundEvents.ITEM_WATER_SKIN_FILL, 1.0F, 1.0F);
+        ItemStack used = mmsOrigins$drain(bucket.copyWithCount(1));
+        if (bucket.getCount() == 1) {
+            return used;
+        }
+        player.getInventory().placeItemBackInInventory(used);
+        return bucket.copyWithCount(bucket.getCount() - 1);
+    }
+
+    /**
+     * Returns a single water bucket with one more fill taken from it.
+     */
+    @Unique
+    private static ItemStack mmsOrigins$drain(ItemStack bucket) {
         int fills = bucket.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY)
                 .copyTag()
                 .getIntOr(FILLS_KEY, 0) + 1;
         if (fills >= FILLS_PER_BUCKET) {
             return new ItemStack(Items.BUCKET);
         }
-        ItemStack result = bucket.copy();
-        CustomData.update(DataComponents.CUSTOM_DATA, result, tag -> tag.putInt(FILLS_KEY, fills));
-        return result;
+        CustomData.update(DataComponents.CUSTOM_DATA, bucket, tag -> tag.putInt(FILLS_KEY, fills));
+        return bucket;
     }
 }

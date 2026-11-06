@@ -4,10 +4,5 @@
 	"entity_group": {
 		"type": "origins:entity_group",
 		"group": "aquatic"
-	},
-	"spawn": {
-		"type": "origins:modify_player_spawn",
-		"dimension": "minecraft:overworld",
-		"structure": "originstweaks:fishman_spawn"
 	}
 }
