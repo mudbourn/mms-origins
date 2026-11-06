@@ -16,9 +16,11 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Speeds a leaf-form floran's climb and sink while they are buried in natural blocks.
+ * Speeds a leaf-form floran's climb and sink while they are buried in natural
+ * blocks, and lifts the ladder cap on their horizontal speed there.
  */
 @Mixin(LivingEntity.class)
 public abstract class LeafFormBurrowSpeedMixin {
@@ -43,6 +45,13 @@ public abstract class LeafFormBurrowSpeedMixin {
             player.setDeltaMovement(motion.x, BURROW_SINK, motion.z);
         } else if (motion.y > 0.0 && (player.horizontalCollision || player.onClimbable())) {
             player.setDeltaMovement(motion.x, BURROW_LIFT, motion.z);
+        }
+    }
+
+    @Inject(method = "handleOnClimbable", at = @At("RETURN"), cancellable = true)
+    private void mmsOrigins$burrowUnclamped(Vec3 motion, CallbackInfoReturnable<Vec3> cir) {
+        if ((Object) this instanceof Player player && mmsOrigins$buried(player)) {
+            cir.setReturnValue(new Vec3(motion.x, cir.getReturnValue().y, motion.z));
         }
     }
 
