@@ -1,0 +1,24 @@
+{
+  "type": "origins:multiple",
+  "hidden": true,
+  "base": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_base",
+      "value": 0.2
+    }
+  },
+  "gilded": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_base",
+      "value": 0.2
+    },
+    "condition": {
+      "type": "origins:command",
+      "command": "execute if items entity @s armor.* #mms_origins:golden_armor",
+      "comparison": ">=",
+      "compare_to": 2
+    }
+  }
+}

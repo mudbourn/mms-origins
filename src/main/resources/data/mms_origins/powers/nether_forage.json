@@ -19,6 +19,13 @@
       "text": {
         "translate": "badge.mms_origins.nether_forage.0"
       }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.shroomlight_snack.0"
+      }
     }
   ]
 }

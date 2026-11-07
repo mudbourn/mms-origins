@@ -1,14 +1,5 @@
 {
   "type": "origins:multiple",
-  "badges": [
-    {
-      "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_up.png",
-      "text": {
-        "translate": "badge.mms_origins.nether_heat_immunity.0"
-      }
-    }
-  ],
   "heat_stroke_immunity": {
     "type": "origins:effect_immunity",
     "effects": [
@@ -35,5 +26,6 @@
       "type": "origins:in_tag",
       "tag": "mms_origins:is_heat"
     }
-  }
+  },
+  "hidden": true
 }

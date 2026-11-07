@@ -135,10 +135,7 @@
 			"name": "player"
 		},
 		"condition": {
-			"type": "origins:resource",
-			"resource": "*:aerial_combatant_velocity_tiers",
-			"compare_to": 7,
-			"comparison": ">="
+			"type": "origins:fall_flying"
 		}
 	},
 	"player_mount": {

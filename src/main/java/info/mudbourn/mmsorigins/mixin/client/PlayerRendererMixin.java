@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Reads the avatar's origin during extraction and stamps its fur, tail, claw, wing,
- * zombie and leaf form state onto the render state.
+ * zombie and leaf form state onto the render state, hiding the cape under avian wings.
  *
  * <p>Players carry the origin on an Apoli component the fur layer never sees; a logout
  * mannequin has no such component, so it falls back to the synced fur attachment
@@ -58,6 +58,9 @@ public abstract class PlayerRendererMixin {
             wing = player.getAttachedOrElse(BodyWingAttachment.TYPE, null);
         }
         ((WingState) state).mmsOrigins$setWingOption(wing);
+        if (mmsOrigins$avianWingsShown(wing)) {
+            state.showCape = false;
+        }
         ((ZombieShakeState) state).mmsOrigins$setZombieShaking(mmsOrigins$zombieShaking(player));
         boolean leafForm = mmsOrigins$leafFormComplete(player);
         ((LeafFormState) state).mmsOrigins$setLeafForm(leafForm);
@@ -73,6 +76,13 @@ public abstract class PlayerRendererMixin {
             ((WingState) state).mmsOrigins$setWingFlapDegrees(
                     ButterflyFlap.idleDegrees(state.ageInTicks));
         }
+    }
+
+    /** Whether the wing option is an avian wing pair that draws over the cape. */
+    private static boolean mmsOrigins$avianWingsShown(Identifier wing) {
+        return wing != null
+                && wing.getNamespace().equals("originstweaks")
+                && !wing.getPath().equals("no_render");
     }
 
     /** Whether the player's zombification has crept past the halfway mark. */

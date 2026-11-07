@@ -10,6 +10,34 @@
       "text": {
         "translate": "badge.mms_origins.nether_born.0"
       }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.fire_resilience.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.nether_heat_immunity.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "text": {
+        "translate": "badge.mms_origins.nether_chill.0"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "text": {
+        "translate": "badge.mms_origins.sun_shy.0"
+      }
     }
   ]
 }

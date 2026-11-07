@@ -396,7 +396,7 @@
 						"actions": [
 							{
 								"type": "origins:add_velocity",
-								"z": 1.7,
+								"z": 1.95,
 								"space": "local",
 								"operation": "set"
 							},
@@ -586,8 +586,8 @@
 	"stamina": {
 		"type": "origins:resource",
 		"min": 0,
-		"max": 600,
-		"start_value": 600,
+		"max": 800,
+		"start_value": 800,
 		"hud_render": {
 			"sprite_location": "origins:textures/gui/resource_bar.png",
 			"bar_index": 2,
@@ -603,7 +603,7 @@
 		"entity_action": {
 			"type": "origins:change_resource",
 			"resource": "*:*_stamina",
-			"change": 6
+			"change": 8
 		},
 		"condition": {
 			"type": "origins:fall_flying",
@@ -615,7 +615,7 @@
 		"entity_action": {
 			"type": "origins:change_resource",
 			"resource": "*:*_stamina",
-			"change": 600,
+			"change": 800,
 			"operation": "set"
 		}
 	},
@@ -624,7 +624,7 @@
 		"entity_action_respawned": {
 			"type": "origins:change_resource",
 			"resource": "*:*_stamina",
-			"change": 600,
+			"change": 800,
 			"operation": "set"
 		}
 	},

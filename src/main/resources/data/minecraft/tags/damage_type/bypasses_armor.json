@@ -2,6 +2,7 @@
     "replace": false,
     "values": [
         "originstweaks:beastfolk_slash",
-        "mms_origins:venom"
+        "mms_origins:venom",
+        "mms_origins:guardian_beam"
     ]
 }

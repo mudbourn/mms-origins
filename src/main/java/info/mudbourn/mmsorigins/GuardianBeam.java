@@ -12,11 +12,16 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -31,6 +36,11 @@ import net.minecraft.world.entity.LivingEntity;
  * draw it with the guardian's own renderer.
  */
 public final class GuardianBeam {
+
+    /** Beam damage type, tagged to bypass armor and enchantments. */
+    public static final ResourceKey<DamageType> DAMAGE_TYPE = ResourceKey.create(
+        Registries.DAMAGE_TYPE,
+        Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "guardian_beam"));
 
     private static final int RELEASE_GRACE_TICKS = 2;
     private static final Map<UUID, Channel> CHANNELS = new HashMap<>();
@@ -71,7 +81,11 @@ public final class GuardianBeam {
             return;
         }
         if (level.getEntity(channel.targetId) instanceof LivingEntity target) {
-            target.hurtServer(level, level.damageSources().indirectMagic(player, player), damage);
+            DamageSource source = new DamageSource(
+                level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DAMAGE_TYPE),
+                player,
+                player);
+            target.hurtServer(level, source, damage);
         }
         if (onFire != null) {
             onFire.accept(player);

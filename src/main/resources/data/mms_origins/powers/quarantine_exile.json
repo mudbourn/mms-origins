@@ -1,14 +1,5 @@
 {
   "type": "origins:multiple",
-  "badges": [
-    {
-      "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_down.png",
-      "text": {
-        "translate": "badge.mms_origins.quarantine_exile.0"
-      }
-    }
-  ],
   "shunned": {
     "type": "origins:action_over_time",
     "interval": 10,
@@ -43,5 +34,6 @@
       "comparison": ">=",
       "compare_to": 600
     }
-  }
+  },
+  "hidden": true
 }

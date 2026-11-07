@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "mms_origins:venom"
+        "mms_origins:venom",
+        "mms_origins:guardian_beam"
     ]
 }

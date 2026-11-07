@@ -30,7 +30,7 @@
           "type": "origins:resource",
           "resource": "mms_origins:wetness_moisture",
           "comparison": ">=",
-          "compare_to": 330
+          "compare_to": 280
         },
         {
           "type": "origins:resource",
@@ -52,7 +52,7 @@
           {
             "type": "origins:change_resource",
             "resource": "mms_origins:wetness_moisture",
-            "change": -150
+            "change": -280
           },
           {
             "type": "origins:change_resource",
