@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins;
 
+import info.mudbourn.mmsorigins.compat.SelfReviveStrainSoundBridge;
 import info.mudbourn.mmsorigins.effect.MmsMobEffects;
 import info.mudbourn.mmsorigins.entity.HenchmanLifecycle;
 import info.mudbourn.mmsorigins.entity.MmsEntities;
@@ -49,6 +50,7 @@ public class MmsOrigins implements ModInitializer {
         }
         if (FabricLoader.getInstance().isModLoaded("mms_combat")) {
             LogoutBodyFurBridge.register();
+            SelfReviveStrainSoundBridge.register();
         }
         LOGGER.info("MMS Origins loaded.");
     }

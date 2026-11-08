@@ -242,22 +242,6 @@
       "compare_to": 10
     }
   },
-  "rush": {
-    "type": "origins:conditioned_attribute",
-    "modifier": {
-      "attribute": "minecraft:movement_speed",
-      "id": "mms_origins:leaf_form_rush",
-      "operation": "multiply_total",
-      "value": 0.15
-    },
-    "tick_rate": 1,
-    "condition": {
-      "type": "origins:resource",
-      "resource": "mms_origins:leaf_form_morph",
-      "comparison": ">=",
-      "compare_to": 10
-    }
-  },
   "phasing": {
     "type": "origins:phasing",
     "blacklist": false,
@@ -463,34 +447,6 @@
       "resource": "mms_origins:leaf_form_morph",
       "comparison": ">=",
       "compare_to": 10
-    }
-  },
-  "burrow_rush": {
-    "type": "origins:conditioned_attribute",
-    "modifier": {
-      "attribute": "minecraft:movement_speed",
-      "id": "mms_origins:leaf_form_burrow_rush",
-      "operation": "multiply_total",
-      "value": 1.26
-    },
-    "tick_rate": 1,
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:resource",
-          "resource": "mms_origins:leaf_form_morph",
-          "comparison": ">=",
-          "compare_to": 10
-        },
-        {
-          "type": "origins:in_block_anywhere",
-          "block_condition": {
-            "type": "origins:in_tag",
-            "tag": "mms_origins:leaf_climbable"
-          }
-        }
-      ]
     }
   },
   "armless_items": {

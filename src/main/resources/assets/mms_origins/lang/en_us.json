@@ -240,7 +240,7 @@
   "power.mms_origins.leaf_form.description": "Fold yourself into a drift of leaves, and slip through soil and bough like a breath of wind.",
   "badge.mms_origins.leaf_form.0": "Sneak and press [Secondary] to fold into leaf form over half a second, slowed while you change. Repeat to return, which needs you within a block of the surface.",
   "badge.mms_origins.leaf_form.1": "In leaf form you pass through and sink into dirt, leaves, logs, roots, mushroom blocks and moss, and climb them along with sand, gravel and clay. Stone stops you. You cannot jump.",
-  "badge.mms_origins.leaf_form.2": "In leaf form you cannot sprint, use items, or interact with blocks and creatures. Above ground you move a little slower than a running player; buried in natural blocks you move twice as fast as one.",
+  "badge.mms_origins.leaf_form.2": "In leaf form you cannot sprint, use items, or interact with blocks and creatures. You drift at a steady pace, a little slower than a running player above ground and twice as fast as one buried in natural blocks. Buried, you hover, rising with [Jump] and sinking with [Sneak], and you never take fall damage.",
   "badge.mms_origins.leaf_form.3": "Sunlight heals you half a heart every 2.5 s.",
   "badge.mms_origins.leaf_form.4": "Take 25% more damage.",
   "badge.mms_origins.leaf_form.5": "Buried, your breath drains quickly. With none left you take 2 drowning damage every second.",

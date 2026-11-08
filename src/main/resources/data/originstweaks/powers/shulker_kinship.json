@@ -1,0 +1,20 @@
+{
+	"type": "apoli_legacy:modify_behavior",
+	"behavior_type": "passive",
+	"bientity_condition": {
+		"type": "origins:target_condition",
+		"condition": {
+			"type": "origins:entity_type",
+			"entity_type": "minecraft:shulker"
+		}
+	},
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.shulker_kinship.0"
+			}
+		}
+	]
+}

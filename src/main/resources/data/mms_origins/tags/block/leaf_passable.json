@@ -4,6 +4,9 @@
     "#minecraft:dirt",
     "#minecraft:leaves",
     "#minecraft:logs",
+    "#minecraft:nylium",
+    "#minecraft:wart_blocks",
+    "#minecraft:mushroom_grow_block",
     "minecraft:mangrove_roots",
     "minecraft:muddy_mangrove_roots",
     "minecraft:bamboo",
@@ -11,7 +14,41 @@
     "minecraft:red_mushroom_block",
     "minecraft:mushroom_stem",
     "minecraft:moss_block",
+    "minecraft:pale_moss_block",
+    "minecraft:moss_carpet",
+    "minecraft:pale_moss_carpet",
     "minecraft:azalea",
-    "minecraft:flowering_azalea"
+    "minecraft:flowering_azalea",
+    "minecraft:shroomlight",
+    "minecraft:pumpkin",
+    "minecraft:melon",
+    "minecraft:cactus",
+    "minecraft:sugar_cane",
+    "minecraft:vine",
+    "#minecraft:cave_vines",
+    {
+      "id": "#c:natural_logs",
+      "required": false
+    },
+    {
+      "id": "#c:natural_woods",
+      "required": false
+    },
+    {
+      "id": "#c:mushrooms",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:lush_grass_block",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:lush_dirt",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:peat",
+      "required": false
+    }
   ]
 }
