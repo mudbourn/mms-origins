@@ -1,0 +1,69 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "bountiful-fish:bass",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:catfish",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:eel",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:large_tuna",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:sardine",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:trout",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:octopus",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:weird_octopus",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:shrimp",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:crab",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:lobster",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:blue_lobster",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:clam",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:amethyst_fish",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:rifteye",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:star_fish",
+      "required": false
+    }
+  ]
+}

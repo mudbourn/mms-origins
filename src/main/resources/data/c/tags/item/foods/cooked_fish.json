@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "bountiful-fish:fish_chips",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:sushi",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:shrimp_fried_rice",
+      "required": false
+    }
+  ]
+}
