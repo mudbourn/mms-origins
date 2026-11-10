@@ -86,6 +86,14 @@
 			}
 		},
 		"cooldown": 200,
+		"bientity_condition": {
+			"type": "origins:target_condition",
+			"condition": {
+				"type": "origins:entity_type",
+				"entity_type": "minecraft:player",
+				"inverted": true
+			}
+		},
 		"damage_condition": {
 			"type": "origins:or",
 			"conditions": [
