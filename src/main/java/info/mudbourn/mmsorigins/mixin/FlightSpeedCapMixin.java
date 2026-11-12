@@ -17,6 +17,7 @@ public abstract class FlightSpeedCapMixin {
     private static final double AVIAN_CRUISE_SPEED = 1.75;
     private static final double AVIAN_CRUISE_GAIN = 0.08;
     private static final float AVIAN_CLIMB_PITCH = -25.0F;
+    private static final double AVIAN_RISING = 0.1;
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void mmsOrigins$capFlightSpeed(CallbackInfo ci) {
@@ -39,7 +40,7 @@ public abstract class FlightSpeedCapMixin {
 
     private static Vec3 mmsOrigins$holdAvianCruise(Player player, Vec3 motion) {
         double speed = motion.length();
-        if (speed >= AVIAN_CRUISE_SPEED || player.getXRot() < AVIAN_CLIMB_PITCH) {
+        if (speed >= AVIAN_CRUISE_SPEED || player.getXRot() < AVIAN_CLIMB_PITCH || motion.y > AVIAN_RISING) {
             return motion;
         }
         Vec3 push = player.getLookAngle().scale((AVIAN_CRUISE_SPEED - speed) * AVIAN_CRUISE_GAIN);

@@ -148,6 +148,8 @@ public final class MmsOriginsPowers {
      * marker and {@code AvianPeaceMixin} and {@code AvianForgetTargetMixin} spare
      * the bearer while they have not struck first.
      */
+    public static final String DOWNED_TAG = "mms_combat_downed";
+
     public static final PowerType<?> AVIAN_PEACE =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "avian_peace"));
 
@@ -250,6 +252,11 @@ public final class MmsOriginsPowers {
     /** Range, in blocks, at which a beastfolk's viciousness spooks timid mobs. */
     public static final double VICIOUS_APPEARANCE_RANGE = 12.0;
 
+
+    /** Whether mms-combat has marked the entity as downed, which grounds every flying origin. */
+    public static boolean downed(Entity entity) {
+        return entity.getTags().contains(DOWNED_TAG);
+    }
 
     /** Whether the entity holds the power at all, active or not, by a single map lookup. */
     public static boolean holds(Entity entity, PowerType<?> type) {

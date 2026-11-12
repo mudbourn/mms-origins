@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins.power;
 
+import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
@@ -47,7 +48,7 @@ public final class BlazeFlightPower extends Power implements SurgingFlight {
         Abilities abilities = player.getAbilities();
         VariableIntPower fire = fuel();
         boolean fueled = fire != null && fire.getValue() > 0;
-        if (isActive() && fueled) {
+        if (isActive() && fueled && !MmsOriginsPowers.downed(player)) {
             abilities.setFlyingSpeed(NORMAL_FLYING_SPEED);
             if (!abilities.mayfly) {
                 abilities.mayfly = true;

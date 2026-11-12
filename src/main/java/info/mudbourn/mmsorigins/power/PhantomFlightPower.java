@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins.power;
 
+import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import net.minecraft.world.entity.LivingEntity;
@@ -8,8 +9,8 @@ import net.minecraft.world.entity.player.Player;
 
 /**
  * Lets a phantom in phantom form fly with no timer and no cost. Flight is granted while
- * the power's condition holds. The server only grants and revokes {@code mayfly};
- * vanilla's double-tap-jump toggles {@code flying}, the holder's client sets the flying
+ * the power's condition holds, and the form keeps {@code flying} on so a phantom never
+ * walks. The holder's client sets the flying
  * speed from {@link SurgingFlight}, and the winged movement itself is the holder's client
  * physics. Vanilla's sprint doubles the speed, and sprinting aloft for a moment eases it
  * up along the shared surge curve in {@link SurgingFlight}.
@@ -29,14 +30,23 @@ public final class PhantomFlightPower extends Power implements SurgingFlight {
         if (!(entity instanceof Player player)) {
             return;
         }
-        if (player.isCreative() || player.isSpectator() || player.level().isClientSide()) {
+        if (player.isCreative() || player.isSpectator()) {
             return;
         }
         Abilities abilities = player.getAbilities();
-        if (isActive()) {
+        if (player.level().isClientSide()) {
+            if (isActive() && abilities.mayfly && !abilities.flying && !player.isPassenger()) {
+                abilities.flying = true;
+                player.onUpdateAbilities();
+            }
+            return;
+        }
+        if (isActive() && !MmsOriginsPowers.downed(player)) {
             abilities.setFlyingSpeed(FLYING_SPEED);
-            if (!abilities.mayfly) {
+            boolean airborne = !player.isPassenger();
+            if (!abilities.mayfly || abilities.flying != airborne) {
                 abilities.mayfly = true;
+                abilities.flying = airborne;
                 player.onUpdateAbilities();
             }
         } else {
@@ -55,7 +65,6 @@ public final class PhantomFlightPower extends Power implements SurgingFlight {
     public float cruiseSpeed(Player player) {
         return FLYING_SPEED;
     }
-
 
     @Override
     public boolean surging(Player player) {

@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins.power;
 
+import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import net.minecraft.core.registries.Registries;
@@ -43,11 +44,11 @@ public final class FairyFlightPower extends Power implements SurgingFlight {
         if (!(entity instanceof Player player)) {
             return;
         }
-        if (player.isCreative() || player.isSpectator()) {
+        if (player.isCreative() || player.isSpectator() || player.level().isClientSide()) {
             return;
         }
         Abilities abilities = player.getAbilities();
-        boolean fedEnough = isActive() && player.getFoodData().getFoodLevel() >= REQUIRED_FOOD_LEVEL;
+        boolean fedEnough = !MmsOriginsPowers.downed(player) && isActive() && player.getFoodData().getFoodLevel() >= REQUIRED_FOOD_LEVEL;
         if (fedEnough) {
             abilities.setFlyingSpeed(cruiseSpeed(player));
             if (!abilities.mayfly) {
