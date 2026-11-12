@@ -586,8 +586,8 @@
 	"stamina": {
 		"type": "origins:resource",
 		"min": 0,
-		"max": 800,
-		"start_value": 800,
+		"max": 1360,
+		"start_value": 1360,
 		"hud_render": {
 			"sprite_location": "origins:textures/gui/resource_bar.png",
 			"bar_index": 2,
@@ -603,7 +603,7 @@
 		"entity_action": {
 			"type": "origins:change_resource",
 			"resource": "*:*_stamina",
-			"change": 8
+			"change": 14
 		},
 		"condition": {
 			"type": "origins:fall_flying",
@@ -615,7 +615,7 @@
 		"entity_action": {
 			"type": "origins:change_resource",
 			"resource": "*:*_stamina",
-			"change": 800,
+			"change": 1360,
 			"operation": "set"
 		}
 	},
@@ -624,7 +624,7 @@
 		"entity_action_respawned": {
 			"type": "origins:change_resource",
 			"resource": "*:*_stamina",
-			"change": 800,
+			"change": 1360,
 			"operation": "set"
 		}
 	},
