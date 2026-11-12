@@ -10,7 +10,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Phantom kinship: a phantom drops any bearer it has picked as prey, unless the bearer struck it first.
+ * Phantom kinship: a phantom drops any bearer it has picked as prey, unless the bearer struck it
+ * first. A phantom still holding a revenge mark on something else, such as a bearer's attacker,
+ * turns back to that instead of going idle.
  */
 @Mixin(Mob.class)
 public class PhantomKinshipMixin {
@@ -22,8 +24,9 @@ public class PhantomKinshipMixin {
             return;
         }
         LivingEntity target = mob.getTarget();
-        if (target != null && mob.getLastHurtByMob() != target && MmsOriginsPowers.PHANTOM_KINSHIP.isActive(target)) {
-            mob.setTarget(null);
+        LivingEntity foe = mob.getLastHurtByMob();
+        if (target != null && foe != target && MmsOriginsPowers.PHANTOM_KINSHIP.isActive(target)) {
+            mob.setTarget(foe != null && foe.isAlive() ? foe : null);
         }
     }
 }

@@ -245,7 +245,7 @@
   "badge.mms_origins.summon_henchmen.4": "Raised under Mael's Blessing, they have 50% more health and damage, and run up to 30% faster at noon.",
   "power.mms_origins.nature_reclaim.name": "Nature's Reclamation",
   "power.mms_origins.nature_reclaim.description": "Ask the growing world to take back what hands have made. Your body keeps a biological clock that tells you when the sun, and your strength, will peak.",
-  "badge.mms_origins.nature_reclaim.0": "While the sun is up, hold a crafted item in your off hand and hold [Primary] for 5 s to unmake the whole stack into its ingredients. You are rooted in place while you channel.",
+  "badge.mms_origins.nature_reclaim.0": "While the sun is up, hold a crafted item in your off hand and hold [Primary] for 5 s to unmake the whole stack into its ingredients. Sneak with an empty off hand to unmake your main-hand item instead, such as a two-handed weapon. You are rooted in place while you channel.",
   "badge.mms_origins.nature_reclaim.1": "Each reclamation costs Sun Power and strains your sun metabolism, slowing how fast you gather sunlight. Both costs shrink toward noon: about 1 reclamation at dawn, 10 at noon. Strain fades over time.",
   "badge.mms_origins.nature_reclaim.2": "Enchantments move onto books, one per book in your inventory. Any beyond your books are lost.",
   "message.mms_origins.nature_reclaim.no_sun": "You lack the sun power to reclaim this.",

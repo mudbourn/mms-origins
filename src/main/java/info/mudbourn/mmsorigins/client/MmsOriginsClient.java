@@ -52,6 +52,7 @@ public class MmsOriginsClient implements ClientModInitializer {
         GuardianBeamClient.register();
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             LavaViewState.tick(client);
+            FlightSurge.tick(client);
             if (client.level != null) {
                 ButterflyFlap.tickAll(client.level.players());
             }

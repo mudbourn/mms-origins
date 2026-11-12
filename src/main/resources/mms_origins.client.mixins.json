@@ -18,6 +18,7 @@
     "LivingEntityRenderStateMixin",
     "LocalPlayerCrouchMixin",
     "OriginScaleHideMixin",
+    "PhantomFormPaceMixin",
     "PhantomFormRenderMixin",
     "PiglinBruteAdmirePoseMixin",
     "PlayerRendererMixin",

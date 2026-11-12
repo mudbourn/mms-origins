@@ -23,12 +23,15 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
 
 /**
- * A slow nature spell cast from the off hand. The floran holds the primary key
- * with a crafted item in their off hand; a charging note sounds after the first
- * second, and once the full channel elapses the item is unmade into its parts.
+ * A slow nature spell cast on a held item. The floran holds the primary key
+ * with a crafted item in their off hand, or sneaks with an empty off hand to
+ * offer the main-hand item instead, which is the only way to offer a two-handed
+ * weapon; a charging note sounds after the first second, and once the full
+ * channel elapses the item is unmade into its parts.
  *
  * <p>The spell works any time the sun is up. Each cast spends sun power and adds
  * strain to the floran's sun metabolism, both scaled by how far the sun is from
@@ -38,7 +41,7 @@ import net.minecraft.world.level.biome.Biome;
  */
 public final class NatureReclaimPower extends Power implements Active {
 
-    // groves where the old magic runs strong and reclamation strains the floran less
+    // Groves where reclamation strains the floran less.
     private static final TagKey<Biome> ENCHANTED_GROVES =
         TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("mms_origins", "enchanted_groves"));
 
@@ -141,7 +144,7 @@ public final class NatureReclaimPower extends Power implements Active {
         if (awaitingRelease) {
             return;
         }
-        if (player.getOffhandItem().isEmpty()) {
+        if (subject(player).isEmpty()) {
             charge = 0;
             return;
         }
@@ -159,6 +162,15 @@ public final class NatureReclaimPower extends Power implements Active {
             charge = 0;
             awaitingRelease = true;
         }
+    }
+
+    /** The stack offered for unmaking: the off hand, or the main hand while sneaking with an empty off hand. */
+    private static ItemStack subject(Player player) {
+        ItemStack offhand = player.getOffhandItem();
+        if (!offhand.isEmpty() || !player.isShiftKeyDown()) {
+            return offhand;
+        }
+        return player.getMainHandItem();
     }
 
     private static void root(Player player, boolean rooted) {
@@ -224,7 +236,7 @@ public final class NatureReclaimPower extends Power implements Active {
             message(player, "message.mms_origins.nature_reclaim.no_sun");
             return;
         }
-        NatureReclaim.Result result = NatureReclaim.reclaim(player, level);
+        NatureReclaim.Result result = NatureReclaim.reclaim(player, level, subject(player));
         switch (result) {
             case SUCCESS -> {
                 spend(player, strain, -strainCost);

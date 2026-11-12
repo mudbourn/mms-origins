@@ -26,7 +26,7 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 
 /**
  * The nature magic that unmakes a crafted item back into its parts. It finds the
- * shaped or shapeless crafting recipe whose result matches the off-hand stack,
+ * shaped or shapeless crafting recipe whose result matches the given stack,
  * refunds one of each ingredient per full craft, and writes any enchantments onto
  * books drawn from the caster's own supply. Apoli has no power for this, so it
  * is Java.
@@ -40,9 +40,8 @@ public final class NatureReclaim {
         NOT_ENOUGH
     }
 
-    public static Result reclaim(Player player, ServerLevel level) {
-        ItemStack offhand = player.getOffhandItem();
-        if (offhand.isEmpty()) {
+    public static Result reclaim(Player player, ServerLevel level, ItemStack subject) {
+        if (subject.isEmpty()) {
             return Result.NO_RECIPE;
         }
         MinecraftServer server = level.getServer();
@@ -51,7 +50,7 @@ public final class NatureReclaim {
         }
         RecipeManager recipes = server.getRecipeManager();
         HolderLookup.Provider provider = level.registryAccess();
-        Item target = offhand.getItem();
+        Item target = subject.getItem();
         CraftingRecipe match = null;
         ItemStack result = null;
         List<Ingredient> ingredients = null;
@@ -60,7 +59,7 @@ public final class NatureReclaim {
                 continue;
             }
             CraftingRecipe recipe = (CraftingRecipe) holder.value();
-            ItemStack assembled = recipe.assemble(CraftingInput.EMPTY, provider);
+            ItemStack assembled = resultOf(recipe, provider);
             if (assembled.isEmpty() || !assembled.is(target)) {
                 continue;
             }
@@ -76,25 +75,34 @@ public final class NatureReclaim {
         if (match == null) {
             return Result.NO_RECIPE;
         }
-        int crafts = offhand.getCount() / result.getCount();
+        int crafts = subject.getCount() / result.getCount();
         if (crafts <= 0) {
             return Result.NOT_ENOUGH;
         }
         List<ItemStack> refunds = new ArrayList<>();
-        collectEnchantmentBooks(player, offhand, refunds);
+        collectEnchantmentBooks(player, subject, refunds);
         for (Ingredient ingredient : ingredients) {
             Optional<Holder<Item>> pick = ingredient.items().findFirst();
             pick.ifPresent(item -> refunds.add(new ItemStack(item, crafts)));
         }
-        offhand.shrink(crafts * result.getCount());
+        subject.shrink(crafts * result.getCount());
         for (ItemStack refund : refunds) {
             grant(player, refund);
         }
         return Result.SUCCESS;
     }
 
-    private static void collectEnchantmentBooks(Player player, ItemStack offhand, List<ItemStack> refunds) {
-        ItemEnchantments enchantments = EnchantmentHelper.getEnchantmentsForCrafting(offhand);
+    /** The stack a recipe crafts from no input, or empty when the recipe needs real input to say. */
+    private static ItemStack resultOf(CraftingRecipe recipe, HolderLookup.Provider provider) {
+        try {
+            return recipe.assemble(CraftingInput.EMPTY, provider);
+        } catch (RuntimeException e) {
+            return ItemStack.EMPTY;
+        }
+    }
+
+    private static void collectEnchantmentBooks(Player player, ItemStack subject, List<ItemStack> refunds) {
+        ItemEnchantments enchantments = EnchantmentHelper.getEnchantmentsForCrafting(subject);
         if (enchantments.isEmpty()) {
             return;
         }

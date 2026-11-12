@@ -32,6 +32,7 @@
     "LavaSwimMixin",
     "LivingEntityDeathMixin",
     "OriginFlushMixin",
+    "PhantomDefendMixin",
     "PhantomForgetTargetMixin",
     "PhantomKinshipMixin",
     "PhantomUnseenMixin",

@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.state.PhantomRenderState;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.monster.Phantom;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,14 +20,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Draws a morphed phantom as a vanilla phantom, through the vanilla phantom renderer, in place of
- * their body, armor and held items. The player's Apoli powers ride along so translucency and
+ * their body, armor and held items. The phantom's render state is extracted once from a template
+ * phantom so the fields other mods add to it hold a real phantom's values, then the player's own
+ * state is copied over it each frame. The player's Apoli powers ride along so translucency and
  * invisibility apply to the phantom body too.
  */
 @Mixin(LivingEntityRenderer.class)
 public abstract class PhantomFormRenderMixin {
 
     @Unique
-    private static final PhantomRenderState PHANTOM = new PhantomRenderState();
+    private static PhantomRenderState mmsOrigins$phantom;
 
     @Unique
     private static final int PHANTOM_SIZE = 0;
@@ -42,12 +45,26 @@ public abstract class PhantomFormRenderMixin {
         if (!(state instanceof PhantomFormState form) || !form.mmsOrigins$phantomForm()) {
             return;
         }
-        mmsOrigins$copy(state, PHANTOM);
+        PhantomRenderState phantom = mmsOrigins$phantomState();
+        mmsOrigins$copy(state, phantom);
         Minecraft.getInstance()
             .getEntityRenderDispatcher()
-            .getRenderer(PHANTOM)
-            .submit(PHANTOM, pose, collector, camera);
+            .getRenderer(phantom)
+            .submit(phantom, pose, collector, camera);
         ci.cancel();
+    }
+
+    /** The shared phantom render state, extracted from a template phantom on first use. */
+    @Unique
+    private static PhantomRenderState mmsOrigins$phantomState() {
+        if (mmsOrigins$phantom == null) {
+            Minecraft client = Minecraft.getInstance();
+            Phantom template = new Phantom(EntityType.PHANTOM, client.level);
+            mmsOrigins$phantom = (PhantomRenderState) client.getEntityRenderDispatcher()
+                .getRenderer(template)
+                .createRenderState(template, 0.0F);
+        }
+        return mmsOrigins$phantom;
     }
 
     /** Fills the phantom render state from the player's so the phantom stands where the player does. */

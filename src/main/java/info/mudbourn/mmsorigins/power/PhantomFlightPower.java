@@ -11,25 +11,21 @@ import net.minecraft.world.entity.player.Player;
 /**
  * Lets a morphed phantom fly for as long as its soul energy lasts. Flight is
  * granted while the power's condition holds and the soul bar is not empty, and
- * staying aloft spends one point of it each second. Only {@code mayfly} and the
- * base flying speed are set; vanilla's double-tap-jump toggles {@code flying}
- * and vanilla's sprint doubles the speed in {@code Player.getFlyingSpeed}.
- * Sprinting aloft for a moment eases the base speed up until the sprint pace
- * matches an avian's surge.
+ * staying aloft spends one point of it each second. The server only grants and
+ * revokes {@code mayfly}; vanilla's double-tap-jump toggles {@code flying}, and
+ * the holder's client sets the flying speed from {@link SurgingFlight}.
+ * Vanilla's sprint doubles the speed, and sprinting aloft for a moment eases it
+ * up until the sprint pace matches an avian's surge.
  */
-public final class PhantomFlightPower extends Power {
+public final class PhantomFlightPower extends Power implements SurgingFlight {
 
     private static final float FLYING_SPEED = 0.04F;
     private static final float NORMAL_FLYING_SPEED = 0.05F;
     private static final float TOP_FLYING_SPEED = 0.0878F;
     private static final int DRAIN_INTERVAL = 20;
-    private static final int SPRINT_BOOST_DELAY_TICKS = 30;
-    private static final int SPRINT_BOOST_RAMP_TICKS = 40;
-    private static final int SPEED_STEPS = 4;
 
     private final PowerType<?> resource;
     private int flightTicks;
-    private int sprintFlyTicks;
 
     public PhantomFlightPower(PowerType<?> type, LivingEntity entity, PowerType<?> resource) {
         super(type, entity);
@@ -48,10 +44,9 @@ public final class PhantomFlightPower extends Power {
         Abilities abilities = player.getAbilities();
         VariableIntPower soul = soul();
         if (isActive() && soul != null && soul.getValue() > 0) {
-            float wantedSpeed = sprintSpeed(player, abilities);
-            if (!abilities.mayfly || abilities.getFlyingSpeed() != wantedSpeed) {
+            abilities.setFlyingSpeed(FLYING_SPEED);
+            if (!abilities.mayfly) {
                 abilities.mayfly = true;
-                abilities.setFlyingSpeed(wantedSpeed);
                 player.onUpdateAbilities();
             }
             if (abilities.flying) {
@@ -63,7 +58,6 @@ public final class PhantomFlightPower extends Power {
             }
         } else {
             flightTicks = 0;
-            sprintFlyTicks = 0;
             revoke(player);
         }
     }
@@ -75,15 +69,19 @@ public final class PhantomFlightPower extends Power {
         }
     }
 
-    private float sprintSpeed(Player player, Abilities abilities) {
-        if (!abilities.flying || !player.isSprinting()) {
-            sprintFlyTicks = 0;
-            return FLYING_SPEED;
-        }
-        sprintFlyTicks++;
-        float progress = Math.clamp((sprintFlyTicks - SPRINT_BOOST_DELAY_TICKS) / (float) SPRINT_BOOST_RAMP_TICKS, 0.0F, 1.0F);
-        float eased = Math.round(progress * progress * (3.0F - 2.0F * progress) * SPEED_STEPS) / (float) SPEED_STEPS;
-        return FLYING_SPEED + (TOP_FLYING_SPEED - FLYING_SPEED) * eased;
+    @Override
+    public float cruiseSpeed(Player player) {
+        return FLYING_SPEED;
+    }
+
+    @Override
+    public float surgeSpeed(Player player, float build) {
+        return FLYING_SPEED + (TOP_FLYING_SPEED - FLYING_SPEED) * build;
+    }
+
+    @Override
+    public boolean surging(Player player) {
+        return player.isSprinting();
     }
 
     private static void revoke(Player player) {
