@@ -64,6 +64,24 @@
 					"pitch": 0.9
 				}
 			]
+		},
+		"hold_condition": {
+			"type": "origins:sneaking"
+		},
+		"hold_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:toggle",
+					"power": "originstweaks:phantomize_toggle"
+				},
+				{
+					"type": "origins:play_sound",
+					"sound": "minecraft:entity.phantom.ambient",
+					"volume": 1.0,
+					"pitch": 0.9
+				}
+			]
 		}
 	},
 	"morph": {
