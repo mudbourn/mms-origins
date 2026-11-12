@@ -36,9 +36,13 @@ public final class PhantomWings {
     /** Runs one tick of winged flight, returning whether it replaced vanilla travel. */
     public static boolean travel(LocalPlayer player, Vec3 input) {
         Abilities abilities = player.getAbilities();
-        if (!abilities.flying || player.isPassenger() || !MmsOriginsPowers.phantomFormComplete(player)) {
+        if (!abilities.mayfly || player.isPassenger() || !MmsOriginsPowers.phantomFormComplete(player)) {
             winged = false;
             return false;
+        }
+        if (!abilities.flying) {
+            abilities.flying = true;
+            player.onUpdateAbilities();
         }
         Vec3 current = player.getDeltaMovement();
         if (!winged || current.subtract(lastSet).length() > IMPULSE_THRESHOLD) {
