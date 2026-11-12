@@ -18,7 +18,9 @@ public abstract class AvianClimbMixin {
 
     private static final double CLIMB_ACCELERATION = 0.08;
     private static final double MAX_CLIMB_SPEED = 0.6;
-    private static final double CLIMB_DRAG = 0.95;
+    // 20 blocks per second
+    private static final double CLIMB_TOP_SPEED = 1.0;
+    private static final double CLIMB_DRAG = 0.9;
     private static final int CHARGE_INTERVAL = 4;
     // 50 stamina per second, half a surge
     private static final int CHARGE = 10;
@@ -47,7 +49,12 @@ public abstract class AvianClimbMixin {
         }
         Vec3 motion = player.getDeltaMovement();
         double rise = Math.min(MAX_CLIMB_SPEED, Math.max(motion.y, 0.0) + CLIMB_ACCELERATION);
-        player.setDeltaMovement(motion.x * CLIMB_DRAG, rise, motion.z * CLIMB_DRAG);
+        Vec3 climb = new Vec3(motion.x, rise, motion.z);
+        double speed = climb.length();
+        if (speed > CLIMB_TOP_SPEED) {
+            climb = climb.scale(Math.max(CLIMB_TOP_SPEED, speed * CLIMB_DRAG) / speed);
+        }
+        player.setDeltaMovement(climb);
         if (player instanceof ServerPlayer && player.tickCount % CHARGE_INTERVAL == 0) {
             int cost = armor >= HEAVY_ARMOR ? HEAVY_CHARGE : CHARGE;
             stamina.setValue(Math.max(stamina.getMin(), stamina.getValue() - cost));
