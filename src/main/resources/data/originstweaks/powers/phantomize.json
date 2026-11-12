@@ -21,6 +21,13 @@
 			"text": {
 				"translate": "badge.originstweaks.phantomize.2"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.phantomize.3"
+			}
 		}
 	],
 	"toggle": {
@@ -50,9 +57,18 @@
 			"power": "*:*_toggle"
 		}
 	},
-	"flight": {
-		"type": "origins:elytra_flight",
-		"render_elytra": false,
+	"morph": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 10,
+		"start_value": 0,
+		"hud_render": {
+			"should_render": false
+		}
+	},
+	"morph_tick": {
+		"type": "origins:action_over_time",
+		"interval": 1,
 		"condition": {
 			"type": "origins:and",
 			"conditions": [
@@ -62,22 +78,78 @@
 				},
 				{
 					"type": "origins:resource",
-					"resource": "*:soulbound_energy",
-					"comparison": ">",
-					"compare_to": 0
+					"resource": "*:phantomize_morph",
+					"comparison": "<",
+					"compare_to": 10
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:change_resource",
+					"resource": "*:phantomize_morph",
+					"operation": "add",
+					"change": 1
+				},
+				{
+					"type": "origins:apply_effect",
+					"effect": {
+						"effect": "minecraft:slowness",
+						"duration": 3,
+						"amplifier": 3,
+						"show_icon": false,
+						"show_particles": false
+					}
+				},
+				{
+					"type": "origins:if_else",
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:phantomize_morph",
+						"comparison": ">=",
+						"compare_to": 10
+					},
+					"if_action": {
+						"type": "origins:play_sound",
+						"sound": "minecraft:entity.phantom.ambient",
+						"volume": 1.0,
+						"pitch": 1.2
+					}
 				}
 			]
 		}
 	},
-	"flight_toll": {
+	"morph_reset": {
 		"type": "origins:action_over_time",
+		"interval": 1,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle",
+					"inverted": true
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:phantomize_morph",
+					"comparison": ">",
+					"compare_to": 0
+				}
+			]
+		},
 		"entity_action": {
 			"type": "origins:change_resource",
-			"resource": "*:soulbound_energy",
-			"change": -1,
-			"operation": "add"
-		},
-		"interval": 20,
+			"resource": "*:phantomize_morph",
+			"operation": "set",
+			"change": 0
+		}
+	},
+	"morph_fx": {
+		"type": "origins:action_over_time",
+		"interval": 4,
 		"condition": {
 			"type": "origins:and",
 			"conditions": [
@@ -86,7 +158,51 @@
 					"power": "*:phantomize_toggle"
 				},
 				{
-					"type": "origins:fall_flying"
+					"type": "origins:resource",
+					"resource": "*:phantomize_morph",
+					"comparison": "<",
+					"compare_to": 10
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:spawn_particles",
+			"particle": "minecraft:soul",
+			"count": 12,
+			"speed": 0.05,
+			"spread": {
+				"x": 0.4,
+				"y": 0.6,
+				"z": 0.4
+			},
+			"offset_y": 0.8
+		}
+	},
+	"pose": {
+		"type": "mms_origins:pose",
+		"entity_pose": "SWIMMING",
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:phantomize_morph",
+			"comparison": ">=",
+			"compare_to": 10
+		}
+	},
+	"flight": {
+		"type": "mms_origins:phantom_flight",
+		"resource": "originstweaks:soulbound_energy",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:phantomize_morph",
+					"comparison": ">=",
+					"compare_to": 10
 				}
 			]
 		}

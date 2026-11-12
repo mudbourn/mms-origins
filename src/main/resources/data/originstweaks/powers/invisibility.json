@@ -3,7 +3,28 @@
 	"hidden": true,
 	"render_armor": true,
 	"condition": {
-		"type": "origins:power_active",
-		"power": "*:phantomize_toggle"
+		"type": "origins:and",
+		"conditions": [
+			{
+				"type": "origins:power_active",
+				"power": "*:phantomize_toggle"
+			},
+			{
+				"type": "origins:in_block",
+				"block_condition": {
+					"type": "origins:offset",
+					"condition": {
+						"type": "origins:movement_blocking"
+					},
+					"y": 1
+				}
+			},
+			{
+				"type": "origins:resource",
+				"resource": "*:soulbound_energy",
+				"comparison": ">",
+				"compare_to": 33
+			}
+		]
 	}
 }

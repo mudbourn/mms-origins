@@ -18,6 +18,7 @@
     "LivingEntityRenderStateMixin",
     "LocalPlayerCrouchMixin",
     "OriginScaleHideMixin",
+    "PhantomFormRenderMixin",
     "PiglinBruteAdmirePoseMixin",
     "PlayerRendererMixin",
     "WingsElytraTextureMixin",

@@ -6,61 +6,63 @@ import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.VariableIntPower;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
-
-import java.util.Set;
 
 /**
  * A slow nature spell cast from the off hand. The floran holds the primary key
  * with a crafted item in their off hand; a charging note sounds after the first
  * second, and once the full channel elapses the item is unmade into its parts.
  *
- * <p>Apoli cannot count held ticks or reach the off-hand recipe, so the timing,
- * the noon window, and the twice-a-day cost all live here. The reclaim itself is
- * in {@link NatureReclaim}, and the daily allowance is a resource the power
- * spends on success.
+ * <p>The spell works any time the sun is up. Each cast spends sun power and adds
+ * strain to the floran's sun metabolism, both scaled by how far the sun is from
+ * noon, so the strain budget allows the most casts at noon. The power also warns
+ * the floran once a day as noon approaches. The reclaim itself is in
+ * {@link NatureReclaim}.
  */
 public final class NatureReclaimPower extends Power implements Active {
 
+    // groves where the old magic runs strong and reclamation strains the floran less
+    private static final TagKey<Biome> ENCHANTED_GROVES =
+        TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("mms_origins", "enchanted_groves"));
+
     private static final int HOLD_GRACE_TICKS = 3;
 
-    // biomes whose growth is strong enough for the floran to unmake an item
-    private static final Set<ResourceKey<Biome>> RECLAIM_BIOMES = Set.of(
-        reclaimBiome("minecraft", "dark_forest"),
-        reclaimBiome("biomeswevegone", "weeping_witch_forest"),
-        reclaimBiome("biomeswevegone", "enchanted_tangle"),
-        reclaimBiome("biomeswevegone", "ebony_woods"),
-        reclaimBiome("biomeswevegone", "forgotten_forest"),
-        reclaimBiome("biomeswevegone", "jacaranda_jungle"));
+    private static final double NOON = 6000.0;
 
-    private static ResourceKey<Biome> reclaimBiome(String namespace, String path) {
-        return ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(namespace, path));
-    }
+    private static final double HALF_DAY = 6000.0;
+
+    private static final long DAY_LENGTH = 24000L;
+
+    private static final double MIN_DAYLIGHT = 0.05;
 
     private final int castTicks;
     private final int soundDelay;
     private final SoundEvent chargingSound;
     private final SoundEvent finishSound;
-    private final PowerType<?> usesResource;
+    private final PowerType<?> strainResource;
+    private final int noonStrain;
     private final PowerType<?> sunResource;
-    private final int sunCost;
-    private final int noonMin;
-    private final int noonMax;
+    private final int noonSunCost;
+    private final SoundEvent noonSound;
+    private final int noonWarning;
 
     private Key key = new Key();
     private int ticksSinceUse = HOLD_GRACE_TICKS + 1;
     private int charge;
     private boolean awaitingRelease;
+    private long lastWarnedDay = -1L;
 
     public NatureReclaimPower(
             PowerType<?> type,
@@ -69,21 +71,23 @@ public final class NatureReclaimPower extends Power implements Active {
             int soundDelay,
             SoundEvent chargingSound,
             SoundEvent finishSound,
-            PowerType<?> usesResource,
+            PowerType<?> strainResource,
+            int noonStrain,
             PowerType<?> sunResource,
-            int sunCost,
-            int noonMin,
-            int noonMax) {
+            int noonSunCost,
+            SoundEvent noonSound,
+            int noonWarning) {
         super(type, entity);
         this.castTicks = castTicks;
         this.soundDelay = soundDelay;
         this.chargingSound = chargingSound;
         this.finishSound = finishSound;
-        this.usesResource = usesResource;
+        this.strainResource = strainResource;
+        this.noonStrain = noonStrain;
         this.sunResource = sunResource;
-        this.sunCost = sunCost;
-        this.noonMin = noonMin;
-        this.noonMax = noonMax;
+        this.noonSunCost = noonSunCost;
+        this.noonSound = noonSound;
+        this.noonWarning = noonWarning;
         this.setTicking(true);
     }
 
@@ -107,6 +111,7 @@ public final class NatureReclaimPower extends Power implements Active {
         if (!(entity instanceof Player player) || !(entity.level() instanceof ServerLevel level)) {
             return;
         }
+        warnOfNoon(player, level);
         boolean held = ticksSinceUse <= HOLD_GRACE_TICKS;
         ticksSinceUse++;
         if (!held) {
@@ -137,23 +142,45 @@ public final class NatureReclaimPower extends Power implements Active {
         }
     }
 
+    private void warnOfNoon(Player player, ServerLevel level) {
+        long dayTime = level.getDayTime();
+        long time = dayTime % DAY_LENGTH;
+        long day = dayTime / DAY_LENGTH;
+        if (time < NOON - noonWarning || time >= NOON || day == lastWarnedDay) {
+            return;
+        }
+        lastWarnedDay = day;
+        if (noonSound != null && player instanceof ServerPlayer serverPlayer) {
+            serverPlayer.connection.send(new ClientboundSoundPacket(
+                BuiltInRegistries.SOUND_EVENT.wrapAsHolder(noonSound),
+                SoundSource.PLAYERS,
+                player.getX(),
+                player.getY(),
+                player.getZ(),
+                1.0f,
+                1.0f,
+                level.getRandom().nextLong()));
+        }
+        message(player, "message.mms_origins.nature_reclaim.noon_near");
+    }
+
     private void cast(Player player, ServerLevel level) {
-        boolean inReclaimBiome = RECLAIM_BIOMES.stream()
-            .anyMatch(level.getBiome(player.blockPosition())::is);
-        if (!inReclaimBiome) {
-            message(player, "message.mms_origins.nature_reclaim.not_forest");
+        double daylight = daylight(level);
+        if (daylight <= 0.0) {
+            message(player, "message.mms_origins.nature_reclaim.not_day");
             return;
         }
-        if (!isAroundNoon(level)) {
-            message(player, "message.mms_origins.nature_reclaim.not_noon");
-            return;
+        VariableIntPower strain = resource(player, strainResource);
+        int strainCost = scaled(noonStrain, daylight, strain);
+        if (level.getBiome(player.blockPosition()).is(ENCHANTED_GROVES)) {
+            strainCost = Math.max(1, strainCost / 2);
         }
-        VariableIntPower uses = resource(player, usesResource);
-        if (uses != null && uses.getValue() <= 0) {
-            message(player, "message.mms_origins.nature_reclaim.spent");
+        if (strain != null && strain.getValue() + strainCost > strain.getMax()) {
+            message(player, "message.mms_origins.nature_reclaim.strained");
             return;
         }
         VariableIntPower sun = resource(player, sunResource);
+        int sunCost = scaled(noonSunCost, daylight, sun);
         if (sun != null && sun.getValue() < sunCost) {
             message(player, "message.mms_origins.nature_reclaim.no_sun");
             return;
@@ -161,30 +188,42 @@ public final class NatureReclaimPower extends Power implements Active {
         NatureReclaim.Result result = NatureReclaim.reclaim(player, level);
         switch (result) {
             case SUCCESS -> {
-                if (uses != null) {
-                    uses.setValue(uses.getValue() - 1);
-                    PowerHolderComponent.syncPower(player, uses.getType());
-                }
-                if (sun != null && sunCost > 0) {
-                    sun.setValue(sun.getValue() - sunCost);
-                    PowerHolderComponent.syncPower(player, sun.getType());
-                }
+                spend(player, strain, -strainCost);
+                spend(player, sun, sunCost);
                 if (finishSound != null) {
                     level.playSound(null, player.getX(), player.getY(), player.getZ(),
                         finishSound, SoundSource.PLAYERS, 0.8f, 1.0f);
                 }
                 level.sendParticles(ParticleTypes.COMPOSTER,
                     player.getX(), player.getY() + 1.0, player.getZ(), 24, 0.4, 0.6, 0.4, 0.1);
-                message(player, "message.mms_origins.nature_reclaim.success");
+                int left = strain == null || strainCost <= 0
+                    ? 0
+                    : (strain.getMax() - strain.getValue()) / strainCost;
+                player.displayClientMessage(
+                    Component.translatable("message.mms_origins.nature_reclaim.success", left),
+                    true);
             }
             case NOT_ENOUGH -> message(player, "message.mms_origins.nature_reclaim.not_enough");
             default -> message(player, "message.mms_origins.nature_reclaim.no_recipe");
         }
     }
 
-    private boolean isAroundNoon(ServerLevel level) {
-        long time = level.getDayTime() % 24000L;
-        return time >= noonMin && time <= noonMax;
+    private static double daylight(ServerLevel level) {
+        double time = level.getDayTime() % DAY_LENGTH;
+        return Math.max(0.0, 1.0 - Math.abs(time - NOON) / HALF_DAY);
+    }
+
+    private static int scaled(int noonCost, double daylight, VariableIntPower cap) {
+        int cost = (int) Math.round(noonCost / Math.max(daylight, MIN_DAYLIGHT));
+        return cap == null ? cost : Math.min(cost, cap.getMax());
+    }
+
+    private static void spend(Player player, VariableIntPower power, int amount) {
+        if (power == null || amount == 0) {
+            return;
+        }
+        power.setValue(power.getValue() - amount);
+        PowerHolderComponent.syncPower(player, power.getType());
     }
 
     private VariableIntPower resource(Player player, PowerType<?> resourceType) {

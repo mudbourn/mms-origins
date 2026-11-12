@@ -32,6 +32,7 @@ public final class VerdantGrowth {
 
     private static final int CHUNK_RADIUS = 2;
     private static final float GROWTH_BONUS = 0.3f;
+    private static final float BLESSED_GROWTH_BONUS = 0.6f;
 
     private VerdantGrowth() {
     }
@@ -45,11 +46,12 @@ public final class VerdantGrowth {
         if (randomTickSpeed <= 0) {
             return;
         }
-        int extraPerSection = Math.max(1, Math.round(randomTickSpeed * GROWTH_BONUS));
         for (ServerPlayer player : level.players()) {
             if (!MmsOriginsPowers.holds(player, MmsOriginsPowers.VERDANT_GROWTH)) {
                 continue;
             }
+            float bonus = FairyBlessing.isBlessed(player) ? BLESSED_GROWTH_BONUS : GROWTH_BONUS;
+            int extraPerSection = Math.max(1, Math.round(randomTickSpeed * bonus));
             int centerX = player.chunkPosition().x;
             int centerZ = player.chunkPosition().z;
             for (int dx = -CHUNK_RADIUS; dx <= CHUNK_RADIUS; dx++) {

@@ -53,7 +53,7 @@
 			"type": "origins:change_resource",
 			"resource": "originstweaks:fire_power",
 			"operation": "add",
-			"change": 4.95
+			"change": 6.19
 		}
 	},
 	"stoke_magma_block": {
@@ -138,7 +138,7 @@
 			"type": "origins:change_resource",
 			"resource": "originstweaks:fire_power",
 			"operation": "add",
-			"change": 3
+			"change": 5.25
 		}
 	}
 }

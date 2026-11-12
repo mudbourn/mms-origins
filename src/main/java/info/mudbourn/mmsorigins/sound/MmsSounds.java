@@ -29,6 +29,7 @@ public final class MmsSounds {
     public static final SoundEvent FLORAN_DEATH = register("floran.death");
     public static final SoundEvent FLORAN_SUN_POWER_ON = register("floran.sun_power_on");
     public static final SoundEvent FLORAN_SUN_POWER_OFF = register("floran.sun_power_off");
+    public static final SoundEvent FLORAN_NOON_CLOCK = register("floran.noon_clock");
 
     private MmsSounds() {
     }

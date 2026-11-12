@@ -3,6 +3,7 @@ package info.mudbourn.mmsorigins.mixin.client;
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import info.mudbourn.mmsorigins.client.LeafFormState;
 import info.mudbourn.mmsorigins.client.LeafTrail;
+import info.mudbourn.mmsorigins.client.PhantomFormState;
 import info.mudbourn.mmsorigins.client.ZombieShakeState;
 import info.mudbourn.mmsorigins.client.fur.FurState;
 import info.mudbourn.mmsorigins.client.wings.ButterflyFlap;
@@ -26,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Reads the avatar's origin during extraction and stamps its fur, tail, claw, wing,
- * zombie and leaf form state onto the render state, hiding the cape under avian wings.
+ * zombie, leaf form and phantom form state onto the render state, hiding the cape under avian wings.
  *
  * <p>Players carry the origin on an Apoli component the fur layer never sees; a logout
  * mannequin has no such component, so it falls back to the synced fur attachment
@@ -69,6 +70,7 @@ public abstract class PlayerRendererMixin {
         } else {
             LeafTrail.clear(player);
         }
+        ((PhantomFormState) state).mmsOrigins$setPhantomForm(MmsOriginsPowers.phantomFormComplete(player));
         if (player instanceof Player concrete) {
             ((WingState) state).mmsOrigins$setWingFlapDegrees(
                     ButterflyFlap.degreesFor(concrete, partialTick));

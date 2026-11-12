@@ -4,7 +4,7 @@ import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.entity.player.Abilities;
@@ -25,10 +25,15 @@ public final class FairyFlightPower extends Power {
     private static final float NORMAL_FLYING_SPEED = 0.05F;
     private static final float FAINT_FLYING_SPEED = 0.025F;
     private static final float HOMELAND_SPEED_MULTIPLIER = 1.5F;
+    private static final int SPRINT_BOOST_DELAY_TICKS = 30;
+    private static final int SPRINT_BOOST_RAMP_TICKS = 40;
+    private static final float SPRINT_BOOST_MAX = 2.0F;
 
-    // the fairy homeland, where flight quickens
-    private static final ResourceKey<Biome> HOMELAND_BIOME =
-        ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("biomeswevegone", "skyris_vale"));
+    private int sprintFlyTicks;
+
+    // the fairy homeland groves, where flight quickens
+    private static final TagKey<Biome> HOMELAND_BIOMES =
+        TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("mms_origins", "fairy_homeland"));
 
     public FairyFlightPower(PowerType<?> type, LivingEntity entity) {
         super(type, entity);
@@ -52,6 +57,7 @@ public final class FairyFlightPower extends Power {
             if (inHomeland(player)) {
                 wantedSpeed *= HOMELAND_SPEED_MULTIPLIER;
             }
+            wantedSpeed *= sprintBoost(player, abilities);
             boolean changed = !abilities.mayfly || abilities.getFlyingSpeed() != wantedSpeed;
             abilities.mayfly = true;
             abilities.setFlyingSpeed(wantedSpeed);
@@ -69,8 +75,19 @@ public final class FairyFlightPower extends Power {
         }
     }
 
+    private float sprintBoost(Player player, Abilities abilities) {
+        if (!abilities.flying || !player.isSprinting()) {
+            sprintFlyTicks = 0;
+            return 1.0F;
+        }
+        sprintFlyTicks++;
+        float progress = Math.clamp((sprintFlyTicks - SPRINT_BOOST_DELAY_TICKS) / (float) SPRINT_BOOST_RAMP_TICKS, 0.0F, 1.0F);
+        float eased = progress * progress * (3.0F - 2.0F * progress);
+        return 1.0F + (SPRINT_BOOST_MAX - 1.0F) * eased;
+    }
+
     private boolean inHomeland(Player player) {
-        return player.level().getBiome(player.blockPosition()).is(HOMELAND_BIOME);
+        return player.level().getBiome(player.blockPosition()).is(HOMELAND_BIOMES);
     }
 
     @Override

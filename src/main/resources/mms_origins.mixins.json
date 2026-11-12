@@ -26,6 +26,8 @@
     "FairyStartleMixin",
     "GuardianForgetTargetMixin",
     "GuardianKinshipMixin",
+    "HazeBondMixin",
+    "HazeNeutralMixin",
     "ItemStackConsumeMixin",
     "LavaSwimMixin",
     "LivingEntityDeathMixin",

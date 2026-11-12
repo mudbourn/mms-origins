@@ -4,10 +4,9 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.level.Level;
 
 /**
- * Breaks an avian's truce with every overworld monster near the one they strike.
+ * Breaks an avian's truce with every monster near the one they strike.
  *
  * <p>Each {@link Enemy} mob within {@link #RADIUS} blocks of the struck mob takes the
  * avian as its attacker, so {@code AvianPeaceMixin} and {@code AvianForgetTargetMixin}
@@ -15,14 +14,14 @@ import net.minecraft.world.level.Level;
  */
 public final class AvianProvocation {
 
-    private static final double RADIUS = 16.0;
+    private static final double RADIUS = 24.0;
 
     private AvianProvocation() {
     }
 
     public static void register() {
         ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, baseDamage, damage, blocked) -> {
-            if (!(entity instanceof Enemy) || entity.level().dimension() != Level.OVERWORLD) {
+            if (!(entity instanceof Enemy)) {
                 return;
             }
             if (!(source.getEntity() instanceof ServerPlayer player) || !MmsOriginsPowers.AVIAN_PEACE.isActive(player)) {

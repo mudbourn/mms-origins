@@ -2,6 +2,7 @@ package info.mudbourn.mmsorigins.mixin.client;
 
 import info.mudbourn.mmsorigins.client.GuardianBeamState;
 import info.mudbourn.mmsorigins.client.LeafFormState;
+import info.mudbourn.mmsorigins.client.PhantomFormState;
 import info.mudbourn.mmsorigins.client.ZombieShakeState;
 import info.mudbourn.mmsorigins.client.fur.FurState;
 import info.mudbourn.mmsorigins.client.wings.WingState;
@@ -13,14 +14,14 @@ import org.spongepowered.asm.mixin.Unique;
 
 /**
  * Storage for {@link FurState}, {@link WingState}, {@link ZombieShakeState} and
- * {@link GuardianBeamState} and {@link LeafFormState} on
+ * {@link GuardianBeamState}, {@link LeafFormState} and {@link PhantomFormState} on
  * every living render state.
  *
  * <p>Stamped on {@code PlayerRenderer} extraction and cleared on every other entity's,
  * since render states are pooled and reused.
  */
 @Mixin(LivingEntityRenderState.class)
-public abstract class LivingEntityRenderStateMixin implements FurState, WingState, ZombieShakeState, GuardianBeamState, LeafFormState {
+public abstract class LivingEntityRenderStateMixin implements FurState, WingState, ZombieShakeState, GuardianBeamState, LeafFormState, PhantomFormState {
 
     @Unique
     private Identifier mmsOrigins$furOrigin;
@@ -176,5 +177,18 @@ public abstract class LivingEntityRenderStateMixin implements FurState, WingStat
     @Override
     public void mmsOrigins$setLeafTail(Vec3 tail) {
         this.mmsOrigins$leafTail = tail;
+    }
+
+    @Unique
+    private boolean mmsOrigins$phantomForm;
+
+    @Override
+    public boolean mmsOrigins$phantomForm() {
+        return this.mmsOrigins$phantomForm;
+    }
+
+    @Override
+    public void mmsOrigins$setPhantomForm(boolean phantomForm) {
+        this.mmsOrigins$phantomForm = phantomForm;
     }
 }

@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins.mixin;
 
+import info.mudbourn.mmsorigins.FairyBlessing;
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeReference;
@@ -47,6 +48,7 @@ public abstract class CropYieldMixin {
     private static final TagKey<Block> HOE_CROPS =
         TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("mms_origins", "hoe_crops"));
     private static final double GOLD_CHANCE = 0.12;
+    private static final double BLESSED_GOLD_CHANCE = 0.24;
 
     @Inject(
         method = "getDrops(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;",
@@ -71,6 +73,9 @@ public abstract class CropYieldMixin {
         List<ItemStack> drops = cir.getReturnValue();
         List<ItemStack> boosted = new ArrayList<>(drops.size() + 2);
         RandomSource random = level.getRandom();
+        boolean blessed = FairyBlessing.isBlessed(player);
+        double goldChance = blessed ? BLESSED_GOLD_CHANCE : GOLD_CHANCE;
+        int bonusCount = blessed ? 2 : 1;
         if (crop) {
             for (ItemStack stack : drops) {
                 if (stack.isEmpty() || mmsOrigins$isSeed(stack)) {
@@ -78,16 +83,16 @@ public abstract class CropYieldMixin {
                     continue;
                 }
                 ItemStack extra = stack.copy();
-                extra.setCount(stack.getCount() + 1 + random.nextInt(2));
+                extra.setCount(stack.getCount() + bonusCount + random.nextInt(2));
                 boosted.add(extra);
                 Item gold = mmsOrigins$goldVariant(stack.getItem());
-                if (gold != null && random.nextDouble() < GOLD_CHANCE) {
+                if (gold != null && random.nextDouble() < goldChance) {
                     boosted.add(new ItemStack(gold));
                 }
             }
         } else {
             boosted.addAll(drops);
-            if (random.nextDouble() < GOLD_CHANCE) {
+            if (random.nextDouble() < goldChance) {
                 boosted.add(new ItemStack(Items.GOLDEN_APPLE));
             }
         }

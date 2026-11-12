@@ -26,8 +26,8 @@
 	"store": {
 		"type": "origins:resource",
 		"min": 0,
-		"max": 5,
-		"start_value": 5,
+		"max": 15,
+		"start_value": 15,
 		"hud_render": {
 			"sprite_location": "origins:textures/gui/resource_bar.png",
 			"bar_index": 11
@@ -35,7 +35,7 @@
 	},
 	"fire": {
 		"type": "origins:active_self",
-		"cooldown": 10,
+		"cooldown": 4,
 		"hud_render": {
 			"should_render": false
 		},
@@ -47,7 +47,7 @@
 			"type": "origins:resource",
 			"resource": "*:*_store",
 			"comparison": ">=",
-			"compare_to": 1
+			"compare_to": 2
 		},
 		"entity_action": {
 			"type": "mms_origins:shulker_bullet",
@@ -56,14 +56,14 @@
 			"on_fire": {
 				"type": "origins:change_resource",
 				"resource": "*:*_store",
-				"change": -1,
+				"change": -2,
 				"operation": "add"
 			}
 		}
 	},
 	"recharge": {
 		"type": "origins:action_over_time",
-		"interval": 120,
+		"interval": 40,
 		"entity_action": {
 			"type": "origins:change_resource",
 			"resource": "*:*_store",
@@ -74,7 +74,7 @@
 			"type": "origins:resource",
 			"resource": "*:*_store",
 			"comparison": "<",
-			"compare_to": 5
+			"compare_to": 15
 		}
 	}
 }

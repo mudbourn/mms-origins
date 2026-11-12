@@ -1,12 +1,15 @@
 package info.mudbourn.mmsorigins.power;
 
+import info.mudbourn.mmsorigins.FairyBlessing;
 import info.mudbourn.mmsorigins.MmsOrigins;
 import info.mudbourn.mmsorigins.power.action.CausticSporesAction;
+import info.mudbourn.mmsorigins.power.action.CultivateStoneAction;
 import info.mudbourn.mmsorigins.power.action.GuardianBeamAction;
 import info.mudbourn.mmsorigins.power.action.LaunchAction;
 import info.mudbourn.mmsorigins.power.action.RandomTeleportAction;
 import info.mudbourn.mmsorigins.power.action.ShulkerBulletAction;
 import info.mudbourn.mmsorigins.power.action.SmallFireballAction;
+import info.mudbourn.mmsorigins.power.action.SporeHazeAction;
 import info.mudbourn.mmsorigins.power.action.SummonHenchmenAction;
 import info.mudbourn.mmsorigins.power.action.SurfaceAction;
 import info.mudbourn.mmsorigins.power.action.VenomPoisonAction;
@@ -15,6 +18,7 @@ import info.mudbourn.mmsorigins.power.condition.HeightAboveGroundCondition;
 import info.mudbourn.mmsorigins.power.condition.HenchmenCountCondition;
 import info.mudbourn.mmsorigins.power.condition.IncapacitatedCondition;
 import info.mudbourn.mmsorigins.power.condition.SunIntakeCondition;
+import info.mudbourn.mmsorigins.power.condition.SunStrainCondition;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -58,9 +62,12 @@ public final class MmsPowerFactories {
         registerHeightAboveGround();
         registerFairyFlight();
         registerBlazeFlight();
+        registerPhantomFlight();
         registerSummonHenchmen();
         registerHenchmenCount();
         registerCausticSpores();
+        registerSporeHaze();
+        registerCultivateStone();
         registerVenomPoison();
         registerShulkerBullet();
         registerSmallFireball();
@@ -71,6 +78,18 @@ public final class MmsPowerFactories {
         registerNatureReclaim();
         registerIncapacitated();
         registerSunIntake();
+        registerFairyBlessing();
+    }
+
+    private static void registerFairyBlessing() {
+        Identifier id = id("near_fairy");
+        Registry.register(
+            ApoliRegistries.ENTITY_CONDITION,
+            id,
+            new ConditionFactory<Entity>(
+                id,
+                new SerializableData(),
+                FairyBlessing::condition));
     }
 
     private static void registerIncapacitated() {
@@ -96,11 +115,12 @@ public final class MmsPowerFactories {
                     .add("sound_delay", SerializableDataTypes.INT, 20)
                     .add("charging_sound", SerializableDataTypes.SOUND_EVENT, null)
                     .add("finish_sound", SerializableDataTypes.SOUND_EVENT, null)
-                    .add("uses_resource", ApoliDataTypes.POWER_TYPE, null)
+                    .add("strain_resource", ApoliDataTypes.POWER_TYPE, null)
+                    .add("noon_strain", SerializableDataTypes.INT, 10)
                     .add("sun_resource", ApoliDataTypes.POWER_TYPE, null)
-                    .add("sun_cost", SerializableDataTypes.INT, 0)
-                    .add("noon_min", SerializableDataTypes.INT, 5000)
-                    .add("noon_max", SerializableDataTypes.INT, 7000)
+                    .add("noon_sun_cost", SerializableDataTypes.INT, 5)
+                    .add("noon_sound", SerializableDataTypes.SOUND_EVENT, null)
+                    .add("noon_warning", SerializableDataTypes.INT, 600)
                     .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key()),
                 data -> (type, entity) -> {
                     NatureReclaimPower power = new NatureReclaimPower(
@@ -110,15 +130,38 @@ public final class MmsPowerFactories {
                         data.getInt("sound_delay"),
                         data.get("charging_sound"),
                         data.get("finish_sound"),
-                        data.get("uses_resource"),
+                        data.get("strain_resource"),
+                        data.getInt("noon_strain"),
                         data.get("sun_resource"),
-                        data.getInt("sun_cost"),
-                        data.getInt("noon_min"),
-                        data.getInt("noon_max"));
+                        data.getInt("noon_sun_cost"),
+                        data.get("noon_sound"),
+                        data.getInt("noon_warning"));
                     power.setKey(data.get("key"));
                     return power;
                 })
                 .allowCondition());
+    }
+
+    private static void registerSporeHaze() {
+        Identifier id = id("spore_haze");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            id,
+            new ActionFactory<Entity>(
+                id,
+                SporeHazeAction.data(),
+                SporeHazeAction::action));
+    }
+
+    private static void registerCultivateStone() {
+        Identifier id = id("cultivate_stone");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            id,
+            new ActionFactory<Entity>(
+                id,
+                CultivateStoneAction.data(),
+                CultivateStoneAction::action));
     }
 
     private static void registerCausticSpores() {
@@ -167,6 +210,14 @@ public final class MmsPowerFactories {
                 maelsBlessing,
                 new SerializableData(),
                 SunIntakeCondition::maelsBlessingCondition));
+        Identifier sunStrain = id("sun_strain");
+        Registry.register(
+            ApoliRegistries.ENTITY_CONDITION,
+            sunStrain,
+            new ConditionFactory<Entity>(
+                sunStrain,
+                SunStrainCondition.data(),
+                SunStrainCondition::condition));
     }
 
     private static void registerLaunch() {
@@ -279,6 +330,19 @@ public final class MmsPowerFactories {
                 new SerializableData()
                     .add("resource", ApoliDataTypes.POWER_TYPE, null),
                 data -> (type, entity) -> new BlazeFlightPower(type, entity, data.get("resource")))
+                .allowCondition());
+    }
+
+    private static void registerPhantomFlight() {
+        Identifier id = id("phantom_flight");
+        Registry.register(
+            ApoliRegistries.POWER_FACTORY,
+            id,
+            new PowerFactory<>(
+                id,
+                new SerializableData()
+                    .add("resource", ApoliDataTypes.POWER_TYPE, null),
+                data -> (type, entity) -> new PhantomFlightPower(type, entity, data.get("resource")))
                 .allowCondition());
     }
 

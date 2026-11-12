@@ -28,6 +28,13 @@
 			"text": {
 				"translate": "badge.originstweaks.slender_body.3"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.slender_body.4"
+			}
 		}
 	],
 	"scale": {
@@ -93,6 +100,24 @@
 					"command": "attribute @s minecraft:entity_interaction_range base set 3"
 				}
 			]
+		}
+	},
+	"strength": {
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Enderian strength",
+			"attribute": "minecraft:generic.attack_damage",
+			"value": 2.0,
+			"operation": "addition"
+		}
+	},
+	"long_stride": {
+		"type": "origins:attribute",
+		"modifier": {
+			"name": "Enderian long stride",
+			"attribute": "minecraft:generic.movement_speed",
+			"value": 0.15,
+			"operation": "multiply_base"
 		}
 	},
 	"harvest": {

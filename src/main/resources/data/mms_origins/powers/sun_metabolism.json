@@ -21,6 +21,10 @@
           "resource": "mms_origins:sunlit_fury_active",
           "comparison": "==",
           "compare_to": 0
+        },
+        {
+          "type": "mms_origins:sun_strain",
+          "resource": "mms_origins:nature_reclaim_strain"
         }
       ]
     }
@@ -34,7 +38,7 @@
           "type": "origins:resource",
           "resource": "mms_origins:sun_power",
           "comparison": "<",
-          "compare_to": 30
+          "compare_to": 35
         },
         {
           "type": "origins:resource",
@@ -45,10 +49,25 @@
       ]
     },
     "entity_action": {
-      "type": "origins:change_resource",
-      "resource": "mms_origins:sun_power",
-      "operation": "add",
-      "change": 10
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:resource",
+        "resource": "mms_origins:sun_power",
+        "comparison": "<",
+        "compare_to": 25
+      },
+      "if_action": {
+        "type": "origins:change_resource",
+        "resource": "mms_origins:sun_power",
+        "operation": "add",
+        "change": 10
+      },
+      "else_action": {
+        "type": "origins:change_resource",
+        "resource": "mms_origins:sun_power",
+        "operation": "set",
+        "change": 35
+      }
     },
     "item_condition": {
       "type": "origins:or",
@@ -87,6 +106,44 @@
           "type": "mms_origins:sun_intake",
           "peak": 0.4,
           "sharpness": 3.0
+        },
+        {
+          "type": "mms_origins:sun_strain",
+          "resource": "mms_origins:nature_reclaim_strain"
+        }
+      ]
+    }
+  },
+  "grove_sun_intake": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mms_origins:sun_power",
+      "operation": "add",
+      "change": 1
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:exposed_to_sun"
+        },
+        {
+          "type": "mms_origins:sun_intake",
+          "peak": 0.2,
+          "sharpness": 3.0
+        },
+        {
+          "type": "mms_origins:sun_strain",
+          "resource": "mms_origins:nature_reclaim_strain"
+        },
+        {
+          "type": "origins:biome",
+          "condition": {
+            "type": "origins:in_tag",
+            "tag": "mms_origins:enchanted_groves"
+          }
         }
       ]
     }

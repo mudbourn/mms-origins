@@ -1,5 +1,5 @@
 {
-	"type": "origins:simple",
+	"type": "origins:multiple",
 	"badges": [
 		{
 			"type": "origins:tooltip",
@@ -7,6 +7,28 @@
 			"text": {
 				"translate": "badge.originstweaks.avian_peace.0"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.originstweaks.avian_peace.1"
+			}
 		}
-	]
+	],
+	"rival": {
+		"type": "origins:modify_damage_taken",
+		"damage_condition": {
+			"type": "origins:attacker",
+			"entity_condition": {
+				"type": "origins:entity_type",
+				"entity_type": "minecraft:phantom"
+			}
+		},
+		"modifier": {
+			"name": "Phantom rivalry",
+			"operation": "multiply_total",
+			"value": 0.2
+		}
+	}
 }

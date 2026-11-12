@@ -94,6 +94,10 @@ public final class MmsOriginsPowers {
     public static final PowerType<?> FAIRY_ALLURE =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "fairy_allure"));
 
+    /** Fairy's blessing. Nearby players' nurturing powers grow stronger, read through {@code FairyBlessing}. */
+    public static final PowerType<?> FAIRY_BLESSING =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "fairy_blessing"));
+
     /**
      * Floran growth aura. Apoli has no factory that quickens block growth, so
      * the power is a marker and {@code VerdantGrowth} hastens plants around the
@@ -175,6 +179,32 @@ public final class MmsOriginsPowers {
         return LEAF_FORM.isActive(entity)
             && power instanceof VariableIntPower morph
             && morph.getValue() >= LEAF_FORM_MORPH_TICKS;
+    }
+
+    /**
+     * Phantom form. Apoli handles the morph ramp, phasing and flight cost; the
+     * toggle is read on both sides so the player renders as a phantom.
+     */
+    public static final PowerType<?> PHANTOM_FORM =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "phantomize_toggle"));
+
+    /**
+     * Phantom form morph progress; the phantom body replaces the player only once it is full.
+     */
+    public static final PowerType<?> PHANTOM_FORM_MORPH =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "phantomize_morph"));
+
+    /**
+     * Ticks the phantom form morph takes to complete.
+     */
+    public static final int PHANTOM_FORM_MORPH_TICKS = 10;
+
+    /** Whether the entity has finished morphing into phantom form. */
+    public static boolean phantomFormComplete(Entity entity) {
+        Power power = PHANTOM_FORM_MORPH.get(entity);
+        return PHANTOM_FORM.isActive(entity)
+            && power instanceof VariableIntPower morph
+            && morph.getValue() >= PHANTOM_FORM_MORPH_TICKS;
     }
 
     /**

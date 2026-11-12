@@ -33,7 +33,7 @@
 	"claws_sharpness": {
 		"type": "origins:resource",
 		"min": 0,
-		"max": 350,
+		"max": 450,
 		"max_action": {
 			"type": "origins:grant_advancement",
 			"advancement": "originstweaks:beastfolk/sharp_claws"
@@ -167,10 +167,54 @@
 									"condition": {
 										"type": "origins:actor_condition",
 										"condition": {
+											"type": "origins:and",
+											"conditions": [
+												{
+													"type": "origins:resource",
+													"resource": "*:*_claws_sharpness",
+													"comparison": ">",
+													"compare_to": 300
+												},
+												{
+													"type": "origins:resource",
+													"resource": "*:*_claws_sharpness",
+													"comparison": "<=",
+													"compare_to": 400
+												}
+											]
+										}
+									}
+								},
+								{
+									"action": {
+										"type": "origins:if_else",
+										"condition": {
+											"type": "origins:target_condition",
+											"condition": {
+												"type": "origins:attribute",
+												"attribute": "minecraft:generic.armor",
+												"comparison": ">",
+												"compare_to": 0
+											}
+										},
+										"if_action": {
+											"type": "origins:damage",
+											"damage_type": "originstweaks:beastfolk_slash",
+											"amount": 11
+										},
+										"else_action": {
+											"type": "origins:damage",
+											"damage_type": "originstweaks:beastfolk_slash",
+											"amount": 9
+										}
+									},
+									"condition": {
+										"type": "origins:actor_condition",
+										"condition": {
 											"type": "origins:resource",
 											"resource": "*:*_claws_sharpness",
 											"comparison": ">",
-											"compare_to": 300
+											"compare_to": 400
 										}
 									}
 								}
@@ -212,45 +256,53 @@
 							}
 						},
 						{
-							"type": "origins:actor_action",
-							"action": {
+							"type": "origins:if_else",
+							"condition": {
 								"type": "origins:and",
-								"actions": [
+								"conditions": [
 									{
-										"type": "origins:change_resource",
-										"resource": "*:*_claws_swings",
-										"change": 1
-									},
-									{
-										"type": "origins:if_else",
+										"type": "origins:actor_condition",
 										"condition": {
 											"type": "origins:resource",
-											"resource": "*:*_claws_swings",
-											"comparison": ">=",
-											"compare_to": 1
-										},
-										"if_action": {
-											"type": "origins:and",
-											"actions": [
-												{
-													"type": "origins:change_resource",
-													"resource": "*:*_claws_swings",
-													"change": 0,
-													"operation": "set"
-												},
-												{
-													"type": "origins:chance",
-													"chance": 0.6,
-													"action": {
-														"type": "origins:change_resource",
-														"resource": "*:*_claws_sharpness",
-														"change": -2
-													}
-												}
-											]
+											"resource": "*:*_claws_sharpness",
+											"comparison": ">",
+											"compare_to": 400
+										}
+									},
+									{
+										"type": "origins:target_condition",
+										"condition": {
+											"type": "origins:attribute",
+											"attribute": "minecraft:generic.armor",
+											"comparison": ">",
+											"compare_to": 0
 										}
 									}
 								]
+							},
+							"if_action": {
+								"type": "origins:actor_action",
+								"action": {
+									"type": "origins:chance",
+									"chance": 0.39,
+									"action": {
+										"type": "origins:change_resource",
+										"resource": "*:*_claws_sharpness",
+										"change": -2
+									}
+								}
+							},
+							"else_action": {
+								"type": "origins:actor_action",
+								"action": {
+									"type": "origins:chance",
+									"chance": 0.3,
+									"action": {
+										"type": "origins:change_resource",
+										"resource": "*:*_claws_sharpness",
+										"change": -2
+									}
+								}
 							}
 						}
 					]
@@ -299,14 +351,6 @@
 		"condition": {
 			"type": "origins:power_active",
 			"power": "originstweaks:claw_mode"
-		}
-	},
-	"claws_swings": {
-		"type": "origins:resource",
-		"min": 0,
-		"max": 3,
-		"hud_render": {
-			"should_render": false
 		}
 	},
 	"claws_replace_fist": {
@@ -366,6 +410,19 @@
 		"entity_action_removed": {
 			"type": "origins:if_else_list",
 			"actions": [
+				{
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_claws_sharpness",
+						"comparison": ">",
+						"compare_to": 400
+					},
+					"action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_claws_sharpness",
+						"change": -75
+					}
+				},
 				{
 					"condition": {
 						"type": "origins:resource",
@@ -828,6 +885,12 @@
 								"resource": "*:*_claws_sharpness",
 								"compare_to": 290,
 								"comparison": ">"
+							},
+							{
+								"type": "origins:resource",
+								"resource": "*:*_claws_sharpness",
+								"compare_to": 400,
+								"comparison": "<="
 							}
 						]
 					},
@@ -883,6 +946,91 @@
 		"block_condition": {
 			"type": "origins:block",
 			"block": "minecraft:diamond_block"
+		},
+		"item_condition": {
+			"type": "origins:empty"
+		},
+		"condition": {
+			"type": "origins:resource",
+			"resource": "*:*_sharpen_cooldown",
+			"comparison": "==",
+			"compare_to": 0
+		}
+	},
+	"sharpen_netherite": {
+		"type": "origins:action_on_block_use",
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:trigger_cooldown",
+					"power": "*:*_sharpen_cooldown"
+				},
+				{
+					"type": "origins:if_else",
+					"condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:resource",
+								"resource": "*:*_claws_sharpness",
+								"compare_to": 390,
+								"comparison": ">"
+							}
+						]
+					},
+					"if_action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_claws_sharpness",
+						"change": 5
+					}
+				},
+				{
+					"type": "origins:play_sound",
+					"sound": "minecraft:block.netherite_block.place",
+					"category": "players",
+					"pitch": 1.5,
+					"volume": 0.5
+				},
+				{
+					"type": "origins:if_else",
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_sharpen_alternate",
+						"comparison": "==",
+						"compare_to": 0
+					},
+					"if_action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_sharpen_alternate",
+						"change": 1
+					},
+					"else_action": {
+						"type": "origins:change_resource",
+						"resource": "*:*_sharpen_alternate",
+						"change": -1
+					}
+				}
+			]
+		},
+		"block_action": {
+			"type": "origins:execute_command",
+			"command": "particle minecraft:crit ~ ~0.5 ~ 0.5 0.5 0.5 0.25 20"
+		},
+		"directions": [
+			"north",
+			"east",
+			"south",
+			"west",
+			"up",
+			"down"
+		],
+		"hands": [
+			"main_hand"
+		],
+		"block_condition": {
+			"type": "origins:block",
+			"block": "minecraft:netherite_block"
 		},
 		"item_condition": {
 			"type": "origins:empty"

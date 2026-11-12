@@ -1,9 +1,6 @@
 {
 	"replace": false,
 	"values": [
-		{
-			"id": "biomeswevegone:skyris_vale",
-			"required": false
-		}
+		"#mms_origins:enchanted_groves"
 	]
 }

@@ -21,28 +21,36 @@
       "text": {
         "translate": "badge.mms_origins.nature_reclaim.2"
       }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/info.png",
+      "text": {
+        "translate": "badge.mms_origins.nature_reclaim.3"
+      }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.nature_reclaim.4"
+      }
     }
   ],
-  "uses": {
+  "strain": {
     "type": "origins:resource",
     "hidden": true,
     "min": 0,
-    "max": 4,
-    "start_value": 4
+    "max": 100,
+    "start_value": 0
   },
-  "renew": {
+  "recover": {
     "type": "origins:action_over_time",
-    "interval": 40,
-    "condition": {
-      "type": "origins:time_of_day",
-      "comparison": ">=",
-      "compare_to": 12000
-    },
+    "interval": 60,
     "entity_action": {
       "type": "origins:change_resource",
-      "resource": "mms_origins:nature_reclaim_uses",
-      "operation": "set",
-      "change": 4
+      "resource": "mms_origins:nature_reclaim_strain",
+      "change": -1
     }
   },
   "cast": {
@@ -51,11 +59,12 @@
     "sound_delay": 20,
     "charging_sound": "minecraft:block.beacon.ambient",
     "finish_sound": "minecraft:block.amethyst_block.chime",
-    "uses_resource": "mms_origins:nature_reclaim_uses",
+    "strain_resource": "mms_origins:nature_reclaim_strain",
+    "noon_strain": 10,
     "sun_resource": "mms_origins:sun_power",
-    "sun_cost": 20,
-    "noon_min": 5000,
-    "noon_max": 7000,
+    "noon_sun_cost": 5,
+    "noon_sound": "mms_origins:floran.noon_clock",
+    "noon_warning": 600,
     "key": {
       "key": "key.origins.primary_active",
       "continuous": true

@@ -11,6 +11,7 @@ import info.mudbourn.mmsorigins.fur.BodyWingAttachment;
 import info.mudbourn.mmsorigins.fur.LogoutBodyFurBridge;
 import info.mudbourn.mmsorigins.item.MmsItems;
 import info.mudbourn.mmsorigins.power.MmsPowerFactories;
+import info.mudbourn.mmsorigins.power.action.CultivateStoneAction;
 import info.mudbourn.mmsorigins.power.action.LaunchAction;
 import info.mudbourn.mmsorigins.power.action.SummonHenchmenAction;
 import info.mudbourn.mmsorigins.sound.MmsSounds;
@@ -41,6 +42,9 @@ public class MmsOrigins implements ModInitializer {
         SummonHenchmenAction.register();
         TemperatureBaseline.register();
         AvianProvocation.register();
+        HazeBond.register();
+        SporeHaze.register();
+        CultivateStoneAction.register();
         GuardianBeam.register();
         LaunchAction.register();
         BodyFurAttachment.touch();

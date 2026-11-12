@@ -14,14 +14,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * Fairy Allure: the mystique that charms villagers lures monsters to their doom.
  *
- * <p>A hostile mob with no quarry of its own reaches for a fairy from a fifth
- * farther than its usual sight, and prefers the nearest fairy in that reach over
- * any other prey. Targeting carries no Apoli hook, so this proactively hands the
- * mob its target every half second while the fairy stays unseen elsewhere. Once
+ * <p>A hostile mob with no quarry of its own sometimes fixes on a fairy it can
+ * see within its usual sight. Targeting carries no Apoli hook, so every half
+ * second this rolls a chance to hand the mob the nearest visible fairy. Once
  * chosen, the mob's own goals press the hunt.
  */
 @Mixin(Mob.class)
 public class FairyAllureMixin {
+
+    private static final float LURE_CHANCE = 0.25F;
 
     @Inject(method = "serverAiStep", at = @At("RETURN"))
     private void mmsOrigins$lureToFairy(CallbackInfo ci) {
@@ -33,8 +34,8 @@ public class FairyAllureMixin {
         if (current != null && current.isAlive()) {
             return;
         }
-        double range = mob.getAttributeValue(Attributes.FOLLOW_RANGE) * 1.2;
-        if (range <= 0.0) {
+        double range = mob.getAttributeValue(Attributes.FOLLOW_RANGE);
+        if (range <= 0.0 || mob.getRandom().nextFloat() >= LURE_CHANCE) {
             return;
         }
         Player nearest = null;

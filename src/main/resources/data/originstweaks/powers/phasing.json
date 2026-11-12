@@ -21,6 +21,13 @@
 			"text": {
 				"translate": "badge.originstweaks.phasing.2"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.originstweaks.phasing.3"
+			}
 		}
 	],
 	"phase": {
@@ -59,6 +66,12 @@
 				{
 					"type": "origins:power_active",
 					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:phantomize_morph",
+					"comparison": ">=",
+					"compare_to": 10
 				},
 				{
 					"type": "origins:swimming",
