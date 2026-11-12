@@ -73,9 +73,8 @@ public abstract class CropYieldMixin {
         List<ItemStack> drops = cir.getReturnValue();
         List<ItemStack> boosted = new ArrayList<>(drops.size() + 2);
         RandomSource random = level.getRandom();
-        boolean blessed = FairyBlessing.isBlessed(player);
-        double goldChance = blessed ? BLESSED_GOLD_CHANCE : GOLD_CHANCE;
-        int bonusCount = blessed ? 2 : 1;
+        float blessing = FairyBlessing.strength(player);
+        double goldChance = GOLD_CHANCE + (BLESSED_GOLD_CHANCE - GOLD_CHANCE) * blessing;
         if (crop) {
             for (ItemStack stack : drops) {
                 if (stack.isEmpty() || mmsOrigins$isSeed(stack)) {
@@ -83,6 +82,7 @@ public abstract class CropYieldMixin {
                     continue;
                 }
                 ItemStack extra = stack.copy();
+                int bonusCount = random.nextFloat() < blessing ? 2 : 1;
                 extra.setCount(stack.getCount() + bonusCount + random.nextInt(2));
                 boosted.add(extra);
                 Item gold = mmsOrigins$goldVariant(stack.getItem());

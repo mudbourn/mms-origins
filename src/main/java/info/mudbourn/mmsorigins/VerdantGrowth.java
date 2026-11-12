@@ -50,7 +50,7 @@ public final class VerdantGrowth {
             if (!MmsOriginsPowers.holds(player, MmsOriginsPowers.VERDANT_GROWTH)) {
                 continue;
             }
-            float bonus = FairyBlessing.isBlessed(player) ? BLESSED_GROWTH_BONUS : GROWTH_BONUS;
+            float bonus = GROWTH_BONUS + (BLESSED_GROWTH_BONUS - GROWTH_BONUS) * FairyBlessing.strength(player);
             int extraPerSection = Math.max(1, Math.round(randomTickSpeed * bonus));
             int centerX = player.chunkPosition().x;
             int centerZ = player.chunkPosition().z;
