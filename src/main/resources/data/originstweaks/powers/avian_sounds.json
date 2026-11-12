@@ -12,11 +12,11 @@
 			},
 			"if_action": {
 				"type": "origins:play_sound",
-				"sound": "minecraft:entity.chicken.hurt"
+				"sound": "minecraft:entity.parrot.hurt"
 			},
 			"else_action": {
 				"type": "origins:play_sound",
-				"sound": "minecraft:entity.chicken.death"
+				"sound": "minecraft:entity.parrot.death"
 			}
 		},
 		"cooldown": 1

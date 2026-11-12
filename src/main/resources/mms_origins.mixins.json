@@ -8,6 +8,7 @@
     "ArachnidClimbMixin",
     "ArthropodDefendMixin",
     "ArthropodKinshipMixin",
+    "AvianClimbMixin",
     "AvianForgetTargetMixin",
     "AvianPeaceMixin",
     "AvianSlowRegenMixin",

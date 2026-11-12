@@ -1,5 +1,6 @@
 {
   "type": "origins:prevent_item_use",
+  "name": "Fuel Diet",
   "hidden": true,
   "item_condition": {
     "type": "origins:and",

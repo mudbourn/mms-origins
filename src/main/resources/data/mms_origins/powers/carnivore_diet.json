@@ -25,6 +25,7 @@
   ],
   "restrict": {
     "type": "origins:prevent_item_use",
+    "name": "Carnivore Diet",
     "item_condition": {
       "type": "origins:and",
       "conditions": [

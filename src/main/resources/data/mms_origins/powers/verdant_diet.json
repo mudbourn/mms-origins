@@ -18,6 +18,7 @@
   ],
   "restrict": {
     "type": "origins:prevent_item_use",
+    "name": "Verdant Diet",
     "item_condition": {
       "type": "origins:and",
       "conditions": [
