@@ -14,7 +14,9 @@ import net.minecraft.world.entity.player.Player;
  * spends it, so a blaze must keep stoking the bar in lava or flame to stay up.
  * The bar itself grows and cools from heat contact in the datapack; this power
  * only draws on it. When it empties the wings fail and the blaze drops. Only
- * {@code mayfly} is set; vanilla's double-tap-jump toggles {@code flying}.
+ * {@code mayfly} and the flying speed are set; vanilla's double-tap-jump toggles
+ * {@code flying}. Sprinting aloft for a moment eases the speed up until the
+ * sprint pace matches an avian's surge.
  */
 public final class BlazeFlightPower extends Power {
 
@@ -22,9 +24,14 @@ public final class BlazeFlightPower extends Power {
     private static final int DRAIN_INTERVAL = 2;
     private static final int LAVA_CHARGE_PER_TICK = 1;
     private static final int FLIGHT_FIRE_TICKS = 20;
+    private static final float NORMAL_FLYING_SPEED = 0.05F;
+    private static final float TOP_FLYING_SPEED = 0.0878F;
+    private static final int SPRINT_BOOST_DELAY_TICKS = 30;
+    private static final int SPRINT_BOOST_RAMP_TICKS = 40;
 
     private final PowerType<?> resource;
     private int flightTicks;
+    private int sprintFlyTicks;
 
     public BlazeFlightPower(PowerType<?> type, LivingEntity entity, PowerType<?> resource) {
         super(type, entity);
@@ -44,30 +51,28 @@ public final class BlazeFlightPower extends Power {
         VariableIntPower fire = fuel();
         boolean fueled = fire != null && fire.getValue() > 0;
         if (isActive() && fueled) {
-            if (!abilities.mayfly) {
+            float wantedSpeed = sprintSpeed(player, abilities);
+            if (!abilities.mayfly || abilities.getFlyingSpeed() != wantedSpeed) {
                 abilities.mayfly = true;
+                abilities.setFlyingSpeed(wantedSpeed);
                 player.onUpdateAbilities();
             }
             if (abilities.flying && !player.level().isClientSide()) {
                 flightTicks++;
                 int before = fire.getValue();
                 if (player.isInLava()) {
-                    // Flying through lava feeds the bar instead of spending it.
                     fire.setValue(Math.min(fire.getMax(), before + LAVA_CHARGE_PER_TICK));
                 } else if (flightTicks % DRAIN_INTERVAL == 0) {
-                    // Staying aloft spends the fire power once every few ticks.
                     fire.setValue(Math.max(fire.getMin(), before - FLIGHT_DRAIN_PER_TICK));
                 }
                 if (fire.getValue() != before) {
                     PowerHolderComponent.syncPower(player, fire.getType());
                 }
-                // Burning openly marks the fire power being spent to fly.
                 player.setRemainingFireTicks(Math.max(player.getRemainingFireTicks(), FLIGHT_FIRE_TICKS));
             }
-        } else if (abilities.mayfly || abilities.flying) {
-            abilities.mayfly = false;
-            abilities.flying = false;
-            player.onUpdateAbilities();
+        } else {
+            sprintFlyTicks = 0;
+            revoke(player);
         }
     }
 
@@ -79,10 +84,26 @@ public final class BlazeFlightPower extends Power {
         if (player.isCreative() || player.isSpectator()) {
             return;
         }
+        revoke(player);
+    }
+
+    private float sprintSpeed(Player player, Abilities abilities) {
+        if (!abilities.flying || !player.isSprinting()) {
+            sprintFlyTicks = 0;
+            return NORMAL_FLYING_SPEED;
+        }
+        sprintFlyTicks++;
+        float progress = Math.clamp((sprintFlyTicks - SPRINT_BOOST_DELAY_TICKS) / (float) SPRINT_BOOST_RAMP_TICKS, 0.0F, 1.0F);
+        float eased = progress * progress * (3.0F - 2.0F * progress);
+        return NORMAL_FLYING_SPEED + (TOP_FLYING_SPEED - NORMAL_FLYING_SPEED) * eased;
+    }
+
+    private static void revoke(Player player) {
         Abilities abilities = player.getAbilities();
-        if (abilities.mayfly || abilities.flying) {
+        if (abilities.mayfly || abilities.flying || abilities.getFlyingSpeed() != NORMAL_FLYING_SPEED) {
             abilities.mayfly = false;
             abilities.flying = false;
+            abilities.setFlyingSpeed(NORMAL_FLYING_SPEED);
             player.onUpdateAbilities();
         }
     }

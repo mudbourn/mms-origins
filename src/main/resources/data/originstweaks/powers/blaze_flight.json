@@ -27,6 +27,13 @@
 			"text": {
 				"translate": "badge.originstweaks.blaze_flight.2"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.blaze_flight.3"
+			}
 		}
 	]
 }
