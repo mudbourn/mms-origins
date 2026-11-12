@@ -186,8 +186,8 @@ public final class MmsOriginsPowers {
     }
 
     /**
-     * Phantom form. Apoli handles the morph ramp, phasing and flight cost; the
-     * toggle is read on both sides so the player renders as a phantom.
+     * Phantom form. Apoli handles the morph ramp; the toggle is read on both
+     * sides so the player renders as a phantom and flies on its wings.
      */
     public static final PowerType<?> PHANTOM_FORM =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "phantomize_toggle"));

@@ -1,20 +1,17 @@
 package info.mudbourn.mmsorigins.power;
 
-import io.github.apace100.apoli.component.PowerHolderComponent;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
-import io.github.apace100.apoli.power.VariableIntPower;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
 
 /**
- * Lets a morphed phantom fly for as long as its soul energy lasts. Flight is
- * granted while the power's condition holds and the soul bar is not empty, and
- * staying aloft spends one point of it each second. The server only grants and
- * revokes {@code mayfly}; vanilla's double-tap-jump toggles {@code flying}, and
- * the holder's client sets the flying speed from {@link SurgingFlight}.
- * Vanilla's sprint doubles the speed, and sprinting aloft for a moment eases it
+ * Lets a phantom in phantom form fly with no timer and no cost. Flight is granted while
+ * the power's condition holds. The server only grants and revokes {@code mayfly};
+ * vanilla's double-tap-jump toggles {@code flying}, the holder's client sets the flying
+ * speed from {@link SurgingFlight}, and the winged movement itself is the holder's client
+ * physics. Vanilla's sprint doubles the speed, and sprinting aloft for a moment eases it
  * up until the sprint pace matches an avian's surge.
  */
 public final class PhantomFlightPower extends Power implements SurgingFlight {
@@ -22,14 +19,9 @@ public final class PhantomFlightPower extends Power implements SurgingFlight {
     private static final float FLYING_SPEED = 0.04F;
     private static final float NORMAL_FLYING_SPEED = 0.05F;
     private static final float TOP_FLYING_SPEED = 0.0878F;
-    private static final int DRAIN_INTERVAL = 20;
 
-    private final PowerType<?> resource;
-    private int flightTicks;
-
-    public PhantomFlightPower(PowerType<?> type, LivingEntity entity, PowerType<?> resource) {
+    public PhantomFlightPower(PowerType<?> type, LivingEntity entity) {
         super(type, entity);
-        this.resource = resource;
         this.setTicking(true);
     }
 
@@ -42,22 +34,13 @@ public final class PhantomFlightPower extends Power implements SurgingFlight {
             return;
         }
         Abilities abilities = player.getAbilities();
-        VariableIntPower soul = soul();
-        if (isActive() && soul != null && soul.getValue() > 0) {
+        if (isActive()) {
             abilities.setFlyingSpeed(FLYING_SPEED);
             if (!abilities.mayfly) {
                 abilities.mayfly = true;
                 player.onUpdateAbilities();
             }
-            if (abilities.flying) {
-                flightTicks++;
-                if (flightTicks % DRAIN_INTERVAL == 0) {
-                    soul.setValue(Math.max(soul.getMin(), soul.getValue() - 1));
-                    PowerHolderComponent.syncPower(player, soul.getType());
-                }
-            }
         } else {
-            flightTicks = 0;
             revoke(player);
         }
     }
@@ -92,17 +75,5 @@ public final class PhantomFlightPower extends Power implements SurgingFlight {
             abilities.setFlyingSpeed(NORMAL_FLYING_SPEED);
             player.onUpdateAbilities();
         }
-    }
-
-    private VariableIntPower soul() {
-        if (resource == null) {
-            return null;
-        }
-        for (VariableIntPower power : PowerHolderComponent.getPowers(entity, VariableIntPower.class)) {
-            if (power.getType().getIdentifier().equals(resource.getIdentifier())) {
-                return power;
-            }
-        }
-        return null;
     }
 }

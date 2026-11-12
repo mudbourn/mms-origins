@@ -7,23 +7,13 @@
 		"conditions": [
 			{
 				"type": "origins:power_active",
-				"power": "*:phantomize_toggle"
+				"power": "*:phasing_toggle"
 			},
 			{
-				"type": "origins:in_block",
-				"block_condition": {
-					"type": "origins:offset",
-					"condition": {
-						"type": "origins:movement_blocking"
-					},
-					"y": 1
-				}
-			},
-			{
-				"type": "origins:resource",
-				"resource": "*:soulbound_energy",
+				"type": "mms_origins:resource_fraction",
+				"resource": "originstweaks:soulbound_energy",
 				"comparison": ">",
-				"compare_to": 33
+				"compare_to": 0.3333333333333333
 			}
 		]
 	}

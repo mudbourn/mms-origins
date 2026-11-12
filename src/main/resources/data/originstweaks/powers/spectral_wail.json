@@ -10,8 +10,21 @@
 		}
 	],
 	"active_power": {
-		"type": "origins:active_self",
-		"entity_action": {
+		"type": "mms_origins:key_gesture",
+		"cooldown": 600,
+		"hud_render": {
+			"should_render": true,
+			"sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+			"bar_index": 0
+		},
+		"key": {
+			"key": "key.origins.secondary_active"
+		},
+		"hold_condition": {
+			"type": "origins:sneaking",
+			"inverted": true
+		},
+		"hold_action": {
 			"type": "origins:and",
 			"actions": [
 				{
@@ -25,19 +38,6 @@
 					"advancement": "originstweaks:phantom/spectral_wail"
 				}
 			]
-		},
-		"cooldown": 600,
-		"condition": {
-			"type": "origins:sneaking",
-			"inverted": true
-		},
-		"hud_render": {
-			"should_render": true,
-			"sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
-			"bar_index": 0
-		},
-		"key": {
-			"key": "key.origins.secondary_active"
 		}
 	},
 	"glow": {

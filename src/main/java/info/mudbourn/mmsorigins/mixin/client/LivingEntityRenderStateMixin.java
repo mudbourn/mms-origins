@@ -2,6 +2,7 @@ package info.mudbourn.mmsorigins.mixin.client;
 
 import info.mudbourn.mmsorigins.client.GuardianBeamState;
 import info.mudbourn.mmsorigins.client.LeafFormState;
+import info.mudbourn.mmsorigins.client.PhantomFlightPose;
 import info.mudbourn.mmsorigins.client.PhantomFormState;
 import info.mudbourn.mmsorigins.client.ZombieShakeState;
 import info.mudbourn.mmsorigins.client.fur.FurState;
@@ -190,5 +191,18 @@ public abstract class LivingEntityRenderStateMixin implements FurState, WingStat
     @Override
     public void mmsOrigins$setPhantomForm(boolean phantomForm) {
         this.mmsOrigins$phantomForm = phantomForm;
+    }
+
+    @Unique
+    private PhantomFlightPose.Angles mmsOrigins$phantomPose;
+
+    @Override
+    public PhantomFlightPose.Angles mmsOrigins$phantomPose() {
+        return this.mmsOrigins$phantomPose;
+    }
+
+    @Override
+    public void mmsOrigins$setPhantomPose(PhantomFlightPose.Angles pose) {
+        this.mmsOrigins$phantomPose = pose;
     }
 }

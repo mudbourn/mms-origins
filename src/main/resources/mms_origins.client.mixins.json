@@ -20,6 +20,7 @@
     "OriginScaleHideMixin",
     "PhantomFormPaceMixin",
     "PhantomFormRenderMixin",
+    "PhantomWingsTravelMixin",
     "PiglinBruteAdmirePoseMixin",
     "PlayerRendererMixin",
     "WingsElytraTextureMixin",

@@ -44,7 +44,7 @@
 		"interval": 10,
 		"condition": {
 			"type": "origins:power_active",
-			"power": "*:phantomize_toggle",
+			"power": "*:phasing_toggle",
 			"inverted": true
 		}
 	},

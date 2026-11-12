@@ -17,6 +17,7 @@ import info.mudbourn.mmsorigins.power.condition.CausticMarkedCondition;
 import info.mudbourn.mmsorigins.power.condition.HeightAboveGroundCondition;
 import info.mudbourn.mmsorigins.power.condition.HenchmenCountCondition;
 import info.mudbourn.mmsorigins.power.condition.IncapacitatedCondition;
+import info.mudbourn.mmsorigins.power.condition.ResourceFractionCondition;
 import info.mudbourn.mmsorigins.power.condition.SunIntakeCondition;
 import info.mudbourn.mmsorigins.power.condition.SunStrainCondition;
 import io.github.apace100.apoli.data.ApoliDataTypes;
@@ -63,6 +64,8 @@ public final class MmsPowerFactories {
         registerFairyFlight();
         registerBlazeFlight();
         registerPhantomFlight();
+        registerKeyGesture();
+        registerResourceFraction();
         registerSummonHenchmen();
         registerHenchmenCount();
         registerCausticSpores();
@@ -340,10 +343,55 @@ public final class MmsPowerFactories {
             id,
             new PowerFactory<>(
                 id,
-                new SerializableData()
-                    .add("resource", ApoliDataTypes.POWER_TYPE, null),
-                data -> (type, entity) -> new PhantomFlightPower(type, entity, data.get("resource")))
+                new SerializableData(),
+                data -> (type, entity) -> new PhantomFlightPower(type, entity))
                 .allowCondition());
+    }
+
+    private static void registerKeyGesture() {
+        Identifier id = id("key_gesture");
+        Registry.register(
+            ApoliRegistries.POWER_FACTORY,
+            id,
+            new PowerFactory<>(
+                id,
+                new SerializableData()
+                    .add("cooldown", SerializableDataTypes.INT, 1)
+                    .add("hud_render", ApoliDataTypes.HUD_RENDER, HudRender.DONT_RENDER)
+                    .add("hold_ticks", SerializableDataTypes.INT, 10)
+                    .add("press_action", ApoliDataTypes.ENTITY_ACTION, null)
+                    .add("press_condition", ApoliDataTypes.ENTITY_CONDITION, null)
+                    .add("hold_action", ApoliDataTypes.ENTITY_ACTION, null)
+                    .add("hold_condition", ApoliDataTypes.ENTITY_CONDITION, null)
+                    .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key()),
+                data -> (type, entity) -> {
+                    KeyGesturePower power = new KeyGesturePower(
+                        type,
+                        entity,
+                        data.getInt("cooldown"),
+                        data.get("hud_render"),
+                        data.getInt("hold_ticks"),
+                        data.get("press_action"),
+                        data.get("press_condition"),
+                        data.get("hold_action"),
+                        data.get("hold_condition"));
+                    Active.Key key = data.get("key");
+                    key.continuous = true;
+                    power.setKey(key);
+                    return power;
+                })
+                .allowCondition());
+    }
+
+    private static void registerResourceFraction() {
+        Identifier id = id("resource_fraction");
+        Registry.register(
+            ApoliRegistries.ENTITY_CONDITION,
+            id,
+            new ConditionFactory<Entity>(
+                id,
+                ResourceFractionCondition.data(),
+                ResourceFractionCondition::condition));
     }
 
     private static void registerHeightAboveGround() {

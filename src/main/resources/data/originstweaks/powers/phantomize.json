@@ -32,29 +32,38 @@
 	],
 	"toggle": {
 		"type": "origins:toggle",
+		"active_by_default": false,
 		"key": {
-			"key": "key.origins.primary_active"
+			"key": "key.mms_origins.unbound"
 		},
-		"retain_state": false,
-		"condition": {
-			"type": "origins:resource",
-			"resource": "*:soulbound_energy",
-			"comparison": "!=",
-			"compare_to": 0
-		}
+		"retain_state": false
 	},
-	"drain_soul_power": {
-		"type": "origins:action_over_time",
-		"entity_action": {
-			"type": "origins:change_resource",
-			"resource": "*:soulbound_energy",
-			"change": -1,
-			"operation": "add"
+	"shift": {
+		"type": "mms_origins:key_gesture",
+		"cooldown": 20,
+		"hud_render": {
+			"should_render": false
 		},
-		"interval": 40,
-		"condition": {
-			"type": "origins:power_active",
-			"power": "*:*_toggle"
+		"key": {
+			"key": "key.origins.secondary_active"
+		},
+		"press_condition": {
+			"type": "origins:sneaking"
+		},
+		"press_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:toggle",
+					"power": "originstweaks:phantomize_toggle"
+				},
+				{
+					"type": "origins:play_sound",
+					"sound": "minecraft:entity.phantom.ambient",
+					"volume": 1.0,
+					"pitch": 0.9
+				}
+			]
 		}
 	},
 	"morph": {
@@ -190,7 +199,6 @@
 	},
 	"flight": {
 		"type": "mms_origins:phantom_flight",
-		"resource": "originstweaks:soulbound_energy",
 		"condition": {
 			"type": "origins:and",
 			"conditions": [

@@ -1,6 +1,8 @@
 package info.mudbourn.mmsorigins.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import info.mudbourn.mmsorigins.client.PhantomFlightPose;
 import info.mudbourn.mmsorigins.client.PhantomFormState;
 import io.github.apace100.apoli.util.ApoliLivingEntityRenderState;
 import net.minecraft.client.Minecraft;
@@ -23,7 +25,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * their body, armor and held items. The phantom's render state is extracted once from a template
  * phantom so the fields other mods add to it hold a real phantom's values, then the player's own
  * state is copied over it each frame. The player's Apoli powers ride along so translucency and
- * invisibility apply to the phantom body too.
+ * invisibility apply to the phantom body too. The body is turned by the smoothed
+ * {@link PhantomFlightPose} so it follows its motion and banks into turns.
  */
 @Mixin(LivingEntityRenderer.class)
 public abstract class PhantomFormRenderMixin {
@@ -33,6 +36,9 @@ public abstract class PhantomFormRenderMixin {
 
     @Unique
     private static final int PHANTOM_SIZE = 0;
+
+    @Unique
+    private static final float FACING_FRONT_BODY_ROT = 180.0F;
 
     @Inject(
         method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V",
@@ -47,10 +53,19 @@ public abstract class PhantomFormRenderMixin {
         }
         PhantomRenderState phantom = mmsOrigins$phantomState();
         mmsOrigins$copy(state, phantom);
+        PhantomFlightPose.Angles angles = form.mmsOrigins$phantomPose();
+        float pivot = state.boundingBoxHeight * 0.5F;
+        pose.pushPose();
+        pose.translate(0.0F, pivot, 0.0F);
+        pose.mulPose(Axis.YP.rotationDegrees(180.0F - angles.yaw()));
+        pose.mulPose(Axis.XP.rotationDegrees(angles.pitch()));
+        pose.mulPose(Axis.ZP.rotationDegrees(-angles.roll()));
+        pose.translate(0.0F, -pivot, 0.0F);
         Minecraft.getInstance()
             .getEntityRenderDispatcher()
             .getRenderer(phantom)
             .submit(phantom, pose, collector, camera);
+        pose.popPose();
         ci.cancel();
     }
 
@@ -67,7 +82,7 @@ public abstract class PhantomFormRenderMixin {
         return mmsOrigins$phantom;
     }
 
-    /** Fills the phantom render state from the player's so the phantom stands where the player does. */
+    /** Fills the phantom render state from the player's, leaving every rotation to the pose stack. */
     @Unique
     private static void mmsOrigins$copy(LivingEntityRenderState from, PhantomRenderState to) {
         to.entityType = EntityType.PHANTOM;
@@ -87,9 +102,9 @@ public abstract class PhantomFormRenderMixin {
         to.passengerOffset = from.passengerOffset;
         to.nameTag = from.nameTag;
         to.nameTagAttachment = from.nameTagAttachment;
-        to.bodyRot = from.bodyRot;
-        to.yRot = from.yRot;
-        to.xRot = from.xRot;
+        to.bodyRot = FACING_FRONT_BODY_ROT;
+        to.yRot = 0.0F;
+        to.xRot = 0.0F;
         to.deathTime = from.deathTime;
         to.walkAnimationPos = from.walkAnimationPos;
         to.walkAnimationSpeed = from.walkAnimationSpeed;

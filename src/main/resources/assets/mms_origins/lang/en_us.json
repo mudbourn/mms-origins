@@ -135,7 +135,7 @@
   "power.mms_origins.gilded_bearing.name": "Gilded",
   "power.mms_origins.gilded_bearing.description": "Gold is your birthright, and you fight hardest when you wear it.",
   "badge.mms_origins.gilded_bearing.0": "+2 armor toughness.",
-  "badge.mms_origins.gilded_bearing.1": "Deal 1.2x damage, or 1.4x while wearing at least two pieces of golden armor.",
+  "badge.mms_origins.gilded_bearing.1": "Deal 1.2x damage, plus 0.2x for each piece of golden armor worn (2x with a full set).",
   "power.mms_origins.kinsmen.name": "Bastion Kin",
   "power.mms_origins.kinsmen.description": "Piglins and brutes count you as one of their own, and they will trade and fight for you.",
   "badge.mms_origins.kinsmen.0": "Piglins and brutes will not target you. If you strike one, only that piglin holds a grudge, until it hits you back.",

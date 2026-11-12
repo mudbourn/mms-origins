@@ -8,7 +8,20 @@
       "value": 0.2
     }
   },
-  "gilded": {
+  "gilded_one": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_base",
+      "value": 0.2
+    },
+    "condition": {
+      "type": "origins:command",
+      "command": "execute if items entity @s armor.* #mms_origins:golden_armor",
+      "comparison": ">=",
+      "compare_to": 1
+    }
+  },
+  "gilded_two": {
     "type": "origins:modify_damage_dealt",
     "modifier": {
       "operation": "multiply_base",
@@ -19,6 +32,32 @@
       "command": "execute if items entity @s armor.* #mms_origins:golden_armor",
       "comparison": ">=",
       "compare_to": 2
+    }
+  },
+  "gilded_three": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_base",
+      "value": 0.2
+    },
+    "condition": {
+      "type": "origins:command",
+      "command": "execute if items entity @s armor.* #mms_origins:golden_armor",
+      "comparison": ">=",
+      "compare_to": 3
+    }
+  },
+  "gilded_four": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_base",
+      "value": 0.2
+    },
+    "condition": {
+      "type": "origins:command",
+      "command": "execute if items entity @s armor.* #mms_origins:golden_armor",
+      "comparison": ">=",
+      "compare_to": 4
     }
   }
 }

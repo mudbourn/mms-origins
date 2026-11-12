@@ -10,15 +10,15 @@
 		}
 	],
 	"summon": {
-		"type": "origins:active_self",
+		"type": "mms_origins:key_gesture",
 		"cooldown": 200,
 		"hud_render": {
 			"should_render": false
 		},
 		"key": {
-			"key": "key.origins.secondary_active"
+			"key": "key.origins.primary_active"
 		},
-		"condition": {
+		"hold_condition": {
 			"type": "origins:and",
 			"conditions": [
 				{
@@ -29,10 +29,14 @@
 					"resource": "*:soulbound_energy",
 					"comparison": ">=",
 					"compare_to": 40
+				},
+				{
+					"type": "origins:exposed_to_sun",
+					"inverted": true
 				}
 			]
 		},
-		"entity_action": {
+		"hold_action": {
 			"type": "origins:and",
 			"actions": [
 				{

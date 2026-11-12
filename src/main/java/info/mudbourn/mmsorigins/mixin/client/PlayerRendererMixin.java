@@ -3,6 +3,7 @@ package info.mudbourn.mmsorigins.mixin.client;
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import info.mudbourn.mmsorigins.client.LeafFormState;
 import info.mudbourn.mmsorigins.client.LeafTrail;
+import info.mudbourn.mmsorigins.client.PhantomFlightPose;
 import info.mudbourn.mmsorigins.client.PhantomFormState;
 import info.mudbourn.mmsorigins.client.ZombieShakeState;
 import info.mudbourn.mmsorigins.client.fur.FurState;
@@ -70,7 +71,10 @@ public abstract class PlayerRendererMixin {
         } else {
             LeafTrail.clear(player);
         }
-        ((PhantomFormState) state).mmsOrigins$setPhantomForm(MmsOriginsPowers.phantomFormComplete(player));
+        boolean phantomForm = MmsOriginsPowers.phantomFormComplete(player);
+        ((PhantomFormState) state).mmsOrigins$setPhantomForm(phantomForm);
+        ((PhantomFormState) state).mmsOrigins$setPhantomPose(
+                phantomForm ? PhantomFlightPose.of(player, partialTick, state.bodyRot) : null);
         if (player instanceof Player concrete) {
             ((WingState) state).mmsOrigins$setWingFlapDegrees(
                     ButterflyFlap.degreesFor(concrete, partialTick));
