@@ -1,6 +1,8 @@
 package info.mudbourn.mmsorigins.mixin;
 
+import info.mudbourn.mmsorigins.AvianClimb;
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,6 +29,9 @@ public abstract class FlightSpeedCapMixin {
         }
         if (!player.isFallFlying() && !player.getAbilities().flying) {
             return;
+        }
+        if (player instanceof ServerPlayer serverPlayer) {
+            AvianClimb.charge(serverPlayer);
         }
         Vec3 motion = player.getDeltaMovement();
         if (player.isFallFlying() && MmsOriginsPowers.holds(player, MmsOriginsPowers.AVIAN_PEACE)) {
