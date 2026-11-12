@@ -344,6 +344,154 @@
     {
       "id": "bubblellaneous:omelette",
       "required": false
+    },
+    {
+      "id": "alexscaves:trilocaris_tail",
+      "required": false
+    },
+    {
+      "id": "alexscaves:cooked_trilocaris_tail",
+      "required": false
+    },
+    {
+      "id": "alexscaves:dinosaur_nugget",
+      "required": false
+    },
+    {
+      "id": "alexscaves:slam",
+      "required": false
+    },
+    {
+      "id": "alexscaves:green_soylent",
+      "required": false
+    },
+    {
+      "id": "alexscaves:vesper_stew",
+      "required": false
+    },
+    {
+      "id": "alexscaves:primordial_soup",
+      "required": false
+    },
+    {
+      "id": "alexscaves:trilocaris_tail",
+      "required": false
+    },
+    {
+      "id": "alexscaves:radgill",
+      "required": false
+    },
+    {
+      "id": "alexscaves:lanternfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:tripodfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:sea_pig",
+      "required": false
+    },
+    {
+      "id": "accdelight:saurian_cutlet",
+      "required": false
+    },
+    {
+      "id": "accdelight:trilocaris_meat",
+      "required": false
+    },
+    {
+      "id": "accdelight:abyssal_fillet",
+      "required": false
+    },
+    {
+      "id": "accdelight:radgill_fillet",
+      "required": false
+    },
+    {
+      "id": "accdelight:irradiated_cut",
+      "required": false
+    },
+    {
+      "id": "accdelight:grub_meat",
+      "required": false
+    },
+    {
+      "id": "accdelight:vesper_strips",
+      "required": false
+    },
+    {
+      "id": "accdelight:gloom_cut",
+      "required": false
+    },
+    {
+      "id": "accdelight:cooked_saurian_cutlet",
+      "required": false
+    },
+    {
+      "id": "accdelight:cooked_trilocaris_meat",
+      "required": false
+    },
+    {
+      "id": "accdelight:cooked_irradiated_cut",
+      "required": false
+    },
+    {
+      "id": "accdelight:roasted_grub_meat",
+      "required": false
+    },
+    {
+      "id": "accdelight:cooked_vesper_strips",
+      "required": false
+    },
+    {
+      "id": "accdelight:cooked_gloom_cut",
+      "required": false
+    },
+    {
+      "id": "accdelight:cave_tallow",
+      "required": false
+    },
+    {
+      "id": "accdelight:bone_marrow",
+      "required": false
+    },
+    {
+      "id": "accdelight:primordial_stew",
+      "required": false
+    },
+    {
+      "id": "accdelight:saurian_roast",
+      "required": false
+    },
+    {
+      "id": "accdelight:trilocaris_boil",
+      "required": false
+    },
+    {
+      "id": "accdelight:hullbreaker_platter",
+      "required": false
+    },
+    {
+      "id": "accdelight:magnetic_marrow_stew",
+      "required": false
+    },
+    {
+      "id": "accdelight:irradiated_goulash",
+      "required": false
+    },
+    {
+      "id": "accdelight:gloom_confit",
+      "required": false
+    },
+    {
+      "id": "accdelight:tremor_roast",
+      "required": false
+    },
+    {
+      "id": "accdelight:grub_skewer",
+      "required": false
     }
   ]
 }

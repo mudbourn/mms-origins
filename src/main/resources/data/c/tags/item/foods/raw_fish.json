@@ -64,6 +64,34 @@
     {
       "id": "bountiful-fish:star_fish",
       "required": false
+    },
+    {
+      "id": "alexscaves:radgill",
+      "required": false
+    },
+    {
+      "id": "alexscaves:lanternfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:tripodfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:sea_pig",
+      "required": false
+    },
+    {
+      "id": "alexscaves:stinky_fish",
+      "required": false
+    },
+    {
+      "id": "accdelight:abyssal_fillet",
+      "required": false
+    },
+    {
+      "id": "accdelight:radgill_fillet",
+      "required": false
     }
   ]
 }

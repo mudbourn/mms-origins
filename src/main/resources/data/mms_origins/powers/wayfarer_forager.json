@@ -1,0 +1,55 @@
+{
+  "type": "origins:multiple",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.wayfarer_forager.0"
+      }
+    }
+  ],
+  "fortune": {
+    "type": "mms_origins:modify_enchantment_level",
+    "enchantment": "minecraft:fortune",
+    "modifier": {
+      "operation": "add_base_early",
+      "value": 1
+    },
+    "condition": {
+      "type": "origins:command",
+      "command": "execute if entity @s[tag=mms_jobs.explorer]",
+      "comparison": ">=",
+      "compare_to": 1
+    }
+  },
+  "looting": {
+    "type": "mms_origins:modify_enchantment_level",
+    "enchantment": "minecraft:looting",
+    "modifier": {
+      "operation": "add_base_early",
+      "value": 1
+    },
+    "condition": {
+      "type": "origins:command",
+      "command": "execute if entity @s[tag=mms_jobs.explorer]",
+      "comparison": ">=",
+      "compare_to": 1
+    }
+  },
+  "luck": {
+    "type": "origins:attribute",
+    "modifier": {
+      "name": "Explorer luck",
+      "attribute": "minecraft:generic.luck",
+      "value": 8,
+      "operation": "addition"
+    },
+    "condition": {
+      "type": "origins:command",
+      "command": "execute if entity @s[tag=mms_jobs.explorer]",
+      "comparison": ">=",
+      "compare_to": 1
+    }
+  }
+}

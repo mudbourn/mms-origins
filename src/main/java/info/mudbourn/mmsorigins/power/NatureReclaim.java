@@ -17,6 +17,8 @@ import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
@@ -24,9 +26,10 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 
 /**
  * The nature magic that unmakes a crafted item back into its parts. It finds the
- * crafting recipe whose result matches the off-hand stack, refunds one of each
- * ingredient per full craft, and writes any enchantments onto books drawn from
- * the caster's own supply. Apoli has no power for this, so it is Java.
+ * shaped or shapeless crafting recipe whose result matches the off-hand stack,
+ * refunds one of each ingredient per full craft, and writes any enchantments onto
+ * books drawn from the caster's own supply. Apoli has no power for this, so it
+ * is Java.
  */
 public final class NatureReclaim {
 
@@ -53,9 +56,10 @@ public final class NatureReclaim {
         ItemStack result = null;
         List<Ingredient> ingredients = null;
         for (RecipeHolder<?> holder : recipes.getRecipes()) {
-            if (!(holder.value() instanceof CraftingRecipe recipe) || recipe.isSpecial()) {
+            if (!(holder.value() instanceof ShapedRecipe) && !(holder.value() instanceof ShapelessRecipe)) {
                 continue;
             }
+            CraftingRecipe recipe = (CraftingRecipe) holder.value();
             ItemStack assembled = recipe.assemble(CraftingInput.EMPTY, provider);
             if (assembled.isEmpty() || !assembled.is(target)) {
                 continue;

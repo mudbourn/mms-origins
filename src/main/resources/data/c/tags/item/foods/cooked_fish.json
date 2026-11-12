@@ -12,6 +12,46 @@
     {
       "id": "bountiful-fish:shrimp_fried_rice",
       "required": false
+    },
+    {
+      "id": "alexscaves:cooked_radgill",
+      "required": false
+    },
+    {
+      "id": "alexscaves:cooked_lanternfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:cooked_tripodfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:cooked_mussel",
+      "required": false
+    },
+    {
+      "id": "accdelight:cooked_abyssal_fillet",
+      "required": false
+    },
+    {
+      "id": "accdelight:cooked_radgill_fillet",
+      "required": false
+    },
+    {
+      "id": "accdelight:abyssal_chowder",
+      "required": false
+    },
+    {
+      "id": "accdelight:mussel_soup",
+      "required": false
+    },
+    {
+      "id": "accdelight:deepsight_broth",
+      "required": false
+    },
+    {
+      "id": "accdelight:radgill_jerky",
+      "required": false
     }
   ]
 }

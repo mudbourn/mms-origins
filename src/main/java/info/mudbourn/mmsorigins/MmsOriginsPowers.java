@@ -85,6 +85,10 @@ public final class MmsOriginsPowers {
     public static final PowerType<?> FAIRY_CHARM =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "fairy_charm"));
 
+    /** Wayfarer charm. The Explorer class's smaller villager discount, priced by {@code VillagerCharmMixin}. */
+    public static final PowerType<?> WAYFARER_CHARM =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "wayfarer_charm"));
+
     /**
      * Fairy allure. The mystique that charms villagers draws monsters too: they
      * hunt a fairy from farther off and in preference to others. Mob targeting

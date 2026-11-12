@@ -22,6 +22,10 @@
     {
       "id": "aerialhell:shadow_spider_eye",
       "required": false
+    },
+    {
+      "id": "alexscaves:stinky_fish",
+      "required": false
     }
   ]
 }

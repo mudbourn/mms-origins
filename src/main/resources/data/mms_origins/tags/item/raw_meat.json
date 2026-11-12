@@ -71,6 +71,58 @@
     {
       "id": "rusticdelight:calamari_slice",
       "required": false
+    },
+    {
+      "id": "alexscaves:trilocaris_tail",
+      "required": false
+    },
+    {
+      "id": "alexscaves:radgill",
+      "required": false
+    },
+    {
+      "id": "alexscaves:lanternfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:tripodfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:sea_pig",
+      "required": false
+    },
+    {
+      "id": "accdelight:saurian_cutlet",
+      "required": false
+    },
+    {
+      "id": "accdelight:trilocaris_meat",
+      "required": false
+    },
+    {
+      "id": "accdelight:abyssal_fillet",
+      "required": false
+    },
+    {
+      "id": "accdelight:radgill_fillet",
+      "required": false
+    },
+    {
+      "id": "accdelight:irradiated_cut",
+      "required": false
+    },
+    {
+      "id": "accdelight:grub_meat",
+      "required": false
+    },
+    {
+      "id": "accdelight:vesper_strips",
+      "required": false
+    },
+    {
+      "id": "accdelight:gloom_cut",
+      "required": false
     }
   ]
 }

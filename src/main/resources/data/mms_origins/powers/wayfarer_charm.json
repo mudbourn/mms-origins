@@ -1,0 +1,18 @@
+{
+  "type": "origins:simple",
+  "condition": {
+    "type": "origins:command",
+    "command": "execute if entity @s[tag=mms_jobs.explorer]",
+    "comparison": ">=",
+    "compare_to": 1
+  },
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.wayfarer_charm.0"
+      }
+    }
+  ]
+}

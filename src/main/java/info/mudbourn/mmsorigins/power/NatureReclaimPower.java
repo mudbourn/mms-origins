@@ -5,6 +5,7 @@ import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.VariableIntPower;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,6 +18,10 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
 
@@ -38,6 +43,8 @@ public final class NatureReclaimPower extends Power implements Active {
         TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("mms_origins", "enchanted_groves"));
 
     private static final int HOLD_GRACE_TICKS = 3;
+
+    private static final Identifier ROOTED_ID = Identifier.fromNamespaceAndPath("mms_origins", "nature_reclaim_rooted");
 
     private static final double NOON = 6000.0;
 
@@ -112,6 +119,18 @@ public final class NatureReclaimPower extends Power implements Active {
             return;
         }
         warnOfNoon(player, level);
+        channel(player, level);
+        root(player, charge > 0);
+    }
+
+    @Override
+    public void onLost() {
+        if (entity instanceof Player player) {
+            root(player, false);
+        }
+    }
+
+    private void channel(Player player, ServerLevel level) {
         boolean held = ticksSinceUse <= HOLD_GRACE_TICKS;
         ticksSinceUse++;
         if (!held) {
@@ -139,6 +158,26 @@ public final class NatureReclaimPower extends Power implements Active {
             cast(player, level);
             charge = 0;
             awaitingRelease = true;
+        }
+    }
+
+    private static void root(Player player, boolean rooted) {
+        rootAttribute(player, Attributes.MOVEMENT_SPEED, rooted);
+        rootAttribute(player, Attributes.JUMP_STRENGTH, rooted);
+    }
+
+    private static void rootAttribute(Player player, Holder<Attribute> attribute, boolean rooted) {
+        AttributeInstance instance = player.getAttribute(attribute);
+        if (instance == null || instance.hasModifier(ROOTED_ID) == rooted) {
+            return;
+        }
+        if (rooted) {
+            instance.addTransientModifier(new AttributeModifier(
+                ROOTED_ID,
+                -1.0,
+                AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        } else {
+            instance.removeModifier(ROOTED_ID);
         }
     }
 

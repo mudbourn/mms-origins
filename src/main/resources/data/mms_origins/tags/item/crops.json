@@ -35,6 +35,30 @@
     {
       "id": "#c:foods/bread",
       "required": false
+    },
+    {
+      "id": "alexscaves:pine_nuts",
+      "required": false
+    },
+    {
+      "id": "alexscaves:darkened_apple",
+      "required": false
+    },
+    {
+      "id": "alexscaves:caramel_apple",
+      "required": false
+    },
+    {
+      "id": "accdelight:caramel_apple_slices",
+      "required": false
+    },
+    {
+      "id": "accdelight:pewen_porridge",
+      "required": false
+    },
+    {
+      "id": "accdelight:pewen_nut_loaf",
+      "required": false
     }
   ]
 }

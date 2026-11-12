@@ -25,14 +25,24 @@ public class VillagerCharmMixin {
     /** Fraction of the base cost taken off, rounded up, minimum one item. */
     private static final float MMS_CHARM_RATE = 0.25F;
 
+    /** Fraction of the base cost the Explorer class's wayfarer charm takes off. */
+    private static final float MMS_WAYFARER_RATE = 0.10F;
+
     @Inject(method = "updateSpecialPrices", at = @At("RETURN"))
     private void mmsOrigins$charmTheSmitten(Player player, CallbackInfo ci) {
-        if (!MmsOriginsPowers.FAIRY_CHARM.isActive(player)) {
+        float rate = 0.0F;
+        if (MmsOriginsPowers.FAIRY_CHARM.isActive(player)) {
+            rate += MMS_CHARM_RATE;
+        }
+        if (MmsOriginsPowers.WAYFARER_CHARM.isActive(player)) {
+            rate += MMS_WAYFARER_RATE;
+        }
+        if (rate <= 0.0F) {
             return;
         }
         for (MerchantOffer offer : ((Merchant) (Object) this).getOffers()) {
             int base = offer.getBaseCostA().getCount();
-            offer.addToSpecialPriceDiff(-Math.max(1, (int) Math.ceil(base * MMS_CHARM_RATE)));
+            offer.addToSpecialPriceDiff(-Math.max(1, (int) Math.ceil(base * rate)));
         }
     }
 }
