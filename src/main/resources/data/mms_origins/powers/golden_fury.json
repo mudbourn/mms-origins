@@ -2,18 +2,12 @@
   "type": "origins:multiple",
   "hidden": true,
   "base": {
-    "type": "origins:modify_damage_dealt",
-    "modifier": {
-      "operation": "multiply_base",
-      "value": 0.2
-    }
+    "type": "mms_origins:crit_chance",
+    "chance": 0.28
   },
   "gilded_one": {
-    "type": "origins:modify_damage_dealt",
-    "modifier": {
-      "operation": "multiply_base",
-      "value": 0.2
-    },
+    "type": "mms_origins:crit_chance",
+    "chance": 0.18,
     "condition": {
       "type": "origins:command",
       "command": "execute if items entity @s armor.* #mms_origins:golden_armor",
@@ -22,11 +16,8 @@
     }
   },
   "gilded_two": {
-    "type": "origins:modify_damage_dealt",
-    "modifier": {
-      "operation": "multiply_base",
-      "value": 0.2
-    },
+    "type": "mms_origins:crit_chance",
+    "chance": 0.18,
     "condition": {
       "type": "origins:command",
       "command": "execute if items entity @s armor.* #mms_origins:golden_armor",
@@ -35,11 +26,8 @@
     }
   },
   "gilded_three": {
-    "type": "origins:modify_damage_dealt",
-    "modifier": {
-      "operation": "multiply_base",
-      "value": 0.2
-    },
+    "type": "mms_origins:crit_chance",
+    "chance": 0.18,
     "condition": {
       "type": "origins:command",
       "command": "execute if items entity @s armor.* #mms_origins:golden_armor",
@@ -48,11 +36,8 @@
     }
   },
   "gilded_four": {
-    "type": "origins:modify_damage_dealt",
-    "modifier": {
-      "operation": "multiply_base",
-      "value": 0.2
-    },
+    "type": "mms_origins:crit_chance",
+    "chance": 0.18,
     "condition": {
       "type": "origins:command",
       "command": "execute if items entity @s armor.* #mms_origins:golden_armor",

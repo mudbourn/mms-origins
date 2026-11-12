@@ -1,10 +1,6 @@
 {
-  "type": "origins:modify_damage_dealt",
-  "modifier": {
-    "name": "Sunlit vigor",
-    "value": 0.25,
-    "operation": "multiply_base"
-  },
+  "type": "mms_origins:crit_chance",
+  "chance": 0.35,
   "condition": {
     "type": "origins:and",
     "conditions": [

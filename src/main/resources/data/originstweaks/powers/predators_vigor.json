@@ -66,13 +66,8 @@
 		}
 	},
 	"predators_strength": {
-		"type": "origins:attribute",
-		"modifier": {
-			"name": "Predators vigor",
-			"attribute": "minecraft:generic.attack_damage",
-			"operation": "multiply_base",
-			"value": 0.15
-		}
+		"type": "mms_origins:crit_chance",
+		"chance": 0.21
 	},
 	"hungry_hunter": {
 		"type": "origins:modify_exhaustion",

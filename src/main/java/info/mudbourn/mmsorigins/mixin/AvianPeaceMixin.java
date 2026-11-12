@@ -1,11 +1,8 @@
 package info.mudbourn.mmsorigins.mixin;
 
+import info.mudbourn.mmsorigins.Bosses;
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Enemy;
@@ -30,16 +27,13 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 @Mixin(TargetingConditions.class)
 public class AvianPeaceMixin {
 
-    private static final TagKey<EntityType<?>> BOSSES =
-        TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath("c", "bosses"));
-
     @Inject(method = "test", at = @At("HEAD"), cancellable = true)
     private void mmsOrigins$spareAvian(ServerLevel level, LivingEntity attacker, LivingEntity target,
                                        CallbackInfoReturnable<Boolean> cir) {
         if (!(attacker instanceof Mob mob) || !(target instanceof Player)) {
             return;
         }
-        if (!(mob instanceof Enemy) || mob instanceof Phantom || mob.getType().is(BOSSES)) {
+        if (!(mob instanceof Enemy) || mob instanceof Phantom || Bosses.isBoss(mob)) {
             return;
         }
         if (mob.getLastHurtByMob() == target) {

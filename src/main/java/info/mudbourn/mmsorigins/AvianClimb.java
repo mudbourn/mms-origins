@@ -8,15 +8,15 @@ import net.minecraft.world.entity.player.Player;
 
 /**
  * Hold-jump climbing for gliding Avians. The holder's client moves the body upward while
- * the jump key is down, and the server charges stamina from the same player's last input.
+ * the jump key is down, thrusting along the look direction, and the server charges stamina from the same player's last input.
  */
 public final class AvianClimb {
 
     private static final int CHARGE_INTERVAL = 4;
-    // 50 stamina per second, half a surge
-    private static final int CHARGE = 10;
-    // 75 stamina per second, half a heavy surge
-    private static final int HEAVY_CHARGE = 15;
+    // 10 stamina per second
+    private static final int CHARGE = 2;
+    // 15 stamina per second
+    private static final int HEAVY_CHARGE = 3;
     private static final int HEAVY_ARMOR = 13;
     private static final int GROUNDING_ARMOR = 20;
     private static final String STAMINA_PATH = "gift_of_the_skies_stamina";

@@ -50,6 +50,7 @@
     "PiglinGrudgePursuitMixin",
     "PoisonMobEffectMixin",
     "PlayerFireballNoIgniteMixin",
+    "PlayerCritChanceMixin",
     "PlayerHurtSoundMixin",
     "PlayerPoseMixin",
     "ReplaceLootTablePowerGuardMixin",

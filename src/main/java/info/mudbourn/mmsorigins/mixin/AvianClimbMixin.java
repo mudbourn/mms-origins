@@ -12,10 +12,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public abstract class AvianClimbMixin {
 
-    private static final double CLIMB_ACCELERATION = 0.08;
-    private static final double MAX_CLIMB_SPEED = 0.6;
-    // 20 blocks per second
-    private static final double CLIMB_TOP_SPEED = 1.0;
+    private static final double THRUST = 0.05;
+    private static final double STEEP_THRUST_MULTIPLIER = 2.75;
+    private static final float STEEP_PITCH = -75.0F;
+    private static final double ARMOR_SLOWDOWN = 0.1;
+    // 25 blocks per second
+    private static final double CLIMB_TOP_SPEED = 1.25;
     private static final double CLIMB_DRAG = 0.9;
 
     @Inject(method = "travel", at = @At("TAIL"))
@@ -23,9 +25,15 @@ public abstract class AvianClimbMixin {
         if (!((Object) this instanceof Player player) || !AvianClimb.climbing(player)) {
             return;
         }
+        double thrust = THRUST;
+        if (player.getXRot() <= STEEP_PITCH) {
+            thrust *= STEEP_THRUST_MULTIPLIER;
+        }
+        thrust /= Math.max(1.0, player.getArmorValue() * ARMOR_SLOWDOWN);
+        Vec3 look = player.getLookAngle();
         Vec3 motion = player.getDeltaMovement();
-        double rise = Math.min(MAX_CLIMB_SPEED, Math.max(motion.y, 0.0) + CLIMB_ACCELERATION);
-        Vec3 climb = new Vec3(motion.x, rise, motion.z);
+        Vec3 steer = look.scale(CLIMB_TOP_SPEED).subtract(motion);
+        Vec3 climb = motion.add(look.scale(thrust)).add(steer.scale(thrust));
         double speed = climb.length();
         if (speed > CLIMB_TOP_SPEED) {
             climb = climb.scale(Math.max(CLIMB_TOP_SPEED, speed * CLIMB_DRAG) / speed);

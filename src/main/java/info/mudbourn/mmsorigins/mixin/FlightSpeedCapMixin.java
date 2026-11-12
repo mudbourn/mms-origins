@@ -34,7 +34,9 @@ public abstract class FlightSpeedCapMixin {
             AvianClimb.charge(serverPlayer);
         }
         Vec3 motion = player.getDeltaMovement();
-        if (player.isFallFlying() && MmsOriginsPowers.holds(player, MmsOriginsPowers.AVIAN_PEACE)) {
+        if (player.isFallFlying()
+                && MmsOriginsPowers.holds(player, MmsOriginsPowers.AVIAN_PEACE)
+                && !AvianClimb.climbing(player)) {
             motion = mmsOrigins$holdAvianCruise(player, motion);
             player.setDeltaMovement(motion);
         }

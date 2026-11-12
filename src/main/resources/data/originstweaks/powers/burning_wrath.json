@@ -67,11 +67,8 @@
 		}
 	},
 	"damage_bonus_on_fire": {
-		"type": "origins:modify_damage_dealt",
-		"modifier": {
-			"operation": "multiply_base",
-			"value": 0.25
-		},
+		"type": "mms_origins:crit_chance",
+		"chance": 0.35,
 		"condition": {
 			"type": "origins:on_fire"
 		}

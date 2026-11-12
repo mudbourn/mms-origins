@@ -1,5 +1,5 @@
 {
-	"type": "origins:modify_damage_dealt",
+	"type": "mms_origins:crit_chance",
 	"badges": [
 		{
 			"type": "origins:tooltip",
@@ -9,10 +9,7 @@
 			}
 		}
 	],
-	"modifier": {
-		"operation": "multiply_base",
-		"value": 0.2
-	},
+	"chance": 0.28,
 	"condition": {
 		"type": "origins:on_block",
 		"inverted": true

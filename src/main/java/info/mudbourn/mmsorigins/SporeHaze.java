@@ -20,8 +20,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -31,8 +30,8 @@ import net.minecraft.world.phys.Vec3;
  *
  * <p>Every ten ticks the cloud mends its owner, weakens and slows each other mob
  * inside it, and enlists any eligible mob as the owner's soldier through
- * {@link HazeBond}. The Ender Dragon, the Wither and Grovekeepers are weakened but
- * never enlisted.
+ * {@link HazeBond}. Other players are weakened and slowed at half strength.
+ * Bosses (see {@link Bosses}) and Grovekeepers are weakened but never enlisted.
  */
 public final class SporeHaze {
 
@@ -40,6 +39,7 @@ public final class SporeHaze {
     private static final int DURATION = 180;
     private static final int PULSE_INTERVAL = 10;
     private static final int EFFECT_TICKS = 60;
+    private static final int PLAYER_EFFECT_TICKS = 30;
     private static final int DUST_COLOR = 0x5FA82A;
     private static final float DUST_SCALE = 2.0f;
     private static final int DUST_PER_PUFF = 14;
@@ -124,9 +124,11 @@ public final class SporeHaze {
         );
         for (LivingEntity entity : inside) {
             if (entity.getUUID().equals(cloud.owner)) {
-                entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, PULSE_INTERVAL * 2, 1, true, true, true));
+                entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, PULSE_INTERVAL * 2, 0, true, true, true));
             } else if (entity instanceof Mob mob) {
                 touch(mob, cloud.owner);
+            } else if (entity instanceof Player player && !player.isSpectator() && !player.isCreative()) {
+                touchPlayer(player);
             }
         }
     }
@@ -142,8 +144,13 @@ public final class SporeHaze {
         }
     }
 
+    private static void touchPlayer(Player player) {
+        player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, PLAYER_EFFECT_TICKS, 0, true, true, true));
+        player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, PLAYER_EFFECT_TICKS, 0, true, true, true));
+    }
+
     private static boolean isEnlistable(Mob mob) {
-        return !(mob instanceof EnderDragon) && !(mob instanceof WitherBoss) && !(mob instanceof FloranHenchman);
+        return !Bosses.isBoss(mob) && !(mob instanceof FloranHenchman);
     }
 
     private static final class Cloud {

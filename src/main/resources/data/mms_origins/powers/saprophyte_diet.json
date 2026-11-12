@@ -1,5 +1,5 @@
 {
-  "type": "origins:multiple",
+  "type": "origins:prevent_item_use",
   "badges": [
     {
       "type": "origins:tooltip",
@@ -23,171 +23,33 @@
       }
     }
   ],
-  "restrict": {
-    "type": "origins:prevent_item_use",
-    "name": "Saprophyte",
-    "item_condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:food"
+  "item_condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:food"
+      },
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "tag": "mms_origins:waste_food"
         },
-        {
-          "type": "origins:ingredient",
-          "ingredient": {
-            "tag": "mms_origins:waste_food"
-          },
-          "inverted": true
+        "inverted": true
+      },
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "tag": "origins:ignore_diet"
         },
-        {
-          "type": "origins:ingredient",
-          "ingredient": {
-            "tag": "origins:ignore_diet"
-          },
-          "inverted": true
-        }
-      ]
-    }
-  },
-  "rot_saturation": {
-    "type": "origins:action_on_item_use",
-    "trigger_type": "finish",
-    "item_condition": {
-      "type": "origins:ingredient",
-      "ingredient": {
-        "item": "minecraft:rotten_flesh"
+        "inverted": true
+      },
+      {
+        "type": "origins:ingredient",
+        "ingredient": {
+          "item": "minecraft:shroomlight"
+        },
+        "inverted": true
       }
-    },
-    "entity_action": {
-      "type": "origins:apply_effect",
-      "effect": {
-        "effect": "minecraft:saturation",
-        "duration": 6,
-        "amplifier": 0,
-        "show_icon": true,
-        "show_particles": false
-      }
-    }
-  },
-  "cultivate_cooldown": {
-    "type": "origins:cooldown",
-    "cooldown": 60,
-    "hud_render": {
-      "should_render": false
-    }
-  },
-  "cultivate": {
-    "type": "origins:active_self",
-    "cooldown": 0,
-    "hud_render": {
-      "should_render": false
-    },
-    "key": {
-      "key": "key.origins.secondary_active",
-      "continuous": true
-    },
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:sneaking"
-        },
-        {
-          "type": "origins:resource",
-          "resource": "mms_origins:saprophyte_diet_cultivate_cooldown",
-          "comparison": "==",
-          "compare_to": 0
-        }
-      ]
-    },
-    "entity_action": {
-      "type": "mms_origins:cultivate_stone",
-      "charge_ticks": 20,
-      "reach": 5.0,
-      "finish_action": {
-        "type": "origins:and",
-        "actions": [
-          {
-            "type": "origins:trigger_cooldown",
-            "power": "mms_origins:saprophyte_diet_cultivate_cooldown"
-          },
-          {
-            "type": "origins:exhaust",
-            "amount": 2.0
-          },
-          {
-            "type": "origins:play_sound",
-            "sound": "minecraft:block.fungus.place",
-            "category": "players",
-            "volume": 1.0,
-            "pitch": 0.8
-          }
-        ]
-      }
-    }
-  },
-  "graze": {
-    "type": "origins:action_on_block_use",
-    "block_condition": {
-      "type": "origins:block",
-      "block": "minecraft:shroomlight"
-    },
-    "hands": [
-      "main_hand"
-    ],
-    "item_condition": {
-      "type": "origins:empty"
-    },
-    "condition": {
-      "type": "origins:and",
-      "conditions": [
-        {
-          "type": "origins:sneaking",
-          "inverted": true
-        },
-        {
-          "type": "origins:food_level",
-          "comparison": "<",
-          "compare_to": 20
-        }
-      ]
-    },
-    "block_action": {
-      "type": "origins:set_block",
-      "block": "minecraft:air"
-    },
-    "entity_action": {
-      "type": "origins:and",
-      "actions": [
-        {
-          "type": "origins:feed",
-          "food": 2,
-          "saturation": 1.2
-        },
-        {
-          "type": "origins:play_sound",
-          "sound": "minecraft:entity.generic.eat",
-          "category": "players",
-          "volume": 1.0,
-          "pitch": 0.9
-        },
-        {
-          "type": "origins:if_else",
-          "condition": {
-            "type": "mms_origins:near_fairy"
-          },
-          "if_action": {
-            "type": "origins:apply_effect",
-            "effect": {
-              "effect": "minecraft:saturation",
-              "duration": 4,
-              "amplifier": 0,
-              "show_icon": true,
-              "show_particles": false
-            }
-          }
-        }
-      ]
-    }
+    ]
   }
 }

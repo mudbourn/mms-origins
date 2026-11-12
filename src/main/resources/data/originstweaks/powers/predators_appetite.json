@@ -10,11 +10,8 @@
 		}
 	],
 	"saturated_might": {
-		"type": "origins:modify_damage_dealt",
-		"modifier": {
-			"operation": "multiply_base",
-			"value": 0.3
-		},
+		"type": "mms_origins:crit_chance",
+		"chance": 0.42,
 		"condition": {
 			"type": "origins:saturation_level",
 			"comparison": ">",
@@ -22,11 +19,8 @@
 		}
 	},
 	"fed_might": {
-		"type": "origins:modify_damage_dealt",
-		"modifier": {
-			"operation": "multiply_base",
-			"value": 0.2
-		},
+		"type": "mms_origins:crit_chance",
+		"chance": 0.28,
 		"condition": {
 			"type": "origins:and",
 			"conditions": [

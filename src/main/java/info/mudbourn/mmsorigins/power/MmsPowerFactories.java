@@ -56,6 +56,7 @@ public final class MmsPowerFactories {
         registerResourceAttribute();
         registerActionOnDeath();
         registerPose();
+        registerCritChance();
         registerModifyEnchantmentLevel();
         registerEdibleItem();
         registerGrapple();
@@ -538,6 +539,22 @@ public final class MmsPowerFactories {
                         modifiers -> modifiers.forEach(power::addModifier));
                     return power;
                 })
+                .allowCondition());
+    }
+
+    private static void registerCritChance() {
+        Identifier id = id("crit_chance");
+        Registry.register(
+            ApoliRegistries.POWER_FACTORY,
+            id,
+            new PowerFactory<>(
+                id,
+                new SerializableData()
+                    .add("chance", SerializableDataTypes.FLOAT),
+                data -> (type, entity) -> new CritChancePower(
+                    type,
+                    entity,
+                    data.getFloat("chance")))
                 .allowCondition());
     }
 

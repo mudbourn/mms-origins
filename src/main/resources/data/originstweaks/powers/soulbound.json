@@ -192,7 +192,7 @@
 				{
 					"type": "origins:attribute",
 					"attribute": "minecraft:generic.max_health",
-					"compare_to": 100,
+					"compare_to": 50,
 					"comparison": "<="
 				}
 			]
@@ -316,8 +316,10 @@
 					"type": "origins:living"
 				},
 				{
-					"type": "origins:in_tag",
-					"tag": "c:bosses"
+					"type": "origins:attribute",
+					"attribute": "minecraft:generic.max_health",
+					"compare_to": 50,
+					"comparison": ">"
 				}
 			]
 		}

@@ -1,10 +1,7 @@
 package info.mudbourn.mmsorigins.mixin;
 
+import info.mudbourn.mmsorigins.Bosses;
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Enemy;
@@ -27,13 +24,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Mob.class)
 public class AvianForgetTargetMixin {
 
-    private static final TagKey<EntityType<?>> BOSSES =
-        TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath("c", "bosses"));
-
     @Inject(method = "serverAiStep", at = @At("RETURN"))
     private void mmsOrigins$forgetAvian(CallbackInfo ci) {
         Mob mob = (Mob) (Object) this;
-        if (!(mob instanceof Enemy) || mob instanceof Phantom || mob.getType().is(BOSSES)) {
+        if (!(mob instanceof Enemy) || mob instanceof Phantom || Bosses.isBoss(mob)) {
             return;
         }
         LivingEntity target = mob.getTarget();
