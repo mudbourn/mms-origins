@@ -29,7 +29,7 @@ public abstract class PhantomFormRenderMixin {
     private static final PhantomRenderState PHANTOM = new PhantomRenderState();
 
     @Unique
-    private static final int PHANTOM_SIZE = 2;
+    private static final int PHANTOM_SIZE = 0;
 
     @Inject(
         method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V",
@@ -76,8 +76,8 @@ public abstract class PhantomFormRenderMixin {
         to.deathTime = from.deathTime;
         to.walkAnimationPos = from.walkAnimationPos;
         to.walkAnimationSpeed = from.walkAnimationSpeed;
-        to.scale = from.scale;
-        to.ageScale = from.ageScale;
+        to.scale = 1.0F;
+        to.ageScale = 1.0F;
         to.isFullyFrozen = from.isFullyFrozen;
         to.isInWater = from.isInWater;
         to.hasRedOverlay = from.hasRedOverlay;

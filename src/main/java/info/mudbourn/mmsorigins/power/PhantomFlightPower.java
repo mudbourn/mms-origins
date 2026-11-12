@@ -25,6 +25,7 @@ public final class PhantomFlightPower extends Power {
     private static final int DRAIN_INTERVAL = 20;
     private static final int SPRINT_BOOST_DELAY_TICKS = 30;
     private static final int SPRINT_BOOST_RAMP_TICKS = 40;
+    private static final int SPEED_STEPS = 4;
 
     private final PowerType<?> resource;
     private int flightTicks;
@@ -41,7 +42,7 @@ public final class PhantomFlightPower extends Power {
         if (!(entity instanceof Player player)) {
             return;
         }
-        if (player.isCreative() || player.isSpectator()) {
+        if (player.isCreative() || player.isSpectator() || player.level().isClientSide()) {
             return;
         }
         Abilities abilities = player.getAbilities();
@@ -53,7 +54,7 @@ public final class PhantomFlightPower extends Power {
                 abilities.setFlyingSpeed(wantedSpeed);
                 player.onUpdateAbilities();
             }
-            if (abilities.flying && !player.level().isClientSide()) {
+            if (abilities.flying) {
                 flightTicks++;
                 if (flightTicks % DRAIN_INTERVAL == 0) {
                     soul.setValue(Math.max(soul.getMin(), soul.getValue() - 1));
@@ -81,7 +82,7 @@ public final class PhantomFlightPower extends Power {
         }
         sprintFlyTicks++;
         float progress = Math.clamp((sprintFlyTicks - SPRINT_BOOST_DELAY_TICKS) / (float) SPRINT_BOOST_RAMP_TICKS, 0.0F, 1.0F);
-        float eased = progress * progress * (3.0F - 2.0F * progress);
+        float eased = Math.round(progress * progress * (3.0F - 2.0F * progress) * SPEED_STEPS) / (float) SPEED_STEPS;
         return FLYING_SPEED + (TOP_FLYING_SPEED - FLYING_SPEED) * eased;
     }
 
