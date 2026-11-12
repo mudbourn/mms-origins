@@ -1,0 +1,55 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.avian_diet.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.originstweaks.avian_diet.1"
+			}
+		}
+	],
+	"produce_nutrition": {
+		"type": "origins:modify_food",
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "mms_origins:fresh_produce"
+			}
+		},
+		"food_modifier": {
+			"operation": "multiply_base",
+			"value": 0.25
+		},
+		"saturation_modifier": {
+			"operation": "multiply_base",
+			"value": 0.5
+		},
+		"prevent_effects": false
+	},
+	"baked_nutrition": {
+		"type": "origins:modify_food",
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "mms_origins:baked_goods"
+			}
+		},
+		"food_modifier": {
+			"operation": "multiply_base",
+			"value": -0.25
+		},
+		"saturation_modifier": {
+			"operation": "multiply_base",
+			"value": -0.25
+		},
+		"prevent_effects": false
+	}
+}

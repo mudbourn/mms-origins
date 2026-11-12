@@ -8,17 +8,10 @@
   },
   "consume_sound": "minecraft:item.bucket.fill_lava",
   "finish_sound": "minecraft:entity.generic.drink",
-  "nutrition": 4,
-  "saturation": 0.4,
+  "nutrition": 8,
+  "saturation": 0.8,
   "eat_seconds": 2.0,
   "use_action": "drink",
-  "effects": [
-    {
-      "effect": "minecraft:saturation",
-      "duration": 300,
-      "amplifier": 0
-    }
-  ],
   "badges": [
     {
       "type": "origins:tooltip",

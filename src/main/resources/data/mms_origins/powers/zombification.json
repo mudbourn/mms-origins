@@ -28,6 +28,13 @@
       "text": {
         "translate": "badge.mms_origins.quarantine_exile.0"
       }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.zombification.3"
+      }
     }
   ],
   "creep": {
@@ -219,6 +226,30 @@
         }
       ]
     },
+    "condition": {
+      "type": "origins:resource",
+      "resource": "mms_origins:zombie_meter",
+      "comparison": ">=",
+      "compare_to": 600
+    }
+  },
+  "flesh_appetite": {
+    "type": "origins:modify_food",
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "tag": "mms_origins:zombie_diet"
+      }
+    },
+    "food_modifier": {
+      "operation": "multiply_base",
+      "value": 1.0
+    },
+    "saturation_modifier": {
+      "operation": "multiply_base",
+      "value": 1.0
+    },
+    "prevent_effects": false,
     "condition": {
       "type": "origins:resource",
       "resource": "mms_origins:zombie_meter",

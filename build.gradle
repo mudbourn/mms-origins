@@ -57,6 +57,9 @@ dependencies {
     modCompileOnly files("libs/scorchful-0.16.8+1.21.11.jar")
     modCompileOnly files("libs/frostiful-2.4.0+1.21.11.jar")
     modCompileOnly files("libs/thermoo-9.1.0.jar")
+
+    // Food-value event the client compat uses to show origin-modified nutrition.
+    modCompileOnly files("libs/appleskin-fabric-mc1.21.11-3.0.8.jar")
 }
 
 tasks.withType(JavaCompile).configureEach {

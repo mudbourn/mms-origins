@@ -1,0 +1,89 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.arachnid_diet.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.originstweaks.arachnid_diet.1"
+			}
+		}
+	],
+	"raw_nutrition": {
+		"type": "origins:modify_food",
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "mms_origins:raw_meat"
+			}
+		},
+		"food_modifier": {
+			"operation": "multiply_base",
+			"value": 0.5
+		},
+		"saturation_modifier": {
+			"operation": "multiply_base",
+			"value": 1.0
+		},
+		"prevent_effects": false
+	},
+	"cooked_nutrition": {
+		"type": "origins:modify_food",
+		"item_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:ingredient",
+							"ingredient": {
+								"tag": "origins:meat"
+							}
+						},
+						{
+							"type": "origins:meat"
+						}
+					]
+				},
+				{
+					"type": "origins:ingredient",
+					"ingredient": {
+						"tag": "mms_origins:raw_meat"
+					},
+					"inverted": true
+				},
+				{
+					"type": "origins:ingredient",
+					"ingredient": {
+						"item": "minecraft:rotten_flesh"
+					},
+					"inverted": true
+				},
+				{
+					"type": "origins:ingredient",
+					"ingredient": {
+						"item": "minecraft:spider_eye"
+					},
+					"inverted": true
+				}
+			]
+		},
+		"food_modifier": {
+			"operation": "multiply_base",
+			"value": -0.25
+		},
+		"saturation_modifier": {
+			"operation": "multiply_base",
+			"value": -0.25
+		},
+		"prevent_effects": false
+	}
+}

@@ -14,6 +14,13 @@
       "text": {
         "translate": "badge.mms_origins.carnivore_diet.1"
       }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.carnivore_diet.2"
+      }
     }
   ],
   "restrict": {
@@ -50,24 +57,74 @@
       ]
     }
   },
-  "raw_vigor": {
-    "type": "origins:action_on_item_use",
-    "trigger_type": "finish",
+  "raw_nutrition": {
+    "type": "origins:modify_food",
     "item_condition": {
       "type": "origins:ingredient",
       "ingredient": {
         "tag": "mms_origins:raw_meat"
       }
     },
-    "entity_action": {
-      "type": "origins:apply_effect",
-      "effect": {
-        "effect": "minecraft:saturation",
-        "duration": 6,
-        "amplifier": 0,
-        "show_icon": true,
-        "show_particles": false
-      }
-    }
+    "food_modifier": {
+      "operation": "multiply_base",
+      "value": 1.0
+    },
+    "saturation_modifier": {
+      "operation": "multiply_base",
+      "value": 1.5
+    },
+    "prevent_effects": false
+  },
+  "cooked_nutrition": {
+    "type": "origins:modify_food",
+    "item_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "tag": "origins:meat"
+              }
+            },
+            {
+              "type": "origins:meat"
+            }
+          ]
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "mms_origins:raw_meat"
+          },
+          "inverted": true
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "minecraft:rotten_flesh"
+          },
+          "inverted": true
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "item": "minecraft:spider_eye"
+          },
+          "inverted": true
+        }
+      ]
+    },
+    "food_modifier": {
+      "operation": "multiply_base",
+      "value": 0.25
+    },
+    "saturation_modifier": {
+      "operation": "multiply_base",
+      "value": 0.25
+    },
+    "prevent_effects": false
   }
 }

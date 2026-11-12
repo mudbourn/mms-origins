@@ -123,6 +123,18 @@
     {
       "id": "accdelight:gloom_cut",
       "required": false
+    },
+    {
+      "id": "farmersdelight:cod_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:salmon_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:bacon",
+      "required": false
     }
   ]
 }

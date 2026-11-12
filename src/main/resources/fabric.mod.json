@@ -15,6 +15,9 @@
     ],
     "client": [
       "info.mudbourn.mmsorigins.client.MmsOriginsClient"
+    ],
+    "appleskin": [
+      "info.mudbourn.mmsorigins.client.AppleSkinCompat"
     ]
   },
   "mixins": [
@@ -38,6 +41,7 @@
     "jobsplus": "*"
   },
   "suggests": {
-    "mms_combat": "*"
+    "mms_combat": "*",
+    "appleskin": "*"
   }
 }

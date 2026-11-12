@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bread",
+    "minecraft:cookie",
+    "minecraft:pumpkin_pie",
+    {
+      "id": "#c:foods/bread",
+      "required": false
+    },
+    {
+      "id": "#c:foods/cookie",
+      "required": false
+    },
+    {
+      "id": "#c:foods/pie",
+      "required": false
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "type": "origins:prevent_item_use",
+  "type": "origins:multiple",
   "badges": [
     {
       "type": "origins:tooltip",
@@ -7,35 +7,63 @@
       "text": {
         "translate": "badge.mms_origins.verdant_diet.0"
       }
+    },
+    {
+      "type": "origins:tooltip",
+      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.verdant_diet.1"
+      }
     }
   ],
-  "item_condition": {
-    "type": "origins:and",
-    "conditions": [
-      {
-        "type": "origins:or",
-        "conditions": [
-          {
-            "type": "origins:ingredient",
-            "ingredient": {
-              "tag": "origins:meat"
+  "restrict": {
+    "type": "origins:prevent_item_use",
+    "item_condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "tag": "origins:meat"
+              }
+            },
+            {
+              "type": "origins:meat"
             }
-          },
-          {
-            "type": "origins:meat"
-          }
-        ]
-      },
-      {
-        "type": "origins:food"
-      },
-      {
-        "type": "origins:ingredient",
-        "ingredient": {
-          "tag": "origins:ignore_diet"
+          ]
         },
-        "inverted": true
+        {
+          "type": "origins:food"
+        },
+        {
+          "type": "origins:ingredient",
+          "ingredient": {
+            "tag": "origins:ignore_diet"
+          },
+          "inverted": true
+        }
+      ]
+    }
+  },
+  "produce_nutrition": {
+    "type": "origins:modify_food",
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "tag": "mms_origins:fresh_produce"
       }
-    ]
+    },
+    "food_modifier": {
+      "operation": "multiply_base",
+      "value": 0.5
+    },
+    "saturation_modifier": {
+      "operation": "multiply_base",
+      "value": 1.0
+    },
+    "prevent_effects": false
   }
 }
