@@ -16,7 +16,7 @@ import net.minecraft.world.phys.Vec3;
  */
 public final class PhantomWings {
 
-    private static final double SPEED_PER_FLYING_SPEED = 10.0;
+    private static final double SPEED_PER_FLYING_SPEED = 1.0 / 0.09;
     private static final double THRUST_GAIN = 0.07;
     private static final double STRAFE_SHARE = 0.25;
     private static final double CLIMB_SHARE = 0.6;
@@ -45,7 +45,7 @@ public final class PhantomWings {
             velocity = current;
             winged = true;
         }
-        double limit = abilities.getFlyingSpeed() * (player.isSprinting() ? 2.0 : 1.0) * SPEED_PER_FLYING_SPEED;
+        double limit = abilities.getFlyingSpeed() * (surging(player) ? 2.0 : 1.0) * SPEED_PER_FLYING_SPEED;
         velocity = steer(player, input, limit);
         player.setDeltaMovement(velocity);
         player.move(MoverType.SELF, velocity);
@@ -77,6 +77,10 @@ public final class PhantomWings {
             next = glide(next, look);
         }
         return forward < 0.0 ? next.scale(BRAKE_DRAG) : next;
+    }
+
+    private static boolean surging(LocalPlayer player) {
+        return player.isSprinting() || player.input.keyPresses.sprint();
     }
 
     private static Vec3 glide(Vec3 velocity, Vec3 look) {

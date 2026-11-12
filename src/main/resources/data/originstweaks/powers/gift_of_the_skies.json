@@ -396,7 +396,7 @@
 						"actions": [
 							{
 								"type": "origins:add_velocity",
-								"z": 1.95,
+								"z": 2.5,
 								"space": "local",
 								"operation": "set"
 							},

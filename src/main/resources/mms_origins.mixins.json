@@ -11,6 +11,7 @@
     "AvianForgetTargetMixin",
     "AvianPeaceMixin",
     "AvianSlowRegenMixin",
+    "FlightSpeedCapMixin",
     "LeafFormSwimMixin",
     "ShulkerBulletGroundingMixin",
     "ShulkerGroundedElytraMixin",

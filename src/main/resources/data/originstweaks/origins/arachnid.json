@@ -3,7 +3,7 @@
 		"id": "minecraft:cobweb"
 	},
 	"order": 1,
-	"impact": 1,
+	"impact": 2,
 	"loading_priority": 1,
 	"powers": [
 		"originstweaks:master_of_webs",

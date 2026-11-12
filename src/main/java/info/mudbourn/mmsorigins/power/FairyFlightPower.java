@@ -28,7 +28,6 @@ public final class FairyFlightPower extends Power implements SurgingFlight {
     private static final float NORMAL_FLYING_SPEED = 0.05F;
     private static final float FAINT_FLYING_SPEED = 0.025F;
     private static final float HOMELAND_SPEED_MULTIPLIER = 1.5F;
-    private static final float SPRINT_BOOST_MAX = 2.0F;
 
     // The fairy homeland groves, where flight quickens.
     private static final TagKey<Biome> HOMELAND_BIOMES =
@@ -80,10 +79,6 @@ public final class FairyFlightPower extends Power implements SurgingFlight {
         return inHomeland(player) ? speed * HOMELAND_SPEED_MULTIPLIER : speed;
     }
 
-    @Override
-    public float surgeSpeed(Player player, float build) {
-        return cruiseSpeed(player) * (1.0F + (SPRINT_BOOST_MAX - 1.0F) * build);
-    }
 
     @Override
     public boolean surging(Player player) {

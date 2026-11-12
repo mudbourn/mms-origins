@@ -38,7 +38,7 @@ public final class FlightSurge {
         boolean surging = abilities.flying && flight.surging(player);
         surgeTicks = surging ? surgeTicks + 1 : 0;
         drivenSpeed = surging
-            ? flight.surgeSpeed(player, SurgingFlight.build(surgeTicks))
+            ? SurgingFlight.surgeSpeed(flight.cruiseSpeed(player), surgeTicks)
             : flight.cruiseSpeed(player);
         abilities.setFlyingSpeed(drivenSpeed);
     }

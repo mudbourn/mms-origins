@@ -17,7 +17,7 @@ import net.minecraft.world.entity.player.Player;
  * server only grants and revokes {@code mayfly}; vanilla's double-tap-jump
  * toggles {@code flying}, and the holder's client sets the flying speed from
  * {@link SurgingFlight}. Sprinting aloft for a moment eases the speed up until
- * the sprint pace matches an avian's surge.
+ * it follows the shared surge curve.
  */
 public final class BlazeFlightPower extends Power implements SurgingFlight {
 
@@ -26,7 +26,6 @@ public final class BlazeFlightPower extends Power implements SurgingFlight {
     private static final int LAVA_CHARGE_PER_TICK = 1;
     private static final int FLIGHT_FIRE_TICKS = 20;
     private static final float NORMAL_FLYING_SPEED = 0.05F;
-    private static final float TOP_FLYING_SPEED = 0.0878F;
 
     private final PowerType<?> resource;
     private int flightTicks;
@@ -88,10 +87,6 @@ public final class BlazeFlightPower extends Power implements SurgingFlight {
         return NORMAL_FLYING_SPEED;
     }
 
-    @Override
-    public float surgeSpeed(Player player, float build) {
-        return NORMAL_FLYING_SPEED + (TOP_FLYING_SPEED - NORMAL_FLYING_SPEED) * build;
-    }
 
     @Override
     public boolean surging(Player player) {

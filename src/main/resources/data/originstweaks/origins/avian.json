@@ -3,7 +3,7 @@
 		"id": "minecraft:feather"
 	},
 	"order": 0,
-	"impact": 1,
+	"impact": 2,
 	"loading_priority": 1,
 	"powers": [
 		"originstweaks:slow_falling",

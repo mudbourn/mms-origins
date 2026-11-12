@@ -12,13 +12,12 @@ import net.minecraft.world.entity.player.Player;
  * vanilla's double-tap-jump toggles {@code flying}, the holder's client sets the flying
  * speed from {@link SurgingFlight}, and the winged movement itself is the holder's client
  * physics. Vanilla's sprint doubles the speed, and sprinting aloft for a moment eases it
- * up until the sprint pace matches an avian's surge.
+ * up along the shared surge curve in {@link SurgingFlight}.
  */
 public final class PhantomFlightPower extends Power implements SurgingFlight {
 
     private static final float FLYING_SPEED = 0.04F;
     private static final float NORMAL_FLYING_SPEED = 0.05F;
-    private static final float TOP_FLYING_SPEED = 0.0878F;
 
     public PhantomFlightPower(PowerType<?> type, LivingEntity entity) {
         super(type, entity);
@@ -57,10 +56,6 @@ public final class PhantomFlightPower extends Power implements SurgingFlight {
         return FLYING_SPEED;
     }
 
-    @Override
-    public float surgeSpeed(Player player, float build) {
-        return FLYING_SPEED + (TOP_FLYING_SPEED - FLYING_SPEED) * build;
-    }
 
     @Override
     public boolean surging(Player player) {

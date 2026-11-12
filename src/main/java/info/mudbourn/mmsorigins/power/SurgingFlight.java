@@ -9,21 +9,30 @@ import net.minecraft.world.entity.player.Player;
  */
 public interface SurgingFlight {
 
-    int BOOST_DELAY_TICKS = 30;
-    int BOOST_RAMP_TICKS = 40;
+    int FIRST_RAMP_TICKS = 60;
+    int HOLD_TICKS = 100;
+    int SECOND_RAMP_TICKS = 40;
+    float FIRST_TOP_SPEED = 0.09F;
+    float SECOND_TOP_SPEED = 0.10125F;
 
     /** The flying speed while not surging. */
     float cruiseSpeed(Player player);
 
-    /** The flying speed while surging, for a build from 0 to 1. */
-    float surgeSpeed(Player player, float build);
-
     /** Whether the holder is surging. */
     boolean surging(Player player);
 
-    /** How far the surge has built after the given ticks of surging, eased from 0 to 1. */
-    static float build(int surgeTicks) {
-        float progress = Math.clamp((surgeTicks - BOOST_DELAY_TICKS) / (float) BOOST_RAMP_TICKS, 0.0F, 1.0F);
-        return progress * progress * (3.0F - 2.0F * progress);
+    /** The flying speed after the given ticks of surging, starting from the cruise speed. */
+    static float surgeSpeed(float cruise, int surgeTicks) {
+        if (surgeTicks <= FIRST_RAMP_TICKS) {
+            return lerp(cruise, FIRST_TOP_SPEED, surgeTicks / (float) FIRST_RAMP_TICKS);
+        }
+        float second = (surgeTicks - FIRST_RAMP_TICKS - HOLD_TICKS) / (float) SECOND_RAMP_TICKS;
+        return lerp(FIRST_TOP_SPEED, SECOND_TOP_SPEED, second);
+    }
+
+    private static float lerp(float from, float to, float progress) {
+        float eased = Math.clamp(progress, 0.0F, 1.0F);
+        eased = eased * eased * (3.0F - 2.0F * eased);
+        return Math.max(from, from + (to - from) * eased);
     }
 }
