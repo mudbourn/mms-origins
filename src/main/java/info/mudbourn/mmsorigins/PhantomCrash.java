@@ -15,6 +15,8 @@ public final class PhantomCrash {
     private static final double DAMAGE_PER_SPEED = 16.0;
     private static final double SAFE_DAMAGE = 2.0;
     private static final float MAX_SPEED_LOST = 4.0F;
+    // 15 blocks per second
+    private static final double MIN_IMPACT_SPEED = 0.75;
 
     private PhantomCrash() {
     }
@@ -23,6 +25,11 @@ public final class PhantomCrash {
         PayloadTypeRegistry.playC2S().register(PhantomCrashPayload.TYPE, PhantomCrashPayload.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(PhantomCrashPayload.TYPE, (payload, context) ->
             crash(context.player(), payload.speedLost()));
+    }
+
+    /** Whether a body moving this fast is going quick enough for an impact to hurt. */
+    public static boolean fastEnough(double speed) {
+        return speed >= MIN_IMPACT_SPEED;
     }
 
     /** The damage an impact losing this much speed deals; zero or less for a gentle bump. */

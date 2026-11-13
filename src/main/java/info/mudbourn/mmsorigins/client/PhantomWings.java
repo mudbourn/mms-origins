@@ -59,7 +59,7 @@ public final class PhantomWings {
         player.setDeltaMovement(velocity);
         player.move(MoverType.SELF, velocity);
         velocity = player.getDeltaMovement();
-        if (player.horizontalCollision || player.verticalCollision) {
+        if ((player.horizontalCollision || player.verticalCollision) && PhantomCrash.fastEnough(before)) {
             crash(before - velocity.length());
         }
         lastSet = velocity;
