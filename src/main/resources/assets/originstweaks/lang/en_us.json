@@ -176,7 +176,7 @@
 	"power.originstweaks.phantom_sunburn.description": "You catch fire in direct sunlight unless you wear a helmet or hold an umbrella.",
 	"badge.originstweaks.phantom_sunburn.0": "A helmet blocks the burn but loses 1 durability per second in the sun. An umbrella blocks it for free.",
 	"badge.originstweaks.phantomize.0": "Sneak and press or hold [Secondary] to transform into a phantom over half a second, and back again. It lasts until you change back and costs no soul energy.",
-	"badge.originstweaks.phantomize.1": "In Phantom Form you look like a phantom with a smaller body. Having no arms, you will your tools to act with soul magic: each item use costs 5 soul energy, and below 5 you cannot use items. Hostile mobs cannot target you. A mob you strike hunts you down regardless.",
+	"badge.originstweaks.phantomize.1": "In Phantom Form you look like a phantom with a smaller body. Having no arms, you will your tools to act with soul magic: each item use costs 5 soul energy, and below 5 you cannot use items. Each melee hit with something in your main hand costs 3, and below 3 you cannot strike with it at all. Bare-handed hits are free. Hostile mobs cannot target you. A mob you strike hunts you down regardless.",
 	"badge.originstweaks.phantomize.2": "Phantom Form lets you fly by double-tapping jump, free of cost. You glide toward where you look, keep your momentum and bank into turns like a phantom. Braking sheds speed gradually, and slamming into something at speed hurts.",
 	"badge.originstweaks.phantomize.3": "Sprinting while flying doubles your flight speed. Keep it up for 1.5 s and you build smoothly over 2 s to an avian's top surge speed.",
 	"power.originstweaks.phantom_kinship.name": "Phantom Kinship",

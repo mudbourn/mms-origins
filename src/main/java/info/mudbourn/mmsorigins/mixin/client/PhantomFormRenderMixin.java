@@ -8,6 +8,7 @@ import io.github.apace100.apoli.util.ApoliLivingEntityRenderState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.entity.state.PhantomRenderState;
 import net.minecraft.client.renderer.state.CameraRenderState;
@@ -51,6 +52,10 @@ public abstract class PhantomFormRenderMixin {
         if (!(state instanceof PhantomFormState form) || !form.mmsOrigins$phantomForm()) {
             return;
         }
+        if (mmsOrigins$ownFirstPerson(state)) {
+            ci.cancel();
+            return;
+        }
         PhantomRenderState phantom = mmsOrigins$phantomState();
         mmsOrigins$copy(state, phantom);
         PhantomFlightPose.Angles angles = form.mmsOrigins$phantomPose();
@@ -67,6 +72,16 @@ public abstract class PhantomFormRenderMixin {
             .submit(phantom, pose, collector, camera);
         pose.popPose();
         ci.cancel();
+    }
+
+    /** Whether this is the local player seen from their own first-person camera. */
+    @Unique
+    private static boolean mmsOrigins$ownFirstPerson(LivingEntityRenderState state) {
+        Minecraft client = Minecraft.getInstance();
+        return client.player != null
+            && client.options.getCameraType().isFirstPerson()
+            && state instanceof AvatarRenderState avatar
+            && avatar.id == client.player.getId();
     }
 
     /** The shared phantom render state, extracted from a template phantom on first use. */

@@ -297,5 +297,44 @@
 				}
 			]
 		}
+	},
+	"will_strikes": {
+		"type": "origins:action_on_hit",
+		"damage_condition": {
+			"type": "origins:projectile",
+			"inverted": true
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:phantomize_morph",
+					"comparison": ">=",
+					"compare_to": 10
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition": {
+						"type": "origins:empty"
+					},
+					"inverted": true
+				}
+			]
+		},
+		"bientity_action": {
+			"type": "origins:actor_action",
+			"action": {
+				"type": "origins:change_resource",
+				"resource": "*:soulbound_energy",
+				"change": -3,
+				"operation": "add"
+			}
+		}
 	}
 }
