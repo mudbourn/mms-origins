@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -22,7 +23,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -47,7 +47,7 @@ import java.util.Set;
  * spoils trade for all. This holds for every piglin, not just those with a
  * kinsman near.
  */
-@Mixin(PiglinAi.class)
+@Mixin(value = PiglinAi.class, priority = 900)
 public class PiglinBarterMixin {
 
     @Unique
@@ -67,17 +67,17 @@ public class PiglinBarterMixin {
         ResourceKey.create(Registries.LOOT_TABLE,
             Identifier.fromNamespaceAndPath("mms_origins", "gameplay/piglin_bartering"));
 
-    @Inject(method = "getBarterResponseItems", at = @At("HEAD"), cancellable = true)
-    private static void mmsOrigins$kinsmenLoot(Piglin piglin, CallbackInfoReturnable<List<ItemStack>> cir) {
+    @ModifyReturnValue(method = "getBarterResponseItems", at = @At("RETURN"))
+    private static List<ItemStack> mmsOrigins$kinsmenLoot(List<ItemStack> original, Piglin piglin) {
         Level level = piglin.level();
         if (!(level instanceof ServerLevel serverLevel)) {
-            return;
+            return original;
         }
         Player player = level.getNearestPlayer(piglin, MMS_KIN_RANGE);
         if (player == null || !MmsOriginsPowers.KINSMEN.isActive(player)) {
-            return;
+            return original;
         }
-        cir.setReturnValue(mmsOrigins$rollKinBarter(serverLevel, piglin));
+        return mmsOrigins$rollKinBarter(serverLevel, piglin);
     }
 
     // A zombified player anywhere near sours the piglin on trade; it keeps the gold instead of paying out.

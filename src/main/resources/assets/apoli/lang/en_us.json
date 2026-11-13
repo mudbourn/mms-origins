@@ -1,0 +1,8 @@
+{
+  "tooltip.apoli.unusable.trident.single": "Unusable (%s)",
+  "tooltip.apoli.unusable.trident.multiple": "Unusable (%s)",
+  "tooltip.apoli.unusable.brush.single": "Unusable (%s)",
+  "tooltip.apoli.unusable.brush.multiple": "Unusable (%s)",
+  "tooltip.apoli.unusable.bundle.single": "Unusable (%s)",
+  "tooltip.apoli.unusable.bundle.multiple": "Unusable (%s)"
+}

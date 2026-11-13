@@ -100,7 +100,7 @@
   "power.mms_origins.spore_haze.name": "Mind Haze",
   "power.mms_origins.spore_haze.description": "A green fog of spores that mends you and bends the wills of the beasts caught in it.",
   "badge.mms_origins.spore_haze.0": "Press [Primary] while standing to loose a spore haze of 5 blocks radius that lingers 9 s. Cooldown 60 s.",
-  "badge.mms_origins.spore_haze.1": "Inside the haze you gain Regeneration I. Every other mob in it gets Weakness and Slowness II; other players get Weakness and Slowness I that wear off twice as fast.",
+  "badge.mms_origins.spore_haze.1": "Inside the haze you gain Regeneration I while another mob or player shares it. Every other mob in it gets Weakness and Slowness II; other players get Weakness and Slowness I that wear off twice as fast.",
   "badge.mms_origins.spore_haze.2": "Any mob it touches becomes your loyal soldier for 30 s: it follows you, fights what you fight or what hurts you, and spares you and your other soldiers. Bosses (over 50 max health) and Grovekeepers are immune to the mind effect.",
   "badge.mms_origins.spore_haze.3": "Afterwards the mob returns to its own ways but never turns on you again, unless you strike it first.",
   "power.mms_origins.fungal_constitution.name": "Fungal Constitution",

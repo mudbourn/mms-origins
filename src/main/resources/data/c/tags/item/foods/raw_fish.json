@@ -92,6 +92,18 @@
     {
       "id": "accdelight:radgill_fillet",
       "required": false
+    },
+    {
+      "id": "bountiful-fish:seahorse",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:starfish",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:marine_flatworm",
+      "required": false
     }
   ]
 }

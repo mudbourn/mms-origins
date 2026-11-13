@@ -48,6 +48,18 @@
     {
       "id": "alexscaves:darkened_apple",
       "required": false
+    },
+    {
+      "id": "#c:foods/fruit",
+      "required": false
+    },
+    {
+      "id": "#c:foods/vegetable",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:half_pineapple",
+      "required": false
     }
   ]
 }

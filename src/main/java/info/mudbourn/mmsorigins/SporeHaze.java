@@ -42,7 +42,7 @@ public final class SporeHaze {
     private static final int PLAYER_EFFECT_TICKS = 30;
     private static final int DUST_COLOR = 0x5FA82A;
     private static final float DUST_SCALE = 2.0f;
-    private static final int DUST_PER_PUFF = 14;
+    private static final int DUST_PER_PUFF = 20;
     private static final List<Cloud> CLOUDS = new ArrayList<>();
 
     private SporeHaze() {
@@ -122,14 +122,23 @@ public final class SporeHaze {
             AABB.ofSize(cloud.center, RADIUS * 2.0, RADIUS * 2.0, RADIUS * 2.0),
             entity -> entity.isAlive() && entity.distanceToSqr(cloud.center) <= RADIUS * RADIUS
         );
+        LivingEntity owner = null;
+        boolean occupied = false;
         for (LivingEntity entity : inside) {
             if (entity.getUUID().equals(cloud.owner)) {
-                entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, PULSE_INTERVAL * 2, 0, true, true, true));
+                owner = entity;
             } else if (entity instanceof Mob mob) {
+                occupied = true;
                 touch(mob, cloud.owner);
-            } else if (entity instanceof Player player && !player.isSpectator() && !player.isCreative()) {
-                touchPlayer(player);
+            } else if (entity instanceof Player player && !player.isSpectator()) {
+                occupied = true;
+                if (!player.isCreative()) {
+                    touchPlayer(player);
+                }
             }
+        }
+        if (owner != null && occupied) {
+            owner.addEffect(new MobEffectInstance(MobEffects.REGENERATION, PULSE_INTERVAL * 2, 0, true, true, true));
         }
     }
 
