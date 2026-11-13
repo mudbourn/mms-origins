@@ -1,0 +1,10 @@
+{
+  "required": false,
+  "package": "info.mudbourn.mmsorigins.mixin.nocreativedrift",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "info.mudbourn.mmsorigins.mixin.nocreativedrift.NoCreativeDriftMixinGate",
+  "client": ["PhantomKeepsDriftMixin"],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

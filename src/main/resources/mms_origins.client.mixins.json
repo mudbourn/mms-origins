@@ -23,6 +23,7 @@
     "PhantomWingsTravelMixin",
     "PiglinBruteAdmirePoseMixin",
     "PlayerRendererMixin",
+    "UnusableReasonTooltipMixin",
     "WingsElytraTextureMixin",
     "ZombieShakeMixin"
   ],

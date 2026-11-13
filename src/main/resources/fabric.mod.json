@@ -23,7 +23,8 @@
   "mixins": [
     "mms_origins.mixins.json",
     "mms_origins.client.mixins.json",
-    "mms_origins.originsclasses.mixins.json"
+    "mms_origins.originsclasses.mixins.json",
+    "mms_origins.nocreativedrift.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.0",
