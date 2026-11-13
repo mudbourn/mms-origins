@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "expanded_weaponry:heavy_golden_helmet",
+      "required": false
+    },
+    {
+      "id": "expanded_weaponry:heavy_golden_chestplate",
+      "required": false
+    },
+    {
+      "id": "expanded_weaponry:heavy_golden_leggings",
+      "required": false
+    },
+    {
+      "id": "expanded_weaponry:heavy_golden_boots",
+      "required": false
+    }
+  ]
+}

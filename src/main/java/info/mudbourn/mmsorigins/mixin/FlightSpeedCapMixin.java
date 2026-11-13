@@ -2,10 +2,13 @@ package info.mudbourn.mmsorigins.mixin;
 
 import info.mudbourn.mmsorigins.AvianClimb;
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
+import io.github.apace100.apoli.component.PowerHolderComponent;
+import io.github.apace100.apoli.power.CooldownPower;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -20,6 +23,11 @@ public abstract class FlightSpeedCapMixin {
     private static final double AVIAN_CRUISE_GAIN = 0.08;
     private static final float AVIAN_CLIMB_PITCH = -25.0F;
     private static final double AVIAN_RISING = 0.1;
+    private static final int AVIAN_SURGE_RECOIL_TICKS = 20;
+    private static final int AVIAN_SURGE_HOLD_TICKS = 10;
+
+    @Unique
+    private double mmsOrigins$surgeSpeed;
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void mmsOrigins$capFlightSpeed(CallbackInfo ci) {
@@ -37,12 +45,28 @@ public abstract class FlightSpeedCapMixin {
         if (player.isFallFlying()
                 && MmsOriginsPowers.holds(player, MmsOriginsPowers.AVIAN_PEACE)
                 && !AvianClimb.climbing(player)) {
+            motion = mmsOrigins$holdAvianSurge(player, motion);
             motion = mmsOrigins$holdAvianCruise(player, motion);
             player.setDeltaMovement(motion);
         }
         if (motion.lengthSqr() > MAX_FLIGHT_SPEED * MAX_FLIGHT_SPEED) {
             player.setDeltaMovement(motion.normalize().scale(MAX_FLIGHT_SPEED));
         }
+    }
+
+    private Vec3 mmsOrigins$holdAvianSurge(Player player, Vec3 motion) {
+        PowerHolderComponent component = PowerHolderComponent.KEY.getNullable(player);
+        CooldownPower recoil = component == null ? null : component.getPower(MmsOriginsPowers.AVIAN_SURGE_RECOIL);
+        if (recoil == null || recoil.getRemainingTicks() <= AVIAN_SURGE_RECOIL_TICKS - AVIAN_SURGE_HOLD_TICKS) {
+            mmsOrigins$surgeSpeed = 0.0;
+            return motion;
+        }
+        double speed = motion.length();
+        if (speed > mmsOrigins$surgeSpeed) {
+            mmsOrigins$surgeSpeed = speed;
+            return motion;
+        }
+        return speed > 0.0 ? motion.scale(mmsOrigins$surgeSpeed / speed) : motion;
     }
 
     private static Vec3 mmsOrigins$holdAvianCruise(Player player, Vec3 motion) {

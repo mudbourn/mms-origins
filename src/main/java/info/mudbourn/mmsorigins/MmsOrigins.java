@@ -1,6 +1,7 @@
 package info.mudbourn.mmsorigins;
 
 import info.mudbourn.mmsorigins.compat.FishOfThievesFairyFishing;
+import info.mudbourn.mmsorigins.compat.HeavyNetheriteFrostResistance;
 import info.mudbourn.mmsorigins.compat.SelfReviveStrainSoundBridge;
 import info.mudbourn.mmsorigins.effect.MmsMobEffects;
 import info.mudbourn.mmsorigins.entity.HenchmanLifecycle;
@@ -59,6 +60,9 @@ public class MmsOrigins implements ModInitializer {
         }
         if (FabricLoader.getInstance().isModLoaded("fishofthieves")) {
             FishOfThievesFairyFishing.register();
+        }
+        if (FabricLoader.getInstance().isModLoaded("expanded_weaponry")) {
+            HeavyNetheriteFrostResistance.register();
         }
         LOGGER.info("MMS Origins loaded.");
     }

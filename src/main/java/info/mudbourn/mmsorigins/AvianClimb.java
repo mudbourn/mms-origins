@@ -7,8 +7,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 /**
- * Hold-jump climbing for gliding Avians. The holder's client moves the body upward while
- * the jump key is down, thrusting along the look direction, and the server charges stamina from the same player's last input.
+ * Hold-jump climbing for gliding Avians. The holder's client eases the body into a
+ * steady climb while the jump key is down, and the server charges stamina from the
+ * same player's last input.
  */
 public final class AvianClimb {
 

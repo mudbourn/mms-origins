@@ -249,6 +249,10 @@ public final class MmsOriginsPowers {
     public static final PowerType<?> ARACHNID_CLIMBING =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "climbing_toggle"));
 
+    /** Avian surge recoil, triggered by every surge and read by {@code FlightSpeedCapMixin} to hold the surge's speed. */
+    public static final PowerType<CooldownPower> AVIAN_SURGE_RECOIL =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "gift_of_the_skies_surge_recoil"));
+
     /** Range, in blocks, at which a beastfolk's viciousness spooks timid mobs. */
     public static final double VICIOUS_APPEARANCE_RANGE = 12.0;
 
