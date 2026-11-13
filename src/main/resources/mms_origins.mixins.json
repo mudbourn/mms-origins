@@ -19,6 +19,7 @@
     "ShulkerGroundedElytraMixin",
     "BeastfolkDeathCryMixin",
     "CooldownAccelMixin",
+    "ClawModeMiningMixin",
     "CreativeTabDuplicateGuardMixin",
     "CropYieldMixin",
     "EnchantmentEntityLevelMixin",

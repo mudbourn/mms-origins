@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins;
 
+import info.mudbourn.mmsorigins.compat.DummyActionOnHitBridge;
 import info.mudbourn.mmsorigins.compat.FishOfThievesFairyFishing;
 import info.mudbourn.mmsorigins.compat.HeavyNetheriteFrostResistance;
 import info.mudbourn.mmsorigins.compat.SelfReviveStrainSoundBridge;
@@ -57,6 +58,7 @@ public class MmsOrigins implements ModInitializer {
         if (FabricLoader.getInstance().isModLoaded("mms_combat")) {
             LogoutBodyFurBridge.register();
             SelfReviveStrainSoundBridge.register();
+            DummyActionOnHitBridge.register();
         }
         if (FabricLoader.getInstance().isModLoaded("fishofthieves")) {
             FishOfThievesFairyFishing.register();
