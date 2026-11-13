@@ -1,6 +1,9 @@
 package info.mudbourn.mmsorigins.client;
 
 import info.mudbourn.mmsorigins.MmsOriginsPowers;
+import info.mudbourn.mmsorigins.PhantomCrash;
+import info.mudbourn.mmsorigins.network.PhantomCrashPayload;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Abilities;
@@ -12,7 +15,8 @@ import net.minecraft.world.phys.Vec3;
  * with momentum: thrust eases the velocity toward where the player looks, and with no
  * thrust the body glides on, slowly turning its heading toward the look direction. Top
  * speed follows the flying speed that {@link FlightSurge} drives, so the cruise and surge
- * curve is unchanged.
+ * curve is unchanged. Braking sheds speed gradually, and slamming into something hurts
+ * through {@link PhantomCrash}.
  */
 public final class PhantomWings {
 
@@ -22,7 +26,7 @@ public final class PhantomWings {
     private static final double CLIMB_SHARE = 0.6;
     private static final double GLIDE_DRAG = 0.985;
     private static final double GLIDE_STEER = 0.05;
-    private static final double BRAKE_DRAG = 0.88;
+    private static final double BRAKE_DRAG = 0.96;
     private static final double REST_SPEED = 0.01;
     private static final double IMPULSE_THRESHOLD = 0.4;
 
@@ -51,9 +55,13 @@ public final class PhantomWings {
         }
         double limit = abilities.getFlyingSpeed() * (surging(player) ? 2.0 : 1.0) * SPEED_PER_FLYING_SPEED;
         velocity = steer(player, input, limit);
+        double before = velocity.length();
         player.setDeltaMovement(velocity);
         player.move(MoverType.SELF, velocity);
         velocity = player.getDeltaMovement();
+        if (player.horizontalCollision || player.verticalCollision) {
+            crash(before - velocity.length());
+        }
         lastSet = velocity;
         player.resetFallDistance();
         player.calculateEntityAnimation(true);
@@ -81,6 +89,13 @@ public final class PhantomWings {
             next = glide(next, look);
         }
         return forward < 0.0 ? next.scale(BRAKE_DRAG) : next;
+    }
+
+    /** Reports an impact hard enough to hurt, so the server deals the crash damage. */
+    private static void crash(double speedLost) {
+        if (PhantomCrash.damage(speedLost) > 0.0) {
+            ClientPlayNetworking.send(new PhantomCrashPayload((float) speedLost));
+        }
     }
 
     private static boolean surging(LocalPlayer player) {

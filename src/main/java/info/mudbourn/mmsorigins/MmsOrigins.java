@@ -48,6 +48,7 @@ public class MmsOrigins implements ModInitializer {
         SporeHaze.register();
         CultivateStoneAction.register();
         GuardianBeam.register();
+        PhantomCrash.register();
         LaunchAction.register();
         BodyFurAttachment.touch();
         BodyTailAttachment.touch();

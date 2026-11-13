@@ -259,13 +259,22 @@
 		"render_type": "blindness",
 		"view_distance": 10,
 		"phase_down_condition": {
-			"type": "origins:and",
+			"type": "origins:or",
 			"conditions": [
 				{
-					"type": "origins:on_block"
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:on_block"
+						},
+						{
+							"type": "origins:sneaking"
+						}
+					]
 				},
 				{
-					"type": "origins:sneaking"
+					"type": "origins:power_active",
+					"power": "originstweaks:phantomize_flight"
 				}
 			]
 		},
@@ -346,6 +355,11 @@
 				{
 					"type": "origins:power_active",
 					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:power_active",
+					"power": "originstweaks:phantomize_flight",
+					"inverted": true
 				},
 				{
 					"type": "origins:in_block",
