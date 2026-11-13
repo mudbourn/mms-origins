@@ -12,8 +12,8 @@ import net.minecraft.server.level.ServerPlayer;
  */
 public final class PhantomCrash {
 
-    private static final double DAMAGE_PER_SPEED = 10.0;
-    private static final double SAFE_DAMAGE = 3.0;
+    private static final double DAMAGE_PER_SPEED = 16.0;
+    private static final double SAFE_DAMAGE = 2.0;
     private static final float MAX_SPEED_LOST = 4.0F;
 
     private PhantomCrash() {

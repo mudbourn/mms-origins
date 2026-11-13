@@ -24,10 +24,10 @@ public final class PhantomWings {
     private static final double THRUST_GAIN = 0.07;
     private static final double STRAFE_SHARE = 0.25;
     private static final double CLIMB_SHARE = 0.6;
-    private static final double GLIDE_DRAG = 0.985;
+    private static final double GLIDE_DRAG = 0.996;
     private static final double GLIDE_STEER = 0.05;
-    private static final double BRAKE_DRAG = 0.96;
-    private static final double REST_SPEED = 0.01;
+    private static final double BRAKE_DRAG = 0.98;
+    private static final double REST_SPEED = 0.003;
     private static final double IMPULSE_THRESHOLD = 0.4;
 
     private static Vec3 velocity = Vec3.ZERO;

@@ -252,6 +252,48 @@
 					"resource": "*:phantomize_morph",
 					"comparison": ">=",
 					"compare_to": 10
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:soulbound_energy",
+					"comparison": "<",
+					"compare_to": 5
+				}
+			]
+		}
+	},
+	"will_tools": {
+		"type": "origins:action_on_item_use",
+		"trigger_type": "instant",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phantomize_toggle"
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:phantomize_morph",
+					"comparison": ">=",
+					"compare_to": 10
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:change_resource",
+					"resource": "*:soulbound_energy",
+					"change": -5,
+					"operation": "add"
+				},
+				{
+					"type": "origins:play_sound",
+					"sound": "minecraft:block.soul_sand.step",
+					"volume": 0.6,
+					"pitch": 1.4
 				}
 			]
 		}
