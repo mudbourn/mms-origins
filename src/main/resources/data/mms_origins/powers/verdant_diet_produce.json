@@ -1,0 +1,19 @@
+{
+  "type": "origins:modify_food",
+  "hidden": true,
+  "item_condition": {
+    "type": "origins:ingredient",
+    "ingredient": {
+      "tag": "mms_origins:fresh_produce"
+    }
+  },
+  "food_modifier": {
+    "operation": "multiply_base",
+    "value": 0.5
+  },
+  "saturation_modifier": {
+    "operation": "multiply_base",
+    "value": 1.0
+  },
+  "prevent_effects": false
+}
