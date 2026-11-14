@@ -451,6 +451,8 @@ public final class MmsPowerFactories {
                     .add("silk_resource", ApoliDataTypes.POWER_TYPE, null)
                     .add("silk_cost_interval", SerializableDataTypes.INT, 15)
                     .add("snare_silk_cost", SerializableDataTypes.INT, 1)
+                    .add("hold_silk_interval", SerializableDataTypes.INT, 15)
+                    .add("block_silk_cost", SerializableDataTypes.INT, 0)
                     .add("sound", SerializableDataTypes.SOUND_EVENT, null)
                     .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key()),
                 data -> (type, entity) -> {
@@ -469,6 +471,8 @@ public final class MmsPowerFactories {
                         data.get("silk_resource"),
                         data.getInt("silk_cost_interval"),
                         data.getInt("snare_silk_cost"),
+                        data.getInt("hold_silk_interval"),
+                        data.getInt("block_silk_cost"),
                         data.get("sound"));
                     power.setKey(data.get("key"));
                     return power;

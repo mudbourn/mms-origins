@@ -26,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
 
 /**
  * A held web line. It fires once toward the crosshair and holds while the key is
- * held. Only creature shots spend silk; block shots are free. On a block it becomes a rope the holder swings from, and holding use with
+ * held. Every shot spends silk, and holding a creature drains it, faster while reeling. On a block it becomes a rope the holder swings from, and holding use with
  * an empty hand reels them in, speeding up after a delay; the swing itself runs on
  * the holder's client in {@link info.mudbourn.mmsorigins.client.WebSwing}. On a
  * creature, the same rope tethers the creature instead: it cannot stray past the rope,
@@ -55,6 +55,8 @@ public final class GrappleHookPower extends Power implements Active {
     private final PowerType<?> silkResource;
     private final int silkCostInterval;
     private final int snareSilkCost;
+    private final int holdSilkInterval;
+    private final int blockSilkCost;
     private final SoundEvent sound;
 
     private Key key = new Key();
@@ -82,6 +84,8 @@ public final class GrappleHookPower extends Power implements Active {
             PowerType<?> silkResource,
             int silkCostInterval,
             int snareSilkCost,
+            int holdSilkInterval,
+            int blockSilkCost,
             SoundEvent sound) {
         super(type, entity);
         this.maxLength = maxLength;
@@ -96,6 +100,8 @@ public final class GrappleHookPower extends Power implements Active {
         this.silkResource = silkResource;
         this.silkCostInterval = silkCostInterval;
         this.snareSilkCost = snareSilkCost;
+        this.holdSilkInterval = holdSilkInterval;
+        this.blockSilkCost = blockSilkCost;
         this.sound = sound;
         this.setTicking(true);
     }
@@ -165,19 +171,18 @@ public final class GrappleHookPower extends Power implements Active {
             target -> target instanceof LivingEntity living && living.isAlive() && living != player,
             reach * reach);
         Vec3 to;
-        boolean hasSilk = silk == null || silk.getValue() >= snareSilkCost;
-        if (hasSilk && hit != null && hit.getEntity() instanceof LivingEntity living) {
+        boolean canSnare = silk == null || silk.getValue() >= snareSilkCost;
+        boolean canAnchor = silk == null || silk.getValue() >= blockSilkCost;
+        if (canSnare && hit != null && hit.getEntity() instanceof LivingEntity living) {
             anchorEntity = living;
             entityRope = Math.max(arriveDistance, player.position().distanceTo(living.position()));
             syncedRope = entityRope;
             entityReelTicks = 0;
-            if (silk != null) {
-                silk.setValue(silk.getValue() - snareSilkCost);
-                PowerHolderComponent.syncPower(player, silk.getType());
-            }
+            spend(player, silk, snareSilkCost);
             living.addEffect(new MobEffectInstance(MmsMobEffects.WEBBED, WEBBED_TICKS), player);
             to = living.getEyePosition();
-        } else if (block.getType() == HitResult.Type.BLOCK) {
+        } else if (canAnchor && block.getType() == HitResult.Type.BLOCK) {
+            spend(player, silk, blockSilkCost);
             anchorPoint = block.getLocation();
             to = anchorPoint;
         } else {
@@ -223,7 +228,7 @@ public final class GrappleHookPower extends Power implements Active {
         Vec3 velocity = anchorEntity.getDeltaMovement();
         double inward = velocity.dot(dir);
         boolean reeling = WebReel.isReeling(player);
-        if (reeling && !spendSilk(player)) {
+        if (!spendSilk(player, reeling ? silkCostInterval : holdSilkInterval)) {
             release();
             return;
         }
@@ -297,7 +302,14 @@ public final class GrappleHookPower extends Power implements Active {
         return null;
     }
 
-    private boolean spendSilk(Player player) {
+    private void spend(Player player, VariableIntPower silk, int cost) {
+        if (silk != null && cost > 0) {
+            silk.setValue(silk.getValue() - cost);
+            PowerHolderComponent.syncPower(player, silk.getType());
+        }
+    }
+
+    private boolean spendSilk(Player player, int interval) {
         VariableIntPower silk = findSilk(player);
         if (silk == null) {
             return true;
@@ -305,7 +317,7 @@ public final class GrappleHookPower extends Power implements Active {
         if (silk.getValue() <= 0) {
             return false;
         }
-        if (++silkTimer >= silkCostInterval) {
+        if (++silkTimer >= interval) {
             silkTimer = 0;
             silk.decrement();
             PowerHolderComponent.syncPower(player, silk.getType());

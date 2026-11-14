@@ -134,6 +134,8 @@
 		"silk_resource": "originstweaks:master_of_webs_silk_resource",
 		"silk_cost_interval": 5,
 		"snare_silk_cost": 1,
+		"hold_silk_interval": 15,
+		"block_silk_cost": 2,
 		"sound": "minecraft:entity.item_frame.remove_item",
 		"hud_render": {
 			"should_render": false
