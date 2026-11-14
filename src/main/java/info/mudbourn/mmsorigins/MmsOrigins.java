@@ -49,6 +49,7 @@ public class MmsOrigins implements ModInitializer {
         CultivateStoneAction.register();
         GuardianBeam.register();
         PhantomCrash.register();
+        WebReel.register();
         LaunchAction.register();
         BodyFurAttachment.touch();
         BodyTailAttachment.touch();

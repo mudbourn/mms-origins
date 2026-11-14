@@ -442,10 +442,15 @@ public final class MmsPowerFactories {
                     .add("max_length", SerializableDataTypes.DOUBLE, 24.0)
                     .add("block_max_length", SerializableDataTypes.DOUBLE, 24.0)
                     .add("reel_speed", SerializableDataTypes.DOUBLE, 1.0)
+                    .add("max_reel_speed", SerializableDataTypes.DOUBLE, 1.7)
+                    .add("reel_ramp_delay", SerializableDataTypes.INT, 20)
+                    .add("reel_ramp_ticks", SerializableDataTypes.INT, 30)
                     .add("entity_reel_speed", SerializableDataTypes.DOUBLE, 0.9)
+                    .add("max_entity_reel_speed", SerializableDataTypes.DOUBLE, 0.9)
                     .add("arrive_distance", SerializableDataTypes.DOUBLE, 1.5)
                     .add("silk_resource", ApoliDataTypes.POWER_TYPE, null)
                     .add("silk_cost_interval", SerializableDataTypes.INT, 15)
+                    .add("snare_silk_cost", SerializableDataTypes.INT, 1)
                     .add("sound", SerializableDataTypes.SOUND_EVENT, null)
                     .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key()),
                 data -> (type, entity) -> {
@@ -455,10 +460,15 @@ public final class MmsPowerFactories {
                         data.getDouble("max_length"),
                         data.getDouble("block_max_length"),
                         data.getDouble("reel_speed"),
+                        data.getDouble("max_reel_speed"),
+                        data.getInt("reel_ramp_delay"),
+                        data.getInt("reel_ramp_ticks"),
                         data.getDouble("entity_reel_speed"),
+                        data.getDouble("max_entity_reel_speed"),
                         data.getDouble("arrive_distance"),
                         data.get("silk_resource"),
                         data.getInt("silk_cost_interval"),
+                        data.getInt("snare_silk_cost"),
                         data.get("sound"));
                     power.setKey(data.get("key"));
                     return power;
