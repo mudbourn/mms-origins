@@ -492,6 +492,18 @@
     {
       "id": "accdelight:grub_skewer",
       "required": false
+    },
+    {
+      "id": "alexscaves:seething_stew",
+      "required": false
+    },
+    {
+      "id": "alexscaves:alex_meal",
+      "required": false
+    },
+    {
+      "id": "alexscaves:vesper_wing",
+      "required": false
     }
   ]
 }

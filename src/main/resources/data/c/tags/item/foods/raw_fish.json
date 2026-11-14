@@ -104,6 +104,10 @@
     {
       "id": "bountiful-fish:marine_flatworm",
       "required": false
+    },
+    {
+      "id": "alexscaves:trilocaris_tail",
+      "required": false
     }
   ]
 }

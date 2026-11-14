@@ -38,13 +38,14 @@
     }
   },
   "luck": {
-    "type": "origins:attribute",
+    "type": "origins:conditioned_attribute",
     "modifier": {
       "name": "Explorer luck",
       "attribute": "minecraft:generic.luck",
       "value": 8,
       "operation": "addition"
     },
+    "tick_rate": 20,
     "condition": {
       "type": "origins:command",
       "command": "execute if entity @s[tag=mms_jobs.explorer]",

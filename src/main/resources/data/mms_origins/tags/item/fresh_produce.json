@@ -60,6 +60,14 @@
     {
       "id": "fishofthieves:half_pineapple",
       "required": false
+    },
+    {
+      "id": "alexscaves:serene_salad",
+      "required": false
+    },
+    {
+      "id": "alexscaves:giant_sweetberry",
+      "required": false
     }
   ]
 }

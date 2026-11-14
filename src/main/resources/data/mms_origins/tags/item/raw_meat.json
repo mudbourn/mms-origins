@@ -135,6 +135,10 @@
     {
       "id": "farmersdelight:bacon",
       "required": false
+    },
+    {
+      "id": "alexscaves:vesper_wing",
+      "required": false
     }
   ]
 }
