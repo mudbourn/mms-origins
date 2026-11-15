@@ -50,6 +50,26 @@
     {
       "id": "biomeswevegone:peat",
       "required": false
+    },
+    {
+      "id": "biomeswevegone:brown_mushroom_stem",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:white_mushroom_stem",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:green_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:weeping_milkcap_mushroom_block",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:wood_blewit_mushroom_block",
+      "required": false
     }
   ]
 }
