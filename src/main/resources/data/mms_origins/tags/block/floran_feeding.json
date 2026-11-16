@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:crops",
+    "minecraft:farmland",
+    {
+      "id": "biomeswevegone:lush_farmland",
+      "required": false
+    }
+  ]
+}

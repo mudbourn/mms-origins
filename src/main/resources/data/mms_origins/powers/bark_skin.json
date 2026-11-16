@@ -1,5 +1,6 @@
 {
-  "type": "origins:attribute",
+  "type": "mms_origins:sun_armor",
+  "resource": "mms_origins:sun_power",
   "badges": [
     {
       "type": "origins:tooltip",
@@ -8,11 +9,5 @@
         "translate": "badge.mms_origins.bark_skin.0"
       }
     }
-  ],
-  "modifier": {
-    "name": "Bark skin armor bonus",
-    "attribute": "minecraft:generic.armor",
-    "value": 2.0,
-    "operation": "addition"
-  }
+  ]
 }

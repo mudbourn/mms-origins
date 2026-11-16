@@ -7,6 +7,8 @@
     "AvatarBodyHideMixin",
     "ChooseOriginGridMixin",
     "FireOverlayLowerMixin",
+    "GrovekeeperRiderHandMixin",
+    "GrovekeeperRiderHideMixin",
     "GuardianBeamSubmitMixin",
     "GuardianRendererInvoker",
     "LavaSurfaceAlphaMixin",

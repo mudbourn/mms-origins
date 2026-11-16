@@ -4,9 +4,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import info.mudbourn.mmsorigins.MmsOrigins;
 import info.mudbourn.mmsorigins.entity.FloranHenchman;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.monster.creaking.CreakingModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.LivingEntityEmissiveLayer;
@@ -19,6 +23,9 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CocoaBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * Draws the Grovekeeper as a jungle creaking: the creaking model with softened
@@ -49,6 +56,7 @@ public class FloranHenchmanRenderer
             RenderTypes::eyes,
             true));
         this.addLayer(new FlowerLayer(this));
+        this.addLayer(new CoconutLayer(this));
     }
 
     @Override
@@ -62,10 +70,39 @@ public class FloranHenchmanRenderer
     }
 
     @Override
+    public boolean shouldRender(FloranHenchman henchman, Frustum frustum, double x, double y, double z) {
+        return !hiddenFromRider(henchman) && super.shouldRender(henchman, frustum, x, y, z);
+    }
+
+    @Override
+    public void submit(
+            CreakingRenderState state,
+            PoseStack poseStack,
+            SubmitNodeCollector collector,
+            CameraRenderState camera) {
+        if (!((State) state).hiddenFromRider) {
+            super.submit(state, poseStack, collector, camera);
+        }
+    }
+
+    /** Whether the Grovekeeper is the mount of the first-person camera entity. */
+    private static boolean hiddenFromRider(FloranHenchman henchman) {
+        Minecraft minecraft = Minecraft.getInstance();
+        return henchman.hasPassenger(minecraft.getCameraEntity())
+            && minecraft.options.getCameraType().isFirstPerson();
+    }
+
+    @Override
     public void extractRenderState(FloranHenchman henchman, CreakingRenderState state, float partialTick) {
         super.extractRenderState(henchman, state, partialTick);
         state.attackAnimationState.copyFrom(henchman.attackAnimationState);
         state.canMove = henchman.canMove();
+        ((State) state).carrying = henchman.isVehicle();
+        ((State) state).hiddenFromRider = hiddenFromRider(henchman);
+        if (((State) state).hiddenFromRider) {
+            state.displayFireAnimation = false;
+            state.shadowRadius = 0.0f;
+        }
         state.eyesGlowing = henchman.getTarget() != null || !henchman.canMove();
         this.itemModelResolver.updateForLiving(
             ((State) state).flower,
@@ -77,6 +114,8 @@ public class FloranHenchmanRenderer
     public static class State extends CreakingRenderState {
 
         public final ItemStackRenderState flower = new ItemStackRenderState();
+        public boolean carrying;
+        public boolean hiddenFromRider;
     }
 
     private static final class LeavesLayer extends RenderLayer<CreakingRenderState, CreakingModel> {
@@ -104,6 +143,40 @@ public class FloranHenchmanRenderer
                     -1,
                     1);
             }
+        }
+    }
+
+    private static final class CoconutLayer extends RenderLayer<CreakingRenderState, CreakingModel> {
+
+        private static final BlockState COCOA_POD = Blocks.COCOA.defaultBlockState().setValue(CocoaBlock.AGE, 2);
+        private static final float POD_SCALE = 0.9f;
+
+        private CoconutLayer(RenderLayerParent<CreakingRenderState, CreakingModel> parent) {
+            super(parent);
+        }
+
+        @Override
+        public void submit(
+                PoseStack poseStack,
+                SubmitNodeCollector collector,
+                int light,
+                CreakingRenderState state,
+                float yRot,
+                float xRot) {
+            if (!((State) state).carrying || state.isInvisible) {
+                return;
+            }
+            ModelPart upperBody = this.getParentModel().root().getChild("root").getChild("upper_body");
+            poseStack.pushPose();
+            this.getParentModel().root().getChild("root").translateAndRotate(poseStack);
+            upperBody.translateAndRotate(poseStack);
+            upperBody.getChild("body").translateAndRotate(poseStack);
+            poseStack.translate(0.0f, 5.5f / 16.0f, 9.0f / 16.0f);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(180.0f));
+            poseStack.scale(POD_SCALE, POD_SCALE, POD_SCALE);
+            poseStack.translate(-0.5f, -0.5f, -0.5f);
+            collector.submitBlock(poseStack, COCOA_POD, light, OverlayTexture.NO_OVERLAY, state.outlineColor);
+            poseStack.popPose();
         }
     }
 

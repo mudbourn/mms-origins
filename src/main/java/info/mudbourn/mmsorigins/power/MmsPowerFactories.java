@@ -17,6 +17,7 @@ import info.mudbourn.mmsorigins.power.condition.CausticMarkedCondition;
 import info.mudbourn.mmsorigins.power.condition.HeightAboveGroundCondition;
 import info.mudbourn.mmsorigins.power.condition.HenchmenCountCondition;
 import info.mudbourn.mmsorigins.power.condition.IncapacitatedCondition;
+import info.mudbourn.mmsorigins.power.condition.OwnsHenchmanCondition;
 import info.mudbourn.mmsorigins.power.condition.ResourceFractionCondition;
 import info.mudbourn.mmsorigins.power.condition.SunIntakeCondition;
 import info.mudbourn.mmsorigins.power.condition.SunStrainCondition;
@@ -34,6 +35,7 @@ import io.github.apace100.calio.data.SerializableDataTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -83,6 +85,8 @@ public final class MmsPowerFactories {
         registerIncapacitated();
         registerSunIntake();
         registerFairyBlessing();
+        registerSunArmor();
+        registerOwnsHenchman();
     }
 
     private static void registerFairyBlessing() {
@@ -636,6 +640,39 @@ public final class MmsPowerFactories {
                     data.getFloat("value"),
                     data.get("operation")))
                 .allowCondition());
+    }
+
+    private static void registerSunArmor() {
+        Identifier id = id("sun_armor");
+        Registry.register(
+            ApoliRegistries.POWER_FACTORY,
+            id,
+            new PowerFactory<>(
+                id,
+                new SerializableData()
+                    .add("resource", ApoliDataTypes.POWER_TYPE)
+                    .add("night_armor", SerializableDataTypes.DOUBLE, 1.0)
+                    .add("peak_armor", SerializableDataTypes.DOUBLE, 5.0)
+                    .add("threshold", SerializableDataTypes.DOUBLE, 0.25),
+                data -> (type, entity) -> new SunArmorPower(
+                    type,
+                    entity,
+                    data.get("resource"),
+                    data.getDouble("night_armor"),
+                    data.getDouble("peak_armor"),
+                    data.getDouble("threshold")))
+                .allowCondition());
+    }
+
+    private static void registerOwnsHenchman() {
+        Identifier id = id("owns_henchman");
+        Registry.register(
+            ApoliRegistries.BIENTITY_CONDITION,
+            id,
+            new ConditionFactory<Tuple<Entity, Entity>>(
+                id,
+                OwnsHenchmanCondition.data(),
+                OwnsHenchmanCondition::condition));
     }
 
     private static Identifier id(String path) {

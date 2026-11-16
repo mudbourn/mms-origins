@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:dirt",
+    "#minecraft:sand",
+    "#mms_origins:lush_soil",
+    "minecraft:farmland",
+    "minecraft:soul_sand",
+    "minecraft:soul_soil"
+  ]
+}

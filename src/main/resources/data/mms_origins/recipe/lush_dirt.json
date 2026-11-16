@@ -1,0 +1,20 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "biomeswevegone"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:dirt",
+    "minecraft:bone_meal"
+  ],
+  "result": {
+    "id": "biomeswevegone:lush_dirt",
+    "count": 1
+  }
+}

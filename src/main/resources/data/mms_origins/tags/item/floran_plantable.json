@@ -1,0 +1,34 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:villager_plantable_seeds",
+    "#minecraft:saplings",
+    "#minecraft:small_flowers",
+    "minecraft:sunflower",
+    "minecraft:lilac",
+    "minecraft:rose_bush",
+    "minecraft:peony",
+    "minecraft:pitcher_plant",
+    "minecraft:melon_seeds",
+    "minecraft:pumpkin_seeds",
+    "minecraft:nether_wart",
+    "minecraft:bamboo",
+    "minecraft:sugar_cane",
+    "minecraft:cactus",
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    "minecraft:crimson_fungus",
+    "minecraft:warped_fungus",
+    "minecraft:short_grass",
+    "minecraft:tall_grass",
+    "minecraft:fern",
+    "minecraft:large_fern",
+    "minecraft:azalea",
+    "minecraft:flowering_azalea",
+    "minecraft:mangrove_propagule",
+    {
+      "id": "#c:seeds",
+      "required": false
+    }
+  ]
+}

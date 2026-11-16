@@ -39,12 +39,17 @@
       "id": "#c:mushrooms",
       "required": false
     },
+    "minecraft:farmland",
     {
       "id": "biomeswevegone:lush_grass_block",
       "required": false
     },
     {
       "id": "biomeswevegone:lush_dirt",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:lush_farmland",
       "required": false
     },
     {
