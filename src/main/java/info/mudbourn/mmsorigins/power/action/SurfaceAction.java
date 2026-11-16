@@ -2,6 +2,7 @@ package info.mudbourn.mmsorigins.power.action;
 
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
@@ -11,6 +12,8 @@ import net.minecraft.world.phys.AABB;
 /**
  * Lifts the entity to the lowest spot within {@code max} blocks above it where its standing
  * hitbox touches no solid block, and as a condition reports whether such a spot exists.
+ * With {@code crawl} set and Crawl on Demand loaded the condition also passes without one,
+ * since the player can be left crawling in place.
  */
 public final class SurfaceAction {
 
@@ -18,10 +21,14 @@ public final class SurfaceAction {
 
     public static SerializableData data() {
         return new SerializableData()
-            .add("max", SerializableDataTypes.DOUBLE, 1.0);
+            .add("max", SerializableDataTypes.DOUBLE, 1.0)
+            .add("crawl", SerializableDataTypes.BOOLEAN, false);
     }
 
     public static boolean condition(SerializableData.Instance data, Entity entity) {
+        if (data.getBoolean("crawl") && FabricLoader.getInstance().isModLoaded("crawlondemand")) {
+            return true;
+        }
         return findLift(entity, data.getDouble("max")) >= 0;
     }
 

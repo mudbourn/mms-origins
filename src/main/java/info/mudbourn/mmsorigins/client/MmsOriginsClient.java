@@ -59,6 +59,7 @@ public class MmsOriginsClient implements ClientModInitializer {
             FlightSurge.tick(client);
             WebSwing.tick(client);
             WebLines.tick(client);
+            LeafCrawlHandoff.tick(client);
             if (client.level != null) {
                 ButterflyFlap.tickAll(client.level.players());
             }
