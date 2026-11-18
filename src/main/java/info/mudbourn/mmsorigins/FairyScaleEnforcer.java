@@ -32,10 +32,10 @@ public final class FairyScaleEnforcer {
     }
 
     public static void register() {
-        ServerTickEvents.END_WORLD_TICK.register(FairyScaleEnforcer::onEndWorldTick);
+        ServerTickEvents.END_LEVEL_TICK.register(FairyScaleEnforcer::onEndLevelTick);
     }
 
-    private static void onEndWorldTick(ServerLevel level) {
+    private static void onEndLevelTick(ServerLevel level) {
         for (ServerPlayer player : level.players()) {
             AttributeInstance scale = player.getAttribute(Attributes.SCALE);
             if (scale == null) {

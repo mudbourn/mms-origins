@@ -25,6 +25,7 @@ public abstract class OriginScaleHideMixin {
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
     private void mmsOrigins$hideUntilScaled(Entity entity, Frustum frustum,
                                             double x, double y, double z,
+                                            float partialTick,
                                             CallbackInfoReturnable<Boolean> cir) {
         if (entity instanceof Player player && OriginScaleGate.awaitingScale(player)) {
             cir.setReturnValue(false);

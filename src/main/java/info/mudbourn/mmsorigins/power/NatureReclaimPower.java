@@ -194,7 +194,7 @@ public final class NatureReclaimPower extends Power implements Active {
     }
 
     private void warnOfNoon(Player player, ServerLevel level) {
-        long dayTime = level.getDayTime();
+        long dayTime = level.getOverworldClockTime();
         long time = dayTime % DAY_LENGTH;
         long day = dayTime / DAY_LENGTH;
         if (time < NOON - noonWarning || time >= NOON || day == lastWarnedDay) {
@@ -250,9 +250,8 @@ public final class NatureReclaimPower extends Power implements Active {
                 int left = strain == null || strainCost <= 0
                     ? 0
                     : (strain.getMax() - strain.getValue()) / strainCost;
-                player.displayClientMessage(
-                    Component.translatable("message.mms_origins.nature_reclaim.success", left),
-                    true);
+                player.sendOverlayMessage(
+                    Component.translatable("message.mms_origins.nature_reclaim.success", left));
             }
             case NOT_ENOUGH -> message(player, "message.mms_origins.nature_reclaim.not_enough");
             default -> message(player, "message.mms_origins.nature_reclaim.no_recipe");
@@ -260,7 +259,7 @@ public final class NatureReclaimPower extends Power implements Active {
     }
 
     private static double daylight(ServerLevel level) {
-        double time = level.getDayTime() % DAY_LENGTH;
+        double time = level.getOverworldClockTime() % DAY_LENGTH;
         return Math.max(0.0, 1.0 - Math.abs(time - NOON) / HALF_DAY);
     }
 
@@ -290,6 +289,6 @@ public final class NatureReclaimPower extends Power implements Active {
     }
 
     private void message(Player player, String key) {
-        player.displayClientMessage(Component.translatable(key), true);
+        player.sendOverlayMessage(Component.translatable(key));
     }
 }

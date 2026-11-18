@@ -4,6 +4,7 @@ import com.github.thedeathlycow.scorchful.item.WaterSkinItem;
 import com.github.thedeathlycow.scorchful.item.component.DrinkContainer;
 import com.github.thedeathlycow.scorchful.registry.SSoundEvents;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
@@ -85,7 +86,7 @@ public class WaterSkinBucketFillMixin {
         if (bucket.getCount() == 1) {
             return used;
         }
-        player.getInventory().placeItemBackInInventory(used);
+        player.getInventory().placeItemBackInInventory(used, Prediction.SERVER_ONLY);
         return bucket.copyWithCount(bucket.getCount() - 1);
     }
 

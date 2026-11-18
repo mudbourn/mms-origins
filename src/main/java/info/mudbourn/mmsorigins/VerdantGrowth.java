@@ -38,10 +38,10 @@ public final class VerdantGrowth {
     }
 
     public static void register() {
-        ServerTickEvents.END_WORLD_TICK.register(VerdantGrowth::onEndWorldTick);
+        ServerTickEvents.END_LEVEL_TICK.register(VerdantGrowth::onEndLevelTick);
     }
 
-    private static void onEndWorldTick(ServerLevel level) {
+    private static void onEndLevelTick(ServerLevel level) {
         int randomTickSpeed = level.getGameRules().get(GameRules.RANDOM_TICK_SPEED);
         if (randomTickSpeed <= 0) {
             return;
@@ -52,8 +52,8 @@ public final class VerdantGrowth {
             }
             float bonus = GROWTH_BONUS + (BLESSED_GROWTH_BONUS - GROWTH_BONUS) * FairyBlessing.strength(player);
             int extraPerSection = Math.max(1, Math.round(randomTickSpeed * bonus));
-            int centerX = player.chunkPosition().x;
-            int centerZ = player.chunkPosition().z;
+            int centerX = player.chunkPosition().x();
+            int centerZ = player.chunkPosition().z();
             for (int dx = -CHUNK_RADIUS; dx <= CHUNK_RADIUS; dx++) {
                 for (int dz = -CHUNK_RADIUS; dz <= CHUNK_RADIUS; dz++) {
                     hastenChunk(level, centerX + dx, centerZ + dz, extraPerSection);

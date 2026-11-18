@@ -46,7 +46,7 @@ public final class LavaViewState {
         int centerZ = SectionPos.blockToSectionCoord(player.getBlockZ());
         int minY = Math.max(client.level.getMinSectionY(), centerY - VERTICAL_SECTION_RADIUS);
         int maxY = Math.min(client.level.getMaxSectionY(), centerY + VERTICAL_SECTION_RADIUS);
-        client.levelRenderer.setSectionRangeDirty(
+        client.levelExtractor.setSectionRangeDirty(
             centerX - radius,
             minY,
             centerZ - radius,

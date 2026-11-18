@@ -66,7 +66,8 @@ public final class LaunchAction {
 
     private static void push(Entity entity, Vec3 velocity) {
         entity.setDeltaMovement(velocity);
-        entity.hurtMarked = true;
+        entity.needsSync = true;
+        entity.syncVelocity = true;
     }
 
     private static Vec3 movementDirection(Entity entity) {

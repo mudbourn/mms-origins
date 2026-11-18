@@ -94,10 +94,9 @@ public class BeastfolkFeatureRenderer extends RenderLayer<AvatarRenderState, Pla
         collector.submitModel(model,
                 state,
                 poseStack,
-                RenderTypes.entityCutoutNoCull(texture),
+                RenderTypes.entityCutout(texture),
                 light,
                 OverlayTexture.NO_OVERLAY,
-                state.outlineColor,
-                null);
+                state.outlineColor);
     }
 }

@@ -1,7 +1,7 @@
 package info.mudbourn.mmsorigins;
 
-import com.github.thedeathlycow.thermoo.api.ThermooAttributes;
-import com.github.thedeathlycow.thermoo.api.temperature.TemperatureAware;
+import com.github.thedeathlycow.thermoo.api.entity.v1.ThermooAttributes;
+import com.github.thedeathlycow.thermoo.api.core.v2.TemperatureAware;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

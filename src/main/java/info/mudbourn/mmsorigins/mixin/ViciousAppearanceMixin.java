@@ -44,7 +44,7 @@ public abstract class ViciousAppearanceMixin {
         if (!((Object) this instanceof Animal mob) || mob.level().isClientSide()) {
             return;
         }
-        if ((mob.tickCount + mob.getId()) % 5 != 0 || mob.getType().is(UNAFRAID) || mmsOrigins$isTamed(mob)) {
+        if ((mob.tickCount + mob.getId()) % 5 != 0 || mob.is(UNAFRAID) || mmsOrigins$isTamed(mob)) {
             return;
         }
         for (Entity passenger : mob.getPassengers()) {

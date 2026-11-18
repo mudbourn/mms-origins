@@ -49,7 +49,7 @@ public final class SunIntakeCondition {
     }
 
     private static double rate(Entity entity, double peak, double sharpness) {
-        double time = entity.level().getDayTime() % 24000L;
+        double time = entity.level().getOverworldClockTime() % 24000L;
         double height = 1.0 - Math.abs(time - NOON) / HALF_DAY;
         if (height <= 0.0) {
             return 0.0;

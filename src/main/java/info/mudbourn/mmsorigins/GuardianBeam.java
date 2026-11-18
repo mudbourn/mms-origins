@@ -49,7 +49,7 @@ public final class GuardianBeam {
     }
 
     public static void register() {
-        PayloadTypeRegistry.playS2C().register(GuardianBeamPayload.TYPE, GuardianBeamPayload.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(GuardianBeamPayload.TYPE, GuardianBeamPayload.CODEC);
         ServerTickEvents.END_SERVER_TICK.register(GuardianBeam::releaseLetGo);
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> stop(handler.getPlayer()));
     }

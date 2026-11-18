@@ -14,10 +14,10 @@ import info.mudbourn.mmsorigins.client.wings.ButterflyWingsModel;
 import info.mudbourn.mmsorigins.client.wings.WingsFeatureRenderer;
 import info.mudbourn.mmsorigins.entity.MmsEntities;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityRenderLayerRegistrationCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
@@ -37,11 +37,11 @@ public class MmsOriginsClient implements ClientModInitializer {
         FurModels.init();
         AvianClimb.setLocalJump(() -> Minecraft.getInstance().options.keyJump.isDown());
         EntityRendererRegistry.register(MmsEntities.FLORAN_HENCHMAN, FloranHenchmanRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(ButterflyWingsModel.LAYER, ButterflyWingsModel::createLayer);
-        EntityModelLayerRegistry.registerModelLayer(TailModel.LAYER, TailModel::createLayer);
-        EntityModelLayerRegistry.registerModelLayer(EarsModel.LAYER, EarsModel::createLayer);
-        EntityModelLayerRegistry.registerModelLayer(ClawsModel.LAYER, ClawsModel::createLayer);
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register(
+        ModelLayerRegistry.registerModelLayer(ButterflyWingsModel.LAYER, ButterflyWingsModel::createLayer);
+        ModelLayerRegistry.registerModelLayer(TailModel.LAYER, TailModel::createLayer);
+        ModelLayerRegistry.registerModelLayer(EarsModel.LAYER, EarsModel::createLayer);
+        ModelLayerRegistry.registerModelLayer(ClawsModel.LAYER, ClawsModel::createLayer);
+        LivingEntityRenderLayerRegistrationCallback.EVENT.register(
                 (entityType, renderer, helper, context) -> {
                     if (renderer instanceof AvatarRenderer player) {
                         helper.register(new FurFeatureRenderer(player));
@@ -59,7 +59,6 @@ public class MmsOriginsClient implements ClientModInitializer {
             FlightSurge.tick(client);
             WebSwing.tick(client);
             WebLines.tick(client);
-            LeafCrawlHandoff.tick(client);
             if (client.level != null) {
                 ButterflyFlap.tickAll(client.level.players());
             }

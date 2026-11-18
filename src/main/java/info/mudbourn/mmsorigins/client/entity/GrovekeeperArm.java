@@ -30,18 +30,18 @@ public final class GrovekeeperArm {
         poseStack.pushPose();
         poseStack.translate(0.6f, -0.75f, -0.95f);
         poseStack.scale(0.04f, -0.04f, 0.04f);
-        poseStack.mulPose(Axis.XP.rotationDegrees(-75.0f - (float) Math.sin(swing * Math.PI) * SWING_DEGREES));
+        poseStack.rotate(Axis.XP.rotationDegrees(-75.0f - (float) Math.sin(swing * Math.PI) * SWING_DEGREES));
         collector.submitModelPart(
             part,
             poseStack,
-            RenderTypes.entityCutoutNoCull(TEXTURE),
+            RenderTypes.entityCutout(TEXTURE),
             light,
             OverlayTexture.NO_OVERLAY,
             null);
         collector.submitModelPart(
             part,
             poseStack,
-            RenderTypes.entityCutoutNoCull(LEAVES_TEXTURE),
+            RenderTypes.entityCutout(LEAVES_TEXTURE),
             light,
             OverlayTexture.NO_OVERLAY,
             null);

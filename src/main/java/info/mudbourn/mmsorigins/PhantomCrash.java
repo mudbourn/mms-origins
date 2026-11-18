@@ -22,7 +22,7 @@ public final class PhantomCrash {
     }
 
     public static void register() {
-        PayloadTypeRegistry.playC2S().register(PhantomCrashPayload.TYPE, PhantomCrashPayload.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(PhantomCrashPayload.TYPE, PhantomCrashPayload.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(PhantomCrashPayload.TYPE, (payload, context) ->
             crash(context.player(), payload.speedLost()));
     }

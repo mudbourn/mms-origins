@@ -278,7 +278,8 @@ public final class GrappleHookPower extends Power implements Active {
 
     private void drive(LivingEntity target, Vec3 velocity) {
         target.setDeltaMovement(velocity);
-        target.hurtMarked = true;
+        target.needsSync = true;
+        target.syncVelocity = true;
         target.resetFallDistance();
     }
 

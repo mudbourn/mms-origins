@@ -27,10 +27,10 @@ public final class MoltenChargeCharger {
     }
 
     public static void register() {
-        ServerTickEvents.END_WORLD_TICK.register(MoltenChargeCharger::onEndWorldTick);
+        ServerTickEvents.END_LEVEL_TICK.register(MoltenChargeCharger::onEndLevelTick);
     }
 
-    private static void onEndWorldTick(ServerLevel level) {
+    private static void onEndLevelTick(ServerLevel level) {
         boolean fireTickHalf = level.getGameTime() % 2 == 0;
         for (ServerPlayer player : level.players()) {
             if (!MmsOriginsPowers.holds(player, MARKER)) {

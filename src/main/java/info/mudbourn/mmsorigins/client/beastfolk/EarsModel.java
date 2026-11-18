@@ -46,7 +46,7 @@ public final class EarsModel extends Model<AvatarRenderState> {
     };
 
     public EarsModel(ModelPart root) {
-        super(root, RenderTypes::entityCutoutNoCull);
+        super(root, RenderTypes::entityCutout);
     }
 
     public static LayerDefinition createLayer() {

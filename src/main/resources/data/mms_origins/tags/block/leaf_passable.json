@@ -65,6 +65,22 @@
       "required": false
     },
     {
+      "id": "biomeswevegone:allium_petal_block",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:pink_allium_petal_block",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:white_allium_petal_block",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:rose_petal_block",
+      "required": false
+    },
+    {
       "id": "biomeswevegone:green_mushroom_block",
       "required": false
     },

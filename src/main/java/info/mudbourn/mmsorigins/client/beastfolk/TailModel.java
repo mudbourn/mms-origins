@@ -31,7 +31,7 @@ public final class TailModel extends Model<AvatarRenderState> {
     private final ModelPart[] segments = new ModelPart[SEGMENTS];
 
     public TailModel(ModelPart root) {
-        super(root, RenderTypes::entityCutoutNoCull);
+        super(root, RenderTypes::entityCutout);
         ModelPart part = root;
         for (int i = 0; i < SEGMENTS; i++) {
             part = part.getChild("tail" + i);

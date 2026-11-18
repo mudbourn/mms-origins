@@ -59,8 +59,7 @@ public class WingsFeatureRenderer extends RenderLayer<AvatarRenderState, PlayerM
                 RenderTypes.armorCutoutNoCull(texture),
                 light,
                 OverlayTexture.NO_OVERLAY,
-                state.outlineColor,
-                null);
+                state.outlineColor);
         poseStack.popPose();
     }
 }

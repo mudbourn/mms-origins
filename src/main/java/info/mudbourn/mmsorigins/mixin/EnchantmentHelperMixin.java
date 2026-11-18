@@ -5,6 +5,7 @@ import info.mudbourn.mmsorigins.power.ModifyEnchantmentLevelPower;
 import io.github.apace100.apoli.component.PowerHolderComponent;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -24,10 +25,10 @@ public class EnchantmentHelperMixin {
     @Inject(method = "getItemEnchantmentLevel", at = @At("RETURN"), cancellable = true)
     private static void mmsOrigins$modifyLevel(
             Holder<Enchantment> enchantment,
-            ItemStack stack,
+            ItemInstance instance,
             CallbackInfoReturnable<Integer> cir) {
         Player miner = EnchantmentMiningContext.get();
-        if (miner == null) {
+        if (miner == null || !(instance instanceof ItemStack stack)) {
             return;
         }
         int level = cir.getReturnValueI();

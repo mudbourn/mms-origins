@@ -2,7 +2,7 @@ package info.mudbourn.mmsorigins.item;
 
 import info.mudbourn.mmsorigins.MmsOrigins;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
@@ -44,9 +44,9 @@ public final class MmsItems {
     }
 
     public static void register() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS)
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
                 .register(entries -> entries.accept(UMBRELLA));
-        ServerTickEvents.END_WORLD_TICK.register(MmsItems::wearLevel);
+        ServerTickEvents.END_LEVEL_TICK.register(MmsItems::wearLevel);
     }
 
     private static Item register(String name) {

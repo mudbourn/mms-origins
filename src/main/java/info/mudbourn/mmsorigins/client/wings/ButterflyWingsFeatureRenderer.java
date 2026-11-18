@@ -51,8 +51,7 @@ public class ButterflyWingsFeatureRenderer extends RenderLayer<AvatarRenderState
                 RenderTypes.entityCutout(texture),
                 light,
                 OverlayTexture.NO_OVERLAY,
-                state.outlineColor,
-                null);
+                state.outlineColor);
         poseStack.popPose();
     }
 }

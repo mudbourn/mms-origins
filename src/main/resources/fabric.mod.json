@@ -27,9 +27,9 @@
     "mms_origins.nocreativedrift.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.16.0",
-    "minecraft": "~1.21.11",
-    "java": ">=21",
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
     "fabric-api": "*",
     "origins": ">=1.12.0",
     "apoli": ">=2.12.0",

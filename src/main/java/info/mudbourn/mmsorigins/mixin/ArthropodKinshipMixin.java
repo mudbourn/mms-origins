@@ -27,7 +27,7 @@ public class ArthropodKinshipMixin {
         if (!(target instanceof Player) || mob.getLastHurtByMob() == target) {
             return;
         }
-        if (mob.getType().is(EntityTypeTags.ARTHROPOD) && MmsOriginsPowers.ARTHROPOD_KINSHIP.isActive(target)) {
+        if (mob.is(EntityTypeTags.ARTHROPOD) && MmsOriginsPowers.ARTHROPOD_KINSHIP.isActive(target)) {
             mob.setTarget(null);
         }
     }

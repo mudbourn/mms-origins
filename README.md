@@ -1,6 +1,6 @@
 # mms-origins
 
-A Fabric mod for Minecraft 1.21.11 that adds MMS origin content for Origins:
+A Fabric mod for Minecraft 26.3 that adds MMS origin content for Origins:
 Legacy. It is almost entirely a datapack; the Java layer covers only the few
 behaviours no Apoli power factory can express.
 

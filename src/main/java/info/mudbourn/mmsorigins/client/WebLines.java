@@ -71,7 +71,7 @@ public final class WebLines {
         if (LINES.isEmpty() || client.isPaused()) {
             return;
         }
-        Vec3 camera = client.gameRenderer.getMainCamera().position();
+        Vec3 camera = client.gameRenderer.mainCamera().position();
         Iterator<Map.Entry<Integer, WebLinePayload>> lines = LINES.entrySet().iterator();
         while (lines.hasNext()) {
             WebLinePayload line = lines.next().getValue();

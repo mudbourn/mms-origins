@@ -259,7 +259,7 @@ public final class MmsOriginsPowers {
 
     /** Whether mms-combat has marked the entity as downed, which grounds every flying origin. */
     public static boolean downed(Entity entity) {
-        return entity.getTags().contains(DOWNED_TAG);
+        return entity.entityTags().contains(DOWNED_TAG);
     }
 
     /** Whether the entity holds the power at all, active or not, by a single map lookup. */

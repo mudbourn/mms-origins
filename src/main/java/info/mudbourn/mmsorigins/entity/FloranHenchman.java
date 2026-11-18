@@ -14,6 +14,7 @@ import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -24,7 +25,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -62,6 +63,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -91,6 +93,8 @@ public class FloranHenchman extends AbstractGolem {
         SynchedEntityData.defineId(FloranHenchman.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Boolean> RUNNING =
         SynchedEntityData.defineId(FloranHenchman.class, EntityDataSerializers.BOOLEAN);
+    private static final TagKey<Item> SMALL_FLOWERS =
+        TagKey.create(Registries.ITEM, Identifier.withDefaultNamespace("small_flowers"));
     private static final byte ATTACK_EVENT = 4;
     public static final float ATTACK_ANIMATION_SPEED = 0.6f;
     private static final int ATTACK_ANIMATION_TICKS = 25;
@@ -639,9 +643,9 @@ public class FloranHenchman extends AbstractGolem {
     }
 
     @Override
-    public void knockback(double strength, double x, double z) {
+    public void knockback(double strength, double x, double z, DamageSource source, float resistance, boolean sendPacket) {
         if (this.canMove()) {
-            super.knockback(strength, x, z);
+            super.knockback(strength, x, z, source, resistance, sendPacket);
         }
     }
 
@@ -736,7 +740,7 @@ public class FloranHenchman extends AbstractGolem {
         @Override
         public void start() {
             this.ticks = this.adjustedTickDelay(OFFER_TICKS);
-            ItemStack flower = BuiltInRegistries.ITEM.get(ItemTags.SMALL_FLOWERS)
+            ItemStack flower = BuiltInRegistries.ITEM.get(SMALL_FLOWERS)
                 .flatMap(flowers -> flowers.getRandomElement(this.henchman.getRandom()))
                 .map(holder -> new ItemStack(holder))
                 .orElse(ItemStack.EMPTY);

@@ -1,23 +1,26 @@
 package info.mudbourn.mmsorigins.power.action;
 
+import info.mudbourn.mmsorigins.compat.CrawlOnDemandBridge;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataTypes;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
 /**
- * Lifts the entity to the lowest spot within {@code max} blocks above it where its standing
- * hitbox touches no solid block, and as a condition reports whether such a spot exists.
- * With {@code crawl} set and Crawl on Demand loaded the condition also passes without one,
- * since the player can be left crawling in place.
+ * Settles the entity as it leaves leaf form. It is lifted to the lowest spot within {@code max}
+ * blocks above where its standing hitbox touches no solid block and left standing. Only when no
+ * such spot exists and its body is inside solid blocks is it lifted to the lowest spot where its
+ * crawling hitbox fits and put into Crawl on Demand's crawl; a body that is in air, or only
+ * partly in blocks, is left to stand with the game's own pose rules. As a condition it reports
+ * whether a standing spot exists, or with {@code crawl} set and Crawl on Demand loaded, always.
  */
 public final class SurfaceAction {
 
     private static final double STEP = 0.0625;
+    private static final double EPSILON = 1.0E-7;
 
     public static SerializableData data() {
         return new SerializableData()
@@ -26,23 +29,50 @@ public final class SurfaceAction {
     }
 
     public static boolean condition(SerializableData.Instance data, Entity entity) {
-        if (data.getBoolean("crawl") && FabricLoader.getInstance().isModLoaded("crawlondemand")) {
+        if (data.getBoolean("crawl") && CrawlOnDemandBridge.present()) {
             return true;
         }
-        return findLift(entity, data.getDouble("max")) >= 0;
+        return findLift(entity, Pose.STANDING, data.getDouble("max")) >= 0;
     }
 
     public static void action(SerializableData.Instance data, Entity entity) {
-        double lift = findLift(entity, data.getDouble("max"));
+        settle(entity, data.getDouble("max"));
+    }
+
+    /** Returns whether the entity was left crawling. */
+    public static boolean settle(Entity entity, double max) {
+        double stand = findLift(entity, Pose.STANDING, max);
+        if (stand >= 0) {
+            raise(entity, stand);
+            crawl(entity, false);
+            return false;
+        }
+        double crawl = findLift(entity, Pose.SWIMMING, max);
+        if (crawl == 0) {
+            crawl(entity, false);
+            return false;
+        }
+        raise(entity, crawl);
+        crawl(entity, true);
+        return true;
+    }
+
+    private static void raise(Entity entity, double lift) {
         if (lift > 0) {
             entity.teleportTo(entity.getX(), entity.getY() + lift, entity.getZ());
         }
     }
 
-    private static double findLift(Entity entity, double max) {
-        AABB standing = entity.getDimensions(Pose.STANDING).makeBoundingBox(entity.position());
+    private static void crawl(Entity entity, boolean crawling) {
+        if (entity instanceof Player player) {
+            CrawlOnDemandBridge.setCrawling(player, crawling);
+        }
+    }
+
+    private static double findLift(Entity entity, Pose pose, double max) {
+        AABB box = entity.getDimensions(pose).makeBoundingBox(entity.position());
         for (double lift = 0; lift <= max; lift += STEP) {
-            if (isClear(entity.level(), standing.move(0, lift, 0))) {
+            if (isClear(entity.level(), box.move(0, lift, 0))) {
                 return lift;
             }
         }
@@ -50,15 +80,7 @@ public final class SurfaceAction {
     }
 
     private static boolean isClear(Level level, AABB box) {
-        AABB inset = box.deflate(0.001);
-        for (BlockPos pos : BlockPos.betweenClosed(
-            BlockPos.containing(inset.minX, inset.minY, inset.minZ),
-            BlockPos.containing(inset.maxX, inset.maxY, inset.maxZ))) {
-            if (!level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()) {
-                return false;
-            }
-        }
-        return true;
+        return level.noBlockCollision(null, box.deflate(EPSILON));
     }
 
     private SurfaceAction() {

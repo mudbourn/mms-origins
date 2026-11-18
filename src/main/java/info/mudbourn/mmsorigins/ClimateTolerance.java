@@ -1,6 +1,6 @@
 package info.mudbourn.mmsorigins;
 
-import com.github.thedeathlycow.thermoo.api.temperature.TemperatureAware;
+import com.github.thedeathlycow.thermoo.api.core.v2.TemperatureAware;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.PowerTypeReference;
 import java.util.List;

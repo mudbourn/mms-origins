@@ -1,14 +1,14 @@
 package info.mudbourn.mmsorigins.mixin.client;
 
 import info.mudbourn.mmsorigins.client.LavaViewState;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.minecraft.client.renderer.block.FluidModel;
+import net.minecraft.client.renderer.block.FluidStateModelSet;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.material.FluidState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Renders lava on the translucent chunk layer while the viewer is submerged in
@@ -18,15 +18,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * {@link LavaViewState} so lava stays solid when viewed from above, and the
  * state change forces the re-tesselation that swaps the layer.
  */
-@Mixin(ItemBlockRenderTypes.class)
+@Mixin(FluidStateModelSet.class)
 public class LavaTranslucentLayerMixin {
 
-    @Inject(method = "getRenderLayer", at = @At("HEAD"), cancellable = true)
-    private static void mmsOrigins$lavaTranslucent(
-            FluidState fluidState,
-            CallbackInfoReturnable<ChunkSectionLayer> cir) {
+    @ModifyReturnValue(method = "get", at = @At("RETURN"))
+    private FluidModel mmsOrigins$lavaTranslucent(FluidModel model, FluidState fluidState) {
         if (LavaViewState.isSubmerged() && fluidState.is(FluidTags.LAVA)) {
-            cir.setReturnValue(ChunkSectionLayer.TRANSLUCENT);
+            return new FluidModel(
+                ChunkSectionLayer.TRANSLUCENT,
+                model.stillMaterial(),
+                model.flowingMaterial(),
+                model.overlayMaterial(),
+                model.tintSource());
         }
+        return model;
     }
 }

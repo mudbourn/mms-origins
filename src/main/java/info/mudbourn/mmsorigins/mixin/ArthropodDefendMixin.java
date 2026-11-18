@@ -36,11 +36,11 @@ public class ArthropodDefendMixin {
         }
         if (!(source.getEntity() instanceof LivingEntity attacker)
             || attacker == player
-            || attacker.getType().is(EntityTypeTags.ARTHROPOD)) {
+            || attacker.is(EntityTypeTags.ARTHROPOD)) {
             return;
         }
         AABB swarm = player.getBoundingBox().inflate(MMS_SWARM_RANGE);
-        for (Mob mob : level.getEntitiesOfClass(Mob.class, swarm, mob -> mob.getType().is(EntityTypeTags.ARTHROPOD))) {
+        for (Mob mob : level.getEntitiesOfClass(Mob.class, swarm, mob -> mob.is(EntityTypeTags.ARTHROPOD))) {
             mob.setLastHurtByMob(attacker);
             mob.setTarget(attacker);
         }

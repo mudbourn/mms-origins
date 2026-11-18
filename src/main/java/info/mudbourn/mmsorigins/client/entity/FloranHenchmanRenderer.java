@@ -3,6 +3,7 @@ package info.mudbourn.mmsorigins.client.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import info.mudbourn.mmsorigins.MmsOrigins;
+import info.mudbourn.mmsorigins.client.BlockSubmit;
 import info.mudbourn.mmsorigins.entity.FloranHenchman;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -10,16 +11,16 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.monster.creaking.CreakingModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.culling.Frustum;
-import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.LivingEntityEmissiveLayer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.state.CreakingRenderState;
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -70,8 +71,14 @@ public class FloranHenchmanRenderer
     }
 
     @Override
-    public boolean shouldRender(FloranHenchman henchman, Frustum frustum, double x, double y, double z) {
-        return !hiddenFromRider(henchman) && super.shouldRender(henchman, frustum, x, y, z);
+    public boolean shouldRender(
+            FloranHenchman henchman,
+            Frustum frustum,
+            double x,
+            double y,
+            double z,
+            float partialTick) {
+        return !hiddenFromRider(henchman) && super.shouldRender(henchman, frustum, x, y, z, partialTick);
     }
 
     @Override
@@ -172,10 +179,10 @@ public class FloranHenchmanRenderer
             upperBody.translateAndRotate(poseStack);
             upperBody.getChild("body").translateAndRotate(poseStack);
             poseStack.translate(0.0f, 5.5f / 16.0f, 9.0f / 16.0f);
-            poseStack.mulPose(Axis.ZP.rotationDegrees(180.0f));
+            poseStack.rotate(Axis.ZP.rotationDegrees(180.0f));
             poseStack.scale(POD_SCALE, POD_SCALE, POD_SCALE);
             poseStack.translate(-0.5f, -0.5f, -0.5f);
-            collector.submitBlock(poseStack, COCOA_POD, light, OverlayTexture.NO_OVERLAY, state.outlineColor);
+            BlockSubmit.submit(collector, poseStack, COCOA_POD, light, OverlayTexture.NO_OVERLAY, state.outlineColor);
             poseStack.popPose();
         }
     }
@@ -204,7 +211,7 @@ public class FloranHenchmanRenderer
             this.getParentModel().root().getChild("root").getChild("upper_body").getChild("right_arm")
                 .translateAndRotate(poseStack);
             poseStack.translate(-0.03f, 1.4f, -0.15f);
-            poseStack.mulPose(Axis.XP.rotationDegrees(-90.0f));
+            poseStack.rotate(Axis.XP.rotationDegrees(-90.0f));
             flower.submit(poseStack, collector, light, OverlayTexture.NO_OVERLAY, state.outlineColor);
             poseStack.popPose();
         }

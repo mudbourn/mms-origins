@@ -6,7 +6,7 @@ import io.github.apace100.origins.origin.Origin;
 import io.github.apace100.origins.origin.OriginLayer;
 import io.github.apace100.origins.screen.ChooseOriginScreen;
 import io.github.apace100.origins.screen.OriginDisplayScreen;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -124,7 +124,7 @@ public abstract class ChooseOriginGridMixin extends OriginDisplayScreen {
                     .build());
         }
 
-        addRenderableOnly((GuiGraphics context, int mouseX, int mouseY, float delta) -> {
+        addRenderableOnly((GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) -> {
             mmsOrigins$renderChoicesBox(context, mouseX, mouseY);
             this.tickTime += delta;
         });
@@ -168,7 +168,7 @@ public abstract class ChooseOriginGridMixin extends OriginDisplayScreen {
     }
 
     @Unique
-    private void mmsOrigins$renderChoicesBox(GuiGraphics context, int mouseX, int mouseY) {
+    private void mmsOrigins$renderChoicesBox(GuiGraphicsExtractor context, int mouseX, int mouseY) {
         context.blit(RenderPipelines.GUI_TEXTURED, ORIGIN_CHOICES,
                 this.calculatedLeft, this.calculatedTop, 0.0F, 0.0F,
                 CHOICES_WIDTH, CHOICES_HEIGHT, 256, 256);
@@ -187,18 +187,18 @@ public abstract class ChooseOriginGridMixin extends OriginDisplayScreen {
             } else {
                 Origin origin = this.originSelection.get(i);
                 mmsOrigins$renderOriginSlot(context, mouseX, mouseY, x, y, selected, origin);
-                context.renderItem(origin.getDisplayItem(), x + 5, y + 5);
+                context.item(origin.getDisplayItem(), x + 5, y + 5);
             }
         }
 
         Component counter = Component.literal((this.currentPage + 1) + "/" + this.pages);
-        context.drawCenteredString(this.font, counter,
+        context.centeredText(this.font, counter,
                 this.calculatedLeft + CHOICES_WIDTH / 2,
                 this.guiTop + CHOICES_HEIGHT + 5 + this.font.lineHeight / 2, 0xFFFFFF);
     }
 
     @Unique
-    private void mmsOrigins$renderOriginSlot(GuiGraphics context, int mouseX, int mouseY,
+    private void mmsOrigins$renderOriginSlot(GuiGraphicsExtractor context, int mouseX, int mouseY,
                                              int x, int y, boolean selected, Origin origin) {
         boolean hovered = mmsOrigins$slotHovered(mouseX, mouseY, x, y);
         mmsOrigins$renderSlotFrame(context, x, y, selected, hovered);
@@ -217,7 +217,7 @@ public abstract class ChooseOriginGridMixin extends OriginDisplayScreen {
     }
 
     @Unique
-    private void mmsOrigins$renderRandomSlot(GuiGraphics context, int mouseX, int mouseY,
+    private void mmsOrigins$renderRandomSlot(GuiGraphicsExtractor context, int mouseX, int mouseY,
                                              int x, int y, boolean selected) {
         boolean hovered = mmsOrigins$slotHovered(mouseX, mouseY, x, y);
         mmsOrigins$renderSlotFrame(context, x, y, selected, hovered);
@@ -231,7 +231,7 @@ public abstract class ChooseOriginGridMixin extends OriginDisplayScreen {
      * Draws the 26x26 slot border, highlighted when selected or picked out by mouse or keyboard focus.
      */
     @Unique
-    private void mmsOrigins$renderSlotFrame(GuiGraphics context, int x, int y, boolean selected, boolean hovered) {
+    private void mmsOrigins$renderSlotFrame(GuiGraphicsExtractor context, int x, int y, boolean selected, boolean hovered) {
         int v = selected ? 26 : 0;
         boolean focused = this.getFocused() instanceof Button button && button.getX() == x && button.getY() == y;
         if (focused || hovered) {

@@ -21,6 +21,7 @@ public abstract class GrovekeeperRiderHideMixin {
             double x,
             double y,
             double z,
+            float partialTick,
             CallbackInfoReturnable<Boolean> cir) {
         if (entity instanceof Player player && player.getVehicle() instanceof FloranHenchman) {
             cir.setReturnValue(false);

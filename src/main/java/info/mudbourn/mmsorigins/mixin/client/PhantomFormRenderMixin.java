@@ -11,8 +11,8 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.entity.state.PhantomRenderState;
-import net.minecraft.client.renderer.state.CameraRenderState;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.monster.Phantom;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,7 +42,7 @@ public abstract class PhantomFormRenderMixin {
     private static final float FACING_FRONT_BODY_ROT = 180.0F;
 
     @Inject(
-        method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V",
+        method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V",
         at = @At("HEAD"),
         cancellable = true
     )
@@ -62,9 +62,9 @@ public abstract class PhantomFormRenderMixin {
         float pivot = state.boundingBoxHeight * 0.5F;
         pose.pushPose();
         pose.translate(0.0F, pivot, 0.0F);
-        pose.mulPose(Axis.YP.rotationDegrees(180.0F - angles.yaw()));
-        pose.mulPose(Axis.XP.rotationDegrees(angles.pitch()));
-        pose.mulPose(Axis.ZP.rotationDegrees(-angles.roll()));
+        pose.rotate(Axis.YP.rotationDegrees(180.0F - angles.yaw()));
+        pose.rotate(Axis.XP.rotationDegrees(angles.pitch()));
+        pose.rotate(Axis.ZP.rotationDegrees(-angles.roll()));
         pose.translate(0.0F, -pivot, 0.0F);
         Minecraft.getInstance()
             .getEntityRenderDispatcher()
@@ -89,7 +89,7 @@ public abstract class PhantomFormRenderMixin {
     private static PhantomRenderState mmsOrigins$phantomState() {
         if (mmsOrigins$phantom == null) {
             Minecraft client = Minecraft.getInstance();
-            Phantom template = new Phantom(EntityType.PHANTOM, client.level);
+            Phantom template = new Phantom(EntityTypes.PHANTOM, client.level);
             mmsOrigins$phantom = (PhantomRenderState) client.getEntityRenderDispatcher()
                 .getRenderer(template)
                 .createRenderState(template, 0.0F);
@@ -100,7 +100,7 @@ public abstract class PhantomFormRenderMixin {
     /** Fills the phantom render state from the player's, leaving every rotation to the pose stack. */
     @Unique
     private static void mmsOrigins$copy(LivingEntityRenderState from, PhantomRenderState to) {
-        to.entityType = EntityType.PHANTOM;
+        to.entityType = EntityTypes.PHANTOM;
         to.x = from.x;
         to.y = from.y;
         to.z = from.z;

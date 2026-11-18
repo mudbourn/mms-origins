@@ -24,7 +24,7 @@ public final class ClawsModel extends Model<AvatarRenderState> {
             Identifier.fromNamespaceAndPath("mms_origins", "beastfolk_claws"), "main");
 
     public ClawsModel(ModelPart root) {
-        super(root, RenderTypes::entityCutoutNoCull);
+        super(root, RenderTypes::entityCutout);
     }
 
     public static LayerDefinition createLayer() {

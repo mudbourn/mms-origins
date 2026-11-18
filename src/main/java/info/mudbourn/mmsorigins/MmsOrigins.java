@@ -3,7 +3,6 @@ package info.mudbourn.mmsorigins;
 import info.mudbourn.mmsorigins.compat.DummyActionOnHitBridge;
 import info.mudbourn.mmsorigins.compat.FishOfThievesFairyFishing;
 import info.mudbourn.mmsorigins.compat.HeavyNetheriteFrostResistance;
-import info.mudbourn.mmsorigins.compat.SelfReviveStrainSoundBridge;
 import info.mudbourn.mmsorigins.effect.MmsMobEffects;
 import info.mudbourn.mmsorigins.entity.HenchmanLifecycle;
 import info.mudbourn.mmsorigins.entity.MmsEntities;
@@ -59,7 +58,6 @@ public class MmsOrigins implements ModInitializer {
         }
         if (FabricLoader.getInstance().isModLoaded("mms_combat")) {
             LogoutBodyFurBridge.register();
-            SelfReviveStrainSoundBridge.register();
             DummyActionOnHitBridge.register();
         }
         if (FabricLoader.getInstance().isModLoaded("fishofthieves")) {

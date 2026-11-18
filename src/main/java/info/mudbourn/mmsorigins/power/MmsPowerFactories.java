@@ -1,5 +1,6 @@
 package info.mudbourn.mmsorigins.power;
 
+import com.mojang.datafixers.util.Pair;
 import info.mudbourn.mmsorigins.FairyBlessing;
 import info.mudbourn.mmsorigins.MmsOrigins;
 import info.mudbourn.mmsorigins.power.action.CausticSporesAction;
@@ -32,20 +33,19 @@ import io.github.apace100.apoli.util.modifier.Modifier;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataType;
 import io.github.apace100.calio.data.SerializableDataTypes;
+import java.util.List;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.Tuple;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.item.consume_effects.ConsumeEffect;
-import java.util.List;
 
 /**
  * Registers the Apoli factories that OriginsTweaks relies on but Apoli-Legacy
@@ -669,7 +669,7 @@ public final class MmsPowerFactories {
         Registry.register(
             ApoliRegistries.BIENTITY_CONDITION,
             id,
-            new ConditionFactory<Tuple<Entity, Entity>>(
+            new ConditionFactory<Pair<Entity, Entity>>(
                 id,
                 OwnsHenchmanCondition.data(),
                 OwnsHenchmanCondition::condition));

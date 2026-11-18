@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -49,7 +49,6 @@ public final class NatureReclaim {
             return Result.NO_RECIPE;
         }
         RecipeManager recipes = server.getRecipeManager();
-        HolderLookup.Provider provider = level.registryAccess();
         Item target = subject.getItem();
         CraftingRecipe match = null;
         ItemStack result = null;
@@ -59,7 +58,7 @@ public final class NatureReclaim {
                 continue;
             }
             CraftingRecipe recipe = (CraftingRecipe) holder.value();
-            ItemStack assembled = resultOf(recipe, provider);
+            ItemStack assembled = resultOf(recipe);
             if (assembled.isEmpty() || !assembled.is(target)) {
                 continue;
             }
@@ -93,9 +92,9 @@ public final class NatureReclaim {
     }
 
     /** The stack a recipe crafts from no input, or empty when the recipe needs real input to say. */
-    private static ItemStack resultOf(CraftingRecipe recipe, HolderLookup.Provider provider) {
+    private static ItemStack resultOf(CraftingRecipe recipe) {
         try {
-            return recipe.assemble(CraftingInput.EMPTY, provider);
+            return recipe.assemble(CraftingInput.EMPTY);
         } catch (RuntimeException e) {
             return ItemStack.EMPTY;
         }
@@ -127,7 +126,7 @@ public final class NatureReclaim {
 
     private static void grant(Player player, ItemStack stack) {
         if (!player.getInventory().add(stack)) {
-            player.drop(stack, false);
+            player.drop(stack, false, Prediction.SERVER_ONLY);
         }
     }
 

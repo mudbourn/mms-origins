@@ -34,11 +34,11 @@ public final class WebReel {
     }
 
     public static void register() {
-        PayloadTypeRegistry.playC2S().register(WebReelPayload.TYPE, WebReelPayload.CODEC);
-        PayloadTypeRegistry.playC2S().register(WebFirePayload.TYPE, WebFirePayload.CODEC);
-        PayloadTypeRegistry.playC2S().register(WebRopePayload.TYPE, WebRopePayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(WebLinePayload.TYPE, WebLinePayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(WebRopePayload.TYPE, WebRopePayload.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(WebReelPayload.TYPE, WebReelPayload.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(WebFirePayload.TYPE, WebFirePayload.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(WebRopePayload.TYPE, WebRopePayload.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(WebLinePayload.TYPE, WebLinePayload.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(WebRopePayload.TYPE, WebRopePayload.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(WebReelPayload.TYPE, (payload, context) -> {
             UUID id = context.player().getUUID();
             if (payload.reeling()) {

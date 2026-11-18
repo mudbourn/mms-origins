@@ -17,6 +17,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -51,7 +52,7 @@ public abstract class CropYieldMixin {
     private static final double BLESSED_GOLD_CHANCE = 0.24;
 
     @Inject(
-        method = "getDrops(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;",
+        method = "getDrops(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemInstance;)Ljava/util/List;",
         at = @At("RETURN"),
         cancellable = true)
     private static void mmsOrigins$greenThumbYield(
@@ -60,7 +61,7 @@ public abstract class CropYieldMixin {
             BlockPos pos,
             BlockEntity blockEntity,
             Entity breaker,
-            ItemStack tool,
+            ItemInstance tool,
             CallbackInfoReturnable<List<ItemStack>> cir) {
         if (!(breaker instanceof Player player) || !tool.is(ItemTags.HOES)) {
             return;
