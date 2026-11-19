@@ -1,6 +1,7 @@
 {
-	"condition": "minecraft:location_check",
+	"type": "minecraft:location_check",
 	"predicate": {
 		"structures": "#originstweaks:ocean_monuments"
 	}
 }
+
