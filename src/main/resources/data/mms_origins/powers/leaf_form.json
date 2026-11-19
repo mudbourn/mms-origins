@@ -96,8 +96,17 @@
           "type": "origins:sneaking"
         },
         {
-          "type": "origins:riding",
-          "inverted": true
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:riding",
+              "inverted": true
+            },
+            {
+              "type": "origins:power_active",
+              "power": "mms_origins:leaf_form_toggle"
+            }
+          ]
         },
         {
           "type": "origins:or",
@@ -586,6 +595,18 @@
           "resource": "mms_origins:leaf_form_morph",
           "comparison": ">=",
           "compare_to": 10
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:sunlit_fury_active",
+          "comparison": "==",
+          "compare_to": 1
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mms_origins:sun_power",
+          "comparison": ">",
+          "compare_to": 0
         },
         {
           "type": "origins:in_block_anywhere",

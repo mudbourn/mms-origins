@@ -31,6 +31,10 @@ public abstract class LeafFormRenderMixin {
     @Unique
     private static final BlockState GRASS = Blocks.SHORT_GRASS.defaultBlockState();
 
+    /** Jungle foliage green, so the bush matches jungle leaves instead of drawing white. */
+    @Unique
+    private static final int JUNGLE_GREEN = 0xFF30BB0B;
+
     @Unique
     private static final float BUSH_SIZE = 0.9F;
 
@@ -97,7 +101,7 @@ public abstract class LeafFormRenderMixin {
         pose.pushPose();
         pose.scale(size, size, size);
         pose.translate(-0.5F, 0.0F, -0.5F);
-        BlockSubmit.submit(collector, pose, plant, light, OverlayTexture.NO_OVERLAY, 0);
+        BlockSubmit.submitTinted(collector, pose, plant, light, OverlayTexture.NO_OVERLAY, JUNGLE_GREEN);
         pose.popPose();
     }
 }

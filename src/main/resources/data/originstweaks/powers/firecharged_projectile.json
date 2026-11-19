@@ -7,14 +7,59 @@
 			"text": {
 				"translate": "badge.originstweaks.firecharged_projectile.0"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/active.png",
+			"text": {
+				"translate": "badge.originstweaks.firecharged_projectile.1"
+			}
 		}
 	],
+	"shield_cooldown": {
+		"type": "origins:cooldown",
+		"cooldown": 300,
+		"hud_render": {
+			"sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
+			"bar_index": 8
+		}
+	},
 	"fireballs": {
-		"type": "origins:active_self",
-		"condition": {
+		"type": "mms_origins:key_gesture",
+		"hold_ticks": 1000,
+		"chord": "blazeborn_hands",
+		"press_condition": {
 			"type": "origins:food_level",
 			"comparison": ">",
 			"compare_to": 6
+		},
+		"chord_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:food_level",
+					"comparison": ">",
+					"compare_to": 6
+				},
+				{
+					"type": "origins:resource",
+					"resource": "originstweaks:firecharged_projectile_shield_cooldown",
+					"comparison": "==",
+					"compare_to": 0
+				}
+			]
+		},
+		"chord_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "mms_origins:wildfire_shield"
+				},
+				{
+					"type": "origins:trigger_cooldown",
+					"power": "originstweaks:firecharged_projectile_shield_cooldown"
+				}
+			]
 		},
 		"cooldown": 200,
 		"hud_render": {
@@ -22,10 +67,9 @@
 			"bar_index": 7
 		},
 		"key": {
-			"key": "key.origins.secondary_active",
-			"continuous": false
+			"key": "key.origins.secondary_active"
 		},
-		"entity_action": {
+		"press_action": {
 			"type": "origins:and",
 			"actions": [
 				{
@@ -33,7 +77,7 @@
 					"ticks": 5,
 					"action": {
 						"type": "mms_origins:small_fireball",
-						"speed": 1.5
+						"spread": 0.05
 					}
 				},
 				{
@@ -41,7 +85,7 @@
 					"ticks": 12,
 					"action": {
 						"type": "mms_origins:small_fireball",
-						"speed": 1.5
+						"spread": 0.05
 					}
 				},
 				{
@@ -49,7 +93,7 @@
 					"ticks": 24,
 					"action": {
 						"type": "mms_origins:small_fireball",
-						"speed": 1.5
+						"spread": 0.05
 					}
 				}
 			]

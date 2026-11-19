@@ -59,6 +59,8 @@
     "PlayerHurtSoundMixin",
     "PlayerPoseMixin",
     "PlayerRiderAttackMixin",
+    "RiderShieldMixin",
+    "ScorchfulBlazeFireMixin",
     "RiderSwingStrikeMixin",
     "ReplaceLootTablePowerGuardMixin",
     "ServerPlayerGameModeMixin",

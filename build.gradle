@@ -59,6 +59,9 @@ dependencies {
     compileOnly files("libs/26.3/yumi-commons-core-2.0.0.jar")
     compileOnly files("libs/26.3/yumi-commons-event-2.0.0.jar")
 
+    // Friends and Foes' wildfire model, texture and sounds drawn for the Blazeborn's wildfire shield.
+    compileOnly files("libs/26.3/friendsandfoes-fabric-5.0.5+mc26.3.jar")
+
     // Food-value event the client compat uses to show origin-modified nutrition.
     compileOnly files("libs/26.3/appleskin-fabric-mc26.3-3.0.10.jar")
 }

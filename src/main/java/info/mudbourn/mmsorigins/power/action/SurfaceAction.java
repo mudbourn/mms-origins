@@ -41,6 +41,7 @@ public final class SurfaceAction {
 
     /** Returns whether the entity was left crawling. */
     public static boolean settle(Entity entity, double max) {
+        entity.stopRiding();
         double stand = findLift(entity, Pose.STANDING, max);
         if (stand >= 0) {
             raise(entity, stand);

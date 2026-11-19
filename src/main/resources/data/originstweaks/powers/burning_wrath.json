@@ -24,8 +24,10 @@
 		}
 	],
 	"set_on_fire": {
-		"type": "origins:active_self",
-		"condition": {
+		"type": "mms_origins:key_gesture",
+		"hold_ticks": 1000,
+		"chord": "blazeborn_hands",
+		"press_condition": {
 			"type": "origins:and",
 			"conditions": [
 				{
@@ -41,7 +43,7 @@
 				}
 			]
 		},
-		"entity_action": {
+		"press_action": {
 			"type": "origins:and",
 			"actions": [
 				{
@@ -78,7 +80,7 @@
 		"bientity_action": {
 			"type": "origins:target_action",
 			"action": {
-				"type": "origins:set_on_fire",
+				"type": "mms_origins:blaze_ignite",
 				"duration": 6
 			}
 		},

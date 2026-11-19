@@ -37,32 +37,18 @@
       }
     }
   ],
-  "strain": {
-    "type": "origins:resource",
-    "hidden": true,
-    "min": 0,
-    "max": 100,
-    "start_value": 0
-  },
-  "recover": {
-    "type": "origins:action_over_time",
-    "interval": 60,
-    "entity_action": {
-      "type": "origins:change_resource",
-      "resource": "mms_origins:nature_reclaim_strain",
-      "change": -1
-    }
-  },
   "cast": {
     "type": "mms_origins:nature_reclaim",
     "cast_ticks": 100,
     "sound_delay": 20,
     "charging_sound": "minecraft:block.beacon.ambient",
     "finish_sound": "minecraft:block.amethyst_block.chime",
-    "strain_resource": "mms_origins:nature_reclaim_strain",
-    "noon_strain": 10,
     "sun_resource": "mms_origins:sun_power",
-    "noon_sun_cost": 5,
+    "dawn_cost": 2.0,
+    "noon_cost": 0.35,
+    "shaded_cost": 0.5,
+    "cooldown": 300,
+    "night_capacity": 0.5,
     "noon_sound": "mms_origins:floran.noon_clock",
     "noon_warning": 600,
     "key": {

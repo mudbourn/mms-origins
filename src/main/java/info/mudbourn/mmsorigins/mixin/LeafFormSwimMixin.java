@@ -50,6 +50,9 @@ public abstract class LeafFormSwimMixin {
     private static final double VERTICAL_SPEED = 0.3;
 
     @Unique
+    private static final double LEDGE_CLEARANCE = 1.05;
+
+    @Unique
     private static final double ACCELERATION = 0.35;
 
     @Unique
@@ -95,6 +98,10 @@ public abstract class LeafFormSwimMixin {
         if (player.isShiftKeyDown() && (buried || swimming || mmsOrigins$onNatural(player))) {
             y = -VERTICAL_SPEED;
         } else if (this.jumping && (buried || swimming && mmsOrigins$headInWater(player))) {
+            y = VERTICAL_SPEED;
+        } else if (swimming && player.horizontalCollision && player.isFree(x, LEDGE_CLEARANCE, z)) {
+            // Climb out onto a block at the water line, as vanilla swimming hops out of a fluid. Leaf form hovers
+            // where it is instead of floating at the surface, so it has to rise a full block to clear the edge.
             y = VERTICAL_SPEED;
         } else if (buried || swimming) {
             y = 0.0;

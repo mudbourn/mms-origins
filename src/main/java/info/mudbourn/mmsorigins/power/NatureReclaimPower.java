@@ -6,8 +6,9 @@ import io.github.apace100.apoli.power.Power;
 import io.github.apace100.apoli.power.PowerType;
 import io.github.apace100.apoli.power.VariableIntPower;
 import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -16,7 +17,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -24,7 +24,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.biome.Biome;
 
 /**
  * A slow nature spell cast on a held item. The floran holds the primary key
@@ -33,17 +32,16 @@ import net.minecraft.world.level.biome.Biome;
  * weapon; a charging note sounds after the first second, and once the full
  * channel elapses the item is unmade into its parts.
  *
- * <p>The spell works any time the sun is up. Each cast spends sun power and adds
- * strain to the floran's sun metabolism, both scaled by how far the sun is from
- * noon, so the strain budget allows the most casts at noon. The power also warns
- * the floran once a day as noon approaches. The reclaim itself is in
+ * <p>The floran's strength follows a tide of day and night. A cast costs a share
+ * of the full sun reserve that falls from {@code dawn_cost} at sunrise and sunset
+ * to {@code noon_cost} at noon, never below {@code shaded_cost} away from open sky
+ * so the hour alone grants nothing underground, and each cast is followed by a hard cooldown. The
+ * reserve the floran can hold shrinks toward {@code night_capacity} of its maximum
+ * as the sun sets and swells back as it rises, spilling any sun above it. The power
+ * also warns the floran once a day as noon approaches. The reclaim itself is in
  * {@link NatureReclaim}.
  */
 public final class NatureReclaimPower extends Power implements Active {
-
-    // Groves where reclamation strains the floran less.
-    private static final TagKey<Biome> ENCHANTED_GROVES =
-        TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("mms_origins", "enchanted_groves"));
 
     private static final int HOLD_GRACE_TICKS = 3;
 
@@ -55,16 +53,18 @@ public final class NatureReclaimPower extends Power implements Active {
 
     private static final long DAY_LENGTH = 24000L;
 
-    private static final double MIN_DAYLIGHT = 0.05;
+    private static final String LAST_CAST_KEY = "LastCast";
 
     private final int castTicks;
     private final int soundDelay;
     private final SoundEvent chargingSound;
     private final SoundEvent finishSound;
-    private final PowerType<?> strainResource;
-    private final int noonStrain;
     private final PowerType<?> sunResource;
-    private final int noonSunCost;
+    private final double dawnCost;
+    private final double noonCost;
+    private final double shadedCost;
+    private final int cooldown;
+    private final double nightCapacity;
     private final SoundEvent noonSound;
     private final int noonWarning;
 
@@ -73,6 +73,7 @@ public final class NatureReclaimPower extends Power implements Active {
     private int charge;
     private boolean awaitingRelease;
     private long lastWarnedDay = -1L;
+    private long lastCast = Long.MIN_VALUE;
 
     public NatureReclaimPower(
             PowerType<?> type,
@@ -81,10 +82,12 @@ public final class NatureReclaimPower extends Power implements Active {
             int soundDelay,
             SoundEvent chargingSound,
             SoundEvent finishSound,
-            PowerType<?> strainResource,
-            int noonStrain,
             PowerType<?> sunResource,
-            int noonSunCost,
+            double dawnCost,
+            double noonCost,
+            double shadedCost,
+            int cooldown,
+            double nightCapacity,
             SoundEvent noonSound,
             int noonWarning) {
         super(type, entity);
@@ -92,10 +95,12 @@ public final class NatureReclaimPower extends Power implements Active {
         this.soundDelay = soundDelay;
         this.chargingSound = chargingSound;
         this.finishSound = finishSound;
-        this.strainResource = strainResource;
-        this.noonStrain = noonStrain;
         this.sunResource = sunResource;
-        this.noonSunCost = noonSunCost;
+        this.dawnCost = dawnCost;
+        this.noonCost = noonCost;
+        this.shadedCost = shadedCost;
+        this.cooldown = cooldown;
+        this.nightCapacity = nightCapacity;
         this.noonSound = noonSound;
         this.noonWarning = noonWarning;
         this.setTicking(true);
@@ -122,8 +127,23 @@ public final class NatureReclaimPower extends Power implements Active {
             return;
         }
         warnOfNoon(player, level);
+        ebbReserve(player, level);
         channel(player, level);
         root(player, charge > 0);
+    }
+
+    @Override
+    public Tag toTag() {
+        CompoundTag tag = new CompoundTag();
+        tag.putLong(LAST_CAST_KEY, lastCast);
+        return tag;
+    }
+
+    @Override
+    public void fromTag(Tag tag) {
+        if (tag instanceof CompoundTag compound) {
+            lastCast = compound.getLongOr(LAST_CAST_KEY, Long.MIN_VALUE);
+        }
     }
 
     @Override
@@ -221,17 +241,15 @@ public final class NatureReclaimPower extends Power implements Active {
             message(player, "message.mms_origins.nature_reclaim.not_day");
             return;
         }
-        VariableIntPower strain = resource(player, strainResource);
-        int strainCost = scaled(noonStrain, daylight, strain);
-        if (level.getBiome(player.blockPosition()).is(ENCHANTED_GROVES)) {
-            strainCost = Math.max(1, strainCost / 2);
-        }
-        if (strain != null && strain.getValue() + strainCost > strain.getMax()) {
-            message(player, "message.mms_origins.nature_reclaim.strained");
+        long elapsed = level.getGameTime() - lastCast;
+        if (elapsed >= 0 && elapsed < cooldown) {
+            player.sendOverlayMessage(Component.translatable(
+                "message.mms_origins.nature_reclaim.cooldown",
+                (cooldown - elapsed + 19) / 20));
             return;
         }
         VariableIntPower sun = resource(player, sunResource);
-        int sunCost = scaled(noonSunCost, daylight, sun);
+        int sunCost = sun == null ? 0 : (int) Math.ceil(sun.getMax() * costShare(player, daylight));
         if (sun != null && sun.getValue() < sunCost) {
             message(player, "message.mms_origins.nature_reclaim.no_sun");
             return;
@@ -239,19 +257,16 @@ public final class NatureReclaimPower extends Power implements Active {
         NatureReclaim.Result result = NatureReclaim.reclaim(player, level, subject(player));
         switch (result) {
             case SUCCESS -> {
-                spend(player, strain, -strainCost);
                 spend(player, sun, sunCost);
+                lastCast = level.getGameTime();
                 if (finishSound != null) {
                     level.playSound(null, player.getX(), player.getY(), player.getZ(),
                         finishSound, SoundSource.PLAYERS, 0.8f, 1.0f);
                 }
                 level.sendParticles(ParticleTypes.COMPOSTER,
                     player.getX(), player.getY() + 1.0, player.getZ(), 24, 0.4, 0.6, 0.4, 0.1);
-                int left = strain == null || strainCost <= 0
-                    ? 0
-                    : (strain.getMax() - strain.getValue()) / strainCost;
                 player.sendOverlayMessage(
-                    Component.translatable("message.mms_origins.nature_reclaim.success", left));
+                    Component.translatable("message.mms_origins.nature_reclaim.success", sunCost));
             }
             case NOT_ENOUGH -> message(player, "message.mms_origins.nature_reclaim.not_enough");
             default -> message(player, "message.mms_origins.nature_reclaim.no_recipe");
@@ -263,9 +278,27 @@ public final class NatureReclaimPower extends Power implements Active {
         return Math.max(0.0, 1.0 - Math.abs(time - NOON) / HALF_DAY);
     }
 
-    private static int scaled(int noonCost, double daylight, VariableIntPower cap) {
-        int cost = (int) Math.round(noonCost / Math.max(daylight, MIN_DAYLIGHT));
-        return cap == null ? cost : Math.min(cost, cap.getMax());
+    /** The share of the full reserve one cast costs, sliding from dawn to noon and back, floored when shaded. */
+    private double costShare(Player player, double daylight) {
+        double share = dawnCost + (noonCost - dawnCost) * daylight;
+        if (player.level().canSeeSky(player.blockPosition().above())) {
+            return share;
+        }
+        return Math.max(share, shadedCost);
+    }
+
+    /** Spills any sun above the reserve the hour allows, which ebbs at dusk and swells at dawn. */
+    private void ebbReserve(Player player, ServerLevel level) {
+        VariableIntPower sun = resource(player, sunResource);
+        if (sun == null) {
+            return;
+        }
+        double share = nightCapacity + (1.0 - nightCapacity) * daylight(level);
+        int capacity = (int) Math.round(sun.getMax() * share);
+        if (sun.getValue() > capacity) {
+            sun.setValue(capacity);
+            PowerHolderComponent.syncPower(player, sun.getType());
+        }
     }
 
     private static void spend(Player player, VariableIntPower power, int amount) {

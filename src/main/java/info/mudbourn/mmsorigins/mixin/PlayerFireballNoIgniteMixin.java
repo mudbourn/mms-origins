@@ -1,6 +1,7 @@
 package info.mudbourn.mmsorigins.mixin;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import info.mudbourn.mmsorigins.BlazebornFire;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.hurtingprojectile.SmallFireball;
@@ -10,7 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 
 /**
  * Keeps a player's small fireballs from setting other players alight, so a
- * Blazeborn volley still deals its hit damage in PvP without the burn.
+ * Blazeborn volley still deals its hit damage in PvP without the burn, and
+ * marks anything else they light as burning from a Blazeborn's flame.
  */
 @Mixin(SmallFireball.class)
 public abstract class PlayerFireballNoIgniteMixin {
@@ -23,6 +25,13 @@ public abstract class PlayerFireballNoIgniteMixin {
         )
     )
     private boolean mmsOrigins$skipPlayerIgnite(Entity target, float seconds, EntityHitResult hit) {
-        return !(target instanceof Player && ((SmallFireball) (Object) this).getOwner() instanceof Player);
+        if (!(((SmallFireball) (Object) this).getOwner() instanceof Player)) {
+            return true;
+        }
+        if (target instanceof Player) {
+            return false;
+        }
+        BlazebornFire.mark(target);
+        return true;
     }
 }

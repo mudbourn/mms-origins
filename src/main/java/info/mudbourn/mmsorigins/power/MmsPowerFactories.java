@@ -9,7 +9,9 @@ import info.mudbourn.mmsorigins.power.action.GuardianBeamAction;
 import info.mudbourn.mmsorigins.power.action.LaunchAction;
 import info.mudbourn.mmsorigins.power.action.RandomTeleportAction;
 import info.mudbourn.mmsorigins.power.action.ShulkerBulletAction;
+import info.mudbourn.mmsorigins.power.action.BlazeIgniteAction;
 import info.mudbourn.mmsorigins.power.action.SmallFireballAction;
+import info.mudbourn.mmsorigins.power.action.WildfireShieldAction;
 import info.mudbourn.mmsorigins.power.action.SporeHazeAction;
 import info.mudbourn.mmsorigins.power.action.SummonHenchmenAction;
 import info.mudbourn.mmsorigins.power.action.SurfaceAction;
@@ -21,7 +23,6 @@ import info.mudbourn.mmsorigins.power.condition.IncapacitatedCondition;
 import info.mudbourn.mmsorigins.power.condition.OwnsHenchmanCondition;
 import info.mudbourn.mmsorigins.power.condition.ResourceFractionCondition;
 import info.mudbourn.mmsorigins.power.condition.SunIntakeCondition;
-import info.mudbourn.mmsorigins.power.condition.SunStrainCondition;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
 import io.github.apace100.apoli.power.factory.PowerFactory;
@@ -123,10 +124,12 @@ public final class MmsPowerFactories {
                     .add("sound_delay", SerializableDataTypes.INT, 20)
                     .add("charging_sound", SerializableDataTypes.SOUND_EVENT, null)
                     .add("finish_sound", SerializableDataTypes.SOUND_EVENT, null)
-                    .add("strain_resource", ApoliDataTypes.POWER_TYPE, null)
-                    .add("noon_strain", SerializableDataTypes.INT, 10)
                     .add("sun_resource", ApoliDataTypes.POWER_TYPE, null)
-                    .add("noon_sun_cost", SerializableDataTypes.INT, 5)
+                    .add("dawn_cost", SerializableDataTypes.DOUBLE, 2.0)
+                    .add("noon_cost", SerializableDataTypes.DOUBLE, 0.35)
+                    .add("shaded_cost", SerializableDataTypes.DOUBLE, 0.5)
+                    .add("cooldown", SerializableDataTypes.INT, 300)
+                    .add("night_capacity", SerializableDataTypes.DOUBLE, 0.5)
                     .add("noon_sound", SerializableDataTypes.SOUND_EVENT, null)
                     .add("noon_warning", SerializableDataTypes.INT, 600)
                     .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key()),
@@ -138,10 +141,12 @@ public final class MmsPowerFactories {
                         data.getInt("sound_delay"),
                         data.get("charging_sound"),
                         data.get("finish_sound"),
-                        data.get("strain_resource"),
-                        data.getInt("noon_strain"),
                         data.get("sun_resource"),
-                        data.getInt("noon_sun_cost"),
+                        data.getDouble("dawn_cost"),
+                        data.getDouble("noon_cost"),
+                        data.getDouble("shaded_cost"),
+                        data.getInt("cooldown"),
+                        data.getDouble("night_capacity"),
                         data.get("noon_sound"),
                         data.getInt("noon_warning"));
                     power.setKey(data.get("key"));
@@ -218,14 +223,6 @@ public final class MmsPowerFactories {
                 maelsBlessing,
                 new SerializableData(),
                 SunIntakeCondition::maelsBlessingCondition));
-        Identifier sunStrain = id("sun_strain");
-        Registry.register(
-            ApoliRegistries.ENTITY_CONDITION,
-            sunStrain,
-            new ConditionFactory<Entity>(
-                sunStrain,
-                SunStrainCondition.data(),
-                SunStrainCondition::condition));
     }
 
     private static void registerLaunch() {
@@ -262,6 +259,22 @@ public final class MmsPowerFactories {
     }
 
     private static void registerSmallFireball() {
+        Identifier ignite = id("blaze_ignite");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            ignite,
+            new ActionFactory<Entity>(
+                ignite,
+                BlazeIgniteAction.data(),
+                BlazeIgniteAction::action));
+        Identifier shield = id("wildfire_shield");
+        Registry.register(
+            ApoliRegistries.ENTITY_ACTION,
+            shield,
+            new ActionFactory<Entity>(
+                shield,
+                WildfireShieldAction.data(),
+                WildfireShieldAction::action));
         Identifier id = id("small_fireball");
         Registry.register(
             ApoliRegistries.ENTITY_ACTION,
@@ -368,6 +381,9 @@ public final class MmsPowerFactories {
                     .add("press_condition", ApoliDataTypes.ENTITY_CONDITION, null)
                     .add("hold_action", ApoliDataTypes.ENTITY_ACTION, null)
                     .add("hold_condition", ApoliDataTypes.ENTITY_CONDITION, null)
+                    .add("chord", SerializableDataTypes.STRING, null)
+                    .add("chord_action", ApoliDataTypes.ENTITY_ACTION, null)
+                    .add("chord_condition", ApoliDataTypes.ENTITY_CONDITION, null)
                     .add("key", ApoliDataTypes.BACKWARDS_COMPATIBLE_KEY, new Active.Key()),
                 data -> (type, entity) -> {
                     KeyGesturePower power = new KeyGesturePower(
@@ -379,7 +395,10 @@ public final class MmsPowerFactories {
                         data.get("press_action"),
                         data.get("press_condition"),
                         data.get("hold_action"),
-                        data.get("hold_condition"));
+                        data.get("hold_condition"),
+                        data.get("chord"),
+                        data.get("chord_action"),
+                        data.get("chord_condition"));
                     Active.Key key = data.get("key");
                     key.continuous = true;
                     power.setKey(key);

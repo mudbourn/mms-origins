@@ -6,6 +6,7 @@ import info.mudbourn.mmsorigins.client.beastfolk.ClawsModel;
 import info.mudbourn.mmsorigins.client.beastfolk.EarsModel;
 import info.mudbourn.mmsorigins.client.beastfolk.TailModel;
 import info.mudbourn.mmsorigins.client.entity.FloranHenchmanRenderer;
+import info.mudbourn.mmsorigins.client.entity.WildfireShieldRenderer;
 import info.mudbourn.mmsorigins.client.fur.FurFeatureRenderer;
 import info.mudbourn.mmsorigins.client.fur.FurModels;
 import info.mudbourn.mmsorigins.client.wings.ButterflyFlap;
@@ -37,6 +38,7 @@ public class MmsOriginsClient implements ClientModInitializer {
         FurModels.init();
         AvianClimb.setLocalJump(() -> Minecraft.getInstance().options.keyJump.isDown());
         EntityRendererRegistry.register(MmsEntities.FLORAN_HENCHMAN, FloranHenchmanRenderer::new);
+        EntityRendererRegistry.register(MmsEntities.WILDFIRE_SHIELD, WildfireShieldRenderer::new);
         ModelLayerRegistry.registerModelLayer(ButterflyWingsModel.LAYER, ButterflyWingsModel::createLayer);
         ModelLayerRegistry.registerModelLayer(TailModel.LAYER, TailModel::createLayer);
         ModelLayerRegistry.registerModelLayer(EarsModel.LAYER, EarsModel::createLayer);

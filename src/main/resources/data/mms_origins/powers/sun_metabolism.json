@@ -21,10 +21,6 @@
           "resource": "mms_origins:sunlit_fury_active",
           "comparison": "==",
           "compare_to": 0
-        },
-        {
-          "type": "mms_origins:sun_strain",
-          "resource": "mms_origins:nature_reclaim_strain"
         }
       ]
     }
@@ -38,7 +34,7 @@
           "type": "origins:resource",
           "resource": "mms_origins:sun_power",
           "comparison": "<",
-          "compare_to": 35
+          "compare_to": 42
         },
         {
           "type": "origins:resource",
@@ -54,7 +50,7 @@
         "type": "origins:resource",
         "resource": "mms_origins:sun_power",
         "comparison": "<",
-        "compare_to": 25
+        "compare_to": 32
       },
       "if_action": {
         "type": "origins:change_resource",
@@ -66,7 +62,7 @@
         "type": "origins:change_resource",
         "resource": "mms_origins:sun_power",
         "operation": "set",
-        "change": 35
+        "change": 42
       }
     },
     "item_condition": {
@@ -106,10 +102,6 @@
           "type": "mms_origins:sun_intake",
           "peak": 0.4,
           "sharpness": 3.0
-        },
-        {
-          "type": "mms_origins:sun_strain",
-          "resource": "mms_origins:nature_reclaim_strain"
         }
       ]
     }
@@ -133,10 +125,6 @@
           "type": "mms_origins:sun_intake",
           "peak": 0.2,
           "sharpness": 3.0
-        },
-        {
-          "type": "mms_origins:sun_strain",
-          "resource": "mms_origins:nature_reclaim_strain"
         },
         {
           "type": "origins:biome",

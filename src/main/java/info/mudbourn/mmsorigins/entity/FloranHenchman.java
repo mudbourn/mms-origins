@@ -130,6 +130,7 @@ public class FloranHenchman extends AbstractGolem {
     private int runTicks;
     private int runCooldown;
     private int lastRiderAttack;
+    private boolean lastRiderWhiffed;
     private int mountTicks;
 
     private static final Identifier MAELS_BLESSING_ID = Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "maels_blessing");
@@ -365,7 +366,7 @@ public class FloranHenchman extends AbstractGolem {
             this.crumble();
             return;
         }
-        if (this.tickCount % TAUNT_INTERVAL == 0) {
+        if (pilot != null || this.tickCount % TAUNT_INTERVAL == 0) {
             this.pullAggroOffOwner(level);
         }
     }
@@ -396,12 +397,18 @@ public class FloranHenchman extends AbstractGolem {
 
     /** Swings for the rider, striking what they aim at within the golem's reach, or the given target if one was hit. */
     public void strikeFor(Player rider, Entity aimed) {
-        if (!(this.level() instanceof ServerLevel level)
-                || this.tickCount - this.lastRiderAttack < RIDER_ATTACK_COOLDOWN) {
+        if (!(this.level() instanceof ServerLevel level)) {
             return;
         }
-        this.lastRiderAttack = this.tickCount;
         LivingEntity target = this.reachable(aimed) ? (LivingEntity) aimed : this.aimedTarget(rider);
+        boolean cooling = this.tickCount - this.lastRiderAttack < RIDER_ATTACK_COOLDOWN;
+        if (cooling && (target == null || !this.lastRiderWhiffed)) {
+            return;
+        }
+        this.lastRiderWhiffed = target == null;
+        if (!cooling) {
+            this.lastRiderAttack = this.tickCount;
+        }
         if (target == null) {
             this.attackAnimationRemainingTicks = ATTACK_ANIMATION_TICKS;
             level.broadcastEntityEvent(this, ATTACK_EVENT);

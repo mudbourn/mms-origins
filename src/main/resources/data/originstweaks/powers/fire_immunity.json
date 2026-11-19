@@ -7,8 +7,26 @@
 			"text": {
 				"translate": "badge.originstweaks.fire_immunity.0"
 			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.originstweaks.fire_immunity.1"
+			}
 		}
 	],
+	"blast_resistance": {
+		"type": "origins:modify_damage_taken",
+		"damage_condition": {
+			"type": "origins:explosive"
+		},
+		"modifier": {
+			"name": "Blazeborn blast resistance",
+			"value": -0.65,
+			"operation": "multiply_total"
+		}
+	},
 	"fire_immune": {
 		"type": "origins:invulnerability",
 		"damage_condition": {
