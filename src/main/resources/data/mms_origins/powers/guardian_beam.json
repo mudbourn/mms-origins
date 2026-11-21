@@ -30,13 +30,13 @@
           "type": "origins:resource",
           "resource": "mms_origins:wetness_moisture",
           "comparison": ">=",
-          "compare_to": 280
+          "compare_to": 140
         },
         {
           "type": "origins:resource",
           "resource": "mms_origins:tide_magic_charge",
           "comparison": ">=",
-          "compare_to": 100
+          "compare_to": 50
         }
       ]
     },
@@ -45,19 +45,19 @@
       "range": 16,
       "cone_degrees": 15,
       "charge_ticks": 30,
-      "damage": 6,
+      "damage": 4,
       "on_fire": {
         "type": "origins:and",
         "actions": [
           {
             "type": "origins:change_resource",
             "resource": "mms_origins:wetness_moisture",
-            "change": -280
+            "change": -140
           },
           {
             "type": "origins:change_resource",
             "resource": "mms_origins:tide_magic_charge",
-            "change": -100
+            "change": -50
           }
         ]
       }

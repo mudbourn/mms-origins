@@ -2,8 +2,10 @@ package info.mudbourn.mmsorigins;
 
 import info.mudbourn.mmsorigins.network.GuardianBeamPayload;
 import info.mudbourn.mmsorigins.power.action.ShulkerBulletAction;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -12,6 +14,7 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -24,6 +27,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Server side of the fishman guardian beam: target lock, charge and release.
@@ -32,7 +39,7 @@ import net.minecraft.world.entity.LivingEntity;
  * the closest creature in the caster's sight, like a guardian picking its prey, and
  * the beam then charges on that creature while it stays alive, in range and in
  * sight. A full charge strikes it once; letting go, losing the target or breaking
- * sight drops the beam. Clients are told when a beam starts and stops so they can
+ * sight drops the beam. Half a second later the strike arcs once, weaker, to enemies that were close to the target. Clients are told when a beam starts and stops so they can
  * draw it with the guardian's own renderer.
  */
 public final class GuardianBeam {
@@ -43,6 +50,11 @@ public final class GuardianBeam {
         Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "guardian_beam"));
 
     private static final int RELEASE_GRACE_TICKS = 2;
+    private static final double CHAIN_RADIUS = 3.0;
+    private static final double CHAIN_PARTICLES_PER_BLOCK = 3.0;
+    private static final int CHAIN_DELAY_TICKS = 10;
+    private static final float CHAIN_DAMAGE_FACTOR = 0.75F;
+    private static final List<PendingChain> CHAINS = new ArrayList<>();
     private static final Map<UUID, Channel> CHANNELS = new HashMap<>();
 
     private GuardianBeam() {
@@ -51,6 +63,7 @@ public final class GuardianBeam {
     public static void register() {
         PayloadTypeRegistry.clientboundPlay().register(GuardianBeamPayload.TYPE, GuardianBeamPayload.CODEC);
         ServerTickEvents.END_SERVER_TICK.register(GuardianBeam::releaseLetGo);
+        ServerTickEvents.END_SERVER_TICK.register(GuardianBeam::fireChains);
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> stop(handler.getPlayer()));
     }
 
@@ -86,11 +99,74 @@ public final class GuardianBeam {
                 player,
                 player);
             target.hurtServer(level, source, damage);
+            chain(player, level, target, source, damage);
         }
         if (onFire != null) {
             onFire.accept(player);
         }
         stop(player);
+    }
+
+    /** Picks the enemies within {@link #CHAIN_RADIUS} of the target that the strike arcs to after {@link #CHAIN_DELAY_TICKS}. */
+    private static void chain(ServerPlayer player, ServerLevel level, LivingEntity target, DamageSource source, float damage) {
+        AABB area = target.getBoundingBox().inflate(CHAIN_RADIUS);
+        List<Integer> victims = level.getEntitiesOfClass(LivingEntity.class, area, other -> isChainVictim(player, target, other))
+            .stream()
+            .map(Entity::getId)
+            .toList();
+        if (victims.isEmpty()) {
+            return;
+        }
+        CHAINS.add(new PendingChain(
+            level,
+            target.getId(),
+            target.getEyePosition(),
+            victims,
+            source,
+            damage * CHAIN_DAMAGE_FACTOR,
+            level.getServer().getTickCount() + CHAIN_DELAY_TICKS));
+    }
+
+    private static void fireChains(MinecraftServer server) {
+        Iterator<PendingChain> chains = CHAINS.iterator();
+        while (chains.hasNext()) {
+            PendingChain chain = chains.next();
+            if (server.getTickCount() < chain.fireTick()) {
+                continue;
+            }
+            chains.remove();
+            ServerLevel level = chain.level();
+            Vec3 from = level.getEntity(chain.targetId()) instanceof LivingEntity target && target.isAlive()
+                ? target.getEyePosition()
+                : chain.origin();
+            for (int id : chain.victimIds()) {
+                if (level.getEntity(id) instanceof LivingEntity victim && victim.isAlive()) {
+                    arc(level, from, victim);
+                    victim.hurtServer(level, chain.source(), chain.damage());
+                }
+            }
+        }
+    }
+
+    private static void arc(ServerLevel level, Vec3 from, LivingEntity victim) {
+        Vec3 step = victim.getEyePosition().subtract(from);
+        int points = Math.max(1, (int) Math.ceil(step.length() * CHAIN_PARTICLES_PER_BLOCK));
+        for (int i = 0; i <= points; i++) {
+            Vec3 at = from.add(step.scale((double) i / points));
+            level.sendParticles(ParticleTypes.GLOW, at.x, at.y, at.z, 1, 0.0, 0.0, 0.0, 0.0);
+        }
+        level.playSound(null, victim.getX(), victim.getY(), victim.getZ(),
+            SoundEvents.GUARDIAN_HURT, SoundSource.PLAYERS, 0.6F, 1.4F);
+    }
+
+    private static boolean isChainVictim(ServerPlayer player, LivingEntity target, LivingEntity other) {
+        if (other == target
+            || other.distanceTo(target) > CHAIN_RADIUS
+            || !ShulkerBulletAction.isCandidate(player, other)
+            || !target.hasLineOfSight(other)) {
+            return false;
+        }
+        return other instanceof Enemy || other instanceof Mob mob && mob.getTarget() == player;
     }
 
     private static boolean holds(ServerPlayer player, ServerLevel level, Channel channel, double range) {
@@ -127,6 +203,17 @@ public final class GuardianBeam {
                 ServerPlayNetworking.send(watcher, payload);
             }
         }
+    }
+
+    private record PendingChain(
+        ServerLevel level,
+        int targetId,
+        Vec3 origin,
+        List<Integer> victimIds,
+        DamageSource source,
+        float damage,
+        int fireTick
+    ) {
     }
 
     private static final class Channel {

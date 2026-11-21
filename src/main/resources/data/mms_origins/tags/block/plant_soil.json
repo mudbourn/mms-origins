@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:dirt",
+    "#minecraft:substrate_overworld",
     "#minecraft:sand",
     "#mms_origins:lush_soil",
     "minecraft:farmland",

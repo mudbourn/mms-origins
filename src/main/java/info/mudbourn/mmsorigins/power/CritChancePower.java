@@ -6,8 +6,8 @@ import io.github.apace100.apoli.power.PowerType;
 import net.minecraft.world.entity.LivingEntity;
 
 /**
- * Gives the holder a chance to turn a fully charged melee hit into a vanilla
- * critical hit. Chances from every active instance add together.
+ * Adds to the holder's Critical Strike crit chance. Chances from every active
+ * instance add together.
  */
 public final class CritChancePower extends Power {
 

@@ -1,12 +1,12 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:dirt",
+    "#minecraft:substrate_overworld",
     "#minecraft:leaves",
     "#minecraft:logs",
     "#minecraft:nylium",
     "#minecraft:wart_blocks",
-    "#minecraft:mushroom_grow_block",
+    "#minecraft:overrides_mushroom_light_requirement",
     "minecraft:mangrove_roots",
     "minecraft:muddy_mangrove_roots",
     "minecraft:packed_mud",

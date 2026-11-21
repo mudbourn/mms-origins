@@ -241,6 +241,10 @@ public final class MmsOriginsPowers {
     public static final PowerType<?> FIRE_POWER =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "fire_power"));
 
+    /** Fishman water power, the moisture bar; holding it lets {@code ShallowSwimMixin} swim in water one block deep. */
+    public static final PowerType<?> WATER_POWER =
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "water_power"));
+
     /** Beastfolk claw mode, the toggle that bares the claws the client draws on their hands. */
     public static final PowerType<?> CLAW_MODE =
         new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "claw_mode"));

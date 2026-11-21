@@ -291,11 +291,8 @@
                                 "compare_to": 0.0
                               },
                               "if_action": {
-                                "type": "origins:add_velocity",
-                                "space": "local",
-                                "z": 2.0,
-                                "server": false,
-                                "set": true
+                                "type": "mms_origins:launch",
+                                "distance": 12
                               },
                               "else_action": {
                                 "type": "mms_origins:launch",
@@ -339,11 +336,8 @@
                                 "compare_to": 0.0
                               },
                               "if_action": {
-                                "type": "origins:add_velocity",
-                                "space": "local",
-                                "z": 2.25,
-                                "server": false,
-                                "set": true
+                                "type": "mms_origins:launch",
+                                "distance": 13
                               },
                               "else_action": {
                                 "type": "mms_origins:launch",
@@ -378,11 +372,8 @@
                                 "compare_to": 0.0
                               },
                               "if_action": {
-                                "type": "origins:add_velocity",
-                                "space": "local",
-                                "z": 2.5,
-                                "server": false,
-                                "set": true
+                                "type": "mms_origins:launch",
+                                "distance": 14
                               },
                               "else_action": {
                                 "type": "mms_origins:launch",
@@ -417,11 +408,8 @@
                                 "compare_to": 0.0
                               },
                               "if_action": {
-                                "type": "origins:add_velocity",
-                                "space": "local",
-                                "z": 2.75,
-                                "server": false,
-                                "set": true
+                                "type": "mms_origins:launch",
+                                "distance": 15
                               },
                               "else_action": {
                                 "type": "mms_origins:launch",
