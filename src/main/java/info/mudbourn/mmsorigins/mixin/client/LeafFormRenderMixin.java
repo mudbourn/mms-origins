@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import info.mudbourn.mmsorigins.client.OwnFirstPerson;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -59,6 +60,11 @@ public abstract class LeafFormRenderMixin {
                                            SubmitNodeCollector collector, CameraRenderState camera,
                                            CallbackInfo ci) {
         if (!(state instanceof LeafFormState leaf) || !leaf.mmsOrigins$leafForm()) {
+            return;
+        }
+        // Better Combat draws the body in first person while swinging; the bush would wrap the camera.
+        if (OwnFirstPerson.is(state)) {
+            ci.cancel();
             return;
         }
         int light = state.lightCoords;

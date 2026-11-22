@@ -36,6 +36,7 @@ public class MmsOrigins implements ModInitializer {
         VerdantGrowth.register();
         FairyScaleEnforcer.register();
         MoltenChargeCharger.register();
+        DownedUnshift.register();
         CritStrikeChance.register();
         ZombieMeterDeathReset.register();
         ClimateTolerance.register();

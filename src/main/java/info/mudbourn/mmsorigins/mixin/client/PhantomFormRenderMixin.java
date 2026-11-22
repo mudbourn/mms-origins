@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.monster.Phantom;
+import info.mudbourn.mmsorigins.client.OwnFirstPerson;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,6 +39,10 @@ public abstract class PhantomFormRenderMixin {
     @Unique
     private static final int PHANTOM_SIZE = 0;
 
+    /** An ID no real entity gets: the client counts up from 1 for its own entities and servers assign positive IDs. */
+    @Unique
+    private static final int TEMPLATE_ID = Integer.MIN_VALUE + 7;
+
     @Unique
     private static final float FACING_FRONT_BODY_ROT = 180.0F;
 
@@ -52,7 +57,7 @@ public abstract class PhantomFormRenderMixin {
         if (!(state instanceof PhantomFormState form) || !form.mmsOrigins$phantomForm()) {
             return;
         }
-        if (mmsOrigins$ownFirstPerson(state)) {
+        if (OwnFirstPerson.is(state)) {
             ci.cancel();
             return;
         }
@@ -74,22 +79,14 @@ public abstract class PhantomFormRenderMixin {
         ci.cancel();
     }
 
-    /** Whether this is the local player seen from their own first-person camera. */
-    @Unique
-    private static boolean mmsOrigins$ownFirstPerson(LivingEntityRenderState state) {
-        Minecraft client = Minecraft.getInstance();
-        return client.player != null
-            && client.options.getCameraType().isFirstPerson()
-            && state instanceof AvatarRenderState avatar
-            && avatar.id == client.player.getId();
-    }
-
     /** The shared phantom render state, extracted from a template phantom on first use. */
     @Unique
     private static PhantomRenderState mmsOrigins$phantomState() {
         if (mmsOrigins$phantom == null) {
             Minecraft client = Minecraft.getInstance();
             Phantom template = new Phantom(EntityTypes.PHANTOM, client.level);
+            // A fresh entity has no ID, and the item model resolver reads it while extracting the state.
+            template.setId(TEMPLATE_ID);
             mmsOrigins$phantom = (PhantomRenderState) client.getEntityRenderDispatcher()
                 .getRenderer(template)
                 .createRenderState(template, 0.0F);
