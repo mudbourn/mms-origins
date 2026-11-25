@@ -6,10 +6,11 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.resources.Identifier;
 
-// A synced attachment carrying the wing option a logout-body mannequin should wear, resolved server-side and read by the client renderer.
+// A synced attachment carrying the wing option a body mannequin should wear, resolved server-side and read by the client renderer.
 public final class BodyWingAttachment {
 
     public static final AttachmentType<Identifier> TYPE = AttachmentRegistry.<Identifier>builder()
+        .persistent(Identifier.CODEC)
         .syncWith(Identifier.STREAM_CODEC, AttachmentSyncPredicate.all())
         .buildAndRegister(Identifier.fromNamespaceAndPath(MmsOrigins.MOD_ID, "body_wing"));
 

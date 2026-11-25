@@ -22,6 +22,7 @@ import info.mudbourn.mmsorigins.power.condition.HenchmenCountCondition;
 import info.mudbourn.mmsorigins.power.condition.IncapacitatedCondition;
 import info.mudbourn.mmsorigins.power.condition.OwnsHenchmanCondition;
 import info.mudbourn.mmsorigins.power.condition.ResourceFractionCondition;
+import info.mudbourn.mmsorigins.power.condition.SunCapCondition;
 import info.mudbourn.mmsorigins.power.condition.SunIntakeCondition;
 import io.github.apace100.apoli.data.ApoliDataTypes;
 import io.github.apace100.apoli.power.Active;
@@ -223,6 +224,14 @@ public final class MmsPowerFactories {
                 maelsBlessing,
                 new SerializableData(),
                 SunIntakeCondition::maelsBlessingCondition));
+        Identifier belowCap = id("below_sun_cap");
+        Registry.register(
+            ApoliRegistries.ENTITY_CONDITION,
+            belowCap,
+            new ConditionFactory<Entity>(
+                belowCap,
+                SunCapCondition.data(),
+                SunCapCondition::condition));
     }
 
     private static void registerLaunch() {

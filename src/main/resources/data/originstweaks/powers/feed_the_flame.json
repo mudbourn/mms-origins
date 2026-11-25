@@ -6,6 +6,9 @@
       "tag": "originstweaks:blazeborn_fuel"
     }
   },
+  "condition": {
+    "type": "origins:on_fire"
+  },
   "consume_sound": "minecraft:block.fire.extinguish",
   "consume_sound_times": 3,
   "finish_sound": "minecraft:entity.blaze.shoot",

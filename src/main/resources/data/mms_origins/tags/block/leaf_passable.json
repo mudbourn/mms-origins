@@ -91,6 +91,126 @@
     {
       "id": "biomeswevegone:wood_blewit_mushroom_block",
       "required": false
+    },
+    {
+      "id": "alexscaves:fern_thatch",
+      "required": false
+    },
+    {
+      "id": "alexscaves:guano_block",
+      "required": false
+    },
+    {
+      "id": "alexscaves:licoroot",
+      "required": false
+    },
+    {
+      "id": "alexscaves:cycad",
+      "required": false
+    },
+    {
+      "id": "aerialhell:aerial_tree_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:copper_pine_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:golden_beech_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:lapis_robinia_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:shadow_pine_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:stellar_jungle_tree_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:giant_cortinarius_violaceus_bark_stem",
+      "required": false
+    },
+    {
+      "id": "aerialhell:giant_cortinarius_violaceus_cap_block",
+      "required": false
+    },
+    {
+      "id": "aerialhell:giant_cortinarius_violaceus_light",
+      "required": false
+    },
+    {
+      "id": "aerialhell:giant_cortinarius_violaceus_stem",
+      "required": false
+    },
+    {
+      "id": "aerialhell:giant_ganoderma_applanatum_block",
+      "required": false
+    },
+    {
+      "id": "aerialhell:giant_verdigris_agaric_bark_stem",
+      "required": false
+    },
+    {
+      "id": "aerialhell:giant_verdigris_agaric_cap_block",
+      "required": false
+    },
+    {
+      "id": "aerialhell:giant_verdigris_agaric_stem",
+      "required": false
+    },
+    {
+      "id": "aerialhell:stellar_coarse_dirt",
+      "required": false
+    },
+    {
+      "id": "aerialhell:stellar_dirt",
+      "required": false
+    },
+    {
+      "id": "aerialhell:stellar_grass_block",
+      "required": false
+    },
+    {
+      "id": "aerialhell:shadow_grass_block",
+      "required": false
+    },
+    {
+      "id": "aerialhell:sky_cactus",
+      "required": false
+    },
+    {
+      "id": "aerialhell:vibrant_sky_cactus",
+      "required": false
+    },
+    {
+      "id": "enderscape:celestial_cap",
+      "required": false
+    },
+    {
+      "id": "enderscape:murublight_cap",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:cattail_thatch",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:packed_pale_mud",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:pale_pumpkin",
+      "required": false
+    },
+    {
+      "id": "undergroundworlds:glowshroom_block",
+      "required": false
     }
   ]
 }

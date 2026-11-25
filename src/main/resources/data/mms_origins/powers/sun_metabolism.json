@@ -14,6 +14,11 @@
       "type": "origins:and",
       "conditions": [
         {
+          "type": "mms_origins:below_sun_cap",
+          "resource": "mms_origins:sun_power",
+          "night_capacity": 0.5
+        },
+        {
           "type": "origins:exposed_to_sun"
         },
         {
@@ -96,6 +101,11 @@
       "type": "origins:and",
       "conditions": [
         {
+          "type": "mms_origins:below_sun_cap",
+          "resource": "mms_origins:sun_power",
+          "night_capacity": 0.5
+        },
+        {
           "type": "origins:exposed_to_sun"
         },
         {
@@ -118,6 +128,11 @@
     "condition": {
       "type": "origins:and",
       "conditions": [
+        {
+          "type": "mms_origins:below_sun_cap",
+          "resource": "mms_origins:sun_power",
+          "night_capacity": 0.5
+        },
         {
           "type": "origins:exposed_to_sun"
         },

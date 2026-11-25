@@ -9,6 +9,7 @@ import info.mudbourn.mmsorigins.entity.MmsEntities;
 import info.mudbourn.mmsorigins.fur.BodyFurAttachment;
 import info.mudbourn.mmsorigins.fur.BodyTailAttachment;
 import info.mudbourn.mmsorigins.fur.BodyWingAttachment;
+import info.mudbourn.mmsorigins.fur.CorpseFurBridge;
 import info.mudbourn.mmsorigins.fur.LogoutBodyFurBridge;
 import info.mudbourn.mmsorigins.item.MmsItems;
 import info.mudbourn.mmsorigins.power.MmsPowerFactories;
@@ -61,6 +62,9 @@ public class MmsOrigins implements ModInitializer {
         if (FabricLoader.getInstance().isModLoaded("mms_combat")) {
             LogoutBodyFurBridge.register();
             DummyActionOnHitBridge.register();
+        }
+        if (FabricLoader.getInstance().isModLoaded("mms_dungeons")) {
+            CorpseFurBridge.register();
         }
         if (FabricLoader.getInstance().isModLoaded("fishofthieves")) {
             FishOfThievesFairyFishing.register();

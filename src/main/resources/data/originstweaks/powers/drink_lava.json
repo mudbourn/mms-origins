@@ -6,6 +6,9 @@
       "item": "minecraft:lava_bucket"
     }
   },
+  "condition": {
+    "type": "origins:on_fire"
+  },
   "consume_sound": "minecraft:item.bucket.fill_lava",
   "finish_sound": "minecraft:entity.generic.drink",
   "nutrition": 8,
