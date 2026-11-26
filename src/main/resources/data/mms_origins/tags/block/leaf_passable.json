@@ -211,6 +211,110 @@
     {
       "id": "undergroundworlds:glowshroom_block",
       "required": false
+    },
+    {
+      "id": "aerialhell:stripped_aerial_tree_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:stripped_copper_pine_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:stripped_golden_beech_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:stripped_lapis_robinia_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:stripped_shadow_pine_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:stripped_stellar_jungle_tree_wood",
+      "required": false
+    },
+    {
+      "id": "aerialhell:stripped_giant_cortinarius_violaceus_bark_stem",
+      "required": false
+    },
+    {
+      "id": "aerialhell:stripped_giant_verdigris_agaric_bark_stem",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:carved_pale_pumpkin",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:golden_spined_cactus",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:prickly_pear_cactus",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:imbued_blue_enchanted_wood",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:imbued_green_enchanted_wood",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:driftwood_log",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:driftwood_wood",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:stripped_driftwood_log",
+      "required": false
+    },
+    {
+      "id": "bountiful-fish:stripped_driftwood_wood",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:prismarized_log",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:budding_prismarized_log",
+      "required": false
+    },
+    {
+      "id": "skniro_furniture:cherry_log",
+      "required": false
+    },
+    {
+      "id": "skniro_furniture:cherry_wood",
+      "required": false
+    },
+    {
+      "id": "skniro_furniture:stripped_cherry_log",
+      "required": false
+    },
+    {
+      "id": "skniro_furniture:stripped_cherry_wood",
+      "required": false
+    },
+    {
+      "id": "skniro_furniture:cherry_leaves",
+      "required": false
+    },
+    {
+      "id": "mms_dungeons:orpiment_petrified_log",
+      "required": false
+    },
+    {
+      "id": "mms_dungeons:orpiment_petrified_roots",
+      "required": false
     }
   ]
 }
