@@ -3,35 +3,35 @@
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "sprite": "mms_origins:textures/gui/badge/arrow_down.png",
       "text": {
         "translate": "badge.mms_origins.zombification.0"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "sprite": "mms_origins:textures/gui/badge/arrow_down.png",
       "text": {
         "translate": "badge.mms_origins.zombification.1"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/star.png",
+      "sprite": "mms_origins:textures/gui/badge/star.png",
       "text": {
         "translate": "badge.mms_origins.zombification.2"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "sprite": "mms_origins:textures/gui/badge/arrow_down.png",
       "text": {
         "translate": "badge.mms_origins.quarantine_exile.0"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "sprite": "mms_origins:textures/gui/badge/arrow_up.png",
       "text": {
         "translate": "badge.mms_origins.zombification.3"
       }
@@ -112,7 +112,7 @@
         {
           "type": "origins:ingredient",
           "ingredient": {
-            "tag": "originstweaks:golden_food"
+            "tag": "mms_origins:golden_food"
           },
           "inverted": true
         }
@@ -194,7 +194,7 @@
     "item_condition": {
       "type": "origins:ingredient",
       "ingredient": {
-        "tag": "originstweaks:golden_food"
+        "tag": "mms_origins:golden_food"
       }
     },
     "entity_action": {

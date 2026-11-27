@@ -41,6 +41,12 @@ public final class FairyFlightPower extends Power implements SurgingFlight {
 
     @Override
     public void tick() {
+        if (entity instanceof FlyingMob mob) {
+            if (!entity.level().isClientSide()) {
+                tickMob(mob);
+            }
+            return;
+        }
         if (!(entity instanceof Player player)) {
             return;
         }
@@ -48,8 +54,7 @@ public final class FairyFlightPower extends Power implements SurgingFlight {
             return;
         }
         Abilities abilities = player.getAbilities();
-        boolean fedEnough = !MmsOriginsPowers.downed(player) && isActive() && player.getFoodData().getFoodLevel() >= REQUIRED_FOOD_LEVEL;
-        if (fedEnough) {
+        if (allowed(player)) {
             abilities.setFlyingSpeed(cruiseSpeed(player));
             if (!abilities.mayfly) {
                 abilities.mayfly = true;
@@ -75,15 +80,22 @@ public final class FairyFlightPower extends Power implements SurgingFlight {
     }
 
     @Override
-    public float cruiseSpeed(Player player) {
-        float speed = player.getHealth() <= FAINT_HEALTH_THRESHOLD ? FAINT_FLYING_SPEED : NORMAL_FLYING_SPEED;
-        return inHomeland(player) ? speed * HOMELAND_SPEED_MULTIPLIER : speed;
+    public boolean allowed(LivingEntity entity) {
+        return !MmsOriginsPowers.downed(entity) && isActive() && SurgingFlight.foodLevel(entity) >= REQUIRED_FOOD_LEVEL;
     }
 
-
     @Override
-    public boolean surging(Player player) {
-        return player.isSprinting();
+    public float cruiseSpeed(LivingEntity entity) {
+        float speed = entity.getHealth() <= FAINT_HEALTH_THRESHOLD ? FAINT_FLYING_SPEED : NORMAL_FLYING_SPEED;
+        return inHomeland(entity) ? speed * HOMELAND_SPEED_MULTIPLIER : speed;
+    }
+
+    private void tickMob(FlyingMob mob) {
+        if (!allowed(entity)) {
+            mob.setFlying(false);
+        } else if (mob.flying()) {
+            mob.exhaust(EXHAUSTION_PER_FLYING_TICK);
+        }
     }
 
     private static void revoke(Player player) {
@@ -96,7 +108,7 @@ public final class FairyFlightPower extends Power implements SurgingFlight {
         }
     }
 
-    private static boolean inHomeland(Player player) {
-        return player.level().getBiome(player.blockPosition()).is(HOMELAND_BIOMES);
+    private static boolean inHomeland(LivingEntity entity) {
+        return entity.level().getBiome(entity.blockPosition()).is(HOMELAND_BIOMES);
     }
 }

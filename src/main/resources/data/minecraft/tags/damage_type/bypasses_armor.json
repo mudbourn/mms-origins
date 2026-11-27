@@ -1,8 +1,9 @@
 {
     "replace": false,
     "values": [
-        "originstweaks:beastfolk_slash",
+        "mms_origins:beastfolk_slash",
         "mms_origins:venom",
-        "mms_origins:guardian_beam"
+        "mms_origins:guardian_beam",
+        "origins:hurt_by_water"
     ]
 }

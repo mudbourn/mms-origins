@@ -1,0 +1,9 @@
+{
+  "powers": [
+    "mms_origins:more_attack_damage",
+    "mms_origins:less_shield_slowdown"
+  ],
+  "icon": "minecraft:iron_sword",
+  "order": 10,
+  "impact": 0
+}

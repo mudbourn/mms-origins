@@ -1,0 +1,23 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.mms_origins.fishman.nether.title"
+		},
+		"description": {
+			"translate": "advancement.mms_origins.fishman.nether.description"
+		},
+		"icon": {
+			"id": "minecraft:netherrack"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"reach_nether": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"parent": "mms_origins:fishman/root"
+}

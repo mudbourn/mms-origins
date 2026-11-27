@@ -1,0 +1,9 @@
+{
+  "powers": [
+    "mms_origins:more_break_speed",
+    "mms_origins:no_mining_exhaustion"
+  ],
+  "icon": "minecraft:iron_pickaxe",
+  "order": 3,
+  "impact": 0
+}

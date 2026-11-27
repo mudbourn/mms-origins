@@ -1,0 +1,195 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.mms_origins.aurophobia.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.mms_origins.aurophobia.1"
+			}
+		}
+	],
+	"gold_weakness": {
+		"type": "origins:modify_damage_taken",
+		"modifier": {
+			"name": "Aurophobia gold weakness",
+			"operation": "multiply_base",
+			"value": 0.5
+		},
+		"damage_condition": {
+			"type": "origins:attacker",
+			"entity_condition": {
+				"type": "origins:equipped_item",
+				"equipment_slot": "mainhand",
+				"item_condition": {
+					"type": "origins:ingredient",
+					"ingredient": {
+						"tag": "mms_origins:golden_tools"
+					}
+				}
+			}
+		}
+	},
+	"gold_diet": {
+		"name": "Aurophobia",
+		"type": "origins:prevent_item_use",
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "mms_origins:golden_food"
+			}
+		}
+	},
+	"gold_tools_attack": {
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "set_total",
+			"value": 0
+		},
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"tag": "mms_origins:golden_tools"
+						}
+					}
+				},
+				{
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition": {
+								"type": "origins:ingredient",
+								"ingredient": {
+									"tag": "mms_origins:golden_tools"
+								},
+								"inverted": true
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "offhand",
+							"item_condition": {
+								"type": "origins:ingredient",
+								"ingredient": {
+									"tag": "mms_origins:golden_tools"
+								}
+							}
+						}
+					]
+				}
+			]
+		}
+	},
+	"gold_tools_mining": {
+		"type": "origins:modify_break_speed",
+		"modifier": {
+			"operation": "set_total",
+			"value": 0
+		},
+		"condition": {
+			"type": "origins:equipped_item",
+			"equipment_slot": "mainhand",
+			"item_condition": {
+				"type": "origins:ingredient",
+				"ingredient": {
+					"tag": "mms_origins:golden_tools"
+				}
+			}
+		}
+	},
+	"gold_tools_use": {
+		"name": "Aurophobia",
+		"type": "origins:prevent_item_use",
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "mms_origins:golden_tools"
+			}
+		}
+	},
+	"no_block_use": {
+		"type": "origins:prevent_block_use",
+		"block_condition": {
+			"type": "origins:constant",
+			"value": true
+		},
+		"condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "mainhand",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"tag": "mms_origins:golden_tools"
+						}
+					}
+				},
+				{
+					"type": "origins:equipped_item",
+					"equipment_slot": "offhand",
+					"item_condition": {
+						"type": "origins:ingredient",
+						"ingredient": {
+							"tag": "mms_origins:golden_tools"
+						}
+					}
+				}
+			]
+		}
+	},
+	"gold_armor_equip": {
+		"type": "origins:conditioned_restrict_armor",
+		"head": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "mms_origins:golden_armor"
+			}
+		},
+		"chest": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "mms_origins:golden_armor"
+			}
+		},
+		"legs": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "mms_origins:golden_armor"
+			}
+		},
+		"feet": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "mms_origins:golden_armor"
+			}
+		},
+		"tick_rate": 5
+	},
+	"gold_armor_use": {
+		"name": "Aurophobia",
+		"type": "origins:prevent_item_use",
+		"item_condition": {
+			"type": "origins:ingredient",
+			"ingredient": {
+				"tag": "mms_origins:golden_armor"
+			}
+		}
+	}
+}

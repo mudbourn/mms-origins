@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Player.class)
 public abstract class PlayerHurtSoundMixin {
 
-    private static final Identifier HUMAN = Identifier.fromNamespaceAndPath("origins", "human");
+    private static final Identifier HUMAN = Identifier.fromNamespaceAndPath("mms_origins", "human");
 
     @Inject(method = "getHurtSound", at = @At("HEAD"), cancellable = true)
     private void mmsOrigins$silenceOriginHurtSound(DamageSource source, CallbackInfoReturnable<SoundEvent> cir) {

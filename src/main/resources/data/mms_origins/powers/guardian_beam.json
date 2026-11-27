@@ -3,14 +3,14 @@
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/active.png",
+      "sprite": "mms_origins:textures/gui/badge/active.png",
       "text": {
         "translate": "badge.mms_origins.guardian_beam.0"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
+      "sprite": "mms_origins:textures/gui/badge/info.png",
       "text": {
         "translate": "badge.mms_origins.guardian_beam.1"
       }

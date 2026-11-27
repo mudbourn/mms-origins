@@ -70,23 +70,23 @@ public final class GuardianBeam {
     /** Advances the caster's beam by one held tick, running {@code onFire} when it strikes. */
     public static void channel(LivingEntity caster, double range, double coneDegrees, int chargeTicks,
                                float damage, Consumer<Entity> onFire) {
-        if (!(caster instanceof ServerPlayer player) || !(player.level() instanceof ServerLevel level)) {
+        if (!(caster.level() instanceof ServerLevel level)) {
             return;
         }
-        Channel channel = CHANNELS.get(player.getUUID());
-        if (channel != null && !holds(player, level, channel, range)) {
-            stop(player);
+        Channel channel = CHANNELS.get(caster.getUUID());
+        if (channel != null && !holds(caster, level, channel, range)) {
+            stop(caster);
             channel = null;
         }
         if (channel == null) {
-            LivingEntity target = ShulkerBulletAction.findTarget(player, level, range, coneDegrees);
+            LivingEntity target = ShulkerBulletAction.findTarget(caster, level, range, coneDegrees);
             if (target == null) {
                 return;
             }
-            channel = new Channel(target.getId());
-            CHANNELS.put(player.getUUID(), channel);
-            broadcast(player, new GuardianBeamPayload(player.getId(), target.getId(), chargeTicks));
-            level.playSound(null, player.getX(), player.getY(), player.getZ(),
+            channel = new Channel(caster, target.getId());
+            CHANNELS.put(caster.getUUID(), channel);
+            broadcast(caster, new GuardianBeamPayload(caster.getId(), target.getId(), chargeTicks));
+            level.playSound(null, caster.getX(), caster.getY(), caster.getZ(),
                 SoundEvents.GUARDIAN_ATTACK, SoundSource.PLAYERS, 1.0F, 1.0F);
         }
         channel.lastHeld = level.getServer().getTickCount();
@@ -96,21 +96,21 @@ public final class GuardianBeam {
         if (level.getEntity(channel.targetId) instanceof LivingEntity target) {
             DamageSource source = new DamageSource(
                 level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DAMAGE_TYPE),
-                player,
-                player);
+                caster,
+                caster);
             target.hurtServer(level, source, damage);
-            chain(player, level, target, source, damage);
+            chain(caster, level, target, source, damage);
         }
         if (onFire != null) {
-            onFire.accept(player);
+            onFire.accept(caster);
         }
-        stop(player);
+        stop(caster);
     }
 
     /** Picks the enemies within {@link #CHAIN_RADIUS} of the target that the strike arcs to after {@link #CHAIN_DELAY_TICKS}. */
-    private static void chain(ServerPlayer player, ServerLevel level, LivingEntity target, DamageSource source, float damage) {
+    private static void chain(LivingEntity caster, ServerLevel level, LivingEntity target, DamageSource source, float damage) {
         AABB area = target.getBoundingBox().inflate(CHAIN_RADIUS);
-        List<Integer> victims = level.getEntitiesOfClass(LivingEntity.class, area, other -> isChainVictim(player, target, other))
+        List<Integer> victims = level.getEntitiesOfClass(LivingEntity.class, area, other -> isChainVictim(caster, target, other))
             .stream()
             .map(Entity::getId)
             .toList();
@@ -159,20 +159,20 @@ public final class GuardianBeam {
             SoundEvents.GUARDIAN_HURT, SoundSource.PLAYERS, 0.6F, 1.4F);
     }
 
-    private static boolean isChainVictim(ServerPlayer player, LivingEntity target, LivingEntity other) {
+    private static boolean isChainVictim(LivingEntity caster, LivingEntity target, LivingEntity other) {
         if (other == target
             || other.distanceTo(target) > CHAIN_RADIUS
-            || !ShulkerBulletAction.isCandidate(player, other)
+            || !ShulkerBulletAction.isCandidate(caster, other)
             || !target.hasLineOfSight(other)) {
             return false;
         }
-        return other instanceof Enemy || other instanceof Mob mob && mob.getTarget() == player;
+        return other instanceof Enemy || other instanceof Mob mob && mob.getTarget() == caster;
     }
 
-    private static boolean holds(ServerPlayer player, ServerLevel level, Channel channel, double range) {
+    private static boolean holds(LivingEntity caster, ServerLevel level, Channel channel, double range) {
         return level.getEntity(channel.targetId) instanceof LivingEntity target
-            && ShulkerBulletAction.isCandidate(player, target)
-            && target.distanceTo(player) <= range;
+            && ShulkerBulletAction.isCandidate(caster, target)
+            && target.distanceTo(caster) <= range;
     }
 
     private static void releaseLetGo(MinecraftServer server) {
@@ -183,23 +183,23 @@ public final class GuardianBeam {
                 continue;
             }
             channels.remove();
-            ServerPlayer player = server.getPlayerList().getPlayer(entry.getKey());
-            if (player != null) {
-                broadcast(player, new GuardianBeamPayload(player.getId(), GuardianBeamPayload.NONE, 0));
-            }
+            LivingEntity caster = entry.getValue().caster;
+            broadcast(caster, new GuardianBeamPayload(caster.getId(), GuardianBeamPayload.NONE, 0));
         }
     }
 
-    private static void stop(ServerPlayer player) {
-        if (CHANNELS.remove(player.getUUID()) != null) {
-            broadcast(player, new GuardianBeamPayload(player.getId(), GuardianBeamPayload.NONE, 0));
+    private static void stop(LivingEntity caster) {
+        if (CHANNELS.remove(caster.getUUID()) != null) {
+            broadcast(caster, new GuardianBeamPayload(caster.getId(), GuardianBeamPayload.NONE, 0));
         }
     }
 
-    private static void broadcast(ServerPlayer player, GuardianBeamPayload payload) {
-        ServerPlayNetworking.send(player, payload);
-        for (ServerPlayer watcher : PlayerLookup.tracking(player)) {
-            if (watcher != player) {
+    private static void broadcast(LivingEntity caster, GuardianBeamPayload payload) {
+        if (caster instanceof ServerPlayer self) {
+            ServerPlayNetworking.send(self, payload);
+        }
+        for (ServerPlayer watcher : PlayerLookup.tracking(caster)) {
+            if (watcher != caster) {
                 ServerPlayNetworking.send(watcher, payload);
             }
         }
@@ -218,11 +218,13 @@ public final class GuardianBeam {
 
     private static final class Channel {
 
+        private final LivingEntity caster;
         private final int targetId;
         private int ticks;
         private int lastHeld;
 
-        private Channel(int targetId) {
+        private Channel(LivingEntity caster, int targetId) {
+            this.caster = caster;
             this.targetId = targetId;
         }
     }

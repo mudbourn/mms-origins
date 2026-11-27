@@ -1,0 +1,23 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.mms_origins.beastfolk.sharp_claws.title"
+		},
+		"description": {
+			"translate": "advancement.mms_origins.beastfolk.sharp_claws.description"
+		},
+		"icon": {
+			"id": "minecraft:diamond_block"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"c1": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"parent": "mms_origins:beastfolk/cooked_fish_stack"
+}

@@ -1,0 +1,23 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.mms_origins.phantom.absorb_soulfire.title"
+		},
+		"description": {
+			"translate": "advancement.mms_origins.phantom.absorb_soulfire.description"
+		},
+		"icon": {
+			"id": "minecraft:soul_lantern"
+		},
+		"frame": "goal",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"c1": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"parent": "mms_origins:phantom/root"
+}

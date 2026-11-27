@@ -4,27 +4,27 @@
   "max": 84,
   "start_value": 0,
   "hud_render": {
-    "sprite_location": "origins:textures/gui/community/huang/resource_bar_02.png",
+    "sprite_location": "mms_origins:textures/gui/community/huang/resource_bar_02.png",
     "bar_index": 15
   },
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
+      "sprite": "mms_origins:textures/gui/badge/info.png",
       "text": {
         "translate": "badge.mms_origins.sun_power.0"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
+      "sprite": "mms_origins:textures/gui/badge/info.png",
       "text": {
         "translate": "badge.mms_origins.sun_power.1"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
+      "sprite": "mms_origins:textures/gui/badge/info.png",
       "text": {
         "translate": "badge.mms_origins.sun_power.2"
       }

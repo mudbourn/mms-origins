@@ -9,13 +9,13 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 
 /**
- * Who counts as a Beastmaster for Useless Reptile's dragons. The class (origins-classes:beastmaster) makes wild
+ * Who counts as a Beastmaster for Useless Reptile's dragons. The class ({@code mms_origins:beastmaster}) makes wild
  * dragons leave the player be and lets them tame one; the Jobs+ Beastmaster job alone lets them tame one, but wild
  * dragons still hunt them.
  */
 public final class Beastmasters {
 
-    public static final Identifier CLASS = Identifier.fromNamespaceAndPath("origins-classes", "beastmaster");
+    public static final Identifier CLASS = Identifier.fromNamespaceAndPath("mms_origins", "beastmaster");
 
     private Beastmasters() {
     }

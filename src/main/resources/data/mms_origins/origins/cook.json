@@ -1,0 +1,9 @@
+{
+  "powers": [
+    "mms_origins:better_crafted_food",
+    "mms_origins:more_smoker_xp"
+  ],
+  "icon": "minecraft:rabbit_stew",
+  "order": 5,
+  "impact": 0
+}

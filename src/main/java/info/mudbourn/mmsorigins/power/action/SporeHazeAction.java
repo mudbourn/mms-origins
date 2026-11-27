@@ -2,8 +2,8 @@ package info.mudbourn.mmsorigins.power.action;
 
 import info.mudbourn.mmsorigins.SporeHaze;
 import io.github.apace100.calio.data.SerializableData;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 
 /**
  * Looses the truffle's mind haze where the caster stands. Run as an entity
@@ -16,8 +16,8 @@ public final class SporeHazeAction {
     }
 
     public static void action(SerializableData.Instance data, Entity entity) {
-        if (entity instanceof ServerPlayer player) {
-            SporeHaze.release(player);
+        if (entity instanceof LivingEntity owner && !owner.level().isClientSide()) {
+            SporeHaze.release(owner);
         }
     }
 

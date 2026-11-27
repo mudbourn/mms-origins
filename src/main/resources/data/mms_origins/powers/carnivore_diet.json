@@ -3,21 +3,21 @@
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
+      "sprite": "mms_origins:textures/gui/badge/info.png",
       "text": {
         "translate": "badge.mms_origins.carnivore_diet.0"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "sprite": "mms_origins:textures/gui/badge/arrow_up.png",
       "text": {
         "translate": "badge.mms_origins.carnivore_diet.1"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "sprite": "mms_origins:textures/gui/badge/arrow_up.png",
       "text": {
         "translate": "badge.mms_origins.carnivore_diet.2"
       }
@@ -38,7 +38,7 @@
             {
               "type": "origins:ingredient",
               "ingredient": {
-                "tag": "origins:meat"
+                "tag": "mms_origins:meat"
               },
               "inverted": true
             },
@@ -51,7 +51,7 @@
         {
           "type": "origins:ingredient",
           "ingredient": {
-            "tag": "origins:ignore_diet"
+            "tag": "mms_origins:ignore_diet"
           },
           "inverted": true
         }
@@ -87,7 +87,7 @@
             {
               "type": "origins:ingredient",
               "ingredient": {
-                "tag": "origins:meat"
+                "tag": "mms_origins:meat"
               }
             },
             {

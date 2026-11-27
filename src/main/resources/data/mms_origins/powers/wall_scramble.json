@@ -3,7 +3,7 @@
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/toggle.png",
+      "sprite": "mms_origins:textures/gui/badge/toggle.png",
       "text": {
         "translate": "badge.mms_origins.wall_scramble.0"
       }

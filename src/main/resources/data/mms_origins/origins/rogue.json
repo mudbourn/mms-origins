@@ -1,0 +1,10 @@
+{
+  "powers": [
+    "mms_origins:sneaky",
+    "mms_origins:stealth",
+    "mms_origins:stealth_descriptor"
+  ],
+  "icon": "minecraft:leather_helmet",
+  "order": 12,
+  "impact": 0
+}

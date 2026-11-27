@@ -8,6 +8,7 @@ import info.mudbourn.mmsorigins.client.PhantomFormState;
 import info.mudbourn.mmsorigins.client.ZombieShakeState;
 import info.mudbourn.mmsorigins.client.fur.FurState;
 import info.mudbourn.mmsorigins.client.wings.ButterflyFlap;
+import info.mudbourn.mmsorigins.client.wings.ButterflyWingModels;
 import info.mudbourn.mmsorigins.client.wings.WingState;
 import info.mudbourn.mmsorigins.fur.BodyFurAttachment;
 import info.mudbourn.mmsorigins.fur.BodyTailAttachment;
@@ -87,7 +88,8 @@ public abstract class PlayerRendererMixin {
     /** Whether the wing option is an avian wing pair that draws over the cape. */
     private static boolean mmsOrigins$avianWingsShown(Identifier wing) {
         return wing != null
-                && wing.getNamespace().equals("originstweaks")
+                && wing.getNamespace().equals("mms_origins")
+                && ButterflyWingModels.resolve(wing) == null
                 && !wing.getPath().equals("no_render");
     }
 

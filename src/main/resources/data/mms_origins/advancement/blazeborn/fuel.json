@@ -1,0 +1,29 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.mms_origins.blazeborn.fuel.title"
+		},
+		"description": {
+			"translate": "advancement.mms_origins.blazeborn.fuel.description"
+		},
+		"icon": {
+			"id": "minecraft:furnace"
+		},
+		"frame": "goal",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"campfire": {
+			"trigger": "minecraft:impossible"
+		},
+		"brewing_stand": {
+			"trigger": "minecraft:impossible"
+		},
+		"furnace": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"parent": "mms_origins:blazeborn/lava_bath"
+}

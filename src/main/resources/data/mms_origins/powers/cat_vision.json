@@ -1,0 +1,17 @@
+{
+	"type": "origins:night_vision",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/toggle.png",
+			"text": {
+				"translate": "badge.mms_origins.cat_vision.0"
+			}
+		}
+	],
+	"strength": 0.4,
+	"condition": {
+		"type": "origins:power_active",
+		"power": "mms_origins:claw_mode"
+	}
+}

@@ -3,23 +3,23 @@
   "order": 0,
   "enabled": true,
   "origins": [
-    "origins:human",
-    "origins:fishman",
+    "mms_origins:human",
+    "mms_origins:fishman",
     "mms_origins:floran",
     "mms_origins:fairy",
     "mms_origins:truffle",
     "mms_origins:piglin",
-    "originstweaks:arachnid",
-    "originstweaks:avian",
-    "originstweaks:blazeborn",
-    "originstweaks:enderian",
-    "originstweaks:beastfolk",
-    "originstweaks:phantom",
-    "originstweaks:shulk"
+    "mms_origins:arachnid",
+    "mms_origins:avian",
+    "mms_origins:blazeborn",
+    "mms_origins:enderian",
+    "mms_origins:beastfolk",
+    "mms_origins:phantom",
+    "mms_origins:shulk"
   ],
   "allow_random": true,
   "exclude_random": [
-    "origins:human"
+    "mms_origins:human"
   ],
   "allow_random_unchoosable": false,
   "hidden": false

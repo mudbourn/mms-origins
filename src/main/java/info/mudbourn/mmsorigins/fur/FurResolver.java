@@ -25,17 +25,17 @@ public final class FurResolver {
     private static final Identifier FAIRY_OPTIONS =
         Identifier.fromNamespaceAndPath("mms_origins", "fairy_wings");
     private static final Identifier AVIAN_WINGS =
-        Identifier.fromNamespaceAndPath("originstweaks", "avian_wings");
+        Identifier.fromNamespaceAndPath("mms_origins", "avian_wings");
     private static final Identifier BEASTFOLK_OPTIONS =
-        Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_options");
+        Identifier.fromNamespaceAndPath("mms_origins", "beastfolk_options");
     private static final Identifier BEASTFOLK_TAIL =
-        Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_tail");
+        Identifier.fromNamespaceAndPath("mms_origins", "beastfolk_tail");
     private static final Identifier BEASTFOLK_COLLAR =
-        Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_collar");
+        Identifier.fromNamespaceAndPath("mms_origins", "beastfolk_collar");
     private static final Identifier BEASTFOLK_NO_COLLAR =
-        Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_no_collar");
+        Identifier.fromNamespaceAndPath("mms_origins", "beastfolk_no_collar");
     private static final Identifier BEASTFOLK_NOCOLLAR_FUR =
-        Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_nocollar");
+        Identifier.fromNamespaceAndPath("mms_origins", "beastfolk_nocollar");
     private static final Map<String, Identifier> FAIRY_WING_FURS = Map.of(
         "cirno_wings", Identifier.fromNamespaceAndPath("mms_origins", "fairy_cirno"),
         "pixie_wings", Identifier.fromNamespaceAndPath("mms_origins", "fairy_pixie"),

@@ -1,11 +1,13 @@
 package info.mudbourn.mmsorigins.power;
 
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
 /**
  * A flight power whose pace builds while its holder keeps surging. The holder's
  * own client reads it each tick and sets its flying speed locally, so the pace
- * never rides on an abilities packet.
+ * never rides on an abilities packet. A mob that implements {@link FlyingMob}
+ * asks the same power whether it may fly and how fast.
  */
 public interface SurgingFlight {
 
@@ -15,11 +17,16 @@ public interface SurgingFlight {
     float FIRST_TOP_SPEED = 0.09F;
     float SECOND_TOP_SPEED = 0.10125F;
 
+    /** Whether the power's rules let the holder fly right now. */
+    boolean allowed(LivingEntity entity);
+
     /** The flying speed while not surging. */
-    float cruiseSpeed(Player player);
+    float cruiseSpeed(LivingEntity entity);
 
     /** Whether the holder is surging. */
-    boolean surging(Player player);
+    default boolean surging(LivingEntity entity) {
+        return entity.isSprinting();
+    }
 
     /** The flying speed after the given ticks of surging, starting from the cruise speed. */
     static float surgeSpeed(float cruise, int surgeTicks) {
@@ -28,6 +35,14 @@ public interface SurgingFlight {
         }
         float second = (surgeTicks - FIRST_RAMP_TICKS - HOLD_TICKS) / (float) SECOND_RAMP_TICKS;
         return lerp(FIRST_TOP_SPEED, SECOND_TOP_SPEED, second);
+    }
+
+    /** The hunger a holder's food rules read: a player's food level, or a mob's own. */
+    static int foodLevel(LivingEntity entity) {
+        if (entity instanceof Player player) {
+            return player.getFoodData().getFoodLevel();
+        }
+        return entity instanceof FlyingMob mob ? mob.foodLevel() : 20;
     }
 
     private static float lerp(float from, float to, float progress) {

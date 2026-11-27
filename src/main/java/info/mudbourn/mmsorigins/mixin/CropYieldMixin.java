@@ -45,7 +45,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class CropYieldMixin {
 
     private static final PowerType<?> GREEN_THUMB =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "green_thumb"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "green_thumb"));
     private static final TagKey<Block> HOE_CROPS =
         TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("mms_origins", "hoe_crops"));
     private static final double GOLD_CHANCE = 0.12;

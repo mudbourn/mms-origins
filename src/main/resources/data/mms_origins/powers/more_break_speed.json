@@ -1,0 +1,15 @@
+{
+  "type": "origins:modify_break_speed",
+  "modifier": {
+    "name": "More break speed",
+    "value": 0.45,
+    "operation": "multiply_base"
+  },
+  "block_condition": {
+    "type": "apoli:in_tag",
+    "tag": "minecraft:mineable/pickaxe"
+  },
+  "condition": {
+    "type": "origins:using_effective_tool"
+  }
+}

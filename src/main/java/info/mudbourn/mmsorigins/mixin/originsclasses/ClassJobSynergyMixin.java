@@ -22,8 +22,8 @@ import java.util.Map;
 /**
  * Appends a live Jobs+ status line to Origins Classes descriptions.
  *
- * <p>Every class in the {@code origins-classes:class} layer has a Jobs+ job of the
- * same name (see the lang override in {@code assets/origins-classes/lang}), but a
+ * <p>Every class in the {@code mms_origins:class} layer has a Jobs+ job of the
+ * same name (see the class descriptions in {@code assets/mms_origins/lang}), but a
  * player choosing a class has no way to learn that.  The lang override states the
  * pairing statically; this mixin adds the part that has to be live: whether you
  * already hold the job and at what level.</p>

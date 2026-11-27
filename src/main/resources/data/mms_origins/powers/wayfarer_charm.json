@@ -9,7 +9,7 @@
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "sprite": "mms_origins:textures/gui/badge/arrow_up.png",
       "text": {
         "translate": "badge.mms_origins.wayfarer_charm.0"
       }

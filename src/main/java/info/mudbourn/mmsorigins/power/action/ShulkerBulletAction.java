@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
 import net.minecraft.world.phys.AABB;
@@ -75,6 +76,9 @@ public final class ShulkerBulletAction {
             return false;
         }
         if (candidate instanceof OwnableEntity pet && pet.getOwner() == caster) {
+            return false;
+        }
+        if (caster instanceof Mob && caster.isAlliedTo(candidate)) {
             return false;
         }
         return caster.hasLineOfSight(candidate);

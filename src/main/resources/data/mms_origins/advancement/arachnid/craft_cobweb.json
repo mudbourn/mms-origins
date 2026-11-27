@@ -1,0 +1,20 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.mms_origins.arachnid.craft_cobweb.title"
+		},
+		"description": {
+			"translate": "advancement.mms_origins.arachnid.craft_cobweb.description"
+		},
+		"icon": {
+			"id": "minecraft:string"
+		},
+		"frame": "task"
+	},
+	"criteria": {
+		"cobweb": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"parent": "mms_origins:arachnid/root"
+}

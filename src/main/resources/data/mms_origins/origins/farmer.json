@@ -1,0 +1,11 @@
+{
+  "powers": [
+    "mms_origins:more_crop_drops",
+    "mms_origins:better_bone_meal",
+    "mms_origins:twin_breeding",
+    "mms_origins:more_animal_loot"
+  ],
+  "icon": "minecraft:wheat",
+  "order": 1,
+  "impact": 0
+}

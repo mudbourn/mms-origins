@@ -1,0 +1,39 @@
+{
+	"type": "mms_origins:blaze_flight",
+	"resource": "mms_origins:fire_power",
+	"condition": {
+		"type": "origins:food_level",
+		"comparison": ">",
+		"compare_to": 6
+	},
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/active.png",
+			"text": {
+				"translate": "badge.mms_origins.blaze_flight.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.mms_origins.blaze_flight.1"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.mms_origins.blaze_flight.2"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.mms_origins.blaze_flight.3"
+			}
+		}
+	]
+}

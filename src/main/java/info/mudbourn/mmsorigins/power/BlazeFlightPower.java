@@ -39,6 +39,12 @@ public final class BlazeFlightPower extends Power implements SurgingFlight {
 
     @Override
     public void tick() {
+        if (entity instanceof FlyingMob mob) {
+            if (!entity.level().isClientSide()) {
+                tickMob(mob);
+            }
+            return;
+        }
         if (!(entity instanceof Player player)) {
             return;
         }
@@ -46,26 +52,14 @@ public final class BlazeFlightPower extends Power implements SurgingFlight {
             return;
         }
         Abilities abilities = player.getAbilities();
-        VariableIntPower fire = fuel();
-        boolean fueled = fire != null && fire.getValue() > 0;
-        if (isActive() && fueled && !MmsOriginsPowers.downed(player)) {
+        if (allowed(player)) {
             abilities.setFlyingSpeed(NORMAL_FLYING_SPEED);
             if (!abilities.mayfly) {
                 abilities.mayfly = true;
                 player.onUpdateAbilities();
             }
             if (abilities.flying) {
-                flightTicks++;
-                int before = fire.getValue();
-                if (player.isInLava()) {
-                    fire.setValue(Math.min(fire.getMax(), before + LAVA_CHARGE_PER_TICK));
-                } else if (flightTicks % DRAIN_INTERVAL == 0) {
-                    fire.setValue(Math.max(fire.getMin(), before - FLIGHT_DRAIN_PER_TICK));
-                }
-                if (fire.getValue() != before) {
-                    PowerHolderComponent.syncPower(player, fire.getType());
-                }
-                player.setRemainingFireTicks(Math.max(player.getRemainingFireTicks(), FLIGHT_FIRE_TICKS));
+                burnFuel(player, fuel());
             }
         } else {
             revoke(player);
@@ -84,14 +78,36 @@ public final class BlazeFlightPower extends Power implements SurgingFlight {
     }
 
     @Override
-    public float cruiseSpeed(Player player) {
+    public boolean allowed(LivingEntity entity) {
+        VariableIntPower fire = fuel();
+        return isActive() && fire != null && fire.getValue() > 0 && !MmsOriginsPowers.downed(entity);
+    }
+
+    @Override
+    public float cruiseSpeed(LivingEntity entity) {
         return NORMAL_FLYING_SPEED;
     }
 
+    private void tickMob(FlyingMob mob) {
+        if (!allowed(entity)) {
+            mob.setFlying(false);
+        } else if (mob.flying()) {
+            burnFuel(entity, fuel());
+        }
+    }
 
-    @Override
-    public boolean surging(Player player) {
-        return player.isSprinting();
+    private void burnFuel(LivingEntity holder, VariableIntPower fire) {
+        flightTicks++;
+        int before = fire.getValue();
+        if (holder.isInLava()) {
+            fire.setValue(Math.min(fire.getMax(), before + LAVA_CHARGE_PER_TICK));
+        } else if (flightTicks % DRAIN_INTERVAL == 0) {
+            fire.setValue(Math.max(fire.getMin(), before - FLIGHT_DRAIN_PER_TICK));
+        }
+        if (fire.getValue() != before) {
+            PowerHolderComponent.syncPower(holder, fire.getType());
+        }
+        holder.setRemainingFireTicks(Math.max(holder.getRemainingFireTicks(), FLIGHT_FIRE_TICKS));
     }
 
     private static void revoke(Player player) {

@@ -1,0 +1,33 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.mms_origins.cold_resistance.0"
+			}
+		}
+	],
+	"chill_pace": {
+		"type": "origins:attribute",
+		"modifier": {
+			"attribute": "thermoo:frost_resistance",
+			"id": "mms_origins:cold_resistance_chill_pace",
+			"operation": "addition",
+			"value": 3.5
+		}
+	},
+	"chill_shield": {
+		"type": "origins:modify_damage_taken",
+		"modifier": {
+			"name": "Cold resistance",
+			"operation": "multiply_base",
+			"value": -0.7
+		},
+		"damage_condition": {
+			"type": "origins:in_tag",
+			"tag": "minecraft:is_freezing"
+		}
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"icon": {
+		"id": "minecraft:ender_pearl"
+	},
+	"order": 1,
+	"impact": 2,
+	"loading_priority": 1,
+	"powers": [
+		"mms_origins:throw_ender_pearl",
+		"mms_origins:slender_body",
+		"mms_origins:hardy_frame",
+		"mms_origins:ender_kinship",
+		"mms_origins:water_vulnerability",
+		"mms_origins:cold_resistance",
+		"mms_origins:enderian_heat_sensitivity",
+		"mms_origins:pumpkin_hate",
+		"mms_origins:ender_particles",
+		"mms_origins:damage_from_potions",
+		"mms_origins:enderian_sounds",
+		"mms_origins:enderian_advancements"
+	]
+}

@@ -116,14 +116,14 @@ public final class MmsOriginsPowers {
      * {@code EndermanKinshipMixin} spares the bearer from it.
      */
     public static final PowerType<?> ENDER_KINSHIP =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "ender_kinship"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "ender_kinship"));
 
     /**
      * Phantom kinship. Phantoms pick their prey in their own goal with no Apoli
      * hook, so {@code PhantomKinshipMixin} reads this sub-power to spare the bearer.
      */
     public static final PowerType<?> PHANTOM_KINSHIP =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "phantom_kinship_harmless"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "phantom_kinship_harmless"));
 
     /**
      * Arachnid arthropod kinship. Arthropod mobs leave the bearer alone unless
@@ -131,7 +131,7 @@ public final class MmsOriginsPowers {
      * {@code ArthropodKinshipMixin} and {@code ArthropodDefendMixin}.
      */
     public static final PowerType<?> ARTHROPOD_KINSHIP =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "arthropod_kinship"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "arthropod_kinship"));
 
     /**
      * Guardian kinship. Guardians and elder guardians take a fishman for one of
@@ -151,7 +151,7 @@ public final class MmsOriginsPowers {
     public static final String DOWNED_TAG = "mms_combat_downed";
 
     public static final PowerType<?> AVIAN_PEACE =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "avian_peace"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "avian_peace"));
 
     /**
      * Avian slow mending. Natural regeneration runs inside the hunger tick with
@@ -159,7 +159,7 @@ public final class MmsOriginsPowers {
      * shrinks each regeneration step for the bearer.
      */
     public static final PowerType<?> AVIAN_SLOW_REGEN =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "slow_healing"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "slow_healing"));
 
     /**
      * Floran leaf form. Apoli handles the phasing, climbing and breath cost; the
@@ -192,13 +192,13 @@ public final class MmsOriginsPowers {
      * sides so the player renders as a phantom and flies on its wings.
      */
     public static final PowerType<?> PHANTOM_FORM =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "phantomize_toggle"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "phantomize_toggle"));
 
     /**
      * Phantom form morph progress; the phantom body replaces the player only once it is full.
      */
     public static final PowerType<?> PHANTOM_FORM_MORPH =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "phantomize_morph"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "phantomize_morph"));
 
     /**
      * Ticks the phantom form morph takes to complete.
@@ -232,14 +232,14 @@ public final class MmsOriginsPowers {
      * quarry away.
      */
     public static final PowerType<?> VICIOUS_APPEARANCE =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "vicious_appearance"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "vicious_appearance"));
 
     /**
      * Blazeborn fire power, the resource bar a bearer spends to fly. Holding it
      * lets {@code LavaSwimMixin} swim lava like water and lowers the fire overlay.
      */
     public static final PowerType<?> FIRE_POWER =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "fire_power"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "fire_power"));
 
     /** Fishman water power, the moisture bar; holding it lets {@code ShallowSwimMixin} swim in water one block deep. */
     public static final PowerType<?> WATER_POWER =
@@ -247,15 +247,15 @@ public final class MmsOriginsPowers {
 
     /** Beastfolk claw mode, the toggle that bares the claws the client draws on their hands. */
     public static final PowerType<?> CLAW_MODE =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "claw_mode"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "claw_mode"));
 
     /** Arachnid wall climbing toggle, read by {@code ArachnidClimbMixin} to climb at running speed. */
     public static final PowerType<?> ARACHNID_CLIMBING =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "climbing_toggle"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "climbing_toggle"));
 
     /** Avian surge recoil, triggered by every surge and read by {@code FlightSpeedCapMixin} to hold the surge's speed. */
     public static final PowerType<CooldownPower> AVIAN_SURGE_RECOIL =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "gift_of_the_skies_surge_recoil"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "gift_of_the_skies_surge_recoil"));
 
     /** Range, in blocks, at which a beastfolk's viciousness spooks timid mobs. */
     public static final double VICIOUS_APPEARANCE_RANGE = 12.0;

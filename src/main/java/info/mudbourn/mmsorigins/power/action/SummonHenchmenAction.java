@@ -44,6 +44,8 @@ public final class SummonHenchmenAction {
     private static final double RING_RADIUS = 1.5;
     private static final long RELEASE_GAP_TICKS = 4;
     private static final double HEARING_RANGE = 32.0;
+    private static final int MAX_ACTIVE = 2;
+    private static final int MAELS_BLESSING_MAX_ACTIVE = 4;
     private static final Map<UUID, Channel> CHANNELS = new HashMap<>();
 
     public static void register() {
@@ -53,8 +55,8 @@ public final class SummonHenchmenAction {
     public static SerializableData data() {
         return new SerializableData()
             .add("resource", ApoliDataTypes.POWER_TYPE, null)
-            .add("max_active", SerializableDataTypes.INT, 2)
-            .add("maels_blessing_max_active", SerializableDataTypes.INT, 4)
+            .add("max_active", SerializableDataTypes.INT, MAX_ACTIVE)
+            .add("maels_blessing_max_active", SerializableDataTypes.INT, MAELS_BLESSING_MAX_ACTIVE)
             .add("charge_ticks", SerializableDataTypes.INT, 30);
     }
 
@@ -120,11 +122,8 @@ public final class SummonHenchmenAction {
     }
 
     private static boolean canSummon(SerializableData.Instance data, LivingEntity owner, ServerLevel level) {
-        AABB search = owner.getBoundingBox().inflate(SEARCH_RADIUS);
-        List<FloranHenchman> existing =
-            level.getEntities(MmsEntities.FLORAN_HENCHMAN, search, henchman -> owner.equals(henchman.getOwner()));
         int cap = SunIntakeCondition.maelsBlessing(owner) ? data.getInt("maels_blessing_max_active") : data.getInt("max_active");
-        if (existing.size() >= cap) {
+        if (active(owner, level).size() >= cap) {
             return false;
         }
         VariableIntPower charge = FloranHenchman.chargeOf(owner, data.<PowerType<?>>get("resource"));
@@ -132,6 +131,28 @@ public final class SummonHenchmenAction {
     }
 
     private static void summon(SerializableData.Instance data, LivingEntity owner, ServerLevel level) {
+        raise(owner, level);
+        VariableIntPower charge = FloranHenchman.chargeOf(owner, data.<PowerType<?>>get("resource"));
+        if (charge != null) {
+            charge.setValue(charge.getValue() - FloranHenchman.CHARGE_COST);
+            PowerHolderComponent.syncPower(owner, charge.getType());
+        }
+    }
+
+    /** The Grovekeepers the owner has raised that are still standing nearby. */
+    public static List<FloranHenchman> active(LivingEntity owner, ServerLevel level) {
+        AABB search = owner.getBoundingBox().inflate(SEARCH_RADIUS);
+        return level.getEntities(MmsEntities.FLORAN_HENCHMAN, search, henchman -> owner.equals(henchman.getOwner()));
+    }
+
+    /** Whether the owner has an empty slot for another Grovekeeper, by the power's default caps. */
+    public static boolean roomFor(LivingEntity owner, ServerLevel level) {
+        int cap = SunIntakeCondition.maelsBlessing(owner) ? MAELS_BLESSING_MAX_ACTIVE : MAX_ACTIVE;
+        return active(owner, level).size() < cap;
+    }
+
+    /** Raises one Grovekeeper beside the owner, empowered under Mael's Blessing, without spending sun power. */
+    public static FloranHenchman raise(LivingEntity owner, ServerLevel level) {
         RandomSource random = owner.getRandom();
         double angle = random.nextDouble() * Math.PI * 2.0;
         double x = owner.getX() + Math.cos(angle) * RING_RADIUS;
@@ -144,11 +165,7 @@ public final class SummonHenchmenAction {
         }
         level.addFreshEntity(henchman);
         henchman.playSound(SoundEvents.CREAKING_SPAWN, 1.0f, 1.0f);
-        VariableIntPower charge = FloranHenchman.chargeOf(owner, data.<PowerType<?>>get("resource"));
-        if (charge != null) {
-            charge.setValue(charge.getValue() - FloranHenchman.CHARGE_COST);
-            PowerHolderComponent.syncPower(owner, charge.getType());
-        }
+        return henchman;
     }
 
     private static final class Channel {

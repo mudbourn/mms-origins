@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class PiglinGoldGorgeMixin {
 
     private static final TagKey<Item> GOLDEN_FOOD =
-        TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("originstweaks", "golden_food"));
+        TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("mms_origins", "golden_food"));
 
     @Inject(
         method = "canConsume(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)Z",

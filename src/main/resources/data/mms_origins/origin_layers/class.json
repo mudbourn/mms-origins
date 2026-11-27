@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "order": 10,
+  "enabled": true,
+  "origins": [
+    "mms_origins:blacksmith",
+    "mms_origins:cleric",
+    "mms_origins:cook",
+    "mms_origins:farmer",
+    "mms_origins:merchant",
+    "mms_origins:rancher",
+    "mms_origins:miner",
+    "mms_origins:rogue",
+    "mms_origins:warrior",
+    "mms_origins:archer",
+    "mms_origins:beastmaster",
+    "mms_origins:lumberjack",
+    "mms_origins:explorer",
+    "mms_origins:nitwit"
+  ]
+}

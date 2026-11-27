@@ -1,0 +1,25 @@
+{
+	"icon": {
+		"id": "minecraft:phantom_membrane"
+	},
+	"order": 2,
+	"impact": 3,
+	"loading_priority": 1,
+	"powers": [
+		"mms_origins:soulbound",
+		"mms_origins:phantom_kinship",
+		"mms_origins:phantomize",
+		"mms_origins:phasing",
+		"mms_origins:spectral_wail",
+		"mms_origins:summon_phantoms",
+		"mms_origins:aurophobia",
+		"mms_origins:phantom_sunburn",
+		"mms_origins:carnivore",
+		"mms_origins:cold_resistance",
+		"mms_origins:heat_sensitivity",
+		"mms_origins:phantomize_overlay",
+		"mms_origins:invisibility",
+		"mms_origins:phantom_sounds",
+		"mms_origins:phantom_advancements"
+	]
+}

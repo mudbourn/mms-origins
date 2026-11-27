@@ -27,6 +27,12 @@ public final class PhantomFlightPower extends Power implements SurgingFlight {
 
     @Override
     public void tick() {
+        if (entity instanceof FlyingMob mob) {
+            if (!entity.level().isClientSide() && mob.flying() && !allowed(entity)) {
+                mob.setFlying(false);
+            }
+            return;
+        }
         if (!(entity instanceof Player player)) {
             return;
         }
@@ -41,7 +47,7 @@ public final class PhantomFlightPower extends Power implements SurgingFlight {
             }
             return;
         }
-        if (isActive() && !MmsOriginsPowers.downed(player)) {
+        if (allowed(player)) {
             abilities.setFlyingSpeed(FLYING_SPEED);
             boolean airborne = !player.isPassenger();
             if (!abilities.mayfly || abilities.flying != airborne) {
@@ -62,13 +68,13 @@ public final class PhantomFlightPower extends Power implements SurgingFlight {
     }
 
     @Override
-    public float cruiseSpeed(Player player) {
-        return FLYING_SPEED;
+    public boolean allowed(LivingEntity entity) {
+        return isActive() && !MmsOriginsPowers.downed(entity);
     }
 
     @Override
-    public boolean surging(Player player) {
-        return player.isSprinting();
+    public float cruiseSpeed(LivingEntity entity) {
+        return FLYING_SPEED;
     }
 
     private static void revoke(Player player) {

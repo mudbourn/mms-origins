@@ -1,0 +1,7 @@
+{
+	"type": "minecraft:location_check",
+	"predicate": {
+		"structures": "#mms_origins:ocean_monuments"
+	}
+}
+

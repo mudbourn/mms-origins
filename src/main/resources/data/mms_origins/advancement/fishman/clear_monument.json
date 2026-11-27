@@ -1,0 +1,23 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.mms_origins.fishman.clear_monument.title"
+		},
+		"description": {
+			"translate": "advancement.mms_origins.fishman.clear_monument.description"
+		},
+		"icon": {
+			"id": "minecraft:prismarine"
+		},
+		"frame": "goal",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"clear_monument": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"parent": "mms_origins:fishman/root"
+}

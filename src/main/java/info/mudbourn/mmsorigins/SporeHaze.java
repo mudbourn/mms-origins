@@ -12,7 +12,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -53,7 +52,7 @@ public final class SporeHaze {
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> CLOUDS.clear());
     }
 
-    public static void release(ServerPlayer owner) {
+    public static void release(LivingEntity owner) {
         Vec3 center = owner.position().add(0.0, owner.getBbHeight() * 0.5, 0.0);
         CLOUDS.add(new Cloud(owner.level().dimension(), center, owner.getUUID()));
         owner.level().playSound(
@@ -129,7 +128,9 @@ public final class SporeHaze {
                 owner = entity;
             } else if (entity instanceof Mob mob) {
                 occupied = true;
-                touch(mob, cloud.owner);
+                if (!(level.getEntity(cloud.owner) instanceof Mob master && master.isAlliedTo(mob))) {
+                    touch(mob, cloud.owner);
+                }
             } else if (entity instanceof Player player && !player.isSpectator()) {
                 occupied = true;
                 if (!player.isCreative()) {

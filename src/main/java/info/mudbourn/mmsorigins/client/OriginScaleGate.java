@@ -13,9 +13,9 @@ public final class OriginScaleGate {
     private static final double DEFAULT_SCALE = 1.0;
     private static final double SETTLED_EPSILON = 1.0E-3;
     private static final PowerType<?> SLENDER_BODY =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "slender_body"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "slender_body"));
     private static final PowerType<?> ARTHROPOD =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "arthropod"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "arthropod"));
 
     private OriginScaleGate() {
     }

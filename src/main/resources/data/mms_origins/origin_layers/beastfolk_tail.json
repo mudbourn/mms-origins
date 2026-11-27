@@ -1,0 +1,22 @@
+{
+	"gui_title": {
+		"choose_origin": "mms_origins.gui.choose_tail.title",
+		"view_origin": "mms_origins.gui.view_tail.title"
+	},
+	"order": 4,
+	"auto_choose": false,
+	"origins": [
+		{
+			"origins": [
+				"mms_origins:beastfolk_tail_fox",
+				"mms_origins:beastfolk_tail_wolf",
+				"mms_origins:beastfolk_no_tail"
+			],
+			"condition": {
+				"type": "origins:origin",
+				"layer": "origins:origin",
+				"origin": "mms_origins:beastfolk"
+			}
+		}
+	]
+}

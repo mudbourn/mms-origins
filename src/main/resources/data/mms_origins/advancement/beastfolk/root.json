@@ -1,0 +1,23 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.mms_origins.beastfolk.root.title"
+		},
+		"description": {
+			"translate": "advancement.mms_origins.beastfolk.root.description"
+		},
+		"icon": {
+			"id": "minecraft:salmon"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": true,
+		"background": "minecraft:textures/block/orange_wool.png"
+	},
+	"criteria": {
+		"chose_beastfolk": {
+			"trigger": "minecraft:impossible"
+		}
+	}
+}

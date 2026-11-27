@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Vicious Appearance: prey animals bolt from a beastfolk and refuse to carry one.
  *
  * <p>Every animal reads a beastfolk as a predator unless its type is in
- * {@code originstweaks:unafraid_of_beastfolk} (undead, aquatic, and predator
+ * {@code mms_origins:unafraid_of_beastfolk} (undead, aquatic, and predator
  * animals) or it has been tamed. Every half second a scared animal throws off
  * a beastfolk rider, drops its quarry, and paths to open ground away from the
  * nearest beastfolk;
@@ -36,7 +36,7 @@ public abstract class ViciousAppearanceMixin {
     @Unique
     private static final TagKey<EntityType<?>> UNAFRAID = TagKey.create(
         Registries.ENTITY_TYPE,
-        Identifier.fromNamespaceAndPath("originstweaks", "unafraid_of_beastfolk")
+        Identifier.fromNamespaceAndPath("mms_origins", "unafraid_of_beastfolk")
     );
 
     @Inject(method = "baseTick", at = @At("RETURN"))

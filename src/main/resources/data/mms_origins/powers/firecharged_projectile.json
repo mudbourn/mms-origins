@@ -1,0 +1,102 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/active.png",
+			"text": {
+				"translate": "badge.mms_origins.firecharged_projectile.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/active.png",
+			"text": {
+				"translate": "badge.mms_origins.firecharged_projectile.1"
+			}
+		}
+	],
+	"shield_cooldown": {
+		"type": "origins:cooldown",
+		"cooldown": 300,
+		"hud_render": {
+			"sprite_location": "mms_origins:textures/gui/community/huang/resource_bar_01.png",
+			"bar_index": 8
+		}
+	},
+	"fireballs": {
+		"type": "mms_origins:key_gesture",
+		"hold_ticks": 1000,
+		"chord": "blazeborn_hands",
+		"press_condition": {
+			"type": "origins:food_level",
+			"comparison": ">",
+			"compare_to": 6
+		},
+		"chord_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:food_level",
+					"comparison": ">",
+					"compare_to": 6
+				},
+				{
+					"type": "origins:resource",
+					"resource": "mms_origins:firecharged_projectile_shield_cooldown",
+					"comparison": "==",
+					"compare_to": 0
+				}
+			]
+		},
+		"chord_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "mms_origins:wildfire_shield"
+				},
+				{
+					"type": "origins:trigger_cooldown",
+					"power": "mms_origins:firecharged_projectile_shield_cooldown"
+				}
+			]
+		},
+		"cooldown": 200,
+		"hud_render": {
+			"sprite_location": "mms_origins:textures/gui/community/huang/resource_bar_01.png",
+			"bar_index": 7
+		},
+		"key": {
+			"key": "key.origins.secondary_active"
+		},
+		"press_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:delay",
+					"ticks": 5,
+					"action": {
+						"type": "mms_origins:small_fireball",
+						"spread": 0.05
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 12,
+					"action": {
+						"type": "mms_origins:small_fireball",
+						"spread": 0.05
+					}
+				},
+				{
+					"type": "origins:delay",
+					"ticks": 24,
+					"action": {
+						"type": "mms_origins:small_fireball",
+						"spread": 0.05
+					}
+				}
+			]
+		}
+	}
+}

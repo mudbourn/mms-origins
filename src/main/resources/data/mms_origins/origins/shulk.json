@@ -1,0 +1,21 @@
+{
+	"icon": {
+		"id": "minecraft:shulker_shell"
+	},
+	"order": 4,
+	"impact": 1,
+	"loading_priority": 1,
+	"powers": [
+		"mms_origins:shulker_inventory",
+		"mms_origins:natural_armor",
+		"mms_origins:shell_dodge",
+		"mms_origins:shulker_bullets",
+		"mms_origins:shulker_kinship",
+		"mms_origins:strong_arms",
+		"mms_origins:strong_arms_break_speed",
+		"mms_origins:no_shield",
+		"mms_origins:more_exhaustion",
+		"mms_origins:shulk_sounds",
+		"mms_origins:shulk_advancements"
+	]
+}

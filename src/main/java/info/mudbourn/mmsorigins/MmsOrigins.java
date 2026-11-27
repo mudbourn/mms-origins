@@ -36,6 +36,7 @@ public class MmsOrigins implements ModInitializer {
         MmsSounds.register();
         VerdantGrowth.register();
         FairyScaleEnforcer.register();
+        FairyNotice.register();
         MoltenChargeCharger.register();
         DownedUnshift.register();
         CritStrikeChance.register();

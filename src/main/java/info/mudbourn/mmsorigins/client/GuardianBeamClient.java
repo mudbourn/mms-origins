@@ -9,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -48,7 +47,7 @@ public final class GuardianBeamClient {
         for (Map.Entry<Integer, Beam> entry : BEAMS.entrySet()) {
             Beam beam = entry.getValue();
             if (beam.targetId != entity.getId()
-                    || !(entity.level().getEntity(entry.getKey()) instanceof Player caster)) {
+                    || !(entity.level().getEntity(entry.getKey()) instanceof LivingEntity caster)) {
                 continue;
             }
             float height = entity.getBbHeight() * 0.5F;
@@ -64,7 +63,7 @@ public final class GuardianBeamClient {
     }
 
     /** Where the beam leaves the caster: off to the main hand in first person, so it is not seen end on. */
-    private static Vec3 muzzle(Player caster, float partialTick) {
+    private static Vec3 muzzle(LivingEntity caster, float partialTick) {
         Vec3 view = caster.getViewVector(partialTick);
         Vec3 muzzle = caster.getEyePosition(partialTick).add(view.scale(MUZZLE_FORWARD));
         Minecraft client = Minecraft.getInstance();

@@ -1,0 +1,30 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.mms_origins.molten_core.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.mms_origins.molten_core.1"
+			}
+		}
+	],
+	"lava_stride": {
+		"type": "origins:modify_lava_speed",
+		"modifier": {
+			"name": "Molten stride",
+			"operation": "multiply_base",
+			"value": 2.0
+		},
+		"condition": {
+			"type": "origins:swimming"
+		}
+	}
+}

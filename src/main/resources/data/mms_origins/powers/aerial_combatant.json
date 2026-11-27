@@ -1,0 +1,17 @@
+{
+	"type": "mms_origins:crit_chance",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.mms_origins.aerial_combatant.0"
+			}
+		}
+	],
+	"chance": 0.28,
+	"condition": {
+		"type": "origins:on_block",
+		"inverted": true
+	}
+}

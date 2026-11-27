@@ -3,35 +3,35 @@
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/active.png",
+      "sprite": "mms_origins:textures/gui/badge/active.png",
       "text": {
         "translate": "badge.mms_origins.nature_reclaim.0"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
+      "sprite": "mms_origins:textures/gui/badge/info.png",
       "text": {
         "translate": "badge.mms_origins.nature_reclaim.1"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
+      "sprite": "mms_origins:textures/gui/badge/info.png",
       "text": {
         "translate": "badge.mms_origins.nature_reclaim.2"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/info.png",
+      "sprite": "mms_origins:textures/gui/badge/info.png",
       "text": {
         "translate": "badge.mms_origins.nature_reclaim.3"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "sprite": "mms_origins:textures/gui/badge/arrow_up.png",
       "text": {
         "translate": "badge.mms_origins.nature_reclaim.4"
       }

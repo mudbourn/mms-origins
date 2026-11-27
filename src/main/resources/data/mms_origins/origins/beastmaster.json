@@ -1,0 +1,9 @@
+{
+  "powers": [
+    "mms_origins:tamed_animal_boost",
+    "mms_origins:tamed_potion_diffusal"
+  ],
+  "icon": "minecraft:bone",
+  "order": 13,
+  "impact": 0
+}

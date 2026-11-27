@@ -77,7 +77,7 @@ public final class FurModels {
     private static final Map<Identifier, Fur> BAKED = new HashMap<>();
 
     static {
-        register("origins", "fishman",
+        register("mms_origins", "fishman",
                 "mms_origins:fur/geo/fishman.geo.json",
                 null,
                 "mms_origins:textures/fur/fishman.png",
@@ -131,77 +131,60 @@ public final class FurModels {
                 null,
                 "mms_origins:textures/fur/truffle_skin.png",
                 "mms_origins:textures/fur/truffle_skin_slim.png");
-        register("origins", "beastfolk",
+        register("mms_origins", "beastfolk",
                 "mms_origins:fur/geo/feline.geo.json",
                 null,
                 "mms_origins:textures/fur/feline.png",
                 null,
                 null);
-        register("origins", "beastfolk_nocollar",
+        register("mms_origins", "beastfolk_nocollar",
                 "mms_origins:fur/geo/feline_nocollar.geo.json",
                 null,
                 "mms_origins:textures/fur/feline.png",
                 null,
                 null);
-        register("origins", "enderian",
+        register("mms_origins", "enderian",
                 "mms_origins:fur/geo/enderian.geo.json",
                 null,
                 "mms_origins:textures/fur/enderian.png",
                 "mms_origins:textures/fur/enderian_skin.png",
                 null);
-        registerAnimated("origins", "avian",
+        registerAnimated("mms_origins", "avian",
                 "mms_origins:fur/geo/avian.geo.json",
                 "mms_origins:fur/animations/avian.animation.json",
                 "mms_origins:textures/fur/avian.png",
                 "mms_origins:textures/fur/avian_skin.png",
                 null);
-        registerAnimated("origins", "phantom",
+        registerAnimated("mms_origins", "phantom",
                 "mms_origins:fur/geo/phantom.geo.json",
                 "mms_origins:fur/animations/phantom.animation.json",
                 "mms_origins:textures/fur/phantom.png",
                 "mms_origins:textures/fur/phantom_overlay.png",
                 "mms_origins:textures/fur/phantom_overlay_slim.png");
-        register("origins", "blazeborn",
+        register("mms_origins", "blazeborn",
                 "mms_origins:fur/geo/blazeborn.geo.json",
                 null,
                 "mms_origins:textures/fur/blazeborn.png",
                 "mms_origins:textures/fur/blazeborn_skin.png",
                 null);
-        register("origins", "shulk",
+        register("mms_origins", "shulk",
                 "mms_origins:fur/geo/shulk.geo.json",
                 null,
                 "mms_origins:textures/fur/shulk.png",
                 "mms_origins:textures/fur/shulk_skin.png",
                 null);
-        registerEmissive("origins", "arachnid",
+        registerEmissive("mms_origins", "arachnid",
                 "mms_origins:textures/fur/arachnid.png",
                 "mms_origins:textures/fur/arachnid_eyes.png");
-        offset("origins", "blazeborn", 0.0F, 0.1F, 0.0F);
-        hide("origins", "blazeborn", "leftArm", "rightArm", "leftSleeve", "rightSleeve");
-        hide("origins", "shulk", "leftArm", "rightArm", "body");
-        elytra("origins", "avian", "mms_origins:textures/fur/avian_elytra.png");
-        elytra("origins", "phantom", "mms_origins:textures/fur/phantom_elytra.png");
-        elytra("origins", "shulk", "mms_origins:textures/fur/shulk_elytra.png");
-        aliasToOriginsTweaks("arachnid", "avian", "blazeborn",
-                "enderian", "beastfolk", "beastfolk_nocollar", "phantom", "shulk");
+        offset("mms_origins", "blazeborn", 0.0F, 0.1F, 0.0F);
+        hide("mms_origins", "blazeborn", "leftArm", "rightArm", "leftSleeve", "rightSleeve");
+        hide("mms_origins", "shulk", "leftArm", "rightArm", "body");
+        elytra("mms_origins", "avian", "mms_origins:textures/fur/avian_elytra.png");
+        elytra("mms_origins", "phantom", "mms_origins:textures/fur/phantom_elytra.png");
+        elytra("mms_origins", "shulk", "mms_origins:textures/fur/shulk_elytra.png");
     }
 
     private FurModels() {
-    }
-
-    /**
-     * Points the OriginsTweaks copies of the default origins at the same furs.
-     * OriginsTweaks replaces the vanilla origins with {@code originstweaks:}
-     * versions, so a player's origin id is now that namespace, not
-     * {@code origins:}. Aliasing keeps the ported furs applying to both.
-     */
-    private static void aliasToOriginsTweaks(String... names) {
-        for (String name : names) {
-            Source source = SOURCES.get(Identifier.fromNamespaceAndPath("origins", name));
-            if (source != null) {
-                SOURCES.put(Identifier.fromNamespaceAndPath("originstweaks", name), source);
-            }
-        }
     }
 
     /** Touches the class so its table is populated; the models bake on first draw. */

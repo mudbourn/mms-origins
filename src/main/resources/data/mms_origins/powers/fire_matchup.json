@@ -3,21 +3,21 @@
   "badges": [
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_up.png",
+      "sprite": "mms_origins:textures/gui/badge/arrow_up.png",
       "text": {
         "translate": "badge.mms_origins.fire_matchup.0"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "sprite": "mms_origins:textures/gui/badge/arrow_down.png",
       "text": {
         "translate": "badge.mms_origins.fire_matchup.1"
       }
     },
     {
       "type": "origins:tooltip",
-      "sprite": "origins:textures/gui/badge/arrow_down.png",
+      "sprite": "mms_origins:textures/gui/badge/arrow_down.png",
       "text": {
         "translate": "badge.mms_origins.fire_matchup.2"
       }
@@ -70,7 +70,7 @@
         "conditions": [
           {
             "type": "origins:origin",
-            "origin": "origins:fishman"
+            "origin": "mms_origins:fishman"
           },
           {
             "type": "origins:entity_type",

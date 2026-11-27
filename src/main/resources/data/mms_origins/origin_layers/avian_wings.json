@@ -1,0 +1,34 @@
+{
+	"gui_title": {
+		"choose_origin": "mms_origins.gui.choose_avian_wings.title",
+		"view_origin": "mms_origins.gui.view_avian_wings.title"
+	},
+	"order": 2,
+	"auto_choose": true,
+	"origins": [
+		{
+			"origins": [
+				"mms_origins:feathered_wings",
+				"mms_origins:vanilla_elytra",
+				"mms_origins:golden_wings",
+				"mms_origins:colored_wings",
+				"mms_origins:paper_wings",
+				"mms_origins:magic_wings",
+				"mms_origins:flandre_wings",
+				"mms_origins:ikaros_wings",
+				"mms_origins:nymph_wings",
+				"mms_origins:astraea_wings",
+				"mms_origins:chaos_wings",
+				"mms_origins:hiyori_wings",
+				"mms_origins:melan_wings",
+				"mms_origins:no_render"
+			],
+			"condition": {
+				"type": "origins:origin",
+				"layer": "origins:origin",
+				"origin": "mms_origins:avian"
+			}
+		}
+	],
+	"default_origin": "mms_origins:feathered_wings"
+}

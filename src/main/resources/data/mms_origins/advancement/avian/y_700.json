@@ -1,0 +1,26 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.mms_origins.avian.y_700.title"
+		},
+		"description": {
+			"translate": "advancement.mms_origins.avian.y_700.description"
+		},
+		"icon": {
+			"id": "minecraft:glowstone"
+		},
+		"frame": "challenge",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"y_700": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"rewards": {
+		"experience": 100
+	  },
+	"parent": "mms_origins:avian/flight_attack"
+}

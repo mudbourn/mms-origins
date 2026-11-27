@@ -18,7 +18,8 @@ public class OriginsClassesMixinGate implements IMixinConfigPlugin {
     @Override public void onLoad(String mixinPackage) {}
     @Override public String getRefMapperConfig() { return null; }
     @Override public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.endsWith("TreeFellingLeafGuardMixin")) {
+        if (mixinClassName.endsWith("TreeFellingLeafGuardMixin")
+            || mixinClassName.endsWith("ClassesPowerTypesMixin")) {
             return classes;
         }
         return classes && jobs;

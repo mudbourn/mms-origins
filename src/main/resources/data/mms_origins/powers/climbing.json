@@ -1,0 +1,193 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/toggle.png",
+			"text": {
+				"translate": "badge.mms_origins.climbing.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.mms_origins.climbing.1"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.mms_origins.climbing.2"
+			}
+		}
+	],
+	"climbing": {
+		"type": "origins:climbing",
+		"allow_holding": true,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:block_collision",
+							"offset_x": 0.1,
+							"offset_y": 0,
+							"offset_z": 0.1
+						},
+						{
+							"type": "origins:block_collision",
+							"offset_x": -0.1,
+							"offset_y": 0,
+							"offset_z": -0.1
+						}
+					]
+				},
+				{
+					"type": "origins:power_active",
+					"power": "*:*_toggle"
+				}
+			]
+		}
+	},
+	"toggle": {
+		"type": "origins:toggle",
+		"key": "key.origins.secondary_active",
+		"retain_state": true,
+		"active_by_default": true
+	},
+	"indicator": {
+		"type": "origins:resource",
+		"min": 0,
+		"max": 1,
+		"start_value": 1,
+		"hud_render": {
+			"sprite_location": "mms_origins:textures/gui/community/huang/resource_bar_02.png",
+			"bar_index": 4,
+			"order": 0,
+			"condition": {
+				"type": "origins:power_active",
+				"power": "*:*_toggle"
+			}
+		}
+	},
+	"air_affinity": {
+		"type": "origins:modify_break_speed",
+		"modifier": {
+			"operation": "multiply_base",
+			"value": 4
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:climbing"
+				},
+				{
+					"type": "origins:on_block",
+					"inverted": true
+				},
+				{
+					"inverted": true,
+					"type": "origins:fluid_height",
+					"fluid": "minecraft:water",
+					"comparison": ">=",
+					"compare_to": 0.01
+				}
+			]
+		}
+	},
+	"snare_strike": {
+		"type": "origins:action_on_hit",
+		"condition": {
+			"type": "origins:power_active",
+			"power": "*:*_toggle"
+		},
+		"bientity_action": {
+			"type": "origins:if_else",
+			"condition": {
+				"type": "origins:actor_condition",
+				"condition": {
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:fall_distance",
+							"comparison": ">",
+							"compare_to": 0
+						},
+						{
+							"type": "origins:on_block",
+							"inverted": true
+						},
+						{
+							"type": "origins:climbing",
+							"inverted": true
+						},
+						{
+							"type": "origins:sprinting",
+							"inverted": true
+						},
+						{
+							"type": "origins:fluid_height",
+							"fluid": "minecraft:water",
+							"comparison": ">",
+							"compare_to": 0,
+							"inverted": true
+						}
+					]
+				}
+			},
+			"if_action": {
+				"type": "origins:chance",
+				"chance": 0.6,
+				"action": {
+					"type": "origins:target_action",
+					"action": {
+						"type": "origins:apply_effect",
+						"effect": {
+							"effect": "minecraft:slowness",
+							"duration": 40,
+							"amplifier": 0,
+							"show_particles": true,
+							"show_icon": true
+						}
+					}
+				}
+			},
+			"else_action": {
+				"type": "origins:chance",
+				"chance": 0.3,
+				"action": {
+					"type": "origins:target_action",
+					"action": {
+						"type": "origins:apply_effect",
+						"effect": {
+							"effect": "minecraft:slowness",
+							"duration": 40,
+							"amplifier": 0,
+							"show_particles": true,
+							"show_icon": true
+						}
+					}
+				}
+			}
+		}
+	},
+	"long_reach": {
+		"type": "origins:conditioned_attribute",
+		"tick_rate": 5,
+		"condition": {
+			"type": "origins:power_active",
+			"power": "*:*_toggle"
+		},
+		"modifier": {
+			"name": "Arachnid attack reach",
+			"attribute": "minecraft:player.entity_interaction_range",
+			"value": 0.25,
+			"operation": "multiply_base"
+		}
+	}
+}

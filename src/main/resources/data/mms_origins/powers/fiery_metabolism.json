@@ -1,0 +1,16 @@
+{
+	"type": "origins:modify_exhaustion",
+	"modifier": {
+		"operation": "multiply_base",
+		"value": 0.5
+	},
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.mms_origins.fiery_metabolism.0"
+			}
+		}
+	]
+}

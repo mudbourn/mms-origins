@@ -1,0 +1,27 @@
+{
+  "powers": [
+    "mms_origins:water_breathing",
+    "mms_origins:like_water",
+    "mms_origins:aquatic",
+    "mms_origins:conduit_power_on_land",
+    "mms_origins:air_from_potions",
+    "mms_origins:fishman_sounds",
+    "mms_origins:fishman_advancements",
+    "mms_origins:language_barrier",
+    "mms_origins:seafood_diet",
+    "mms_origins:cold_blooded",
+    "mms_origins:tide_magic",
+    "mms_origins:guardian_kinship",
+    "mms_origins:guardian_beam",
+    "mms_origins:wetness",
+    "mms_origins:seaborn",
+    "mms_origins:water_power",
+    "mms_origins:water_matchup"
+  ],
+  "icon": {
+    "item": "minecraft:tropical_fish"
+  },
+  "order": 0,
+  "impact": 3,
+  "loading_priority": 100
+}

@@ -1,0 +1,11 @@
+{
+	"icon": {
+		"id": "minecraft:phantom_membrane",
+		"components": {
+			"minecraft:item_model": "mms_origins:magic_wings"
+		}
+	},
+	"impact": 0,
+	"order": 5,
+	"powers": []
+}

@@ -1,0 +1,28 @@
+{
+	"icon": {
+		"id": "minecraft:feather"
+	},
+	"order": 0,
+	"impact": 2,
+	"loading_priority": 1,
+	"powers": [
+		"mms_origins:slow_falling",
+		"mms_origins:gift_of_the_skies",
+		"mms_origins:aerial_combatant",
+		"mms_origins:companion_mounting",
+		"mms_origins:more_kinetic_damage",
+		"mms_origins:bird_bones",
+		"mms_origins:slow_healing",
+		"mms_origins:animal_friendship",
+		"mms_origins:avian_peace",
+		"mms_origins:green_thumb",
+		"mms_origins:tailwind",
+		"mms_origins:like_air",
+		"mms_origins:vegetarian",
+		"mms_origins:avian_diet",
+		"mms_origins:fresh_air",
+		"mms_origins:lay_eggs",
+		"mms_origins:avian_sounds",
+		"mms_origins:avian_advancements"
+	]
+}

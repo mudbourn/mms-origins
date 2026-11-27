@@ -1,0 +1,12 @@
+{
+	"type": "origins:simple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.mms_origins.ender_kinship.0"
+			}
+		}
+	]
+}

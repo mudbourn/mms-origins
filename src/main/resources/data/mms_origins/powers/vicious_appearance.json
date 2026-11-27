@@ -1,0 +1,19 @@
+{
+	"type": "origins:simple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.mms_origins.vicious_appearance.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_up.png",
+			"text": {
+				"translate": "badge.mms_origins.vicious_appearance.1"
+			}
+		}
+	]
+}

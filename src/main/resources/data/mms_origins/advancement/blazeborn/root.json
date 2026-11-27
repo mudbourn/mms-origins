@@ -1,0 +1,23 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.mms_origins.blazeborn.root.title"
+		},
+		"description": {
+			"translate": "advancement.mms_origins.blazeborn.root.description"
+		},
+		"icon": {
+			"id": "minecraft:blaze_powder"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": true,
+		"background": "minecraft:textures/block/netherrack.png"
+	},
+	"criteria": {
+		"chose_blazeborn": {
+			"trigger": "minecraft:impossible"
+		}
+	}
+}

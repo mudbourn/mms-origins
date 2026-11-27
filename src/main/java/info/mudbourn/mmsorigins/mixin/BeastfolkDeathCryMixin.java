@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class BeastfolkDeathCryMixin {
 
     @Unique
-    private static final Identifier FOX_TAIL = Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_tail_fox");
+    private static final Identifier FOX_TAIL = Identifier.fromNamespaceAndPath("mms_origins", "beastfolk_tail_fox");
 
     @Inject(method = "die", at = @At("HEAD"))
     private void mmsOrigins$deathCry(DamageSource source, CallbackInfo ci) {

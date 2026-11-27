@@ -1,0 +1,27 @@
+{
+  "type": "mms_origins:edible_item",
+  "item_condition": {
+    "type": "origins:ingredient",
+    "ingredient": {
+      "item": "minecraft:lava_bucket"
+    }
+  },
+  "condition": {
+    "type": "origins:on_fire"
+  },
+  "consume_sound": "minecraft:item.bucket.fill_lava",
+  "finish_sound": "minecraft:entity.generic.drink",
+  "nutrition": 8,
+  "saturation": 0.8,
+  "eat_seconds": 2.0,
+  "use_action": "drink",
+  "badges": [
+    {
+      "type": "origins:tooltip",
+      "sprite": "mms_origins:textures/gui/badge/arrow_up.png",
+      "text": {
+        "translate": "badge.mms_origins.drink_lava.0"
+      }
+    }
+  ]
+}

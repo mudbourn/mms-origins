@@ -1,0 +1,24 @@
+{
+	"icon": {
+		"id": "minecraft:mutton"
+	},
+	"order": 0,
+	"impact": 2,
+	"loading_priority": 1,
+	"powers": [
+		"mms_origins:claw_mode",
+		"mms_origins:natural_hunter",
+		"mms_origins:dexterity",
+		"mms_origins:hunter_physique",
+		"mms_origins:claw_sprint_jump",
+		"mms_origins:velvet_paws",
+		"mms_origins:cat_vision",
+		"mms_origins:predators_vigor",
+		"mms_origins:predators_appetite",
+		"mms_origins:vicious_appearance",
+		"mms_origins:beastfolk_sounds",
+		"mms_origins:beastfolk_advancements",
+		"mms_origins:beast_tongue",
+		"mms_origins:carnivore_diet"
+	]
+}

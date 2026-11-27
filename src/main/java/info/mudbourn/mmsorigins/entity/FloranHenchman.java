@@ -188,7 +188,14 @@ public class FloranHenchman extends AbstractGolem {
     }
 
     public LivingEntity getOwner() {
-        return this.ownerUuid == null ? null : this.level().getPlayerByUUID(this.ownerUuid);
+        if (this.ownerUuid == null) {
+            return null;
+        }
+        Player player = this.level().getPlayerByUUID(this.ownerUuid);
+        if (player != null || !(this.level() instanceof ServerLevel level)) {
+            return player;
+        }
+        return level.getEntity(this.ownerUuid) instanceof LivingEntity owner ? owner : null;
     }
 
     public boolean isOwnedBy(UUID uuid) {
@@ -351,6 +358,8 @@ public class FloranHenchman extends AbstractGolem {
         this.tickRun(pilot);
         if (pilot != null) {
             this.setTarget(null);
+        }
+        if (pilot instanceof Player) {
             this.getNavigation().stop();
             if (!MmsOriginsPowers.leafFormComplete(pilot)) {
                 pilot.stopRiding();
@@ -375,7 +384,7 @@ public class FloranHenchman extends AbstractGolem {
         if (this.runCooldown > 0) {
             this.runCooldown--;
         }
-        boolean wantsRun = pilot instanceof ServerPlayer rider && rider.getLastClientInput().sprint();
+        boolean wantsRun = pilot instanceof ServerPlayer rider ? rider.getLastClientInput().sprint() : pilot instanceof Mob && pilot.isSprinting();
         if (this.isRunning()) {
             this.runTicks++;
             if (!wantsRun || this.runTicks >= RUN_TICKS) {
@@ -396,7 +405,7 @@ public class FloranHenchman extends AbstractGolem {
     }
 
     /** Swings for the rider, striking what they aim at within the golem's reach, or the given target if one was hit. */
-    public void strikeFor(Player rider, Entity aimed) {
+    public void strikeFor(LivingEntity rider, Entity aimed) {
         if (!(this.level() instanceof ServerLevel level)) {
             return;
         }
@@ -425,7 +434,7 @@ public class FloranHenchman extends AbstractGolem {
             && this.getBoundingBox().inflate(RIDER_REACH).intersects(entity.getBoundingBox());
     }
 
-    private LivingEntity aimedTarget(Player rider) {
+    private LivingEntity aimedTarget(LivingEntity rider) {
         Vec3 eye = rider.getEyePosition();
         double range = Math.sqrt(this.distanceToSqr(rider)) + this.getBbWidth() + RIDER_REACH;
         Vec3 end = eye.add(rider.getViewVector(1.0f).scale(range));
@@ -450,7 +459,7 @@ public class FloranHenchman extends AbstractGolem {
 
     @Override
     public boolean isEffectiveAi() {
-        return this.getControllingPassenger() == null && super.isEffectiveAi();
+        return !(this.getControllingPassenger() instanceof Player) && super.isEffectiveAi();
     }
 
     @Override
@@ -460,18 +469,28 @@ public class FloranHenchman extends AbstractGolem {
                 && MmsOriginsPowers.leafFormComplete(player)
                 && !this.isVehicle()
                 && !player.isPassenger()) {
-            if (!this.level().isClientSide() && player.startRiding(this)) {
-                this.mountTicks = MOUNT_MORPH_TICKS;
-                this.playSound(SoundEvents.AZALEA_LEAVES_PLACE, 1.0f, 0.9f);
+            if (!this.level().isClientSide()) {
+                this.carry(player);
             }
             return InteractionResult.SUCCESS;
         }
         return super.mobInteract(player, hand);
     }
 
+    /** Takes the rider into the golem with the leaf-form morph; a mob rider then steers it with its own goals. */
+    public boolean carry(LivingEntity rider) {
+        if (!rider.startRiding(this)) {
+            return false;
+        }
+        this.mountTicks = MOUNT_MORPH_TICKS;
+        this.playSound(SoundEvents.AZALEA_LEAVES_PLACE, 1.0f, 0.9f);
+        return true;
+    }
+
     @Override
     public LivingEntity getControllingPassenger() {
-        return this.getFirstPassenger() instanceof Player rider ? rider : null;
+        Entity rider = this.getFirstPassenger();
+        return rider instanceof Player || rider instanceof Mob ? (LivingEntity) rider : null;
     }
 
     @Override

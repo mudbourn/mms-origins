@@ -1,0 +1,26 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.mms_origins.beastfolk.break_tough_stone.title"
+		},
+		"description": {
+			"translate": "advancement.mms_origins.beastfolk.break_tough_stone.description"
+		},
+		"icon": {
+			"id": "minecraft:obsidian"
+		},
+		"frame": "challenge",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"c1": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"rewards": {
+		"experience": 100
+	  },
+	"parent": "mms_origins:beastfolk/root"
+}

@@ -1,0 +1,21 @@
+{
+	"icon": {
+		"id": "minecraft:cobweb"
+	},
+	"order": 1,
+	"impact": 2,
+	"loading_priority": 1,
+	"powers": [
+		"mms_origins:master_of_webs",
+		"mms_origins:master_of_webs_no_slowdown",
+		"mms_origins:venom",
+		"mms_origins:climbing",
+		"mms_origins:arthropod",
+		"mms_origins:arthropod_kinship",
+		"mms_origins:arachnid_frailty",
+		"mms_origins:carnivore",
+		"mms_origins:arachnid_diet",
+		"mms_origins:arachnid_sounds",
+		"mms_origins:arachnid_advancements"
+	]
+}

@@ -1,0 +1,520 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/active.png",
+			"text": {
+				"translate": "badge.mms_origins.phasing.0"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.mms_origins.phasing.1"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.mms_origins.phasing.2"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.mms_origins.phasing.3"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/info.png",
+			"text": {
+				"translate": "badge.mms_origins.phasing.4"
+			}
+		},
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.mms_origins.phasing.5"
+			}
+		}
+	],
+	"toggle": {
+		"type": "origins:toggle",
+		"active_by_default": false,
+		"key": {
+			"key": "key.mms_origins.unbound"
+		},
+		"retain_state": false
+	},
+	"respawn": {
+		"type": "origins:action_on_callback",
+		"entity_action_respawned": {
+			"type": "origins:if_else",
+			"condition": {
+				"type": "origins:power_active",
+				"power": "mms_origins:phasing_toggle"
+			},
+			"if_action": {
+				"type": "origins:toggle",
+				"power": "mms_origins:phasing_toggle"
+			}
+		}
+	},
+	"gesture": {
+		"type": "mms_origins:key_gesture",
+		"cooldown": 10,
+		"hud_render": {
+			"should_render": false
+		},
+		"key": {
+			"key": "key.origins.primary_active"
+		},
+		"hold_condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:sneaking",
+					"inverted": true
+				},
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:power_active",
+							"power": "*:phasing_toggle"
+						},
+						{
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:resource",
+									"resource": "*:soulbound_energy",
+									"comparison": ">",
+									"compare_to": 0
+								},
+								{
+									"type": "origins:or",
+									"conditions": [
+										{
+											"type": "origins:exposed_to_sun",
+											"inverted": true
+										},
+										{
+											"type": "origins:or",
+											"conditions": [
+												{
+													"type": "origins:equipped_item",
+													"equipment_slot": "mainhand",
+													"item_condition": {
+														"type": "origins:ingredient",
+														"ingredient": {
+															"item": "mms_origins:umbrella"
+														}
+													}
+												},
+												{
+													"type": "origins:equipped_item",
+													"equipment_slot": "offhand",
+													"item_condition": {
+														"type": "origins:ingredient",
+														"ingredient": {
+															"item": "mms_origins:umbrella"
+														}
+													}
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"hold_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:toggle",
+					"power": "mms_origins:phasing_toggle"
+				},
+				{
+					"type": "origins:play_sound",
+					"sound": "minecraft:entity.phantom.ambient",
+					"volume": 1.0,
+					"pitch": 0.6
+				}
+			]
+		}
+	},
+	"soul_lapse": {
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:soulbound_energy",
+					"comparison": "<=",
+					"compare_to": 0
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:toggle",
+			"power": "mms_origins:phasing_toggle"
+		}
+	},
+	"sun_lapse": {
+		"type": "origins:action_over_time",
+		"interval": 1,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:exposed_to_sun"
+				},
+				{
+					"type": "origins:or",
+					"conditions": [
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "mainhand",
+							"item_condition": {
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "mms_origins:umbrella"
+								}
+							}
+						},
+						{
+							"type": "origins:equipped_item",
+							"equipment_slot": "offhand",
+							"item_condition": {
+								"type": "origins:ingredient",
+								"ingredient": {
+									"item": "mms_origins:umbrella"
+								}
+							}
+						}
+					],
+					"inverted": true
+				}
+			]
+		},
+		"entity_action": {
+			"type": "origins:and",
+			"actions": [
+				{
+					"type": "origins:toggle",
+					"power": "mms_origins:phasing_toggle"
+				},
+				{
+					"type": "origins:execute_command",
+					"command": "title @s actionbar \"Sunlight forces you out of phasing.\""
+				}
+			]
+		}
+	},
+	"soul_upkeep": {
+		"type": "origins:action_over_time",
+		"interval": 40,
+		"condition": {
+			"type": "origins:power_active",
+			"power": "*:phasing_toggle"
+		},
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:soulbound_energy",
+			"change": -1,
+			"operation": "add"
+		}
+	},
+	"translucent": {
+		"type": "origins:model_color",
+		"alpha": 0.5,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:resource",
+					"resource": "*:soulbound_energy",
+					"comparison": ">",
+					"compare_to": 0
+				}
+			]
+		}
+	},
+	"phase": {
+		"type": "origins:phasing",
+		"blacklist": true,
+		"render_type": "blindness",
+		"view_distance": 10,
+		"phase_down_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:and",
+					"conditions": [
+						{
+							"type": "origins:on_block"
+						},
+						{
+							"type": "origins:sneaking"
+						}
+					]
+				},
+				{
+					"type": "origins:power_active",
+					"power": "mms_origins:phantomize_flight"
+				}
+			]
+		},
+		"block_condition": {
+			"type": "origins:or",
+			"conditions": [
+				{
+					"type": "origins:in_tag",
+					"tag": "mms_origins:unphasable"
+				},
+				{
+					"type": "origins:blast_resistance",
+					"comparison": ">=",
+					"compare_to": 1200
+				}
+			]
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:swimming",
+					"inverted": true
+				},
+				{
+					"type": "origins:fall_flying",
+					"inverted": true
+				}
+			]
+		}
+	},
+	"drain_soul_power": {
+		"type": "origins:action_over_time",
+		"entity_action": {
+			"type": "origins:change_resource",
+			"resource": "*:soulbound_energy",
+			"change": -1,
+			"operation": "add"
+		},
+		"interval": 20,
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:and",
+						"conditions": [
+							{
+								"type": "origins:movement_blocking"
+							},
+							{
+								"type": "origins:offset",
+								"condition": {
+									"type": "origins:movement_blocking"
+								},
+								"y": 1
+							}
+						]
+					}
+				}
+			]
+		}
+	},
+	"no_sprinting": {
+		"type": "origins:prevent_sprinting",
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:power_active",
+					"power": "mms_origins:phantomize_flight",
+					"inverted": true
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	},
+	"no_melee": {
+		"type": "origins:modify_damage_dealt",
+		"modifier": {
+			"operation": "set_total",
+			"value": 0
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	},
+	"no_projectile": {
+		"type": "origins:modify_projectile_damage",
+		"modifier": {
+			"operation": "set_total",
+			"value": 0
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	},
+	"no_item_use": {
+		"type": "origins:prevent_item_use",
+		"name": "Phasing",
+		"item_condition": {
+			"type": "origins:constant",
+			"value": true
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	},
+	"no_blocks": {
+		"type": "origins:prevent_block_selection",
+		"block_condition": {
+			"type": "origins:constant",
+			"value": true
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	},
+	"prevent_elytra": {
+		"type": "origins:prevent_elytra_flight",
+		"entity_action": {
+			"type": "origins:execute_command",
+			"command": "title @s actionbar \"You cant use your elytra while phasing.\""
+		},
+		"condition": {
+			"type": "origins:and",
+			"conditions": [
+				{
+					"type": "origins:power_active",
+					"power": "*:phasing_toggle"
+				},
+				{
+					"type": "origins:in_block",
+					"block_condition": {
+						"type": "origins:offset",
+						"condition": {
+							"type": "origins:movement_blocking"
+						},
+						"y": 1
+					}
+				}
+			]
+		}
+	}
+}

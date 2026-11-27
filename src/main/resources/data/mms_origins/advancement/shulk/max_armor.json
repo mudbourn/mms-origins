@@ -1,0 +1,23 @@
+{
+	"display": {
+		"title": {
+			"translate": "advancement.mms_origins.shulk.max_armor.title"
+		},
+		"description": {
+			"translate": "advancement.mms_origins.shulk.max_armor.description"
+		},
+		"icon": {
+			"id": "minecraft:iron_chestplate"
+		},
+		"frame": "goal",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"30_armor": {
+			"trigger": "minecraft:impossible"
+		}
+	},
+	"parent": "mms_origins:shulk/root"
+}

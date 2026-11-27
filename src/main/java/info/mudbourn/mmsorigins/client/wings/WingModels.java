@@ -73,11 +73,11 @@ public final class WingModels {
     }
 
     private static Identifier option(String name) {
-        return Identifier.fromNamespaceAndPath("originstweaks", name);
+        return Identifier.fromNamespaceAndPath("mms_origins", name);
     }
 
     private static Identifier texture(String base) {
-        return Identifier.fromNamespaceAndPath("originstweaks",
+        return Identifier.fromNamespaceAndPath("mms_origins",
                 "textures/entity/icaruswings/" + base + ".png");
     }
 }

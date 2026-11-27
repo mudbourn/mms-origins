@@ -1,0 +1,32 @@
+{
+	"icon": {
+		"id": "minecraft:blaze_powder"
+	},
+	"order": 1,
+	"impact": 3,
+	"loading_priority": 1,
+	"powers": [
+		"mms_origins:fire_power",
+		"mms_origins:fire_power_regen",
+		"mms_origins:burning_wrath",
+		"mms_origins:blaze_flight",
+		"mms_origins:molten_core",
+		"mms_origins:feed_the_flame",
+		"mms_origins:primal_magma_feast",
+		"mms_origins:drink_lava",
+		"mms_origins:fuel_diet",
+		"mms_origins:fiery_metabolism",
+		"mms_origins:firecharged_projectile",
+		"mms_origins:fire_immunity",
+		"mms_origins:blaze_kinship",
+		"mms_origins:nether_spawn",
+		"mms_origins:hotblooded",
+		"mms_origins:blazeborn_water_vulnerability",
+		"mms_origins:fire_matchup",
+		"mms_origins:damage_from_snowballs",
+		"mms_origins:damage_from_potions",
+		"mms_origins:flame_particles",
+		"mms_origins:blazeborn_sounds",
+		"mms_origins:blazeborn_advancements"
+	]
+}

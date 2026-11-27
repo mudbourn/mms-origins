@@ -1,0 +1,49 @@
+{
+	"type": "origins:multiple",
+	"badges": [
+		{
+			"type": "origins:tooltip",
+			"sprite": "mms_origins:textures/gui/badge/arrow_down.png",
+			"text": {
+				"translate": "badge.mms_origins.enderian_heat_sensitivity.0"
+			}
+		}
+	],
+	"warmth_pace": {
+		"type": "origins:conditioned_attribute",
+		"modifier": {
+			"attribute": "thermoo:heat_resistance",
+			"id": "mms_origins:heat_sensitivity_warmth_pace",
+			"operation": "addition",
+			"value": -5
+		},
+		"condition": {
+			"type": "origins:biome",
+			"inverted": true,
+			"condition": {
+				"type": "origins:in_tag",
+				"tag": "mms_origins:enderman_haven"
+			}
+		}
+	},
+	"warmth_wound": {
+		"type": "origins:modify_damage_taken",
+		"modifier": {
+			"name": "Heat sensitivity",
+			"operation": "multiply_base",
+			"value": 1.0
+		},
+		"damage_condition": {
+			"type": "origins:in_tag",
+			"tag": "mms_origins:is_heat"
+		},
+		"condition": {
+			"type": "origins:biome",
+			"inverted": true,
+			"condition": {
+				"type": "origins:in_tag",
+				"tag": "mms_origins:enderman_haven"
+			}
+		}
+	}
+}

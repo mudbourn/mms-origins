@@ -24,16 +24,16 @@ public final class ClimateTolerance {
         power("mms_origins", "cold_blooded"));
 
     private static final List<PowerType<?>> HEAT_IMMUNE = List.of(
-        power("originstweaks", "fire_immunity"));
+        power("mms_origins", "fire_immunity"));
 
     private static final List<PowerType<?>> COLD_RESISTANT = List.of(
-        power("originstweaks", "cold_resistance"),
-        power("originstweaks", "predators_vigor"));
+        power("mms_origins", "cold_resistance"),
+        power("mms_origins", "predators_vigor"));
 
     private static final List<PowerType<?>> HEAT_RESISTANT = List.of(
         power("mms_origins", "heat_adaptation"),
         power("mms_origins", "nether_heat_immunity"),
-        power("originstweaks", "predators_vigor"));
+        power("mms_origins", "predators_vigor"));
 
     public static void register() {
         ServerTickEvents.END_SERVER_TICK.register(server -> {

@@ -11,7 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 /**
  * Charges a blazeborn's ability cooldowns faster while it burns, driven by the
- * {@code originstweaks:molten_core} marker.
+ * {@code mms_origins:molten_core} marker.
  *
  * <p>Apoli-Legacy has no cooldown-modifier power and its cooldowns are keyed to
  * world time, so recovery is hurried here: each tick a marked bearer standing in
@@ -21,7 +21,7 @@ import net.minecraft.server.level.ServerPlayer;
 public final class MoltenChargeCharger {
 
     private static final PowerType<?> MARKER =
-        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("originstweaks", "molten_core"));
+        new PowerTypeReference<>(Identifier.fromNamespaceAndPath("mms_origins", "molten_core"));
 
     private MoltenChargeCharger() {
     }

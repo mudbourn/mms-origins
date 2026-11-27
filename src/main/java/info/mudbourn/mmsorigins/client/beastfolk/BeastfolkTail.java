@@ -2,7 +2,7 @@ package info.mudbourn.mmsorigins.client.beastfolk;
 
 import net.minecraft.resources.Identifier;
 
-/** The tails a beastfolk can pick in the {@code originstweaks:beastfolk_tail} layer, each a coat for {@link TailModel} and its matching {@link EarsModel}. */
+/** The tails a beastfolk can pick in the {@code mms_origins:beastfolk_tail} layer, each a coat for {@link TailModel} and its matching {@link EarsModel}. */
 public enum BeastfolkTail {
     FOX("fox"),
     WOLF("wolf");
@@ -12,7 +12,7 @@ public enum BeastfolkTail {
     private final Identifier earTexture;
 
     BeastfolkTail(String name) {
-        this.option = Identifier.fromNamespaceAndPath("originstweaks", "beastfolk_tail_" + name);
+        this.option = Identifier.fromNamespaceAndPath("mms_origins", "beastfolk_tail_" + name);
         this.texture = Identifier.fromNamespaceAndPath("mms_origins", "textures/entity/tail/" + name + ".png");
         this.earTexture = Identifier.fromNamespaceAndPath("mms_origins", "textures/entity/ears/" + name + ".png");
     }

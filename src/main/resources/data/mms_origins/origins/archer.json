@@ -1,0 +1,9 @@
+{
+  "powers": [
+    "mms_origins:no_projectile_divergence",
+    "mms_origins:less_bow_slowdown"
+  ],
+  "icon": "minecraft:bow",
+  "order": 11,
+  "impact": 0
+}

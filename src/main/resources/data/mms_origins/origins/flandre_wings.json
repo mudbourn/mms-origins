@@ -1,0 +1,11 @@
+{
+	"icon": {
+		"id": "minecraft:amethyst_shard",
+		"components": {
+			"minecraft:item_model": "mms_origins:flandre_wings"
+		}
+	},
+	"impact": 0,
+	"order": 6,
+	"powers": []
+}
