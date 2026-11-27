@@ -76,12 +76,21 @@
       ]
     }
   },
+  "drink_flow": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 360,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
   "moisture_water_bottle": {
     "type": "origins:action_on_item_use",
     "entity_action": {
       "type": "origins:change_resource",
-      "resource": "mms_origins:wetness_moisture",
-      "change": 60,
+      "resource": "mms_origins:wetness_drink_flow",
+      "change": 120,
       "operation": "add"
     },
     "item_condition": {
@@ -102,10 +111,37 @@
       ]
     }
   },
+  "drink_flow_tick": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "mms_origins:wetness_drink_flow",
+      "comparison": ">",
+      "compare_to": 0
+    },
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:change_resource",
+          "resource": "mms_origins:wetness_moisture",
+          "change": 3,
+          "operation": "add"
+        },
+        {
+          "type": "origins:change_resource",
+          "resource": "mms_origins:wetness_drink_flow",
+          "change": -3,
+          "operation": "add"
+        }
+      ]
+    }
+  },
   "moisture_water_bottle_tooltip": {
     "type": "origins:tooltip",
     "text": {
-      "text": "+60 Moisture",
+      "text": "+120 Moisture",
       "color": "aqua"
     },
     "item_condition": {

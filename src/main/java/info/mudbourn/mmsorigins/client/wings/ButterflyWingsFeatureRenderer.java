@@ -45,10 +45,11 @@ public class ButterflyWingsFeatureRenderer extends RenderLayer<AvatarRenderState
         }
         this.getParentModel().body.translateAndRotate(poseStack);
         this.model.setupAnim(state);
+        // Culled, since each zero-thickness wing's two faces would z-fight
         collector.submitModel(this.model,
                 state,
                 poseStack,
-                RenderTypes.entityCutout(texture),
+                RenderTypes.entityCutoutCull(texture),
                 light,
                 OverlayTexture.NO_OVERLAY,
                 state.outlineColor);

@@ -23,7 +23,8 @@ import net.minecraft.server.level.ServerPlayer;
  * <p>Runs after every origin assignment and on join. Any layer whose held origin
  * no longer passes that layer's condition (a beastfolk collar kept after leaving
  * beastfolk) is cleared, and every power granted by an origin the player no longer
- * holds in any layer is revoked.
+ * holds in any layer is revoked. Any power a held origin grants but the player lacks,
+ * such as after an assignment that failed partway, is granted again.
  */
 public final class OriginFlush {
 
@@ -59,10 +60,27 @@ public final class OriginFlush {
         for (int i = 0; i < staleTypes.size(); i++) {
             powers.removePower(staleTypes.get(i), staleSources.get(i));
         }
-        if (changed || !staleTypes.isEmpty()) {
+        boolean granted = grantMissing(origins, powers);
+        if (changed || granted || !staleTypes.isEmpty()) {
             origins.sync();
             powers.sync();
         }
+    }
+
+    private static boolean grantMissing(OriginComponent origins, PowerHolderComponent powers) {
+        boolean granted = false;
+        for (Origin origin : origins.getOrigins().values()) {
+            if (origin == null) {
+                continue;
+            }
+            Identifier source = origin.getIdentifier();
+            for (PowerType<?> type : origin.getPowerTypes()) {
+                if (!powers.hasPower(type, source)) {
+                    granted |= powers.addPower(type, source);
+                }
+            }
+        }
+        return granted;
     }
 
     // Clears every layer whose held origin its condition no longer offers to this player.

@@ -272,7 +272,7 @@
     "type": "origins:conditioned_attribute",
     "modifier": {
       "attribute": "minecraft:sneaking_speed",
-      "id": "mms_origins:leaf_form_crawl",
+      "name": "leaf_form_crawl",
       "operation": "addition",
       "value": 0.7
     },

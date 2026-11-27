@@ -13,7 +13,7 @@
 		"type": "origins:conditioned_attribute",
 		"modifier": {
 			"attribute": "thermoo:heat_resistance",
-			"id": "mms_origins:heat_sensitivity_warmth_pace",
+			"name": "enderian_heat_sensitivity_warmth_pace",
 			"operation": "addition",
 			"value": -5
 		},

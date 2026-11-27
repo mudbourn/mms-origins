@@ -10,7 +10,7 @@
     "type": "origins:attribute",
     "modifier": {
       "attribute": "thermoo:heat_resistance",
-      "id": "mms_origins:piglin_warmth_pace",
+      "name": "piglin_warmth_pace",
       "operation": "addition",
       "value": 3.5
     }

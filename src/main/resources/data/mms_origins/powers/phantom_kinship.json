@@ -56,7 +56,7 @@
 		"type": "origins:attribute",
 		"modifier": {
 			"attribute": "minecraft:generic.attack_damage",
-			"id": "mms_origins:phantom_kinship_might",
+			"name": "phantom_kinship_might",
 			"operation": "addition",
 			"value": 1
 		}
@@ -65,7 +65,7 @@
 		"type": "origins:attribute",
 		"modifier": {
 			"attribute": "minecraft:generic.max_health",
-			"id": "mms_origins:phantom_kinship_vitality",
+			"name": "phantom_kinship_vitality",
 			"operation": "addition",
 			"value": 6
 		}

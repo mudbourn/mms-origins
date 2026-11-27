@@ -29,7 +29,7 @@ public final class ButterflyWingsModel extends Model<AvatarRenderState> {
     private final ModelPart wingRight;
 
     public ButterflyWingsModel(ModelPart root) {
-        super(root, RenderTypes::entityCutout);
+        super(root, RenderTypes::entityCutoutCull);
         this.wingLeft = root.getChild("left_wing");
         this.wingRight = root.getChild("right_wing");
     }

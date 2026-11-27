@@ -13,7 +13,7 @@
     "type": "origins:attribute",
     "modifier": {
       "attribute": "thermoo:heat_resistance",
-      "id": "mms_origins:floran_warmth_pace",
+      "name": "floran_warmth_pace",
       "operation": "addition",
       "value": 3.5
     }

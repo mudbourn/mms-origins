@@ -10,6 +10,7 @@
 		}
 	],
 	"modifier": {
+		"name": "arachnid_frailty",
 		"attribute": "minecraft:max_health",
 		"operation": "add_value",
 		"value": -3

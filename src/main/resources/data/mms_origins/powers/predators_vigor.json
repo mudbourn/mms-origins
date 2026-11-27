@@ -27,7 +27,7 @@
 		"type": "origins:attribute",
 		"modifier": {
 			"attribute": "thermoo:frost_resistance",
-			"id": "mms_origins:predators_vigor_chill_pace",
+			"name": "predators_vigor_chill_pace",
 			"operation": "addition",
 			"value": 3.5
 		}
@@ -36,7 +36,7 @@
 		"type": "origins:attribute",
 		"modifier": {
 			"attribute": "thermoo:heat_resistance",
-			"id": "mms_origins:predators_vigor_warmth_pace",
+			"name": "predators_vigor_warmth_pace",
 			"operation": "addition",
 			"value": 3.5
 		}

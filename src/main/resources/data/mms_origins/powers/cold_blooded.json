@@ -64,7 +64,7 @@
     "type": "origins:attribute",
     "modifier": {
       "attribute": "additionalentityattributes:generic.water_speed",
-      "id": "mms_origins:swim_speed",
+      "name": "swim_speed",
       "operation": "multiply_base",
       "value": 1.5
     }
@@ -174,22 +174,36 @@
             "type": "origins:and",
             "actions": [
               {
-                "type": "origins:toggle",
-                "power": "mms_origins:cold_blooded_vision"
-              },
-              {
                 "type": "origins:if_else",
                 "condition": {
-                  "type": "origins:power_active",
-                  "power": "mms_origins:cold_blooded_vision"
+                  "type": "origins:fluid_height",
+                  "fluid": "minecraft:water",
+                  "comparison": ">",
+                  "compare_to": 0.0
                 },
                 "if_action": {
-                  "type": "origins:execute_command",
-                  "command": "title @s actionbar \"Water vision on\""
-                },
-                "else_action": {
-                  "type": "origins:execute_command",
-                  "command": "title @s actionbar \"Water vision off\""
+                  "type": "origins:and",
+                  "actions": [
+                    {
+                      "type": "origins:toggle",
+                      "power": "mms_origins:cold_blooded_vision"
+                    },
+                    {
+                      "type": "origins:if_else",
+                      "condition": {
+                        "type": "origins:power_active",
+                        "power": "mms_origins:cold_blooded_vision"
+                      },
+                      "if_action": {
+                        "type": "origins:execute_command",
+                        "command": "title @s actionbar \"Water vision on\""
+                      },
+                      "else_action": {
+                        "type": "origins:execute_command",
+                        "command": "title @s actionbar \"Water vision off\""
+                      }
+                    }
+                  ]
                 }
               }
             ]

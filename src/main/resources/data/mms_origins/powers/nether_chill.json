@@ -4,7 +4,7 @@
     "type": "origins:attribute",
     "modifier": {
       "attribute": "thermoo:frost_resistance",
-      "id": "mms_origins:piglin_chill_pace",
+      "name": "piglin_chill_pace",
       "operation": "addition",
       "value": -2
     }

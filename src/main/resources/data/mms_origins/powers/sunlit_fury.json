@@ -326,7 +326,7 @@
     },
     "modifier": {
       "attribute": "minecraft:movement_speed",
-      "id": "mms_origins:sunlit_fury_maels_blessing",
+      "name": "sunlit_fury_maels_blessing",
       "operation": "multiply_total",
       "value": 0.2
     }
