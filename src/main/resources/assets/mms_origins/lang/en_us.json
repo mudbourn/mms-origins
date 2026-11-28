@@ -281,7 +281,7 @@
   "badge.mms_origins.nature_reclaim.4": "In the enchanted groves the fairies call home (dark forests, the Skyris Vale and their sister groves), sunlight fills you 50% faster.",
   "message.mms_origins.nature_reclaim.not_day": "This magic needs the sun in the sky.",
   "message.mms_origins.nature_reclaim.cooldown": "Your sap still stirs. Wait %s s before reclaiming again.",
-  "message.mms_origins.nature_reclaim.noon_near": "Your biological clock stirs: the sun nears its peak, and so do you.",
+  "message.mms_origins.nature_reclaim.noon_near": "Your biological clock stirs...",
   "origin.mms_origins.arachnid.name": "Arachnid",
   "origin.mms_origins.arachnid.description": "Eight-legged hunters of cave and canopy, who spin their silk into roads and snares and climb where others dare not look. Their venom is patient, their bodies are slight, and every cousin of the arthropod kind knows them as kin.",
   "power.mms_origins.master_of_webs.name": "Master of Webs",

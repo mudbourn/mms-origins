@@ -59,6 +59,10 @@
     {
       "id": "accdelight:pewen_nut_loaf",
       "required": false
+    },
+    {
+      "id": "accdelight:candied_nut_brittle",
+      "required": false
     }
   ]
 }

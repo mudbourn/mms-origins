@@ -87,6 +87,8 @@ import net.minecraft.world.phys.Vec3;
  */
 public class FloranHenchman extends AbstractGolem {
 
+    private static final TagKey<EntityType<?>> SPARED = TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath("mms_origins", "henchman_spares"));
+
     private static final EntityDataAccessor<Boolean> CAN_MOVE =
         SynchedEntityData.defineId(FloranHenchman.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<ItemStack> OFFERED_FLOWER =
@@ -276,7 +278,7 @@ public class FloranHenchman extends AbstractGolem {
             5,
             false,
             false,
-            (living, serverLevel) -> living instanceof Enemy && !(living instanceof Creeper)));
+            (living, serverLevel) -> living instanceof Enemy && !(living instanceof Creeper) && this.worthFighting(living)));
     }
 
     @Override
@@ -596,6 +598,15 @@ public class FloranHenchman extends AbstractGolem {
             charge.setValue(Math.min(charge.getMax(), charge.getValue() + amount));
             PowerHolderComponent.syncPower(owner, charge.getType());
         }
+    }
+
+    // A spared mob, such as a faction human, is only fought once it goes after the owner or this henchman.
+    private boolean worthFighting(LivingEntity living) {
+        if (!living.getType().builtInRegistryHolder().is(SPARED)) {
+            return true;
+        }
+        LivingEntity target = living instanceof Mob mob ? mob.getTarget() : null;
+        return target != null && (target == this || target == this.getOwner());
     }
 
     private void pullAggroOffOwner(ServerLevel level) {

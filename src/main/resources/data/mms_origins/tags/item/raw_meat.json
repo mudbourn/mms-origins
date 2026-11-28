@@ -139,6 +139,10 @@
     {
       "id": "alexscaves:vesper_wing",
       "required": false
+    },
+    {
+      "id": "alexscaves:dinosaur_chop",
+      "required": false
     }
   ]
 }

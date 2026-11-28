@@ -111,6 +111,22 @@
       "compare_to": 0
     }
   },
+  "dash_step": {
+    "type": "origins:conditioned_attribute",
+    "modifier": {
+      "name": "Dash step up",
+      "attribute": "minecraft:step_height",
+      "value": 0.4,
+      "operation": "addition"
+    },
+    "tick_rate": 1,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "mms_origins:cold_blooded_dash_lock",
+      "comparison": ">",
+      "compare_to": 0
+    }
+  },
   "vision": {
     "type": "origins:toggle_night_vision",
     "strength": 1.0,

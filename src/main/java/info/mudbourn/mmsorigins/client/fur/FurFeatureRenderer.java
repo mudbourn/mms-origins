@@ -25,6 +25,8 @@ import net.minecraft.world.entity.player.PlayerModelType;
  */
 public class FurFeatureRenderer extends RenderLayer<AvatarRenderState, PlayerModel> {
 
+    private static final int OVERLAY_ORDER = 1;
+
     public FurFeatureRenderer(RenderLayerParent<AvatarRenderState, PlayerModel> parent) {
         super(parent);
     }
@@ -41,8 +43,8 @@ public class FurFeatureRenderer extends RenderLayer<AvatarRenderState, PlayerMod
         }
         Identifier overlay = overlayFor(fur, state);
         if (overlay != null) {
-            // Third int is the outline color, not the tint; this overload tints white.
-            collector.submitModel(this.getParentModel(),
+            // Third int is the outline color, not the tint; this overload tints white. A later pass, so the skin's own outer layer at the same depth never covers it.
+            collector.order(OVERLAY_ORDER).submitModel(this.getParentModel(),
                     state,
                     poseStack,
                     RenderTypes.entityTranslucent(overlay),
@@ -51,7 +53,7 @@ public class FurFeatureRenderer extends RenderLayer<AvatarRenderState, PlayerMod
                     state.outlineColor);
         }
         if (fur.emissive() != null) {
-            collector.submitModel(this.getParentModel(),
+            collector.order(OVERLAY_ORDER).submitModel(this.getParentModel(),
                     state,
                     poseStack,
                     RenderTypes.entityTranslucentEmissive(fur.emissive()),

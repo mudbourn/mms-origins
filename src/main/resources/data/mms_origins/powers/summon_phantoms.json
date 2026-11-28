@@ -47,11 +47,11 @@
 				},
 				{
 					"type": "origins:execute_command",
-					"command": "summon minecraft:phantom ~ ~3 ~"
+					"command": "summon minecraft:phantom ~ ~3 ~ {Tags:[\"mms_origins.summoned\"]}"
 				},
 				{
 					"type": "origins:execute_command",
-					"command": "summon minecraft:phantom ~ ~3 ~"
+					"command": "summon minecraft:phantom ~ ~3 ~ {Tags:[\"mms_origins.summoned\"]}"
 				},
 				{
 					"type": "origins:execute_command",

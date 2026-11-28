@@ -519,6 +519,14 @@
     {
       "id": "alexscaves:vesper_wing",
       "required": false
+    },
+    {
+      "id": "alexscaves:dinosaur_chop",
+      "required": false
+    },
+    {
+      "id": "alexscaves:cooked_dinosaur_chop",
+      "required": false
     }
   ]
 }
